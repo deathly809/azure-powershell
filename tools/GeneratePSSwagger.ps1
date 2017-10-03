@@ -50,7 +50,16 @@ param(
     [System.String]$ModuleDirectory = "Module",
     
     [ValidateNotNullOrEmpty()]
-    [System.Version]$Version = "0.1.0"
+    [System.Version]$ModuleVersion = "0.1.0",
+    
+    [Parameter(Mandatory = $true)]
+    [ValidateNotNullOrEmpty()]
+    [System.String]$ClientName,
+        
+    [Parameter(Mandatory = $true)]
+    [ValidateNotNullOrEmpty()]
+    [System.String]$DLLName
+
 )
 
 $file = "https://github.com/$Repo/azure-rest-api-specs/blob/$Branch/specification/azsadmin/resource-manager/$RPName/readme.md"
@@ -85,12 +94,14 @@ $RPName = $RPName.Substring(0, 1).ToUpper() + $RPName.Substring(1);
 $specPath = Join-Path $Location -ChildPath "$Name.json"
 $namespace = "$prefix$RPName$postfix"
 $output = Join-Path $Location -ChildPath $ModuleDirectory
-$license = Join-Path $PSScriptRoot -ChildPath "LICENSE.txt"
+$license = Join-Path $PSScriptRoot -ChildPath (Join-Path ".." -ChildPath "LICENSE.txt") 
 
-$finalDirectory = Join-Path $output -ChildPath $namespace
-if (test-path $finalDirectory) {
-    Remove-Item "$finalDirectory" -Force -Recurse
+<#
+$GeneratedModuleBase = Join-Path $output -ChildPath $namespace
+if (test-path $GeneratedModuleBase) {
+    Remove-Item "$GeneratedModuleBase" -Force -Recurse
 }
-$null = New-Item $finalDirectory -type directory
+$null = New-Item $GeneratedModuleBase -type directory
+#>
 
-New-PSSwaggerModule -SpecificationPath $specPath -Name $namespace  -UseAzureCsharpGenerator -DefaultCommandPrefix Azs -Path $output -Version $Version -Verbose #-Header $license
+New-PSSwaggerModule -SpecificationPath $specPath -Name $namespace  -UseAzureCsharpGenerator -DefaultCommandPrefix Azs -Path $output -Version $ModuleVersion -Verbose -Header $license -ClientTypeName $ClientName -AssemblyFileName $DllName
