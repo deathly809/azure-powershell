@@ -94,7 +94,6 @@ $RPName = $RPName.Substring(0, 1).ToUpper() + $RPName.Substring(1);
 $specPath = Join-Path $Location -ChildPath "$Name.json"
 $namespace = "$prefix$RPName$postfix"
 $output = Join-Path $Location -ChildPath $ModuleDirectory
-$license = Join-Path $PSScriptRoot -ChildPath (Join-Path ".." -ChildPath "LICENSE.txt") 
 
 <#
 $GeneratedModuleBase = Join-Path $output -ChildPath $namespace
@@ -104,4 +103,4 @@ if (test-path $GeneratedModuleBase) {
 $null = New-Item $GeneratedModuleBase -type directory
 #>
 
-New-PSSwaggerModule -SpecificationPath $specPath -Name $namespace  -UseAzureCsharpGenerator -DefaultCommandPrefix Azs -Path $output -Version $ModuleVersion -Verbose -Header $license -ClientTypeName $ClientName -AssemblyFileName $DllName
+New-PSSwaggerModule -SpecificationPath $specPath -Name $namespace  -UseAzureCsharpGenerator -DefaultCommandPrefix Azs -Path $output -Version $ModuleVersion -Verbose -Header MICROSOFT_MIT_NO_VERSION -ClientTypeName $ClientName -AssemblyFileName $DllName

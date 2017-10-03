@@ -24,12 +24,9 @@
     Run using our client creation path.
 
 .EXAMPLE
-    C:\PS> .\src\Alert.Tests.ps1
-	Describing Alerts
-	[+] TestListAlerts 349ms
-	[+] TestGetAlert 175ms
-	[+] TestGetAllAlerts 866ms
-	[+] TestCloseAlert 171ms
+    C:\PS> .\src\Operation.Tests.ps1
+	Describing Operations
+	[+] TestGetOperations 349ms
 	
 .NOTES
     Author: Jeffrey Robinson
@@ -46,7 +43,7 @@ $Global:RunRaw = $RunRaw
 
 InModuleScope Azs.Gallery.Admin {
 
-	Describe "Alerts" -Tags @('Alert', 'GalleryAdmin') {
+	Describe "Operations" -Tags @('Alert', 'GalleryAdmin') {
 	
 		BeforeEach  {
 			. $PSScriptRoot\Common.ps1

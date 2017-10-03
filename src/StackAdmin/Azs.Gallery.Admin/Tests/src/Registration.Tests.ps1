@@ -45,7 +45,7 @@ $Global:RunRaw = $RunRaw
 
 InModuleScope Azs.Gallery.Admin {
 
-	Describe "RegionHealths" -Tags @('RegionHealth', 'GalleryAdmin') {
+	Describe "Registration" -Tags @('RegionHealth', 'GalleryAdmin') {
 
 		BeforeEach  {
 
@@ -61,33 +61,27 @@ InModuleScope Azs.Gallery.Admin {
 
 				# Resource
 				$GalleryItem.Id       | Should Not Be $null
-				$GalleryItem.Location | Should Not Be $null
 				$GalleryItem.Name     | Should Not Be $null
 				$GalleryItem.Type     | Should Not Be $null
 
 				# Gallery Item
 				$GalleryItem.AdditionalProperties	| Should Not Be $null
 				$GalleryItem.Artifacts				| Should Not Be $null
-				$GalleryItem.CategoryIds			| Should Not Be $null
 				$GalleryItem.ChangedTime			| Should Not Be $null
 				$GalleryItem.CreatedTime			| Should Not Be $null
 				$GalleryItem.DefinitionTemplates	| Should Not Be $null
 				$GalleryItem.Description			| Should Not Be $null
-				$GalleryItem.Filters				| Should Not Be $null
 				$GalleryItem.IconFileUris			| Should Not Be $null
 				$GalleryItem.Identity				| Should Not Be $null
 				$GalleryItem.Images					| Should Not Be $null
 				$GalleryItem.ItemDisplayName		| Should Not Be $null
 				$GalleryItem.ItemName				| Should Not Be $null
 				$GalleryItem.ItemType				| Should Not Be $null
-				$GalleryItem.Links					| Should Not Be $null
 				$GalleryItem.LongSummary			| Should Not Be $null
 				$GalleryItem.Metadata				| Should Not Be $null
-				$GalleryItem.Products				| Should Not Be $null
 				$GalleryItem.Properties				| Should Not Be $null
 				$GalleryItem.Publisher				| Should Not Be $null
 				$GalleryItem.PublisherDisplayName	| Should Not Be $null
-				$GalleryItem.ScreenshotUris			| Should Not Be $null
 				$GalleryItem.Summary				| Should Not Be $null
 				$GalleryItem.UiDefinitionUri		| Should Not Be $null
 				$GalleryItem.Version				| Should Not Be $null
