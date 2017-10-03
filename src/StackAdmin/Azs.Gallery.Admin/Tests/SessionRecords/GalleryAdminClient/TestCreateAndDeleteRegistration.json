@@ -1,0 +1,279 @@
+{
+  "Entries": [
+    {
+      "RequestUri": "/subscriptions/0ff0bbbe-d68d-4314-8f68-80a808b5a6ec/providers/microsoft.gallery.admin/galleryItems/microsoft.vmss.1.3.6?api-version=2015-04-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvMGZmMGJiYmUtZDY4ZC00MzE0LThmNjgtODBhODA4YjVhNmVjL3Byb3ZpZGVycy9taWNyb3NvZnQuZ2FsbGVyeS5hZG1pbi9nYWxsZXJ5SXRlbXMvbWljcm9zb2Z0LnZtc3MuMS4zLjY/YXBpLXZlcnNpb249MjAxNS0wNC0wMQ==",
+      "RequestMethod": "DELETE",
+      "RequestBody": "",
+      "RequestHeaders": {
+        "x-ms-client-request-id": [
+          "c4cd5dba-a28e-436a-b5ec-58d804b7e6ce"
+        ],
+        "accept-language": [
+          "en-US"
+        ],
+        "User-Agent": [
+          "FxVersion/4.6.25211.01",
+          "Microsoft.AzureStack.Management.Gallery.Admin.GalleryAdminClient/0.1.0.0"
+        ]
+      },
+      "ResponseBody": "",
+      "ResponseHeaders": {
+        "Expires": [
+          "-1"
+        ],
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "Date": [
+          "Mon, 02 Oct 2017 18:03:45 GMT"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "Server": [
+          "Microsoft-IIS/10.0"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "X-XSS-Protection": [
+          "1; mode=block"
+        ],
+        "x-ms-version": [
+          "5.2.1.252 (AzureUX-Store:master.94b0f64.170509-1605)"
+        ],
+        "X-Powered-By": [
+          "ASP.NET"
+        ],
+        "x-ms-ratelimit-remaining-subscription-writes": [
+          "1183"
+        ],
+        "x-ms-request-id": [
+          "777f8c27-fe89-4433-86c4-2dcaf1723183"
+        ],
+        "x-ms-correlation-request-id": [
+          "777f8c27-fe89-4433-86c4-2dcaf1723183"
+        ],
+        "x-ms-routing-request-id": [
+          "LOCAL:20171002T180346Z:777f8c27-fe89-4433-86c4-2dcaf1723183"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=31536000; includeSubDomains"
+        ]
+      },
+      "StatusCode": 204
+    },
+    {
+      "RequestUri": "/subscriptions/0ff0bbbe-d68d-4314-8f68-80a808b5a6ec/providers/microsoft.gallery.admin/galleryItems/microsoft.vmss.1.3.6?api-version=2015-04-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvMGZmMGJiYmUtZDY4ZC00MzE0LThmNjgtODBhODA4YjVhNmVjL3Byb3ZpZGVycy9taWNyb3NvZnQuZ2FsbGVyeS5hZG1pbi9nYWxsZXJ5SXRlbXMvbWljcm9zb2Z0LnZtc3MuMS4zLjY/YXBpLXZlcnNpb249MjAxNS0wNC0wMQ==",
+      "RequestMethod": "DELETE",
+      "RequestBody": "",
+      "RequestHeaders": {
+        "x-ms-client-request-id": [
+          "21f7fe5f-7ff6-4a65-a069-f9342a103a04"
+        ],
+        "accept-language": [
+          "en-US"
+        ],
+        "User-Agent": [
+          "FxVersion/4.6.25211.01",
+          "Microsoft.AzureStack.Management.Gallery.Admin.GalleryAdminClient/0.1.0.0"
+        ]
+      },
+      "ResponseBody": "",
+      "ResponseHeaders": {
+        "Content-Length": [
+          "0"
+        ],
+        "Expires": [
+          "-1"
+        ],
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "Date": [
+          "Mon, 02 Oct 2017 18:03:46 GMT"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "Server": [
+          "Microsoft-IIS/10.0"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "X-XSS-Protection": [
+          "1; mode=block"
+        ],
+        "x-ms-version": [
+          "5.2.1.252 (AzureUX-Store:master.94b0f64.170509-1605)"
+        ],
+        "X-Powered-By": [
+          "ASP.NET"
+        ],
+        "x-ms-ratelimit-remaining-subscription-writes": [
+          "1181"
+        ],
+        "x-ms-request-id": [
+          "77ff0ba3-44ee-400f-bace-45a80944baed"
+        ],
+        "x-ms-correlation-request-id": [
+          "77ff0ba3-44ee-400f-bace-45a80944baed"
+        ],
+        "x-ms-routing-request-id": [
+          "LOCAL:20171002T180347Z:77ff0ba3-44ee-400f-bace-45a80944baed"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=31536000; includeSubDomains"
+        ]
+      },
+      "StatusCode": 200
+    },
+    {
+      "RequestUri": "/subscriptions/0ff0bbbe-d68d-4314-8f68-80a808b5a6ec/providers/microsoft.gallery.admin/galleryItems/microsoft.vmss.1.3.6?api-version=2015-04-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvMGZmMGJiYmUtZDY4ZC00MzE0LThmNjgtODBhODA4YjVhNmVjL3Byb3ZpZGVycy9taWNyb3NvZnQuZ2FsbGVyeS5hZG1pbi9nYWxsZXJ5SXRlbXMvbWljcm9zb2Z0LnZtc3MuMS4zLjY/YXBpLXZlcnNpb249MjAxNS0wNC0wMQ==",
+      "RequestMethod": "DELETE",
+      "RequestBody": "",
+      "RequestHeaders": {
+        "x-ms-client-request-id": [
+          "7bf80cb7-6ec2-43ee-b9f5-0e5871b03403"
+        ],
+        "accept-language": [
+          "en-US"
+        ],
+        "User-Agent": [
+          "FxVersion/4.6.25211.01",
+          "Microsoft.AzureStack.Management.Gallery.Admin.GalleryAdminClient/0.1.0.0"
+        ]
+      },
+      "ResponseBody": "",
+      "ResponseHeaders": {
+        "Expires": [
+          "-1"
+        ],
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "Date": [
+          "Mon, 02 Oct 2017 18:03:46 GMT"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "Server": [
+          "Microsoft-IIS/10.0"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "X-XSS-Protection": [
+          "1; mode=block"
+        ],
+        "x-ms-version": [
+          "5.2.1.252 (AzureUX-Store:master.94b0f64.170509-1605)"
+        ],
+        "X-Powered-By": [
+          "ASP.NET"
+        ],
+        "x-ms-ratelimit-remaining-subscription-writes": [
+          "1180"
+        ],
+        "x-ms-request-id": [
+          "47874a1b-62f2-4024-bb56-07c59165cb4a"
+        ],
+        "x-ms-correlation-request-id": [
+          "47874a1b-62f2-4024-bb56-07c59165cb4a"
+        ],
+        "x-ms-routing-request-id": [
+          "LOCAL:20171002T180347Z:47874a1b-62f2-4024-bb56-07c59165cb4a"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=31536000; includeSubDomains"
+        ]
+      },
+      "StatusCode": 204
+    },
+    {
+      "RequestUri": "/subscriptions/0ff0bbbe-d68d-4314-8f68-80a808b5a6ec/providers/microsoft.gallery.admin/galleryItems?api-version=2015-04-01",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvMGZmMGJiYmUtZDY4ZC00MzE0LThmNjgtODBhODA4YjVhNmVjL3Byb3ZpZGVycy9taWNyb3NvZnQuZ2FsbGVyeS5hZG1pbi9nYWxsZXJ5SXRlbXM/YXBpLXZlcnNpb249MjAxNS0wNC0wMQ==",
+      "RequestMethod": "POST",
+      "RequestBody": "{\r\n  \"GalleryItemUri\": \"https://github.com/Azure/AzureStack-Tools/raw/master/ComputeAdmin/microsoft.vmss.1.3.6.azpkg\"\r\n}",
+      "RequestHeaders": {
+        "Content-Type": [
+          "application/json; charset=utf-8"
+        ],
+        "Content-Length": [
+          "120"
+        ],
+        "x-ms-client-request-id": [
+          "c80f4c1e-8426-4315-b1bf-867686c78bbd"
+        ],
+        "accept-language": [
+          "en-US"
+        ],
+        "User-Agent": [
+          "FxVersion/4.6.25211.01",
+          "Microsoft.AzureStack.Management.Gallery.Admin.GalleryAdminClient/0.1.0.0"
+        ]
+      },
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/0ff0bbbe-d68d-4314-8f68-80a808b5a6ec/providers/Microsoft.Gallery.Admin/galleryItems/microsoft.vmss.1.3.6\",\r\n  \"name\": \"microsoft.vmss.1.3.6\",\r\n  \"type\": \"Microsoft.Gallery.Admin/galleryItems\",\r\n  \"properties\": {\r\n    \"identity\": \"microsoft.vmss.1.3.6\",\r\n    \"publisher\": \"microsoft\",\r\n    \"publisherDisplayName\": \"Microsoft\",\r\n    \"itemName\": \"vmss\",\r\n    \"itemDisplayName\": \"Virtual machine scale set\",\r\n    \"version\": \"1.3.6\",\r\n    \"summary\": \"Deploy multiple instances of a single image.\",\r\n    \"longSummary\": \"This template deploys a Virtual machine scale set of virtual machines (Windows or Linux) behind a load balancer with NAT rules for RDP or ssh connections.\",\r\n    \"description\": \"This template allows you to deploy a Virtual machine scale set of virtual machines. These virtual machines are behind a load balancer with NAT rules for RDP or ssh connections. After it has deployed, use the Azure Portal to find the public IP address of the load balancer and see the NAT rules associated with the load balancer. For instance, if there is a NAT rule on port 50000, you can connect to that virtual machine by using RDP on port 50000 of the public ip address of the load balancer for Windows or ssh into that virtual machine using the command: ssh -p 50000 {user-name}@{public-ip-address}. (Azure Stack Portal VMSS version 1.3.5).\",\r\n    \"uiDefinitionUri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/UIDefinition.json\",\r\n    \"createdTime\": \"2017-10-02T18:03:46.9796978Z\",\r\n    \"changedTime\": \"2017-10-02T18:03:46.9803009Z\",\r\n    \"itemType\": \"GalleryItem\",\r\n    \"categoryIds\": [\r\n      \"Compute\"\r\n    ],\r\n    \"screenshotUris\": [],\r\n    \"links\": [\r\n      {\r\n        \"id\": \"0\",\r\n        \"displayName\": \"Learn more\",\r\n        \"uri\": \"http://aka.ms/vmssoverview\"\r\n      },\r\n      {\r\n        \"id\": \"1\",\r\n        \"displayName\": \"Documentation\",\r\n        \"uri\": \"http://aka.ms/vmssdoc\"\r\n      }\r\n    ],\r\n    \"filters\": [],\r\n    \"iconFileUris\": {\r\n      \"small\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Small.png\",\r\n      \"medium\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Medium.png\",\r\n      \"large\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Large.png\",\r\n      \"wide\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Wide.png\",\r\n      \"hero\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Hero.png\"\r\n    },\r\n    \"artifacts\": [\r\n      {\r\n        \"name\": \"createuidefinition\",\r\n        \"uri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/DeploymentTemplates/CreateUiDefinition.json\",\r\n        \"type\": \"custom\"\r\n      },\r\n      {\r\n        \"name\": \"DefaultTemplate\",\r\n        \"uri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/DeploymentTemplates/mainTemplate.json\",\r\n        \"type\": \"template\"\r\n      }\r\n    ],\r\n    \"metadata\": {},\r\n    \"properties\": {},\r\n    \"images\": [\r\n      {\r\n        \"context\": \"ibiza\",\r\n        \"items\": [\r\n          {\r\n            \"id\": \"small\",\r\n            \"uri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Small.png\",\r\n            \"type\": \"icon\"\r\n          },\r\n          {\r\n            \"id\": \"medium\",\r\n            \"uri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Medium.png\",\r\n            \"type\": \"icon\"\r\n          },\r\n          {\r\n            \"id\": \"large\",\r\n            \"uri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Large.png\",\r\n            \"type\": \"icon\"\r\n          },\r\n          {\r\n            \"id\": \"wide\",\r\n            \"uri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Wide.png\",\r\n            \"type\": \"icon\"\r\n          },\r\n          {\r\n            \"id\": \"hero\",\r\n            \"uri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/Icons/Hero.png\",\r\n            \"type\": \"icon\"\r\n          }\r\n        ]\r\n      }\r\n    ],\r\n    \"products\": [],\r\n    \"definitionTemplates\": {\r\n      \"uiDefinitionFileUri\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/UIDefinition.json\",\r\n      \"defaultDeploymentTemplateId\": \"DefaultTemplate\",\r\n      \"deploymentTemplateFileUris\": {\r\n        \"createuidefinition\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/DeploymentTemplates/CreateUiDefinition.json\",\r\n        \"DefaultTemplate\": \"https://adminportal.local.azurestack.external:30015/artifact/20161101/microsoft.vmss.1.3.6/DeploymentTemplates/mainTemplate.json\"\r\n      },\r\n      \"deploymentFragmentFileUris\": {}\r\n    },\r\n    \"additionalProperties\": {}\r\n  }\r\n}",
+      "ResponseHeaders": {
+        "Content-Length": [
+          "4129"
+        ],
+        "Content-Type": [
+          "application/json; charset=utf-8"
+        ],
+        "Expires": [
+          "-1"
+        ],
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "Date": [
+          "Mon, 02 Oct 2017 18:03:46 GMT"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "Server": [
+          "Microsoft-IIS/10.0"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "X-XSS-Protection": [
+          "1; mode=block"
+        ],
+        "x-ms-version": [
+          "5.2.1.252 (AzureUX-Store:master.94b0f64.170509-1605)"
+        ],
+        "X-Powered-By": [
+          "ASP.NET"
+        ],
+        "x-ms-ratelimit-remaining-subscription-writes": [
+          "1182"
+        ],
+        "x-ms-request-id": [
+          "d3d984bd-a235-45d3-97c0-50f8dd9b0a63"
+        ],
+        "x-ms-correlation-request-id": [
+          "d3d984bd-a235-45d3-97c0-50f8dd9b0a63"
+        ],
+        "x-ms-routing-request-id": [
+          "LOCAL:20171002T180346Z:d3d984bd-a235-45d3-97c0-50f8dd9b0a63"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=31536000; includeSubDomains"
+        ]
+      },
+      "StatusCode": 201
+    }
+  ],
+  "Names": {},
+  "Variables": {
+    "SubscriptionId": "0ff0bbbe-d68d-4314-8f68-80a808b5a6ec"
+  }
+}

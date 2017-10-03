@@ -1,0 +1,78 @@
+{
+  "Entries": [
+    {
+      "RequestUri": "/providers/Microsoft.Gallery.Admin/operations?api-version=2015-04-01",
+      "EncodedRequestUri": "L3Byb3ZpZGVycy9NaWNyb3NvZnQuR2FsbGVyeS5BZG1pbi9vcGVyYXRpb25zP2FwaS12ZXJzaW9uPTIwMTUtMDQtMDE=",
+      "RequestMethod": "GET",
+      "RequestBody": "",
+      "RequestHeaders": {
+        "x-ms-client-request-id": [
+          "55f2a94f-cad3-43c9-b3fa-c4c244e51aa7"
+        ],
+        "accept-language": [
+          "en-US"
+        ],
+        "User-Agent": [
+          "FxVersion/4.6.25211.01",
+          "Microsoft.AzureStack.Management.Gallery.Admin.GalleryAdminClient/0.1.0.0"
+        ]
+      },
+      "ResponseBody": "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"Microsoft.Gallery.Admin/galleryItems/read\",\r\n      \"display\": {\r\n        \"provider\": \"Microsoft Gallery Administration Service\",\r\n        \"resource\": \"Gallery Item\",\r\n        \"operation\": \"Get Gallery Items\",\r\n        \"description\": \"Gets the gallery items.\"\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"Microsoft.Gallery.Admin/galleryItems/action\",\r\n      \"display\": {\r\n        \"provider\": \"Microsoft Gallery Administration Service\",\r\n        \"resource\": \"Gallery Item\",\r\n        \"operation\": \"Upload Gallery Item\",\r\n        \"description\": \"Uploads a gallery item.\"\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"Microsoft.Gallery.Admin/galleryItems/delete\",\r\n      \"display\": {\r\n        \"provider\": \"Microsoft Gallery Administration Service\",\r\n        \"resource\": \"Gallery Item\",\r\n        \"operation\": \"Delete Gallery Item\",\r\n        \"description\": \"Deletes a gallery item.\"\r\n      }\r\n    },\r\n    {\r\n      \"name\": \"Microsoft.Gallery.Admin/operations/read\",\r\n      \"display\": {\r\n        \"provider\": \"Microsoft Gallery Administration Service\",\r\n        \"resource\": \"Operation\",\r\n        \"operation\": \"List Operations\",\r\n        \"description\": \"Lists the supported operations.\"\r\n      }\r\n    }\r\n  ]\r\n}",
+      "ResponseHeaders": {
+        "Content-Length": [
+          "888"
+        ],
+        "Content-Type": [
+          "application/json; charset=utf-8"
+        ],
+        "Expires": [
+          "-1"
+        ],
+        "Cache-Control": [
+          "no-cache"
+        ],
+        "Date": [
+          "Mon, 02 Oct 2017 18:03:46 GMT"
+        ],
+        "Pragma": [
+          "no-cache"
+        ],
+        "Server": [
+          "Microsoft-IIS/10.0"
+        ],
+        "X-Content-Type-Options": [
+          "nosniff"
+        ],
+        "X-XSS-Protection": [
+          "1; mode=block"
+        ],
+        "x-ms-version": [
+          "5.2.1.252 (AzureUX-Store:master.94b0f64.170509-1605)"
+        ],
+        "X-Powered-By": [
+          "ASP.NET"
+        ],
+        "x-ms-ratelimit-remaining-tenant-reads": [
+          "14971"
+        ],
+        "x-ms-request-id": [
+          "5096ed24-686e-4662-8277-d59ef8debe2d"
+        ],
+        "x-ms-correlation-request-id": [
+          "5096ed24-686e-4662-8277-d59ef8debe2d"
+        ],
+        "x-ms-routing-request-id": [
+          "LOCAL:20171002T180347Z:5096ed24-686e-4662-8277-d59ef8debe2d"
+        ],
+        "Strict-Transport-Security": [
+          "max-age=31536000; includeSubDomains"
+        ]
+      },
+      "StatusCode": 200
+    }
+  ],
+  "Names": {},
+  "Variables": {
+    "SubscriptionId": "0ff0bbbe-d68d-4314-8f68-80a808b5a6ec"
+  }
+}
