@@ -7,9 +7,9 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 <Configuration>
     <ViewDefinitions>
         <View>
-            <Name>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.Resource</Name>
+            <Name>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.Filter</Name>
             <ViewSelectedBy>
-                <TypeName>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.Resource</TypeName>
+                <TypeName>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.Filter</TypeName>
             </ViewSelectedBy>
             <TableControl>
                 <TableHeaders>
@@ -18,13 +18,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
                     <TableRowEntry>
                         <TableColumnItems>
                             <TableColumnItem>
-                                <PropertyName>Name</PropertyName>
+                                <PropertyName>Value</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <PropertyName>Type</PropertyName>
-                            </TableColumnItem>
-                            <TableColumnItem>
-                                <PropertyName>Location</PropertyName>
                             </TableColumnItem>
                         </TableColumnItems>
                     </TableRowEntry>

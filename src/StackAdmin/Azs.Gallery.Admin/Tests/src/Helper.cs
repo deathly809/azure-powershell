@@ -23,7 +23,7 @@ using Microsoft.Rest.ClientRuntime.Azure.TestFramework;
 namespace Test
 {
 
-    [Cmdlet(VerbsCommon.Get, "MockClient"), OutputType(typeof(Gallery))]
+    [Cmdlet(VerbsCommon.Get, "MockClient"), OutputType(typeof(GalleryAdminClient))]
     public class Helper : PSCmdlet {
 
         [Parameter(Mandatory = true, Position = 0, HelpMessage = "The name of your test class.")]
@@ -39,7 +39,7 @@ namespace Test
             handler.IsPassThrough = true;
 
             var context = MockContext.Start(ClassName, TestName);
-            WriteObject(context.GetServiceClient<Gallery>(handlers: handler));
+            WriteObject(context.GetServiceClient<GalleryAdminClient>(handlers: handler));
         }
     }
 }

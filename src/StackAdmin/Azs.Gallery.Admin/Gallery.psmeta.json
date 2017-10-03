@@ -1,0 +1,1266 @@
+{
+  "info": {
+    "x-ps-code-generation-settings": {
+      "codeGenerator": "AzureCsharp",
+      "nameSpacePrefix": "Microsoft.AzureStack.Management.",
+      "noAssembly": false,
+      "powerShellCorePath": "",
+      "includeCoreFxAssembly": false,
+      "testBuild": false,
+      "confirmBootstrap": false,
+      "path": ".",
+      "symbolPath": ".",
+      "serviceType": "azure_stack",
+      "customAuthCommand": "",
+      "hostOverrideCommand": "",
+      "noAuthChallenge": ""
+    },
+    "x-ps-module-info": {
+      "name": "GalleryAdminClient",
+      "moduleVersion": "0.1.0",
+      "guid": "8a81e7bd-ee1e-43b9-9dd1-47978fcca036",
+      "description": "Gallery Admin Client",
+      "author": "Jeffrey Robinson",
+      "companyName": "Microsoft",
+      "CopyRight": "Microsoft",
+      "licenseUri": "",
+      "projectUri": "",
+      "helpInfoUri": "",
+      "iconUri": "",
+      "releaseNotes": "",
+      "defaultCommandPrefix": "Azs",
+      "tags": [
+        
+      ]
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Gallery.Admin/operations": {
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-GalleryOperationList",
+            "description": "Return a list of supported admin operations.",
+            "defaultParameterSet": "Operations",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.gallery.admin/galleryItems": {
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-Registration",
+            "description": "Get current registrations.",
+            "defaultParameterSet": "Registrations_List",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "post": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "New-Registration",
+            "description": "Register a new gallery item.",
+            "defaultParameterSet": "Registrations_Create",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.gallery.admin/galleryItems/{galleryItemName}": {
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-Registration",
+            "description": "Get a registration.",
+            "defaultParameterSet": "Registrations_List",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "delete": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Remove-Registration",
+            "description": "Remove a registration from the gallery.",
+            "defaultParameterSet": "Registrations_Delete",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GalleryItemList": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-GalleryItemListObject",
+          "description": "List of gallery items.",
+          "defaultParameterSet": "GalleryItemList",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "value": {
+          "x-ps-parameter-info": {
+            "name": "Value",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "nextLink": {
+          "x-ps-parameter-info": {
+            "name": "NextLink",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Operation": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OperationObject",
+          "description": "",
+          "defaultParameterSet": "Operation",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "name": {
+          "x-ps-parameter-info": {
+            "name": "Name",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "display": {
+          "x-ps-parameter-info": {
+            "name": "Display",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "origin": {
+          "x-ps-parameter-info": {
+            "name": "Origin",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        }
+      }
+    },
+    "OpenProperty": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OpenPropertyObject",
+          "description": "",
+          "defaultParameterSet": "OpenProperty",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ps-parameter-info": {
+            "name": "Properties",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        }
+      }
+    },
+    "OperationDisplayDefinition": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OperationDisplayDefinitionObject",
+          "description": "",
+          "defaultParameterSet": "OperationDisplayDefinition",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "operation": {
+          "x-ps-parameter-info": {
+            "name": "Operation",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "description": {
+          "x-ps-parameter-info": {
+            "name": "Description",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "resource": {
+          "x-ps-parameter-info": {
+            "name": "Resource",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "provider": {
+          "x-ps-parameter-info": {
+            "name": "Provider",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
+    "GalleryItemUriPayload": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-GalleryItemUriPayloadObject",
+          "description": "Gallery item uri",
+          "defaultParameterSet": "GalleryItemUriPayload",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "GalleryItemUri": {
+          "x-ps-parameter-info": {
+            "name": "GalleryItemUri",
+            "description": "Gets or sets the gallery item URI."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        }
+      }
+    },
+    "ImageGroup": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ImageGroupObject",
+          "description": "",
+          "defaultParameterSet": "ImageGroup",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "items": {
+          "x-ps-parameter-info": {
+            "name": "Items",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "context": {
+          "x-ps-parameter-info": {
+            "name": "Context",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Image": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ImageObject",
+          "description": "",
+          "defaultParameterSet": "Image",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "type": {
+          "x-ps-parameter-info": {
+            "name": "Type",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "id": {
+          "x-ps-parameter-info": {
+            "name": "Id",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "uri": {
+          "x-ps-parameter-info": {
+            "name": "Uri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Plan": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-PlanObject",
+          "description": "",
+          "defaultParameterSet": "Plan",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "summary": {
+          "x-ps-parameter-info": {
+            "name": "Summary",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "description": {
+          "x-ps-parameter-info": {
+            "name": "Description",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "displayName": {
+          "x-ps-parameter-info": {
+            "name": "DisplayName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "planId": {
+          "x-ps-parameter-info": {
+            "name": "PlanId",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
+    "GalleryItemProperties": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-GalleryItemPropertiesObject",
+          "description": "",
+          "defaultParameterSet": "GalleryItemProperties",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "createdTime": {
+          "x-ps-parameter-info": {
+            "name": "CreatedTime",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "description": {
+          "x-ps-parameter-info": {
+            "name": "Description",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "identity": {
+          "x-ps-parameter-info": {
+            "name": "Identity",
+            "description": "Identity of the gallery item."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "itemName": {
+          "x-ps-parameter-info": {
+            "name": "ItemName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        },
+        "definitionTemplates": {
+          "x-ps-parameter-info": {
+            "name": "DefinitionTemplates",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "metadata": {
+          "x-ps-parameter-info": {
+            "name": "Metadata",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "additionalProperties": {
+          "x-ps-parameter-info": {
+            "name": "AdditionalProperties",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 4,
+            "width": 10
+          }
+        },
+        "version": {
+          "x-ps-parameter-info": {
+            "name": "Version",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "products": {
+          "x-ps-parameter-info": {
+            "name": "Products",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "iconFileUris": {
+          "x-ps-parameter-info": {
+            "name": "IconFileUris",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "publisherDisplayName": {
+          "x-ps-parameter-info": {
+            "name": "PublisherDisplayName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "longSummary": {
+          "x-ps-parameter-info": {
+            "name": "LongSummary",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "artifacts": {
+          "x-ps-parameter-info": {
+            "name": "Artifacts",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "itemDisplayName": {
+          "x-ps-parameter-info": {
+            "name": "ItemDisplayName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "categoryIds": {
+          "x-ps-parameter-info": {
+            "name": "CategoryIds",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "properties": {
+          "x-ps-parameter-info": {
+            "name": "Properties",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "images": {
+          "x-ps-parameter-info": {
+            "name": "Images",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "itemType": {
+          "x-ps-parameter-info": {
+            "name": "ItemType",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "resourceGroupName": {
+          "x-ps-parameter-info": {
+            "name": "ResourceGroupName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "filters": {
+          "x-ps-parameter-info": {
+            "name": "Filters",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "screenshotUris": {
+          "x-ps-parameter-info": {
+            "name": "ScreenshotUris",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "marketingMaterial": {
+          "x-ps-parameter-info": {
+            "name": "MarketingMaterial",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "uiDefinitionUri": {
+          "x-ps-parameter-info": {
+            "name": "UiDefinitionUri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "changedTime": {
+          "x-ps-parameter-info": {
+            "name": "ChangedTime",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "publisher": {
+          "x-ps-parameter-info": {
+            "name": "Publisher",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "summary": {
+          "x-ps-parameter-info": {
+            "name": "Summary",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "links": {
+          "x-ps-parameter-info": {
+            "name": "Links",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "LinkProperties": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-LinkPropertiesObject",
+          "description": "",
+          "defaultParameterSet": "LinkProperties",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "displayName": {
+          "x-ps-parameter-info": {
+            "name": "DisplayName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "id": {
+          "x-ps-parameter-info": {
+            "name": "Id",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "uri": {
+          "x-ps-parameter-info": {
+            "name": "Uri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        }
+      }
+    },
+    "MarketingMaterial": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-MarketingMaterialObject",
+          "description": "",
+          "defaultParameterSet": "MarketingMaterial",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "learnUri": {
+          "x-ps-parameter-info": {
+            "name": "LearnUri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "path": {
+          "x-ps-parameter-info": {
+            "name": "Path",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "DefinitionTemplates": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-DefinitionTemplatesObject",
+          "description": "",
+          "defaultParameterSet": "DefinitionTemplates",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "defaultDeploymentTemplateId": {
+          "x-ps-parameter-info": {
+            "name": "DefaultDeploymentTemplateId",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "deploymentTemplateFileUris": {
+          "x-ps-parameter-info": {
+            "name": "DeploymentTemplateFileUris",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "uiDefinitionFileUri": {
+          "x-ps-parameter-info": {
+            "name": "UiDefinitionFileUri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "deploymentFragmentFileUris": {
+          "x-ps-parameter-info": {
+            "name": "DeploymentFragmentFileUris",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Filter": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-FilterObject",
+          "description": "",
+          "defaultParameterSet": "Filter",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "value": {
+          "x-ps-parameter-info": {
+            "name": "Value",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "type": {
+          "x-ps-parameter-info": {
+            "name": "Type",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Product": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ProductObject",
+          "description": "",
+          "defaultParameterSet": "Product",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "privacyPolicyUri": {
+          "x-ps-parameter-info": {
+            "name": "PrivacyPolicyUri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "privacyPolicy": {
+          "x-ps-parameter-info": {
+            "name": "PrivacyPolicy",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "legalTermsUri": {
+          "x-ps-parameter-info": {
+            "name": "LegalTermsUri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "pricingDetailsUri": {
+          "x-ps-parameter-info": {
+            "name": "PricingDetailsUri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        },
+        "publisherDisplayName": {
+          "x-ps-parameter-info": {
+            "name": "PublisherDisplayName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 4,
+            "width": 10
+          }
+        },
+        "offerDetails": {
+          "x-ps-parameter-info": {
+            "name": "OfferDetails",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "legalTerms": {
+          "x-ps-parameter-info": {
+            "name": "LegalTerms",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "displayName": {
+          "x-ps-parameter-info": {
+            "name": "DisplayName",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Artifact": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ArtifactObject",
+          "description": "",
+          "defaultParameterSet": "Artifact",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "type": {
+          "x-ps-parameter-info": {
+            "name": "Type",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "name": {
+          "x-ps-parameter-info": {
+            "name": "Name",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "uri": {
+          "x-ps-parameter-info": {
+            "name": "Uri",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        }
+      }
+    },
+    "OfferDetails": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OfferDetailsObject",
+          "description": "",
+          "defaultParameterSet": "OfferDetails",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "publisherId": {
+          "x-ps-parameter-info": {
+            "name": "PublisherId",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "plans": {
+          "x-ps-parameter-info": {
+            "name": "Plans",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "offerId": {
+          "x-ps-parameter-info": {
+            "name": "OfferId",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        }
+      }
+    },
+    "OperationList": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OperationListObject",
+          "description": "List of operations.",
+          "defaultParameterSet": "OperationList",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "value": {
+          "x-ps-parameter-info": {
+            "name": "Value",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "nextLink": {
+          "x-ps-parameter-info": {
+            "name": "NextLink",
+            "description": ""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "GalleryItem": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-GalleryItemObject",
+          "description": "",
+          "defaultParameterSet": "GalleryItem",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "Resource": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ResourceObject",
+          "description": "Base Resource Object",
+          "defaultParameterSet": "Resource",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "tags": {
+          "x-ps-parameter-info": {
+            "name": "Tags",
+            "description": "List of key value pairs."
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "name": {
+          "x-ps-parameter-info": {
+            "name": "Name",
+            "description": "Name of the resource."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "id": {
+          "x-ps-parameter-info": {
+            "name": "Id",
+            "description": "URI of the resource."
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "type": {
+          "x-ps-parameter-info": {
+            "name": "Type",
+            "description": "Type of resource."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "location": {
+          "x-ps-parameter-info": {
+            "name": "Location",
+            "description": "Location where resource is location."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FilterParameter": {
+      "x-ps-parameter-info": {
+        "name": "Filter",
+        "description": "OData filter parameter.",
+        "flatten": false
+      }
+    },
+    "GalleryItemNameParameter": {
+      "x-ps-parameter-info": {
+        "name": "GalleryItemName",
+        "description": "Identity of the gallery item. Includes publisher name, item name and may include version separated by period character.",
+        "flatten": false
+      }
+    },
+    "SubscriptionIdParameter": {
+      "x-ps-parameter-info": {
+        "name": "SubscriptionId",
+        "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
+        "flatten": false
+      }
+    },
+    "GalleryItemUriPayloadParameter": {
+      "x-ps-parameter-info": {
+        "name": "GalleryItemUri",
+        "description": "The new gallery item.",
+        "flatten": false
+      }
+    },
+    "ApiVersionParameter": {
+      "x-ps-parameter-info": {
+        "name": "Apiversion",
+        "description": "Client Api Version.",
+        "flatten": false
+      }
+    }
+  }
+}

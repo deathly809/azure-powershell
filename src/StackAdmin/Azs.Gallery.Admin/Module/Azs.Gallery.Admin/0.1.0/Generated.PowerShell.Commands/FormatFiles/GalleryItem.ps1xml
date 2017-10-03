@@ -7,9 +7,9 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 <Configuration>
     <ViewDefinitions>
         <View>
-            <Name>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.Resource</Name>
+            <Name>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.GalleryItem</Name>
             <ViewSelectedBy>
-                <TypeName>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.Resource</TypeName>
+                <TypeName>Microsoft.PowerShell.Azs.Gallery.Admin.v010.Models.GalleryItem</TypeName>
             </ViewSelectedBy>
             <TableControl>
                 <TableHeaders>
@@ -18,13 +18,19 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
                     <TableRowEntry>
                         <TableColumnItems>
                             <TableColumnItem>
-                                <PropertyName>Name</PropertyName>
+                                <PropertyName>CreatedTime</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>Type</PropertyName>
+                                <PropertyName>Description</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <PropertyName>Location</PropertyName>
+                                <PropertyName>Identity</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ItemName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>AdditionalProperties</PropertyName>
                             </TableColumnItem>
                         </TableColumnItems>
                     </TableRowEntry>

@@ -79,6 +79,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.InfrastructureInsights.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.InfrastructureInsights.Admin.Tests", "StackAdmin\Azs.InfrastructureInsights.Admin\Tests\Azs.InfrastructureInsights.Admin.Tests.csproj", "{318C3F12-4742-477C-BED0-B6E8475AC304}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Gallery.Admin", "StackAdmin\Azs.Gallery.Admin\Module\Azs.Gallery.Admin.csproj", "{54AB98D7-ED05-431F-8611-83F11884FDDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Gallery.Admin.Tests", "StackAdmin\Azs.Gallery.Admin\Tests\Azs.Gallery.Admin.Tests.csproj", "{91137D65-2703-4724-974F-5394EB7DBE26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

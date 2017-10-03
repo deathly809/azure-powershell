@@ -12,7 +12,7 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------------
 
-$ModuleName = "Azs.InfrastructureInsights.Admin"
+$ModuleName = "Azs.Gallery.Admin"
 
 Import-Module ..\Module\$ModuleName
 
@@ -24,6 +24,4 @@ if(Test-Path bin\Debug) {
     throw "Cannot load test dll: $ModuleName.Tests.dll"
 }
 
-$global:ResourceGroup = "System.local"
-$global:Location = "local"
 $global:TestName = ""
