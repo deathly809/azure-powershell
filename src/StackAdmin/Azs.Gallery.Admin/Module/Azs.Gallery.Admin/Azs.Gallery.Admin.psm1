@@ -14,16 +14,7 @@ if (-not (Get-Command Get-OperatingSystemInfo -Module PSSwaggerUtility -ErrorAct
     Import-Module PSSwaggerUtility -Force
 }
 
-if ((Get-OperatingSystemInfo).IsCore) {
-    . (Join-Path -Path $PSScriptRoot "Test-CoreRequirements.ps1")
-    $clr = 'coreclr'
-}
-else {
-    . (Join-Path -Path $PSScriptRoot "Test-FullRequirements.ps1")
-    $clr = 'fullclr'
-}
-
-$ClrPath = Join-Path -Path $PSScriptRoot -ChildPath 'ref' | Join-Path -ChildPath $clr
+$ClrPath = Join-Path -Path $PSScriptRoot -ChildPath 'ref' | Join-Path -ChildPath "fullclr"
 
 $allDllsPath = Join-Path -Path $ClrPath -ChildPath '*.dll'
 if (Test-Path -Path $ClrPath -PathType Container) {
