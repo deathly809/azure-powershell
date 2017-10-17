@@ -1,0 +1,807 @@
+{
+  "info": {
+    "x-ps-code-generation-settings": {
+      "codeGenerator": "AzureCsharp",
+      "nameSpacePrefix": "Microsoft.AzureStack.Management.",
+      "noAssembly": false,
+      "powerShellCorePath": "",
+      "includeCoreFxAssembly": false,
+      "testBuild": false,
+      "confirmBootstrap": false,
+      "path": ".",
+      "symbolPath": ".",
+      "serviceType": "azure_stack",
+      "customAuthCommand": "",
+      "hostOverrideCommand": "",
+      "noAuthChallenge": ""
+    },
+    "x-ps-module-info": {
+      "name": "ComputeAdminClient",
+      "moduleVersion": "0.0.1",
+      "guid": "1d2315bc-1ed7-47fe-af63-7bdd8b1dce00",
+      "description": "Compute Admin Client",
+      "author": "Microsoft",
+      "companyName": "Microsoft",
+      "CopyRight": "Microsoft",
+      "licenseUri": "",
+      "projectUri": "",
+      "helpInfoUri": "",
+      "iconUri": "",
+      "releaseNotes": "",
+      "defaultCommandPrefix": "Azs",
+      "tags": [
+        
+      ]
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas/{quota}": {
+      "delete": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Remove-Quota",
+            "description": "Delete an existing quota.",
+            "defaultParameterSet": "Quotas_Delete",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-Quota",
+            "description": "Get an existing Quota.",
+            "defaultParameterSet": "Quotas_Get",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "put": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "New-Quota",
+            "description": "Create a new Quota.",
+            "defaultParameterSet": "Quotas_Create",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/platformImage/publishers/{publisher}/offers/{offer}/skus/{sku}/versions/{version}": {
+      "put": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "New-PlatformImage",
+            "description": "Create a new platform image.",
+            "defaultParameterSet": "PlatformImages_Create",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-PlatformImage",
+            "description": "Get a platform image by name.",
+            "defaultParameterSet": "PlatformImages_List",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "delete": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Remove-PlatformImage",
+            "description": "Delete a platform image",
+            "defaultParameterSet": "PlatformImages_Delete",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/platformImage": {
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-PlatformImage",
+            "description": "Get a list of all platform images.",
+            "defaultParameterSet": "PlatformImages_List",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas": {
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-Quota",
+            "description": "Get a list of existing quotas.",
+            "defaultParameterSet": "Quotas_Get",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/VMExtension/publishers/{publisher}/types/{type}/versions/{version}": {
+      "put": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "New-VMExtension",
+            "description": "Create a new platform image.",
+            "defaultParameterSet": "VMExtensions_Create",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "delete": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Remove-VMExtension",
+            "description": "Delete a platform image by name.",
+            "defaultParameterSet": "VMExtensions_Delete",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      },
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-VMExtension",
+            "description": "Get a platform image by name.",
+            "defaultParameterSet": "VMExtensions_Get",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/VMExtension": {
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-VMExtension",
+            "description": "Get a list of all platform images.",
+            "defaultParameterSet": "VMExtensions_Get",
+            "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ProvisioningStateObject",
+          "description": "The provisioning state of the resource.",
+          "defaultParameterSet": "ProvisioningState",
+          "generateCommand": false,
+          "generateOutputFormat": false
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "ImageDetails": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ImageDetailsObject",
+          "description": "Information about the disk image.",
+          "defaultParameterSet": "ImageDetails",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "billingPartNumber": {
+          "x-ps-parameter-info": {
+            "name": "BillingPartNumber",
+            "description": "Something about billing?."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        }
+      }
+    },
+    "DataDisk": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-DataDiskObject",
+          "description": "Information about datadisk.",
+          "defaultParameterSet": "DataDisk",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "lun": {
+          "x-ps-parameter-info": {
+            "name": "Lun",
+            "description": "Logical unit number."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "uri": {
+          "x-ps-parameter-info": {
+            "name": "Uri",
+            "description": "Location of the disk template."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "VMExtensionProperties": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-VMExtensionPropertiesObject",
+          "description": "Properties of a virtual machine extension.",
+          "defaultParameterSet": "VMExtensionProperties",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "x-ps-parameter-info": {
+            "name": "ProvisioningState",
+            "description": "Provisioning state of extension."
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "sourceBlob": {
+          "x-ps-parameter-info": {
+            "name": "SourceBlob",
+            "description": "URI to azure blob."
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "computeRole": {
+          "x-ps-parameter-info": {
+            "name": "ComputeRole",
+            "description": "Compute role"
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "vmOsType": {
+          "x-ps-parameter-info": {
+            "name": "VmOsType",
+            "description": "Target virtaul machine operating system type necessary for deploying the extension handler"
+          },
+          "x-ps-output-format-info": {
+            "include": false,
+            "position": -1,
+            "width": 10
+          }
+        },
+        "vmScaleSetEnabled": {
+          "x-ps-parameter-info": {
+            "name": "VmScaleSetEnabled",
+            "description": "value indicating whether the extension is enabled for virtual machine scale set support"
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "supportMultipleExtensions": {
+          "x-ps-parameter-info": {
+            "name": "SupportMultipleExtensions",
+            "description": "True if supports multiple extensions."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "isSystemExtension": {
+          "x-ps-parameter-info": {
+            "name": "IsSystemExtension",
+            "description": "Denotes if extension is for system or not."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
+    "OsDisk": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OsDiskObject",
+          "description": "Operating system disk.",
+          "defaultParameterSet": "OsDisk",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "osType": {
+          "x-ps-parameter-info": {
+            "name": "OsType",
+            "description": "Operating system type."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "uri": {
+          "x-ps-parameter-info": {
+            "name": "Uri",
+            "description": "Location of the disk."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "VMExtensionList": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-VMExtensionListObject",
+          "description": "List of virtual machine extensions.",
+          "defaultParameterSet": "VMExtensionList",
+          "generateCommand": false,
+          "generateOutputFormat": false
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "AzureBlob": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-AzureBlobObject",
+          "description": "Azure blob information.",
+          "defaultParameterSet": "AzureBlob",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "uri": {
+          "x-ps-parameter-info": {
+            "name": "Uri",
+            "description": "URI to azure blob."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        }
+      }
+    },
+    "PlatformImage": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-PlatformImageObject",
+          "description": "Platform image represents a virtual machine.",
+          "defaultParameterSet": "PlatformImage",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "PlatformImageProperties": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-PlatformImagePropertiesObject",
+          "description": "Properties of platform image.",
+          "defaultParameterSet": "PlatformImageProperties",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "osDisk": {
+          "x-ps-parameter-info": {
+            "name": "OsDisk",
+            "description": "Operating system used for this platform image."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "details": {
+          "x-ps-parameter-info": {
+            "name": "Details",
+            "description": "Information about the image."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "dataDisks": {
+          "x-ps-parameter-info": {
+            "name": "DataDisks",
+            "description": "Data disks used by the platform image."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "provisioningState": {
+          "x-ps-parameter-info": {
+            "name": "ProvisioningState",
+            "description": "Provisioning status of the platform image."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
+    "VMExtension": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-VMExtensionObject",
+          "description": "Virtual machine extenion.",
+          "defaultParameterSet": "VMExtension",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "OsType": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OsTypeObject",
+          "description": "Operating system type.",
+          "defaultParameterSet": "OsType",
+          "generateCommand": false,
+          "generateOutputFormat": false
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "QuotaProperties": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-QuotaPropertiesObject",
+          "description": "Properties for a Quota",
+          "defaultParameterSet": "QuotaProperties",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "coresLimit": {
+          "x-ps-parameter-info": {
+            "name": "CoresLimit",
+            "description": "Maximum number of core allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "vmScaleSetCount": {
+          "x-ps-parameter-info": {
+            "name": "VmScaleSetCount",
+            "description": "Maximum number of scale sets allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "virtualMachineCount": {
+          "x-ps-parameter-info": {
+            "name": "VirtualMachineCount",
+            "description": "Maximum number of virtual machines allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "availabilitySetCount": {
+          "x-ps-parameter-info": {
+            "name": "AvailabilitySetCount",
+            "description": "Maximum number of availability sets allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Quota": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-QuotaObject",
+          "description": "Holds quota information used to control resource allocation.",
+          "defaultParameterSet": "Quota",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "QuotaList": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-QuotaListObject",
+          "description": "List of quotas",
+          "defaultParameterSet": "QuotaList",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "value": {
+          "x-ps-parameter-info": {
+            "name": "Value",
+            "description": "List of quotas"
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "nextLink": {
+          "x-ps-parameter-info": {
+            "name": "NextLink",
+            "description": "URI to the next page."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Resource": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ResourceObject",
+          "description": "Base resource object.",
+          "defaultParameterSet": "Resource",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "name": {
+          "x-ps-parameter-info": {
+            "name": "Name",
+            "description": "Name of the resource."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "id": {
+          "x-ps-parameter-info": {
+            "name": "Id",
+            "description": "Id of the resource."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "type": {
+          "x-ps-parameter-info": {
+            "name": "Type",
+            "description": "Resource type."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "location": {
+          "x-ps-parameter-info": {
+            "name": "Location",
+            "description": "Location of the resource."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
+    "PlatformImageList": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-PlatformImageListObject",
+          "description": "List of platform images.",
+          "defaultParameterSet": "PlatformImageList",
+          "generateCommand": false,
+          "generateOutputFormat": false
+        }
+      ],
+      "properties": {
+        
+      }
+    }
+  },
+  "parameters": {
+    "QuotaParameter": {
+      "x-ps-parameter-info": {
+        "name": "Quota",
+        "description": "Name of the quota.",
+        "flatten": false
+      }
+    },
+    "SubscriptionIdParameter": {
+      "x-ps-parameter-info": {
+        "name": "SubscriptionId",
+        "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
+        "flatten": false
+      }
+    },
+    "TypeParameter": {
+      "x-ps-parameter-info": {
+        "name": "Type",
+        "description": "Type of the extension.",
+        "flatten": false
+      }
+    },
+    "NewQuotaParameter": {
+      "x-ps-parameter-info": {
+        "name": "NewQuota",
+        "description": "New quota to create.",
+        "flatten": false
+      }
+    },
+    "VMExtensionParameter": {
+      "x-ps-parameter-info": {
+        "name": "Extension",
+        "description": "Model of an extension.",
+        "flatten": true
+      }
+    },
+    "ApiVersionParameter": {
+      "x-ps-parameter-info": {
+        "name": "Apiversion",
+        "description": "Client Api Version.",
+        "flatten": false
+      }
+    },
+    "NewPlatformImageParameter": {
+      "x-ps-parameter-info": {
+        "name": "NewImage",
+        "description": "New platform image.",
+        "flatten": true
+      }
+    },
+    "VersionParameter": {
+      "x-ps-parameter-info": {
+        "name": "Version",
+        "description": "The version of the resource.",
+        "flatten": false
+      }
+    },
+    "PublisherParameter": {
+      "x-ps-parameter-info": {
+        "name": "Publisher",
+        "description": "Name of the publisher.",
+        "flatten": false
+      }
+    },
+    "OfferParameter": {
+      "x-ps-parameter-info": {
+        "name": "Offer",
+        "description": "Name of the offer.",
+        "flatten": false
+      }
+    },
+    "LocationParameter": {
+      "x-ps-parameter-info": {
+        "name": "LocationName",
+        "description": "Location of the resource.",
+        "flatten": false
+      }
+    },
+    "SkuParameter": {
+      "x-ps-parameter-info": {
+        "name": "Sku",
+        "description": "Name of the sku.",
+        "flatten": false
+      }
+    }
+  }
+}

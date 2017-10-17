@@ -1,0 +1,1192 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-12-01-preview",
+    "title": "ComputeAdminClient",
+    "description": "Compute Admin Client"
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/platformImage": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of all platform images.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PlatformImages"
+        ],
+        "summary": "Gets all platform images.",
+        "description": "Get a list of all platform images.",
+        "operationId": "PlatformImages_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlatformImageList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/platformImage/publishers/{publisher}/offers/{offer}/skus/{sku}/versions/{version}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a platform image by name.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PlatformImages"
+        ],
+        "summary": "Gets a single platform image.",
+        "description": "Get a platform image by name.",
+        "operationId": "PlatformImages_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlatformImage"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a new platform image.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PlatformImages"
+        ],
+        "description": "Create a new platform image.",
+        "summary": "Create a platform image.",
+        "operationId": "PlatformImages_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewPlatformImageParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlatformImage"
+            }
+          },
+          "201": {
+            "description": "CREATED",
+            "schema": {
+              "$ref": "#/definitions/PlatformImage"
+            }
+          },
+          "202": {
+            "description": "ACCEPTED",
+            "schema": {
+              "$ref": "#/definitions/PlatformImage"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a platform image.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "PlatformImages"
+        ],
+        "summary": "Deletes a platform image",
+        "description": "Delete a platform image",
+        "operationId": "PlatformImages_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas/{quota}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an existing Quota.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "summary": "Gets the quota.",
+        "description": "Get an existing Quota.",
+        "operationId": "Quotas_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a quota.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Create a new Quota.",
+        "summary": "Create a quota.",
+        "operationId": "Quotas_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewQuotaParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quota"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an existing quota.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "description": "Delete an existing quota.",
+        "summary": "Deletes a quota",
+        "operationId": "Quotas_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/QuotaParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of existing quotas.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quotas"
+        ],
+        "summary": "Lists all quotas.",
+        "description": "Get a list of existing quotas.",
+        "operationId": "Quotas_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/VMExtension/publishers/{publisher}/types/{type}/versions/{version}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a platform image by name.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Get a platform images.",
+        "description": "Get a platform image by name.",
+        "operationId": "VMExtensions_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/TypeParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMExtension"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Get a list of all platform images.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Create a platform images.",
+        "description": "Create a new platform image.",
+        "operationId": "VMExtensions_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/TypeParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/VMExtensionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMExtension"
+            }
+          },
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMExtension"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a platform image by name.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Delete a platform images.",
+        "description": "Delete a platform image by name.",
+        "operationId": "VMExtensions_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherParameter"
+          },
+          {
+            "$ref": "#/parameters/TypeParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/VMExtension": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of all platform images.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "VMExtensions"
+        ],
+        "summary": "Get a list of platform images.",
+        "description": "Get a list of all platform images.",
+        "operationId": "VMExtensions_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMExtensionList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readonly": true,
+          "description": "Id of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "readonly": true,
+          "description": "Name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "readonly": true,
+          "description": "Resource type.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProvisioningState": {
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Creating",
+        "Failed",
+        "Succeeded",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState"
+      }
+    },
+    "PlatformImage": {
+      "description": "Platform image represents a virtual machine.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Platform image properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PlatformImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "PlatformImageProperties": {
+      "description": "Properties of platform image.",
+      "type": "object",
+      "properties": {
+        "osDisk": {
+          "description": "Operating system used for this platform image.",
+          "$ref": "#/definitions/OsDisk"
+        },
+        "dataDisks": {
+          "description": "Data disks used by the platform image.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          }
+        },
+        "details": {
+          "description": "Information about the image.",
+          "$ref": "#/definitions/ImageDetails"
+        },
+        "provisioningState": {
+          "description": "Provisioning status of the platform image.",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "OsDisk": {
+      "description": "Operating system disk.",
+      "type": "object",
+      "properties": {
+        "osType": {
+          "description": "Operating system type.",
+          "$ref": "#/definitions/OsType"
+        },
+        "uri": {
+          "description": "Location of the disk.",
+          "type": "string"
+        }
+      }
+    },
+    "DataDisk": {
+      "description": "Information about datadisk.",
+      "type": "object",
+      "properties": {
+        "lun": {
+          "description": "Logical unit number.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "uri": {
+          "description": "Location of the disk template.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageDetails": {
+      "description": "Information about the disk image.",
+      "type": "object",
+      "properties": {
+        "billingPartNumber": {
+          "description": "Something about billing?.",
+          "type": "string"
+        }
+      }
+    },
+    "OsType": {
+      "description": "Operating system type.",
+      "enum": [
+        "Unknown",
+        "Windows",
+        "Linux"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OsType"
+      }
+    },
+    "PlatformImageList": {
+      "description": "List of platform images.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PlatformImage"
+      }
+    },
+    "Quota": {
+      "description": "Holds quota information used to control resource allocation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Quota properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "QuotaProperties": {
+      "description": "Properties for a Quota",
+      "type": "object",
+      "properties": {
+        "availabilitySetCount": {
+          "description": "Maximum number of availability sets allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        },
+        "coresLimit": {
+          "description": "Maximum number of core allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        },
+        "virtualMachineCount": {
+          "description": "Maximum number of virtual machines allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        },
+        "vmScaleSetCount": {
+          "description": "Maximum number of scale sets allowed.",
+          "format": "int32",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "QuotaList": {
+      "description": "List of quotas",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of quotas",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        }
+      }
+    },
+    "VMExtension": {
+      "description": "Virtual machine extenion.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Inner properties of a virtual machine extension.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VMExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "VMExtensionProperties": {
+      "description": "Properties of a virtual machine extension.",
+      "type": "object",
+      "properties": {
+        "vmOsType": {
+          "description": "Target virtaul machine operating system type necessary for deploying the extension handler",
+          "$ref": "#/definitions/OsType"
+        },
+        "computeRole": {
+          "description": "Compute role",
+          "type": "string"
+        },
+        "vmScaleSetEnabled": {
+          "description": "value indicating whether the extension is enabled for virtual machine scale set support",
+          "type": "boolean"
+        },
+        "supportMultipleExtensions": {
+          "description": "True if supports multiple extensions.",
+          "type": "boolean"
+        },
+        "isSystemExtension": {
+          "description": "Denotes if extension is for system or not.",
+          "type": "boolean"
+        },
+        "sourceBlob": {
+          "description": "URI to azure blob.",
+          "$ref": "#/definitions/AzureBlob"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of extension.",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "AzureBlob": {
+      "description": "Azure blob information.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "URI to azure blob.",
+          "type": "string"
+        }
+      }
+    },
+    "VMExtensionList": {
+      "description": "List of virtual machine extensions.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VMExtension"
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "default": "2015-06-01-preview"
+    },
+    "LocationParameter": {
+      "description": "Location of the resource.",
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherParameter": {
+      "description": "Name of the publisher.",
+      "name": "publisher",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VersionParameter": {
+      "description": "The version of the resource.",
+      "name": "version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OfferParameter": {
+      "description": "Name of the offer.",
+      "name": "offer",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkuParameter": {
+      "description": "Name of the sku.",
+      "name": "sku",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "NewPlatformImageParameter": {
+      "description": "New platform image.",
+      "name": "newImage",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PlatformImage"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "QuotaParameter": {
+      "description": "Name of the quota.",
+      "name": "quota",
+      "type": "string",
+      "required": true,
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "NewQuotaParameter": {
+      "description": "New quota to create.",
+      "name": "newQuota",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Quota"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "VMExtensionParameter": {
+      "description": "Model of an extension.",
+      "name": "extension",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/VMExtension"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "TypeParameter": {
+      "description": "Type of the extension.",
+      "name": "type",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
