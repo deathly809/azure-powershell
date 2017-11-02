@@ -13,15 +13,6 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .DESCRIPTION
     Create a new platform image.
 
-.PARAMETER ProvisioningState
-    Provisioning state of extension.
-
-.PARAMETER Id
-    Id of the resource.
-
-.PARAMETER Type
-    Resource type.
-
 .PARAMETER VmScaleSetEnabled
     value indicating whether the extension is enabled for virtual machine scale set support
 
@@ -30,9 +21,6 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 
 .PARAMETER SupportMultipleExtensions
     True if supports multiple extensions.
-
-.PARAMETER LocationName
-    Location of the resource.
 
 .PARAMETER IsSystemExtension
     Denotes if extension is for system or not.
@@ -46,9 +34,6 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Publisher
     Name of the publisher.
 
-.PARAMETER Name
-    Name of the resource.
-
 .PARAMETER Version
     The version of the resource.
 
@@ -56,22 +41,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     Location of the resource.
 
 #>
-function New-VMExtension
-{
+function New-VMExtension {
     [OutputType([Microsoft.AzureStack.Management.Compute.Admin.Models.VMExtension])]
-    [CmdletBinding(DefaultParameterSetName='VMExtensions_Create')]
-    param(    
-        [Parameter(Mandatory = $false, ParameterSetName = 'VMExtensions_Create')]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.ProvisioningState]
-        $ProvisioningState,
-    
-        [Parameter(Mandatory = $false, ParameterSetName = 'VMExtensions_Create')]
-        [string]
-        $Id,
-    
-        [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Create')]
-        [string]
-        $Type,
+    [CmdletBinding(DefaultParameterSetName = 'VMExtensions_Create')]
+    param(
     
         [Parameter(Mandatory = $false, ParameterSetName = 'VMExtensions_Create')]
         [switch]
@@ -85,10 +58,6 @@ function New-VMExtension
         [switch]
         $SupportMultipleExtensions,
     
-        [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Create')]
-        [System.String]
-        $LocationName,
-    
         [Parameter(Mandatory = $false, ParameterSetName = 'VMExtensions_Create')]
         [switch]
         $IsSystemExtension,
@@ -100,14 +69,14 @@ function New-VMExtension
         [Parameter(Mandatory = $false, ParameterSetName = 'VMExtensions_Create')]
         [Microsoft.AzureStack.Management.Compute.Admin.Models.AzureBlob]
         $SourceBlob,
-    
+        
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Create')]
         [System.String]
         $Publisher,
-    
-        [Parameter(Mandatory = $false, ParameterSetName = 'VMExtensions_Create')]
-        [string]
-        $Name,
+            
+        [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Create')]
+        [System.String]
+        $Type,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Create')]
         [System.String]
@@ -118,106 +87,100 @@ function New-VMExtension
         $Location
     )
 
-    Begin 
-    {
-	    Initialize-PSSwaggerDependencies -Azure
+    Begin {
+        Initialize-PSSwaggerDependencies -Azure
         $tracerObject = $null
         if (('continue' -eq $DebugPreference) -or ('inquire' -eq $DebugPreference)) {
             $oldDebugPreference = $global:DebugPreference
-			$global:DebugPreference = "continue"
+            $global:DebugPreference = "continue"
             $tracerObject = New-PSSwaggerClientTracing
             Register-PSSwaggerClientTracing -TracerObject $tracerObject
         }
-	}
+    }
 
     Process {
     
-    $ErrorActionPreference = 'Stop'
-
-    $NewServiceClient_params = @{
-        FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'
-    }
-
-    $GlobalParameterHashtable = @{}      
-    $GlobalParameterHashtable['SubscriptionId'] = $null
-    if($PSBoundParameters.ContainsKey('SubscriptionId')) {
-        $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-    }
- 
-    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable 
-    $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
-    
-    
-        
-    $flattenedParameters = @('ProvisioningState', 'SourceBlob', 'Id', 'Type', 'ComputeRole', 'VmOsType', 'Name', 'Location', 'SupportMultipleExtensions', 'IsSystemExtension', 'VmScaleSetEnabled')
-    $utilityCmdParams = @{}
-    $flattenedParameters | ForEach-Object {
-        if($PSBoundParameters.ContainsKey($_)) {
-            $utilityCmdParams[$_] = $PSBoundParameters[$_]
-        }
-    }
-    $Extension = New-VMExtensionObject @utilityCmdParams
-
-
-    $skippedCount = 0
-    $returnedCount = 0
-    if ('VMExtensions_Create' -eq $PsCmdlet.ParameterSetName) {
-        Write-Verbose -Message 'Performing operation CreateWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.VMExtensions.CreateWithHttpMessagesAsync($LocationName, $Publisher, $Type, $Version, $Extension)
-    } else {
-        Write-Verbose -Message 'Failed to map parameter set to operation method.'
-        throw 'Module failed to find operation to execute.'
-    }
-
-    if ($TaskResult) {
-        $result = $null
         $ErrorActionPreference = 'Stop'
-                    
-        $null = $taskResult.AsyncWaitHandle.WaitOne()
-                    
-        Write-Debug -Message "$($taskResult | Out-String)"
 
+        $NewServiceClient_params = @{
+            FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'
+        }
 
-        if((Get-Member -InputObject $taskResult -Name 'Result') -and
-           $taskResult.Result -and
-           (Get-Member -InputObject $taskResult.Result -Name 'Body') -and
-           $taskResult.Result.Body)
-        {
-            Write-Verbose -Message 'Operation completed successfully.'
-            $result = $taskResult.Result.Body
-            Write-Debug -Message "$($result | Out-String)"
-            $result
+        $GlobalParameterHashtable = @{}      
+        $GlobalParameterHashtable['SubscriptionId'] = $null
+        if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
+            $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
         }
-        elseif($taskResult.IsFaulted)
-        {
-            Write-Verbose -Message 'Operation failed.'
-            if ($taskResult.Exception)
-            {
-                if ((Get-Member -InputObject $taskResult.Exception -Name 'InnerExceptions') -and $taskResult.Exception.InnerExceptions)
-                {
-                    foreach ($ex in $taskResult.Exception.InnerExceptions)
-                    {
-                        Write-Error -Exception $ex
-                    }
-                } elseif ((Get-Member -InputObject $taskResult.Exception -Name 'InnerException') -and $taskResult.Exception.InnerException)
-                {
-                    Write-Error -Exception $taskResult.Exception.InnerException
-                } else {
-                    Write-Error -Exception $taskResult.Exception
-                }
-            }
-        } 
-        elseif ($taskResult.IsCanceled)
-        {
-            Write-Verbose -Message 'Operation got cancelled.'
-            Throw 'Operation got cancelled.'
-        }
-        else
-        {
-            Write-Verbose -Message 'Operation completed successfully.'
-        }
+ 
+        $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable 
+        $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
+    
+    
         
-    }
+        $flattenedParameters = @('SourceBlob', 'ComputeRole', 'VmOsType', 'SupportMultipleExtensions', 'IsSystemExtension', 'VmScaleSetEnabled')
+        $utilityCmdParams = @{}
+        $flattenedParameters | ForEach-Object {
+            if ($PSBoundParameters.ContainsKey($_)) {
+                $utilityCmdParams[$_] = $PSBoundParameters[$_]
+            }
+        }
+        $Extension = New-VMExtensionObject @utilityCmdParams
+
+
+        $skippedCount = 0
+        $returnedCount = 0
+        if ('VMExtensions_Create' -eq $PsCmdlet.ParameterSetName) {
+            Write-Verbose -Message 'Performing operation CreateWithHttpMessagesAsync on $ComputeAdminClient.'
+            $taskResult = $ComputeAdminClient.VMExtensions.CreateWithHttpMessagesAsync($Location, $Publisher, $Type, $Version, $Extension)
+        }
+        else {
+            Write-Verbose -Message 'Failed to map parameter set to operation method.'
+            throw 'Module failed to find operation to execute.'
+        }
+
+        if ($TaskResult) {
+            $result = $null
+            $ErrorActionPreference = 'Stop'
+                    
+            $null = $taskResult.AsyncWaitHandle.WaitOne()
+                    
+            Write-Debug -Message "$($taskResult | Out-String)"
+
+
+            if ((Get-Member -InputObject $taskResult -Name 'Result') -and
+                $taskResult.Result -and
+                (Get-Member -InputObject $taskResult.Result -Name 'Body') -and
+                $taskResult.Result.Body) {
+                Write-Verbose -Message 'Operation completed successfully.'
+                $result = $taskResult.Result.Body
+                Write-Debug -Message "$($result | Out-String)"
+                $result
+            }
+            elseif ($taskResult.IsFaulted) {
+                Write-Verbose -Message 'Operation failed.'
+                if ($taskResult.Exception) {
+                    if ((Get-Member -InputObject $taskResult.Exception -Name 'InnerExceptions') -and $taskResult.Exception.InnerExceptions) {
+                        foreach ($ex in $taskResult.Exception.InnerExceptions) {
+                            Write-Error -Exception $ex
+                        }
+                    }
+                    elseif ((Get-Member -InputObject $taskResult.Exception -Name 'InnerException') -and $taskResult.Exception.InnerException) {
+                        Write-Error -Exception $taskResult.Exception.InnerException
+                    }
+                    else {
+                        Write-Error -Exception $taskResult.Exception
+                    }
+                }
+            } 
+            elseif ($taskResult.IsCanceled) {
+                Write-Verbose -Message 'Operation got cancelled.'
+                Throw 'Operation got cancelled.'
+            }
+            else {
+                Write-Verbose -Message 'Operation completed successfully.'
+            }
+        
+        }
     }
 
     End {

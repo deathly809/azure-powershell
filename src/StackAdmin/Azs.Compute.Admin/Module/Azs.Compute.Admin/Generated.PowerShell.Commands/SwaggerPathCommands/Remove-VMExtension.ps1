@@ -19,7 +19,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Version
     The version of the resource.
 
-.PARAMETER LocationName
+.PARAMETER Location
     Location of the resource.
 
 .PARAMETER Publisher
@@ -40,7 +40,7 @@ function Remove-VMExtension
     
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Delete')]
         [System.String]
-        $LocationName,
+        $Location,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Delete')]
         [System.String]
@@ -83,7 +83,7 @@ function Remove-VMExtension
     $returnedCount = 0
     if ('VMExtensions_Delete' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.VMExtensions.DeleteWithHttpMessagesAsync($LocationName, $Publisher, $Type, $Version)
+        $taskResult = $ComputeAdminClient.VMExtensions.DeleteWithHttpMessagesAsync($Location, $Publisher, $Type, $Version)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

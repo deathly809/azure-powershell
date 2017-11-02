@@ -13,32 +13,53 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .DESCRIPTION
     Create a new Quota.
 
-.PARAMETER NewQuota
-    New quota to create.
+.PARAMETER VmScaleSetCount
+    Maximum number of scale sets allowed.
 
-.PARAMETER LocationName
-    Location of the resource.
+.PARAMETER VirtualMachineCount
+    Maximum number of virtual machines allowed.
+
+.PARAMETER CoresLimit
+    Maximum number of core allowed.
+
+.PARAMETER AvailabilitySetCount
+    Maximum number of availability sets allowed.
 
 .PARAMETER Quota
     Name of the quota.
 
+.PARAMETER Location
+    Location of the resource.
+
 #>
-function New-Quota
+function New-ComputeQuota
 {
     [OutputType([Microsoft.AzureStack.Management.Compute.Admin.Models.Quota])]
     [CmdletBinding(DefaultParameterSetName='Quotas_Create')]
-    param(    
-        [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_Create')]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.Quota]
-        $NewQuota,
+    param(
+        [Parameter(Mandatory = $false, ParameterSetName = 'Quotas_Create')]
+        [int32]
+        $VmScaleSetCount,
+    
+        [Parameter(Mandatory = $false, ParameterSetName = 'Quotas_Create')]
+        [int32]
+        $VirtualMachineCount,
+    
+        [Parameter(Mandatory = $false, ParameterSetName = 'Quotas_Create')]
+        [int32]
+        $CoresLimit,
+    
+        [Parameter(Mandatory = $false, ParameterSetName = 'Quotas_Create')]
+        [int32]
+        $AvailabilitySetCount,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_Create')]
         [System.String]
-        $LocationName,
+        $Quota,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_Create')]
         [System.String]
-        $Quota
+        $Location
     )
 
     Begin 
@@ -71,13 +92,22 @@ function New-Quota
     $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
     
     
-    
+        
+    $flattenedParameters = @('AvailabilitySetCount', 'Id', 'Type', 'CoresLimit', 'VmScaleSetCount', 'Name', 'VirtualMachineCount', 'Location')
+    $utilityCmdParams = @{}
+    $flattenedParameters | ForEach-Object {
+        if($PSBoundParameters.ContainsKey($_)) {
+            $utilityCmdParams[$_] = $PSBoundParameters[$_]
+        }
+    }
+    $NewQuota = New-QuotaObject @utilityCmdParams
+
 
     $skippedCount = 0
     $returnedCount = 0
     if ('Quotas_Create' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation CreateWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.Quotas.CreateWithHttpMessagesAsync($LocationName, $Quota, $NewQuota)
+        $taskResult = $ComputeAdminClient.Quotas.CreateWithHttpMessagesAsync($Location, $Quota, $NewQuota)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

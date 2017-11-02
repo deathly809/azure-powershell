@@ -44,66 +44,179 @@ $global:RunRaw = $RunRaw
 . $PSScriptRoot\CommonModules.ps1
 
 $global:TestName = ""
+$global:Location = "local"
 
 InModuleScope Azs.Compute.Admin {
 
-	Describe "SubscriberUsageAggregates" -Tags @('SubscriberUsageAggregate', 'Azs.Compute.Admin') {
+	Describe "Quota" -Tags @('Quota', 'Azs.Compute.Admin') {
 	
 		BeforeEach  {
 
 			. $PSScriptRoot\Common.ps1
 
-			function ValidateSubscriberUsageAggregate {
+			function ValidateComputeQuota {
 				param(
 					[Parameter(Mandatory=$true)]
-					$SubscriberUsageAggregate
+					$Quota
 				)
 
-				$SubscriberUsageAggregate          | Should Not Be $null
+				$Quota          | Should Not Be $null
 
 				# Resource
-				$SubscriberUsageAggregate.Id       | Should Not Be $null
-				$SubscriberUsageAggregate.Name     | Should Not Be $null
-				$SubscriberUsageAggregate.Type     | Should Not Be $null
+				$Quota.Id       | Should Not Be $null
+				$Quota.Name     | Should Not Be $null
+				$Quota.Type     | Should Not Be $null
 				
 				# Subscriber Usage Aggregate
-				$SubscriberUsageAggregate.InstanceData    | Should Not Be $null
-				$SubscriberUsageAggregate.MeterId         | Should Not Be $null
-				$SubscriberUsageAggregate.Quantity        | Should Not Be $null
-				$SubscriberUsageAggregate.SubscriptionId  | Should Not Be $null
-				$SubscriberUsageAggregate.UsageEndTime    | Should Not Be $null
-				$SubscriberUsageAggregate.UsageStartTime  | Should Not Be $null
-			
+				$Quota.AvailabilitySetCount | Should Not Be $null
+				$Quota.CoresLimit           | Should Not Be $null
+				$Quota.VirtualMachineCount  | Should Not Be $null
+				$Quota.VmScaleSetCount      | Should Not Be $null
 			}
 
-			function Floor-DateTime {
+			function AssertSame{
 				param(
-					[System.DateTime]$DateTime
+					$Expected,
+					$Found
 				)
-
-				$ts = [System.TimeSpan]::FromDays(1)
-				$dto = New-Object -TypeName System.DateTimeOffset -ArgumentList $DateTime
-				$diff = $dto.UtcTicks - ($dto.UtcTicks % $ts.Ticks)
-				$tmp = New-Object -TypeName System.DateTime -ArgumentList $diff
-				$tmp.DateTime
 			}
 		}
 
 
-		It "TestListSubscriberUsageAggregatesFromLastTwoDays" {
-			$global:TestName = 'TestListSubscriberUsageAggregatesFromLastTwoDays'
+		It "TestListQuotas" {
+			$global:TestName = 'TestListQuotas'
+			$quotas= Get-AzsComputeQuota  -Location $global:Location
+			$quotas | Should Not Be $null
+			foreach($quota in $quotas) {
+				ValidateComputeQuota -Quota $quota
+			}
+		}
+
+
+		It "TestGetQuota" {
+			$global:TestName = 'TestGetQuota'
+
+			$quotas = Get-AzsComputeQuota  -Location $global:Location
+			$quotas | Should Not Be $null
+			foreach($quota in $quotas) {
+				$result = Get-AzsComputeQuota -Location $global:Location -Quota $quota.Name
+				AssertSame -Expected $quota -Found $result
+				break
+			}
+		}
+
+
+		It "TestGetAllQuotas" {
+			$global:TestName = 'TestGetAllQuotas'
+			$quotas = Get-AzsComputeQuota  -Location $global:Location
+			$quotas | Should Not Be $null
+			foreach($quota in $quotas) {
+				$result = Get-AzsComputeQuota -Location $global:Location -Quota $quota.Name
+				AssertSame -Expected $quota -Found $result
+			}
+		}
+
+
+		It "TestCreateQuota" {
+			$global:TestName = 'TestCreateQuota'
+
+			$quotaNamePrefix = "testQuota"
+
+			$data = @(
+				@(0, 0, 0, 0, 0),
+				@(0, 1, 0, 0, 1),
+				@(0, 0, 1, 0, 2),
+				@(0, 0, 0, 1, 3),
+				@(100, 100, 100, 100, 4),
+				@(1000, 1000, 1000, 1000, 5)
+			)
+
+			$data | % {
+				$name = $quotaNamePrefix + $_[4]
+				$quota = New-AzsComputeQuota -Location $global:Location -Quota $name -AvailabilitySetCount $_[0] -CoresLimit $_[1] -VmScaleSetCount $_[2] -VirtualMachineCount $_[3]
+				$result = Get-AzsComputeQuota -Location $global:Location -Quota $quota.Name
+				AssertSame -Expected $quota -Found $result
+			}
+
+			$data | % {
+				$name = $quotaNamePrefix + $_[4]
+				Get-AzsComputeQuota -Location $global:Location| Where-Object { $_.Name -eq $name} | Should not be $null
+			}
+			$data | % {
+				$name = $quotaNamePrefix + $_[4]
+				Remove-AzsComputeQuota -Location $global:Location -Quota $name
+			}
+
+		}
+
+		# Tests wth Invalid data
+
+
+		It "TestCreateInvalidQuota" {
+			$global:TestName = 'TestCreateInvalidQuota'
 			
+			$data = @(
+				@(-1, 1, 1, 1),
+				@(1, -1, 1, 1),
+				@(1, 1, -1, 1),
+				@(1, 1, 1, -1),
+				@(-1, 0, 0, 0),
+				@( 0, -1, 0, 0),
+				@( 0, 0,-1, 0),
+				@( 0, 0, 0,-1),
+				@(-1,-1,-1,-1)
+			)
 
-			[DateTime]$start = "2017-09-06T00:00:00Z"
-			[DateTime]$end = "2017-09-07T00:00:00Z"
-
-			$usageAggregates = Get-AzsSubscriberUsageAggregate -ReportedStartTime $start -ReportedEndTime $end
-			$usageAggregates  | Should Not Be $null
-			foreach($usageAggregate in $usageAggregates) {
-				ValidateSubscriberUsageAggregate -SubscriberUsageAggregate $usageAggregate
+			$name = "myQuota"
+			$data | % {
+				{
+					$quota = New-AzsComputeQuota -Location $global:Location -Quota $name -AvailabilitySetCount $_[0] -CoresLimit $_[1] -VmScaleSetCount $_[2] -VirtualMachineCount $_[3]
+				} | Should Throw
 			}
 		}
 
 
+		# Apparently CRP will default to a place even if it does not exist
+		It "TestListInvalidLocation" -Skip {
+			$global:TestName = 'TestListInvalidLocation'
+			$quotas= Get-AzsComputeQuota  -Location "thisisnotarealplace"
+			$quotas | Should Be $null
+		}
+
+
+		It "TestDeleteNonExistingQuota" {
+			$global:TestName = 'TestDeleteNonExistingQuota'
+			
+			Remove-AzsComputeQuota -Location $global:Location -Quota "thisdoesnotexistandifitdoesoops"
+		}
+
+
+		It "TestCreateQuotaOnInvalidLocation" -Skip {
+			$global:TestName = 'TestCreateQuotaOnInvalidLocation'
+			
+			$quotaNamePrefix = "testQuota"
+			$invalidLocation = "thislocationdoesnotexist"
+
+			$data = @(
+				@(0, 0, 0, 0, 0),
+				@(0, 1, 0, 0, 1),
+				@(0, 0, 1, 0, 2),
+				@(0, 0, 0, 1, 3),
+				@(100, 100, 100, 100, 4),
+				@(1000, 1000, 1000, 1000, 5)
+			)
+
+			$data | % {
+				$name = $quotaNamePrefix + $_[4]
+				New-AzsComputeQuota -Location $invalidLocation -Quota $name -AvailabilitySetCount $_[0] -CoresLimit $_[1] -VmScaleSetCount $_[2] -VirtualMachineCount $_[3] | Should be $null
+				Get-AzsComputeQuota -Location $invalidLocation -Quota $quota.Name | Should be $null
+				
+			}
+
+			$data | % {
+				$name = $quotaNamePrefix + $_[4]
+				Get-AzsComputeQuota -Location | Where-Object { $_.Name -eq $name} | Should be $null
+			}
+		}
 	}
 }

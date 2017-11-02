@@ -22,7 +22,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Offer
     Name of the offer.
 
-.PARAMETER LocationName
+.PARAMETER Location
     Location of the resource.
 
 .PARAMETER Publisher
@@ -47,7 +47,7 @@ function Remove-PlatformImage
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Delete')]
         [System.String]
-        $LocationName,
+        $Location,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Delete')]
         [System.String]
@@ -90,7 +90,7 @@ function Remove-PlatformImage
     $returnedCount = 0
     if ('PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.PlatformImages.DeleteWithHttpMessagesAsync($LocationName, $Publisher, $Offer, $Sku, $Version)
+        $taskResult = $ComputeAdminClient.PlatformImages.DeleteWithHttpMessagesAsync($Location, $Publisher, $Offer, $Sku, $Version)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

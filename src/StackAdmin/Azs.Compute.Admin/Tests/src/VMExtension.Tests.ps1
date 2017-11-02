@@ -44,66 +44,75 @@ $global:RunRaw = $RunRaw
 . $PSScriptRoot\CommonModules.ps1
 
 $global:TestName = ""
+$global:Location = "local"
 
 InModuleScope Azs.Compute.Admin {
 
-	Describe "SubscriberUsageAggregates" -Tags @('SubscriberUsageAggregate', 'Azs.Compute.Admin') {
+	Describe "VMExtensions" -Tags @('VMExtensions', 'Azs.Compute.Admin') {
 	
 		BeforeEach  {
 
 			. $PSScriptRoot\Common.ps1
 
-			function ValidateSubscriberUsageAggregate {
+			function ValidateVMExtension {
 				param(
 					[Parameter(Mandatory=$true)]
-					$SubscriberUsageAggregate
+					$VMExtension
 				)
 
-				$SubscriberUsageAggregate          | Should Not Be $null
+				$VMExtension          | Should Not Be $null
 
 				# Resource
-				$SubscriberUsageAggregate.Id       | Should Not Be $null
-				$SubscriberUsageAggregate.Name     | Should Not Be $null
-				$SubscriberUsageAggregate.Type     | Should Not Be $null
-				
-				# Subscriber Usage Aggregate
-				$SubscriberUsageAggregate.InstanceData    | Should Not Be $null
-				$SubscriberUsageAggregate.MeterId         | Should Not Be $null
-				$SubscriberUsageAggregate.Quantity        | Should Not Be $null
-				$SubscriberUsageAggregate.SubscriptionId  | Should Not Be $null
-				$SubscriberUsageAggregate.UsageEndTime    | Should Not Be $null
-				$SubscriberUsageAggregate.UsageStartTime  | Should Not Be $null
+				$VMExtension.Id       | Should Not Be $null
+				$VMExtension.Type     | Should Not Be $null
 			
-			}
-
-			function Floor-DateTime {
-				param(
-					[System.DateTime]$DateTime
-				)
-
-				$ts = [System.TimeSpan]::FromDays(1)
-				$dto = New-Object -TypeName System.DateTimeOffset -ArgumentList $DateTime
-				$diff = $dto.UtcTicks - ($dto.UtcTicks % $ts.Ticks)
-				$tmp = New-Object -TypeName System.DateTime -ArgumentList $diff
-				$tmp.DateTime
 			}
 		}
 
 
-		It "TestListSubscriberUsageAggregatesFromLastTwoDays" {
-			$global:TestName = 'TestListSubscriberUsageAggregatesFromLastTwoDays'
+		It "TestListVMExtensions" {
+			$global:TestName = 'TestListVMExtensions'
 			
-
-			[DateTime]$start = "2017-09-06T00:00:00Z"
-			[DateTime]$end = "2017-09-07T00:00:00Z"
-
-			$usageAggregates = Get-AzsSubscriberUsageAggregate -ReportedStartTime $start -ReportedEndTime $end
-			$usageAggregates  | Should Not Be $null
-			foreach($usageAggregate in $usageAggregates) {
-				ValidateSubscriberUsageAggregate -SubscriberUsageAggregate $usageAggregate
+			$VMExtensions = Get-AzsVMExtension -Location "local"
+			$VMExtensions | Should Not Be $null
+			foreach($VMExtension in $VMExtensions) {
+				ValidateVMExtension -VMExtension $VMExtension
 			}
 		}
 
 
+		It "TestGetVMExtension" {
+			$global:TestName = 'TestGetVMExtension'
+			
+			$VMExtensions = Get-AzsVMExtension -Location "local"
+			$VMExtensions | Should Not Be $null
+			foreach($VMExtension in $VMExtensions) {
+				ValidateVMExtension -VMExtension $VMExtension
+			}
+		}
+
+
+		It "TestGetAllVMExtensions" {
+			$global:TestName = 'TestGetAllVMExtensions'
+			
+			$VMExtensions = Get-AzsVMExtension -Location "local"
+			$VMExtensions | Should Not Be $null
+			foreach($VMExtension in $VMExtensions) {
+				ValidateVMExtension -VMExtension $VMExtension
+			}
+		}
+
+
+		It "TestCreateVMExtension" {
+			$global:TestName = 'TestCreateVMExtension'
+			
+			$ext = New-AzsVMExtension -Location $global:Location -Publisher "Microsoft" -Type "MicroExtension" -Version "0.1.0" -ComputeRole "N/A" -SourceBlob "https://github.com/Microsoft/PowerShell-DSC-for-Linux/archive/v1.1.1-294.zip" -SupportMultipleExtensions -VmOsType "Linux"
+		}
+
+
+		It "TestDeleteVMExtension" {
+			$global:TestName = 'TestDeleteVMExtension'
+			Remove-AzsVMExtension -Location $global:Location -Publisher "Microsoft" -Type "MicroExtension" -Version "0.1.0"
+		}
 	}
 }

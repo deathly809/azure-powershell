@@ -19,7 +19,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Version
     The version of the resource.
 
-.PARAMETER LocationName
+.PARAMETER Location
     Location of the resource.
 
 .PARAMETER Publisher
@@ -45,7 +45,7 @@ function Get-PlatformImage
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_List')]
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Get')]
         [System.String]
-        $LocationName,
+        $Location,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Get')]
         [System.String]
@@ -92,10 +92,10 @@ function Get-PlatformImage
     $returnedCount = 0
     if ('PlatformImages_List' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation ListWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.PlatformImages.ListWithHttpMessagesAsync($LocationName)
+        $taskResult = $ComputeAdminClient.PlatformImages.ListWithHttpMessagesAsync($Location)
     } elseif ('PlatformImages_Get' -eq $PsCmdlet.ParameterSetName ) {
         Write-Verbose -Message 'Performing operation GetWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.PlatformImages.GetWithHttpMessagesAsync($LocationName, $Publisher, $Offer, $Sku, $Version)
+        $taskResult = $ComputeAdminClient.PlatformImages.GetWithHttpMessagesAsync($Location, $Publisher, $Offer, $Sku, $Version)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

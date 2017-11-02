@@ -16,11 +16,11 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Quota
     Name of the quota.
 
-.PARAMETER LocationName
+.PARAMETER Location
     Location of the resource.
 
 #>
-function Get-Quota
+function Get-ComputeQuota
 {
     [OutputType([Microsoft.AzureStack.Management.Compute.Admin.Models.Quota])]
     [CmdletBinding(DefaultParameterSetName='Quotas_List')]
@@ -32,7 +32,7 @@ function Get-Quota
         [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_Get')]
         [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_List')]
         [System.String]
-        $LocationName
+        $Location
     )
 
     Begin 
@@ -71,10 +71,10 @@ function Get-Quota
     $returnedCount = 0
     if ('Quotas_Get' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation GetWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.Quotas.GetWithHttpMessagesAsync($LocationName, $Quota)
+        $taskResult = $ComputeAdminClient.Quotas.GetWithHttpMessagesAsync($Location, $Quota)
     } elseif ('Quotas_List' -eq $PsCmdlet.ParameterSetName ) {
         Write-Verbose -Message 'Performing operation ListWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.Quotas.ListWithHttpMessagesAsync($LocationName)
+        $taskResult = $ComputeAdminClient.Quotas.ListWithHttpMessagesAsync($Location)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

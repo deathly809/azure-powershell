@@ -19,18 +19,6 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Offer
     Name of the offer.
 
-.PARAMETER Id
-    Id of the resource.
-
-.PARAMETER Type
-    Resource type.
-
-.PARAMETER Name
-    Name of the resource.
-
-.PARAMETER LocationName
-    Location of the resource.
-
 .PARAMETER Version
     The version of the resource.
 
@@ -65,22 +53,6 @@ function New-PlatformImage
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Create')]
         [System.String]
         $Offer,
-    
-        [Parameter(Mandatory = $false, ParameterSetName = 'PlatformImages_Create')]
-        [string]
-        $Id,
-    
-        [Parameter(Mandatory = $false, ParameterSetName = 'PlatformImages_Create')]
-        [string]
-        $Type,
-    
-        [Parameter(Mandatory = $false, ParameterSetName = 'PlatformImages_Create')]
-        [string]
-        $Name,
-    
-        [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Create')]
-        [System.String]
-        $LocationName,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Create')]
         [System.String]
@@ -156,7 +128,7 @@ function New-PlatformImage
     $returnedCount = 0
     if ('PlatformImages_Create' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation CreateWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.PlatformImages.CreateWithHttpMessagesAsync($LocationName, $Publisher, $Offer, $Sku, $Version, $NewImage)
+        $taskResult = $ComputeAdminClient.PlatformImages.CreateWithHttpMessagesAsync($Location, $Publisher, $Offer, $Sku, $Version, $NewImage)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

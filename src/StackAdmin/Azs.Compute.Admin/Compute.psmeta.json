@@ -1,8 +1,8 @@
 {
   "info": {
     "x-ps-code-generation-settings": {
-      "codeGenerator": "AzureCsharp",
-      "nameSpacePrefix": "Microsoft.AzureStack.Management.",
+      "codeGenerator": "AzureCSharp",
+      "nameSpacePrefix": "Microsoft.PowerShell.",
       "noAssembly": false,
       "powerShellCorePath": "",
       "includeCoreFxAssembly": false,
@@ -17,10 +17,10 @@
     },
     "x-ps-module-info": {
       "name": "ComputeAdminClient",
-      "moduleVersion": "0.0.1",
-      "guid": "1d2315bc-1ed7-47fe-af63-7bdd8b1dce00",
+      "moduleVersion": "0.1.0",
+      "guid": "80b5131e-0fd4-41e9-92ab-715790f57376",
       "description": "Compute Admin Client",
-      "author": "Microsoft",
+      "author": "Jeffrey Robinson",
       "companyName": "Microsoft",
       "CopyRight": "Microsoft",
       "licenseUri": "",
@@ -39,7 +39,7 @@
       "delete": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Remove-Quota",
+            "name": "Remove-ComputeQuota",
             "description": "Delete an existing quota.",
             "defaultParameterSet": "Quotas_Delete",
             "generateCommand": true
@@ -52,7 +52,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-Quota",
+            "name": "Get-ComputeQuota",
             "description": "Get an existing Quota.",
             "defaultParameterSet": "Quotas_Get",
             "generateCommand": true
@@ -65,10 +65,11 @@
       "put": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "New-Quota",
+            "name": "New-ComputeQuota",
             "description": "Create a new Quota.",
             "defaultParameterSet": "Quotas_Create",
-            "generateCommand": true
+            "generateCommand": true,
+            "flatten": true
           }
         ],
         "parameters": {
@@ -136,7 +137,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-Quota",
+            "name": "Get-ComputeQuota",
             "description": "Get a list of existing quotas.",
             "defaultParameterSet": "Quotas_Get",
             "generateCommand": true
@@ -744,7 +745,7 @@
       "x-ps-parameter-info": {
         "name": "NewQuota",
         "description": "New quota to create.",
-        "flatten": false
+        "flatten": true
       }
     },
     "VMExtensionParameter": {
@@ -791,7 +792,7 @@
     },
     "LocationParameter": {
       "x-ps-parameter-info": {
-        "name": "LocationName",
+        "name": "Location",
         "description": "Location of the resource.",
         "flatten": false
       }

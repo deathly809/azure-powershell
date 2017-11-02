@@ -16,11 +16,11 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Quota
     Name of the quota.
 
-.PARAMETER LocationName
+.PARAMETER Location
     Location of the resource.
 
 #>
-function Remove-Quota
+function Remove-ComputeQuota
 {
     [CmdletBinding(DefaultParameterSetName='Quotas_Delete')]
     param(    
@@ -30,7 +30,7 @@ function Remove-Quota
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_Delete')]
         [System.String]
-        $LocationName
+        $Location
     )
 
     Begin 
@@ -69,7 +69,7 @@ function Remove-Quota
     $returnedCount = 0
     if ('Quotas_Delete' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.Quotas.DeleteWithHttpMessagesAsync($LocationName, $Quota)
+        $taskResult = $ComputeAdminClient.Quotas.DeleteWithHttpMessagesAsync($Location, $Quota)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

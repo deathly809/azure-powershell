@@ -19,7 +19,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER Version
     The version of the resource.
 
-.PARAMETER LocationName
+.PARAMETER Location
     Location of the resource.
 
 .PARAMETER Publisher
@@ -42,7 +42,7 @@ function Get-VMExtension
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_List')]
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Get')]
         [System.String]
-        $LocationName,
+        $Location,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Get')]
         [System.String]
@@ -85,10 +85,10 @@ function Get-VMExtension
     $returnedCount = 0
     if ('VMExtensions_Get' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation GetWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.VMExtensions.GetWithHttpMessagesAsync($LocationName, $Publisher, $Type, $Version)
+        $taskResult = $ComputeAdminClient.VMExtensions.GetWithHttpMessagesAsync($Location, $Publisher, $Type, $Version)
     } elseif ('VMExtensions_List' -eq $PsCmdlet.ParameterSetName ) {
         Write-Verbose -Message 'Performing operation ListWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.VMExtensions.ListWithHttpMessagesAsync($LocationName)
+        $taskResult = $ComputeAdminClient.VMExtensions.ListWithHttpMessagesAsync($Location)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

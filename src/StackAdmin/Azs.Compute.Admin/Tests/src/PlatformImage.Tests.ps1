@@ -74,6 +74,13 @@ InModuleScope Azs.Compute.Admin {
                 $PlatformImage.OsDisk    | Should Not Be $null
                 $PlatformImage.ProvisioningState    | Should Not Be $null
             }
+
+			function AssertSame {
+				param(
+					$Expected,
+					$Found
+				)
+			}
         }
 
         It "TestListPlatformImages" {
@@ -92,7 +99,14 @@ InModuleScope Azs.Compute.Admin {
             $platformImages = Get-AzsPlatformImage -Location "local"
             $platformImages  | Should Not Be $null
             foreach ($platformImage in $platformImages) {
-                $result = Get-AzsPlatformImage -Location "local" -PlatformImage $
+
+				$part = $platformImage.Id.Split("/")
+				$publisher = $part[9]
+				$offer     = $part[11]
+				$sku       = $part[13]
+				$version   = $part[15]
+
+                $result = Get-AzsPlatformImage -Location "local" -Publisher $publisher -Offer $offer -Sku $sku -Version $version
                 AssertSame -Expected $platformImage -Found $result
                 break
             }
@@ -117,9 +131,17 @@ InModuleScope Azs.Compute.Admin {
             $Offer = "UbuntuServer";
             $Sku = "16.04-LTS";
             $Version = "1.0.0";
-            $result = New-AzsPlatformImage -Location $Location -Publisher $Publisher -Offer $Offer -Sku $Sku -Version $Version -OsDisk (New-OsDiskObject -OsType "Linux" -Uri $global:VHDUri) -LocationName "local"
-            $result | Should Not Be $null
 
+            $image = New-AzsPlatformImage -Location $Location -Publisher $Publisher -Offer $Offer -Sku $Sku -Version $Version -OsDisk (New-OsDiskObject -OsType "Linux" -Uri $global:VHDUri)
+            $image | Should Not Be $null
+			$image.OsDisk.Uri | Should be $global:VHDUri
+
+			while($image.PrivisioningState == "Creating") {
+				# Start-Sleep -Seconds 30
+				$image = Get-AzsPlatformImage -Location $Location -Publisher $Publisher -Offer $Offer -Version $version
+			}
+
+			$image | Should be "Succeeded"
 
         }
 
@@ -127,6 +149,25 @@ InModuleScope Azs.Compute.Admin {
             $global:TestName = 'TestCreateAndDeletePlatformImage'
 	
             
+            $Location = "Canonical";
+            $Publisher = "Test";
+            $Offer = "UbuntuServer";
+            $Sku = "16.04-LTS";
+            $Version = "1.0.0";
+
+            $image = New-AzsPlatformImage -Location $Location -Publisher $Publisher -Offer $Offer -Sku $Sku -Version $Version -OsDisk (New-OsDiskObject -OsType "Linux" -Uri $global:VHDUri)
+            $image | Should Not Be $null
+			$image.OsDisk.Uri | Should be $global:VHDUri
+
+			while($image.ProvisioningState -eq "Creating") {
+				# Start-Sleep -Seconds 30
+				$image = Get-AzsPlatformImage -Location $Location -Publisher $Publisher -Offer $Offer -Sku $Sku -Version $version
+			}
+			$image | Should be "Succeeded"
+
+			Remove-AzsPlatformImage -Location $Location -Publisher $Publisher -Offer $Offer -Version $version
+			$image = Get-AzsPlatformImage -Location $Location -Publisher $Publisher -Offer $Offer -Sku $Sku -Version $version
+			$image | Should be $null
         }
     }
 }
