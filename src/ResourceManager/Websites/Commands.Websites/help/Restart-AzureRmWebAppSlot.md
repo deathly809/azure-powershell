@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Websites.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 645E74D2-640D-494F-9798-4375FE6A0AF2
 online version: 
 schema: 2.0.0
@@ -14,13 +13,12 @@ schema: 2.0.0
 
 ### S1
 ```
-Restart-AzureRmWebAppSlot [-ResourceGroupName] <String> [-Name] <String> [-Slot] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Restart-AzureRmWebAppSlot [-ResourceGroupName] <String> [-Name] <String> [-Slot] <String> [<CommonParameters>]
 ```
 
 ### S2
 ```
-Restart-AzureRmWebAppSlot [-WebApp] <Site> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Restart-AzureRmWebAppSlot [-WebApp] <Site> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,21 +35,6 @@ PS C:\> Restart-AzureRmWebAppSlot -ResourceGroupName "Default-Web-WestUS" -Name 
 This command restarts the slot Slot001 for the web app ContosoWebApp associated with the resource group Default-Web-WestUS
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 WebApp Name
@@ -119,6 +102,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Site
+
 Parameter 'WebApp' accepts value of type 'Site' from the pipeline
 
 ## OUTPUTS

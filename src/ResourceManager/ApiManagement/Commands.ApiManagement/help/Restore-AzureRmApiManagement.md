@@ -13,9 +13,8 @@ Restores an API Management Service from the specified Azure storage blob.
 ## SYNTAX
 
 ```
-Restore-AzureRmApiManagement -ResourceGroupName <String> -Name <String> [-StorageContext] <IStorageContext>
- -SourceContainerName <String> -SourceBlobName <String> [-PassThru] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Restore-AzureRmApiManagement -ResourceGroupName <String> -Name <String> [-StorageContext] <AzureStorageContext>
+ -SourceContainerName <String> -SourceBlobName <String> [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,30 +24,12 @@ The **Restore-AzureRmApiManagement** cmdlet restores an API Management Service f
 
 ### Example 1: Restore an API Management service
 ```
-PS C:\>New-AzureRmStorageAccount -StorageAccountName "ContosoStorage" -Location $location -ResourceGroupName "ContosoGroup02" -Type Standard_LRS
-PS C:\>$storageKey = (Get-AzureRmStorageAccountKey -ResourceGroupName "ContosoGroup02" -StorageAccountName "ContosoStorage")[0].Value
-PS C:\>$storageContext = New-AzureStorageContext -StorageAccountName "ContosoStorage" -StorageAccountKey $storageKey
 PS C:\>Restore-AzureRmApiManagement -ResourceGroupName "ContosoGroup" -Name "RestoredContosoApi" -StorageContext $StorageContext -SourceContainerName "ContosoBackups" -SourceBlobName "ContosoBackup.apimbackup"
 ```
 
 This command restores an API Management service from Azure storage blob.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the API Management instance that will be restored with the backup.
@@ -130,7 +111,7 @@ Accept wildcard characters: False
 Specifies the storage connection context.
 
 ```yaml
-Type: IStorageContext
+Type: AzureStorageContext
 Parameter Sets: (All)
 Aliases: 
 

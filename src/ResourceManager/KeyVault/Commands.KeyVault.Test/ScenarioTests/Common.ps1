@@ -32,30 +32,11 @@ function Get-VaultName
 
 <#
 .SYNOPSIS
-Gets test mode - 'Record' or 'Playback'
-#>
-function Get-KeyVaultTestMode {
-    try {
-        $testMode = [Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::Mode;
-        $testMode = $testMode.ToString();
-    } catch {
-        if ($PSItem.Exception.Message -like '*Unable to find type*') {
-            $testMode = 'Record';
-        } else {
-            throw;
-        }
-    }
-
-    return $testMode
-}
-
-<#
-.SYNOPSIS
 Gets the location for the Vault. Default to West US if none found.
 #>
 function Get-Location
 {
-    if ((Get-KeyVaultTestMode) -ne 'Playback')
+	if ([Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::GetCurrentMode() -ne [Microsoft.Azure.Test.HttpRecorder.HttpRecorderMode]::Playback)
 	{
 		$namespace = "Microsoft.KeyVault"  
 		$type = "vaults"
@@ -64,8 +45,7 @@ function Get-Location
 		if ($location -eq $null) 
 		{  
 			return "East US"  
-		} 
-        else 
+		} else 
 		{  
 			return $location.Locations[0]  
 		}  
@@ -80,7 +60,7 @@ Gets the default location for a provider
 #>
 function Get-ProviderLocation($provider)
 {
-	if ((Get-KeyVaultTestMode) -ne 'Playback')
+	if ([Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::GetCurrentMode() -ne [Microsoft.Azure.Test.HttpRecorder.HttpRecorderMode]::Playback)
 	{
 		$namespace = $provider.Split("/")[0]  
 		if($provider.Contains("/"))  
@@ -91,8 +71,7 @@ function Get-ProviderLocation($provider)
 			if ($location -eq $null) 
 			{  
 				return "East US"  
-			} 
-            else 
+			} else 
 			{  
 				return $location.Locations[0]  
 			}  
@@ -110,7 +89,7 @@ Cleans the created resource groups
 #>
 function Clean-ResourceGroup($rgname)
 {
-    if ((Get-KeyVaultTestMode) -ne 'Playback') {
+    if ([Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::GetCurrentMode() -ne [Microsoft.Azure.Test.HttpRecorder.HttpRecorderMode]::Playback) {
         Remove-AzureRmResourceGroup -Name $rgname -Force
     }
 }

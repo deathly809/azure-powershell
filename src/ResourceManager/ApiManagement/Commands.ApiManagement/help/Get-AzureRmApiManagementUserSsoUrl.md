@@ -13,8 +13,7 @@ Generates an SSO URL for a user.
 ## SYNTAX
 
 ```
-Get-AzureRmApiManagementUserSsoUrl -Context <PsApiManagementContext> -UserId <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementUserSsoUrl -Context <PsApiManagementContext> -UserId <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,7 +23,6 @@ The **Get-AzureRmApiManagementUserSsoUrl** cmdlet generates a single sign-on (SS
 
 ### Example 1: Get a user's SSO URL
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
 PS C:\>Get-AzureRmApiManagementUserSsoUrl -Context $apimContext -UserId "0123456789"
 ```
 
@@ -45,21 +43,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

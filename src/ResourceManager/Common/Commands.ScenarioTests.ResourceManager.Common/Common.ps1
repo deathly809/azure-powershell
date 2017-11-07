@@ -304,18 +304,11 @@ Waits for specified duration if not-mocked, otherwise skips wait.
 .PARAMETER timeout
 Timeout in seconds
 #>
-function Wait-Seconds {
+function Wait-Seconds
+{
     param([int] $timeout)
-
-    try {
-        [Microsoft.Azure.Test.TestUtilities]::Wait($timeout * 1000);
-    } catch {
-        if ($PSItem.Exception.Message -like '*Unable to find type*') {
-            Start-Sleep -Seconds $timeout;
-        } else {
-            throw;
-        }
-    }
+    
+    [Microsoft.Azure.Test.TestUtilities]::Wait($timeout * 1000)
 }
 
 
@@ -353,39 +346,12 @@ function Retry-Function
     return $result;
 }
 
-<#
-.SYNOPSIS
-Gets random resource name
-#>
-function getRandomItemName {
-    param([string] $prefix)
-    
-    if ($prefix -eq $null -or $prefix -eq '') {
-        $prefix = "ps";
-    }
-
-    $str = $prefix + ((Get-Random) % 10000);
-    return $str;
-}
-
-function getAssetName {
-    param([string] $prefix)
-
-    if ($prefix -eq $null -or $prefix -eq '') {
-        $prefix = "ps";
-    }
-
+function getAssetName
+{
+    $stack = Get-PSCallStack
     $testName = getTestName
     
-    try {
-        $assetName = [Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::GetAssetName($testName, $prefix);
-    } catch {
-        if ($PSItem.Exception.Message -like '*Unable to find type*') {
-            $assetName = getRandomItemName $prefix;
-        } else {
-            throw;
-        }
-    }
+    $assetName = [Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::GetAssetName($testName, "onesdk")
 
     return $assetName
 }

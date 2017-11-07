@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Sql.dll-Help.xml
-Module Name: AzureRM.Sql
 ms.assetid: 72E0E558-74D7-4A50-A975-FA7D0C0B301E
 online version: 
 schema: 2.0.0
@@ -18,7 +17,7 @@ Restores a SQL database.
 Restore-AzureRmSqlDatabase [-FromPointInTimeBackup] -PointInTime <DateTime> -ResourceId <String>
  -ServerName <String> -TargetDatabaseName <String> [-Edition <DatabaseEdition>]
  [-ServiceObjectiveName <String>] [-ElasticPoolName <String>] [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### FromDeletedDatabaseBackup
@@ -26,23 +25,21 @@ Restore-AzureRmSqlDatabase [-FromPointInTimeBackup] -PointInTime <DateTime> -Res
 Restore-AzureRmSqlDatabase [-FromDeletedDatabaseBackup] [-PointInTime <DateTime>] -DeletionDate <DateTime>
  -ResourceId <String> -ServerName <String> -TargetDatabaseName <String> [-Edition <DatabaseEdition>]
  [-ServiceObjectiveName <String>] [-ElasticPoolName <String>] [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### FromGeoBackup
 ```
 Restore-AzureRmSqlDatabase [-FromGeoBackup] -ResourceId <String> -ServerName <String>
  -TargetDatabaseName <String> [-Edition <DatabaseEdition>] [-ServiceObjectiveName <String>]
- [-ElasticPoolName <String>] [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-ElasticPoolName <String>] [-ResourceGroupName] <String> [<CommonParameters>]
 ```
 
 ### FromLongTermRetentionBackup
 ```
 Restore-AzureRmSqlDatabase [-FromLongTermRetentionBackup] -ResourceId <String> -ServerName <String>
  -TargetDatabaseName <String> [-Edition <DatabaseEdition>] [-ServiceObjectiveName <String>]
- [-ElasticPoolName <String>] [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-ElasticPoolName <String>] [-ResourceGroupName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -102,21 +99,6 @@ The first command gets the geo-redundant backup for the database named Database0
 The second command restores the backup in $GeoBackup to the SQL database named RestoredDatabase.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -DeletionDate
 Specifies the deletion date as a **DateTime** object.

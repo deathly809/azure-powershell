@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.LogicApp.dll-Help.xml
-Module Name: AzureRM.LogicApp
 ms.assetid: 8679240C-EA47-41C5-B8C1-A3C99547F42B
 online version: 
 schema: 2.0.0
@@ -17,15 +16,14 @@ Creates a logic app in a resource group.
 ```
 New-AzureRmLogicApp -ResourceGroupName <String> -Name <String> -Location <String> [-State <String>]
  [-Definition <Object>] [-IntegrationAccountId <String>] [-Parameters <Object>] [-ParameterFilePath <String>]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### LogicAppWithDefinitionFileParameterSet
 ```
 New-AzureRmLogicApp -ResourceGroupName <String> -Name <String> -Location <String> [-State <String>]
  [-DefinitionFilePath <String>] [-IntegrationAccountId <String>] [-Parameters <Object>]
- [-ParameterFilePath <String>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ParameterFilePath <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -158,21 +156,6 @@ The command stores the logic app in the $Workflow variable.
 The second command creates a new logic app that uses the definition and parameters of the logic app stored in $Workflow.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Definition
 Specifies the definition for your logic app as an object or a string in JavaScript Object Notataion (JSON) format.

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.TrafficManager.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 32263236-C207-4FE0-AB8A-018118FC7729
 online version: 
 schema: 2.0.0
@@ -16,13 +15,12 @@ Enables an endpoint in a Traffic Manager profile.
 ### Fields
 ```
 Enable-AzureRmTrafficManagerEndpoint -Name <String> -Type <String> -ProfileName <String>
- -ResourceGroupName <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -ResourceGroupName <String> [<CommonParameters>]
 ```
 
 ### Object
 ```
-Enable-AzureRmTrafficManagerEndpoint -TrafficManagerEndpoint <TrafficManagerEndpoint>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Enable-AzureRmTrafficManagerEndpoint -TrafficManagerEndpoint <TrafficManagerEndpoint> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,21 +49,6 @@ The command then passes that endpoint to the **Enable-AzureRmTrafficManagerEndpo
 That cmdlet enables that endpoint.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the Traffic Manager endpoint that this cmdlet enables.
@@ -157,6 +140,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### TrafficManagerEndpoint
+
 Parameter 'TrafficManagerEndpoint' accepts value of type 'TrafficManagerEndpoint' from the pipeline
 
 ## OUTPUTS

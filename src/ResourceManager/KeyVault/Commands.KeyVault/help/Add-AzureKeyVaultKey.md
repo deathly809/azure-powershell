@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.KeyVault.dll-Help.xml
-Module Name: AzureRM.KeyVault
 ms.assetid: 846F781C-73A3-4BBE-ABD9-897371109FBE
 online version: http://go.microsoft.com/fwlink/?LinkId=690295
 schema: 2.0.0
@@ -16,16 +15,15 @@ Creates a key in a key vault or imports a key into a key vault.
 ### Create (Default)
 ```
 Add-AzureKeyVaultKey [-VaultName] <String> [-Name] <String> -Destination <String> [-Disable]
- [-KeyOps <String[]>] [-Expires <DateTime>] [-NotBefore <DateTime>] [-Tag <Hashtable>]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-KeyOps <String[]>] [-Expires <DateTime>] [-NotBefore <DateTime>] [-Tag <Hashtable>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### Import
 ```
 Add-AzureKeyVaultKey [-VaultName] <String> [-Name] <String> -KeyFilePath <String>
  [-KeyFilePassword <SecureString>] [-Destination <String>] [-Disable] [-KeyOps <String[]>]
- [-Expires <DateTime>] [-NotBefore <DateTime>] [-Tag <Hashtable>] [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Expires <DateTime>] [-NotBefore <DateTime>] [-Tag <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -143,13 +141,13 @@ stored in $tags.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: IAzureContextContainer
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
+Aliases: cf
 
 Required: False
 Position: Named
@@ -179,7 +177,7 @@ extension, it imports the key as a software-protected key.
 ```yaml
 Type: String
 Parameter Sets: Create
-Aliases: 
+Aliases:
 Accepted values: HSM, Software
 
 Required: True
@@ -192,7 +190,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: Import
-Aliases: 
+Aliases:
 Accepted values: HSM, Software
 
 Required: False
@@ -209,7 +207,7 @@ the key will fail. Use this parameter if you are preloading keys that you intend
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -227,7 +225,7 @@ parameter, the key does not expire.
 ```yaml
 Type: DateTime
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -245,7 +243,7 @@ name extension.
 ```yaml
 Type: SecureString
 Parameter Sets: Import
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -269,7 +267,7 @@ When you specify this parameter, the *Destination* parameter is optional.
 ```yaml
 Type: String
 Parameter Sets: Import
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -297,7 +295,7 @@ the [JSON Web Key (JWK) specification](http://go.microsoft.com/fwlink/?LinkID=61
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -332,7 +330,7 @@ parameter, the key can be used immediately.
 ```yaml
 Type: DateTime
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -365,27 +363,12 @@ FQDN of a key vault based on the name that this parameter specifies and your cur
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

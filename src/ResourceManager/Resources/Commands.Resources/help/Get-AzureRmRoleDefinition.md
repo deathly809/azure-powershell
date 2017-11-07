@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Resources.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 7740AC3B-F643-4F8D-8DC5-ACBF59323BD8
 online version: 
 schema: 2.0.0
@@ -15,20 +14,17 @@ Lists all Azure RBAC roles that are available for assignment.
 
 ### RoleDefinitionNameParameterSet
 ```
-Get-AzureRmRoleDefinition [[-Name] <String>] [-Scope <String>] [-AtScopeAndBelow]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmRoleDefinition [[-Name] <String>] [-Scope <String>] [-AtScopeAndBelow] [<CommonParameters>]
 ```
 
 ### RoleDefinitionIdParameterSet
 ```
-Get-AzureRmRoleDefinition -Id <Guid> [-Scope <String>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRoleDefinition -Id <Guid> [-Scope <String>] [<CommonParameters>]
 ```
 
 ### RoleDefinitionCustomParameterSet
 ```
-Get-AzureRmRoleDefinition [-Scope <String>] [-Custom] [-AtScopeAndBelow]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmRoleDefinition [-Scope <String>] [-Custom] [-AtScopeAndBelow] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,21 +76,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -151,6 +132,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### String
+
 Parameter 'Scope' accepts value of type 'String' from the pipeline
 
 ## OUTPUTS

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.DataFactories.dll-Help.xml
-Module Name: AzureRM.DataFactories
 ms.assetid: 5490BB24-127E-4C21-B85F-B70D817B659A
 online version: 
 schema: 2.0.0
@@ -16,13 +15,13 @@ Downloads log files from Azure HDInsight processing.
 ### ByFactoryName (Default)
 ```
 Save-AzureRmDataFactoryLog [-DataFactoryName] <String> [-Id] <String> [-DownloadLogs] [[-Output] <String>]
- [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-ResourceGroupName] <String> [<CommonParameters>]
 ```
 
 ### ByFactoryObject
 ```
 Save-AzureRmDataFactoryLog [-DataFactory] <PSDataFactory> [-Id] <String> [-DownloadLogs] [[-Output] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -90,21 +89,6 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

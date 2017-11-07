@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.dll-Help.xml
-Module Name: AzureRM.ApiManagement
 ms.assetid: 12FC21EB-0B4E-4275-88FB-7FF42730A6A0
 online version: 
 schema: 2.0.0
@@ -9,22 +8,20 @@ schema: 2.0.0
 # Set-AzureRmApiManagementCertificate
 
 ## SYNOPSIS
-Modifies an API Management certificate which is configured for mutual authentication with backend.
+Modifies an API Management certificate.
 
 ## SYNTAX
 
-### LoadFromFile (Default)
+### Load from file (Default)
 ```
 Set-AzureRmApiManagementCertificate -Context <PsApiManagementContext> -CertificateId <String>
- -PfxFilePath <String> -PfxPassword <String> [-PassThru] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -PfxFilePath <String> -PfxPassword <String> [-PassThru] [<CommonParameters>]
 ```
 
 ### Raw
 ```
 Set-AzureRmApiManagementCertificate -Context <PsApiManagementContext> -CertificateId <String>
- -PfxBytes <Byte[]> -PfxPassword <String> [-PassThru] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -PfxBytes <Byte[]> -PfxPassword <String> [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +31,6 @@ The **Set-AzureRmApiManagementCertificate** cmdlet modifies an Azure API Managem
 
 ### Example 1: Modify a certificate
 ```
-PS C:\>$ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
 PS C:\>Set-AzureRmApiManagementCertificate -Context $ApiMgmtContext -CertificateId "0123456789" -PfxFilePath "C:\contoso\certificates\apimanagementnew.pfx" -PfxPassword "2222"
 ```
 
@@ -69,21 +65,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -124,7 +105,7 @@ This parameter is required if you do not specify the *PfxBytes* parameter.
 
 ```yaml
 Type: String
-Parameter Sets: LoadFromFile
+Parameter Sets: Load from file
 Aliases: 
 
 Required: True

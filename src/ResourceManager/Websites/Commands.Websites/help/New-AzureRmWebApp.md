@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Websites.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: D6D4E733-31AE-4ABE-8C78-583EC48C56B8
 online version: 
 schema: 2.0.0
@@ -18,8 +17,7 @@ Creates an Azure Web App.
 New-AzureRmWebApp [-ResourceGroupName] <String> [-Name] <String> [-Location] <String>
  [[-AppServicePlan] <String>] [[-SourceWebApp] <Site>] [[-TrafficManagerProfileId] <String>]
  [-IgnoreSourceControl] [-IgnoreCustomHostNames] [[-AppSettingsOverrides] <Hashtable>] [[-AseName] <String>]
- [[-AseResourceGroupName] <String>] [-IncludeSourceWebAppSlots] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [[-AseResourceGroupName] <String>] [-IncludeSourceWebAppSlots] [<CommonParameters>]
 ```
 
 ### S2
@@ -27,8 +25,7 @@ New-AzureRmWebApp [-ResourceGroupName] <String> [-Name] <String> [-Location] <St
 New-AzureRmWebApp [-ResourceGroupName] <String> [-Name] <String> [-Location] <String>
  [[-AppServicePlan] <String>] [[-SourceWebApp] <Site>] [[-TrafficManagerProfileName] <String>]
  [-IgnoreSourceControl] [-IgnoreCustomHostNames] [[-AppSettingsOverrides] <Hashtable>] [[-AseName] <String>]
- [[-AseResourceGroupName] <String>] [-IncludeSourceWebAppSlots] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [[-AseResourceGroupName] <String>] [-IncludeSourceWebAppSlots] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -101,21 +98,6 @@ Aliases:
 
 Required: False
 Position: 9
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -262,6 +244,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Site
+
 Parameter 'SourceWebApp' accepts value of type 'Site' from the pipeline
 
 ## OUTPUTS

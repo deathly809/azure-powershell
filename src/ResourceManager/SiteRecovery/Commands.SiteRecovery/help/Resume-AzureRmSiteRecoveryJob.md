@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 3F827EA0-7CF9-49F8-93BB-B15078A8BBB7
 online version: 
 schema: 2.0.0
@@ -15,14 +14,12 @@ Resumes a suspended Site Recovery job.
 
 ### ByObject (Default)
 ```
-Resume-AzureRmSiteRecoveryJob -Job <ASRJob> [-Comments <String>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Resume-AzureRmSiteRecoveryJob -Job <ASRJob> [-Comments <String>] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Resume-AzureRmSiteRecoveryJob -Name <String> [-Comments <String>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Resume-AzureRmSiteRecoveryJob -Name <String> [-Comments <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,21 +36,6 @@ Specifies the comments for the job log.
 Type: String
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -98,6 +80,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRJob
+
 Parameter 'Job' accepts value of type 'ASRJob' from the pipeline
 
 ## OUTPUTS

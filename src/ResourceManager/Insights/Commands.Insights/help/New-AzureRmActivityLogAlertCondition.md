@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: 5E854358-CA9D-4336-BA6A-BF7B1FADAB50
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Creates an new activity log alert condition object in memory.
 ## SYNTAX
 
 ```
-New-AzureRmActivityLogAlertCondition -Field <String> -Equal <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+New-AzureRmActivityLogAlertCondition -Field <String> -Equal <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,23 +32,8 @@ This command creates a new activity log alert condition object in memory.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Equal
-Specifies the equals property for the leaf condition.
+### -Field
+Specifies the field for the condition.
 
 ```yaml
 Type: String
@@ -64,8 +47,8 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Field
-Specifies the field for the condition.
+### -Equal
+Specifies the equals property for the leaf condition.
 
 ```yaml
 Type: String

@@ -28,7 +28,7 @@ namespace Microsoft.Azure.Commands.AnalysisServices
     public class SetAzureAnalysisServicesServer : AnalysisServicesCmdletBase
     {
         private const string ParamSetDefault = "Default";
-        private const string ParamSetDisableBackup = "DisableBackup";
+        private const string ParamSetDisableBackup = "Disable Backup";
 
         [Parameter(ValueFromPipelineByPropertyName = true, Position = 0, Mandatory = true,
             HelpMessage = "Name of the server.")]

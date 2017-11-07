@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Relay.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -13,7 +12,7 @@ Checks the Availability of the given NameSpace Name
 ## SYNTAX
 
 ```
-Test-AzureRmRelayName [-Namespace] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Test-AzureRmRelayName [-Namespace] <String>
 ```
 
 ## DESCRIPTION
@@ -40,21 +39,6 @@ Returns the status on availability of the namespace name
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Namespace
 Relay Namespace Name.
 
@@ -69,7 +53,6 @@ Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -100,4 +83,3 @@ NameAvailable    Reason Message
 ## NOTES
 
 ## RELATED LINKS
-

@@ -34,7 +34,7 @@ namespace Microsoft.Azure.Commands.Network
 
             foreach (var community in communityList)
             {
-                var psProvider = NetworkResourceManagerProfile.Mapper.Map<PSBgpServiceCommunity>(community);
+                var psProvider = Mapper.Map<PSBgpServiceCommunity>(community);
                 psCommunities.Add(psProvider);
             }
 

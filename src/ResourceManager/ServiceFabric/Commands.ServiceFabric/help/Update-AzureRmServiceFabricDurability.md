@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceFabric.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -14,8 +13,7 @@ Update the durability tier or VmSku of a node type in the cluster.
 
 ```
 Update-AzureRmServiceFabricDurability [-ResourceGroupName] <String> [-Name] <String> -NodeType <String>
- -DurabilityLevel <DurabilityLevel> [-Sku <String>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ -DurabilityLevel <DurabilityLevel> [-Sku <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +29,6 @@ PS c:> Update-AzureRmServiceFabricDurability -ResourceGroupName 'Group1' -Name '
 This command changes durability tier of the NodeType 'nt1' to silver.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -DurabilityLevel
 Specify durability level.

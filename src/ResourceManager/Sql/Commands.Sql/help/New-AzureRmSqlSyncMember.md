@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Sql.dll-Help.xml
-Module Name: AzureRM.Sql
 online version: 
 schema: 2.0.0
 ---
@@ -10,6 +9,7 @@ schema: 2.0.0
 ## SYNOPSIS
 Creates an Azure SQL Database Sync Member.
 
+
 ## SYNTAX
 
 ### AzureSqlDatabase (Default)
@@ -17,7 +17,7 @@ Creates an Azure SQL Database Sync Member.
 New-AzureRmSqlSyncMember -Name <String> -MemberDatabaseType <String> -MemberServerName <String>
  -MemberDatabaseName <String> -MemberDatabaseCredential <PSCredential> [-SyncDirection <String>]
  [-SyncGroupName] <String> [-ServerName] <String> [-DatabaseName] <String> [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm]
 ```
 
 ### OnPremisesDatabaseSyncAgentComponent
@@ -25,15 +25,14 @@ New-AzureRmSqlSyncMember -Name <String> -MemberDatabaseType <String> -MemberServ
 New-AzureRmSqlSyncMember -Name <String> -MemberDatabaseType <String> -SyncAgentResourceGroupName <String>
  -SyncAgentServerName <String> -SyncAgentName <String> -SqlServerDatabaseId <String> [-SyncDirection <String>]
  [-SyncGroupName] <String> [-ServerName] <String> [-DatabaseName] <String> [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm]
 ```
 
 ### OnPremisesDatabaseSyncAgentResourceID
 ```
 New-AzureRmSqlSyncMember -Name <String> -MemberDatabaseType <String> -SqlServerDatabaseId <String>
  -SyncAgentResourceID <String> [-SyncDirection <String>] [-SyncGroupName] <String> [-ServerName] <String>
- [-DatabaseName] <String> [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-DatabaseName] <String> [-ResourceGroupName] <String> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -60,7 +59,7 @@ MemberServerName            : memberServer01.full.dns.name
 MemberDatabaseName          : memberDatabase01
 MemberDatabaseUserName      : myAccount
 MemberDatabasePassword      : 
-SyncState                   : UnProvisioned
+SyncState                   : UnProvisioned 
 ```
 
 This command creates a sync member for an Azure SQL database.
@@ -85,12 +84,27 @@ MemberServerName            :
 MemberDatabaseName          : 
 MemberDatabaseUserName      : myAccount
 MemberDatabasePassword      : 
-SyncState                   : UnProvisioned
+SyncState                   : UnProvisioned 
 ```
 
 This command creates a sync member for an on-premises SQL database.
 
 ## PARAMETERS
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -DatabaseName
 The name of the Azure SQL Database.
@@ -104,21 +118,6 @@ Required: True
 Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -334,21 +333,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -364,9 +348,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

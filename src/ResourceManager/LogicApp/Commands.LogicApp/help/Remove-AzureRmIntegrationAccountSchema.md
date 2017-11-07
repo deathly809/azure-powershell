@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.LogicApp.dll-Help.xml
-Module Name: AzureRM.LogicApp
 ms.assetid: 56550997-21D9-4F85-B23A-677625482547
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Removes an integration account schema.
 
 ```
 Remove-AzureRmIntegrationAccountSchema -ResourceGroupName <String> -Name <String> -SchemaName <String> [-Force]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,21 +36,6 @@ PS C:\>Remove-AzureRmIntegrationAccountSchema -ResourceGroupName "ResourceGroup1
 This command removes an integration account schema named IntegrationAccountSchema43.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Forces the command to run without asking for user confirmation.

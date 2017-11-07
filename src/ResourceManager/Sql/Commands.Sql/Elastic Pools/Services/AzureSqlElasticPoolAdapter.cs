@@ -106,8 +106,7 @@ namespace Microsoft.Azure.Commands.Sql.ElasticPool.Services
                 DatabaseDtuMin = model.DatabaseDtuMin,
                 Edition = model.Edition.ToString(),
                 Dtu = model.Dtu,
-                StorageMB = model.StorageMB,
-                ZoneRedundant = model.ZoneRedundant
+                StorageMB = model.StorageMB
             });
 
             return CreateElasticPoolModelFromResponse(model.ResourceGroupName, model.ServerName, resp);
@@ -288,8 +287,7 @@ namespace Microsoft.Azure.Commands.Sql.ElasticPool.Services
                 Tags =
                     TagsConversionHelper.CreateTagDictionary(TagsConversionHelper.CreateTagHashtable(pool.Tags), false),
                 Location = pool.Location,
-                Edition = edition,
-                ZoneRedundant = pool.ZoneRedundant
+                Edition = edition
             };
 
             return model;

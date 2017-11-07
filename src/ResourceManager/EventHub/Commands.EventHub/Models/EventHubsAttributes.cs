@@ -18,6 +18,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Azure.Commands.EventHub.Models
 {
+
     public class EventHubAttributes
     {
         public EventHubAttributes()
@@ -40,6 +41,10 @@ namespace Microsoft.Azure.Commands.EventHub.Models
                     CaptureDescription = null;
             }
         }
+
+
+        [ObsoleteAttribute("'Location' property of eventhub is mark as obsolete and will be remved in Breaking changes build", false)]
+        public string Location { get; set; }
 
         public string Name { get; set; }
          
@@ -80,5 +85,7 @@ namespace Microsoft.Azure.Commands.EventHub.Models
         /// Gets or sets properties of capture description
         /// </summary>
         public CaptureDescriptionAttributes CaptureDescription { get; set; }
+
+
     }
 }

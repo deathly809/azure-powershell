@@ -142,8 +142,7 @@ namespace Microsoft.Azure.Commands.AnalysisServices.Dataplane
                 AsAzureClientSession.Instance.Login(context);
                 WriteProgress(new ProgressRecord(0, "Sync-AzureAnalysisServicesInstance.", string.Format("Authenticating user for '{0}' environment.", context.Environment.Name)));
                 var clusterResolveResult = ClusterResolve(context, serverName);
-                var virtualServerName = clusterResolveResult.CoreServerName.Split(":".ToCharArray())[0];
-                if (!serverName.Equals(virtualServerName) && !clusterResolveResult.CoreServerName.EndsWith(":rw"))
+                if (!clusterResolveResult.CoreServerName.Equals(serverName) || !clusterResolveResult.CoreServerName.EndsWith(":rw"))
                 {
                     throw new SynchronizationFailedException("Sync request can only be sent to the management endpoint");
                 }
@@ -246,7 +245,6 @@ namespace Microsoft.Azure.Commands.AnalysisServices.Dataplane
         {
             // No data collection for this commandlet
         }
-
         protected override string DataCollectionWarning
         {
             get
@@ -277,7 +275,8 @@ namespace Microsoft.Azure.Commands.AnalysisServices.Dataplane
             {
                 try
                 {
-                    var synchronize = string.Format((string)context.Environment.Endpoints[AsAzureEnvironment.AsRolloutEndpoints.SyncEndpoint], this.serverName, databaseName);
+                    // pollingUrlAndRetryAfter = await PostSyncRequestAsync(context, syncBaseUri, databaseName, accessToken);
+                    var synchronize = string.Format((string)context.Environment.Endpoints[AsAzureEnvironment.AsRolloutEndpoints.SyncEndpoint], this.clusterResolveResult.CoreServerName, databaseName);
                     this.AsAzureHttpClient.resetHttpClient();
                     using (var message = await AsAzureHttpClient.CallPostAsync(
                         syncBaseUri,
@@ -382,81 +381,70 @@ namespace Microsoft.Azure.Commands.AnalysisServices.Dataplane
             {
                 ScaleOutServerDatabaseSyncResult response = null;
                 var syncCompleted = false;
-                var retryCount = 0;
-
-                while (!syncCompleted && retryCount < maxNumberOfAttempts)
+                do
                 {
-                    // Wait for specified polling interval other than retries.
-                    if (retryCount == 0)
+                    var retryCount = 0;
+                    while (retryCount < maxNumberOfAttempts)
                     {
-                        await Task.Delay(pollingInterval);
-                    }
-                    else
-                    {
-                        await Task.Delay(DefaultRetryIntervalForPolling);
-                    }
-
-                    this.AsAzureHttpClient.resetHttpClient();
-                    using (HttpResponseMessage message = await AsAzureHttpClient.CallGetAsync(
-                        pollingUrl,
-                        string.Empty,
-                        accessToken,
-                        correlationId))
-                    {
-                        bool shouldRetry = false;
-                        if (message.IsSuccessStatusCode && message.Content != null)
+                        // Wait for specified polling interval other than retries.
+                        if (retryCount == 0)
                         {
-                            var responseString = await message.Content.ReadAsStringAsync();
-                            response = JsonConvert.DeserializeObject<ScaleOutServerDatabaseSyncResult>(responseString);
+                            // WriteInformation(new InformationRecord(string.Format("Synchronize database {0}. Attempt #{1}. Waiting for {2} seconds to get sync results...", databaseName, retryCount, pollingInterval.TotalSeconds), string.Empty));
+                            await Task.Delay(pollingInterval);
+                        }
+                        else
+                        {
+                            await Task.Delay(DefaultRetryIntervalForPolling);
+                        }
 
-                            if (response != null)
+                        this.AsAzureHttpClient.resetHttpClient();
+                        using (HttpResponseMessage message = await AsAzureHttpClient.CallGetAsync(
+                            pollingUrl,
+                            string.Empty,
+                            accessToken,
+                            correlationId))
+                        {
+                            syncCompleted = !message.StatusCode.Equals(HttpStatusCode.SeeOther);
+                            if (syncCompleted)
                             {
-                                var state = response.SyncState;
-                                if (state == DatabaseSyncState.Completed || state == DatabaseSyncState.Failed)
+                                if (message.IsSuccessStatusCode)
                                 {
-                                    syncCompleted = true;
+                                    var responseString = await message.Content.ReadAsStringAsync();
+                                    response = JsonConvert.DeserializeObject<ScaleOutServerDatabaseSyncResult>(responseString);
+                                    break;
                                 }
                                 else
                                 {
-                                    pollingUrl = message.Headers.Location ?? pollingUrl;
-                                    pollingInterval = message.Headers.RetryAfter.Delta ?? pollingInterval;
+                                    retryCount++;
+                                    if (response == null)
+                                    {
+                                        response = new ScaleOutServerDatabaseSyncResult()
+                                        {
+                                            Database = databaseName,
+                                            SyncState = DatabaseSyncState.Invalid
+                                        };
+
+                                        response.Details = string.Format(
+                                            "Http Error code: {0}. {1}", 
+                                            message.StatusCode.ToString(), 
+                                            message.Content != null ? await message.Content.ReadAsStringAsync() : string.Empty);
+                                    }
+
+                                    if (message.StatusCode >= (HttpStatusCode)400 && message.StatusCode <= (HttpStatusCode)499)
+                                    {
+                                        break;   
+                                    }
                                 }
                             }
                             else
                             {
-                                shouldRetry = true;
+                                pollingUrl = message.Headers.Location;
+                                pollingInterval = message.Headers.RetryAfter.Delta ?? pollingInterval;
                             }
-                        }
-                        else
-                        {
-                            shouldRetry = true;
-                        }
-
-                        if(shouldRetry)
-                        {
-                            retryCount++;
-                            response = new ScaleOutServerDatabaseSyncResult()
-                            {
-                                Database = databaseName,
-                                SyncState = DatabaseSyncState.Invalid
-                            };
-
-                            response.Details = string.Format(
-                                "Http Error code: {0}. Message: {1}",
-                                message.StatusCode.ToString(),
-                                message.Content != null ? await message.Content.ReadAsStringAsync() : string.Empty);
-
-                            if (message.StatusCode >= (HttpStatusCode)400 && message.StatusCode <= (HttpStatusCode)499)
-                            {
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            retryCount = 0;
                         }
                     }
                 }
+                while (!syncCompleted);
 
                 return response;
             });

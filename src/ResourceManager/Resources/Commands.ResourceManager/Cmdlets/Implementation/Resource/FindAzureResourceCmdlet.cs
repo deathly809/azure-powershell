@@ -43,27 +43,27 @@ namespace Microsoft.Azure.Commands.ResourceManager.Cmdlets.Implementation
         /// <summary>
         /// The list resources parameter set.
         /// </summary>
-        internal const string ListResourcesParameterSet = "GetBySpecifiedScope";
+        internal const string ListResourcesParameterSet = "Lists the resources based on the specified scope.";
 
         /// <summary>
         /// The list tenant resources parameter set.
         /// </summary>
-        internal const string ListTenantResourcesParameterSet = "GetBySpecifiedScopeAtTenantLevel";
+        internal const string ListTenantResourcesParameterSet = "Lists the resources based on the specified scope at the tenant level.";
 
         /// <summary>
         /// The get tenant resource parameter set.
         /// </summary>
-        internal const string MultiSubscriptionListResourcesParameterSet = "GetByMultiSubscriptionQuery";
+        internal const string MultiSubscriptionListResourcesParameterSet = "Get a resources using a multi-subscription query.";
 
         /// <summary>
         /// The list resources by tag object parameter set.
         /// </summary>
-        internal const string ListResourcesByTagObjectParameterSet = "GetByTagObject";
+        internal const string ListResourcesByTagObjectParameterSet = "Lists resources by a tag object specified as a hashset.";
 
         /// <summary>
         /// The list resources by tag name-value parameter set.
         /// </summary>
-        internal const string ListResourcesByTagNameValueParameterSet = "GetByTagNameValue";
+        internal const string ListResourcesByTagNameValueParameterSet = "Lists resources by a tag specified as a individual name and value parameters.";
 
         /// <summary>
         /// Caches the current subscription ids to get all subscription ids in the pipeline.

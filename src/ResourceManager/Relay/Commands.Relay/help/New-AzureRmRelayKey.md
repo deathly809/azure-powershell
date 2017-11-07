@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Relay.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -14,21 +13,20 @@ Regenerates the primary or secondary connection strings for the given Relay enti
 
 ### NamespaceAuthorizationRuleSet (Default)
 ```
-New-AzureRmRelayKey [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
- -RegenerateKey <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-AzureRmRelayKey [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String> -RegenerateKey <String>
+ [-WhatIf] [-Confirm]
 ```
 
 ### WcfRelayAuthorizationRuleSet
 ```
 New-AzureRmRelayKey [-ResourceGroupName] <String> [[-Namespace] <String>] [-WcfRelay] <String> [-Name] <String>
- -RegenerateKey <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ -RegenerateKey <String> [-WhatIf] [-Confirm]
 ```
 
 ### HybridConnectionAuthorizationRuleSet
 ```
 New-AzureRmRelayKey [-ResourceGroupName] <String> [[-Namespace] <String>] [-HybridConnection] <String>
- [-Name] <String> -RegenerateKey <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-Name] <String> -RegenerateKey <String> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -61,13 +59,13 @@ Regenerates the primary or secondary connection strings for the given Relay enti
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: IAzureContextContainer
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
+Aliases: cf
 
 Required: False
 Position: Named
@@ -179,21 +177,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -210,9 +193,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ### -ResourceGroupNameName
@@ -221,7 +201,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### -NamespaceName
  System.String 
  
-
 ### -HybridConnectionsName
  System.String 
 
@@ -233,6 +212,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### -RegenerateKeys
  System.String
+
 
 ## OUTPUTS
 

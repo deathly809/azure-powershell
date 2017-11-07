@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.DataLakeStore.dll-Help.xml
-Module Name: AzureRM.DataLakeStore
 ms.assetid: 58AAA284-45A3-4360-B321-FBE0A3F5D7A9
 online version: 
 schema: 2.0.0
@@ -13,19 +12,18 @@ Creates a new Data Lake Store account.
 
 ## SYNTAX
 
-### UserOrSystemAssignedEncryption (Default)
+### User or System assigned encryption (Default)
 ```
 New-AzureRmDataLakeStoreAccount [-ResourceGroupName] <String> [-Name] <String> [-Location] <String>
  [[-DefaultGroup] <String>] [[-Tags] <Hashtable>] [[-Encryption] <EncryptionConfigType>]
  [[-KeyVaultId] <String>] [[-KeyName] <String>] [[-KeyVersion] <String>] [-Tier <TierType>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
-### DisableEncryption
+### Disable Encryption
 ```
 New-AzureRmDataLakeStoreAccount [-ResourceGroupName] <String> [-Name] <String> [-Location] <String>
- [[-DefaultGroup] <String>] [[-Tags] <Hashtable>] [-DisableEncryption] [-Tier <TierType>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [[-DefaultGroup] <String>] [[-Tags] <Hashtable>] [-DisableEncryption] [-Tier <TierType>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -57,27 +55,12 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DisableEncryption
 Indicates that the account will not have any form of encryption applied to it.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: DisableEncryption
+Parameter Sets: Disable Encryption
 Aliases: 
 
 Required: False
@@ -90,7 +73,7 @@ Accept wildcard characters: False
 ### -Encryption
 ```yaml
 Type: EncryptionConfigType
-Parameter Sets: UserOrSystemAssignedEncryption
+Parameter Sets: User or System assigned encryption
 Aliases: 
 Accepted values: UserManaged, ServiceManaged
 
@@ -104,7 +87,7 @@ Accept wildcard characters: False
 ### -KeyName
 ```yaml
 Type: String
-Parameter Sets: UserOrSystemAssignedEncryption
+Parameter Sets: User or System assigned encryption
 Aliases: 
 
 Required: False
@@ -117,7 +100,7 @@ Accept wildcard characters: False
 ### -KeyVaultId
 ```yaml
 Type: String
-Parameter Sets: UserOrSystemAssignedEncryption
+Parameter Sets: User or System assigned encryption
 Aliases: 
 
 Required: False
@@ -130,7 +113,7 @@ Accept wildcard characters: False
 ### -KeyVersion
 ```yaml
 Type: String
-Parameter Sets: UserOrSystemAssignedEncryption
+Parameter Sets: User or System assigned encryption
 Aliases: 
 
 Required: False

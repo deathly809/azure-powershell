@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Automation.dll-Help.xml
-Module Name: AzureRM.Automation
 ms.assetid: BBD37C4B-BB6F-4560-BDEE-F0440EC1938A
 online version: 
 schema: 2.0.0
@@ -16,13 +15,13 @@ Gets DSC configurations from Automation.
 ### ByAll (Default)
 ```
 Get-AzureRmAutomationDscConfiguration [-ResourceGroupName] <String> [-AutomationAccountName] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### ByConfigurationName
 ```
 Get-AzureRmAutomationDscConfiguration [-Name] <String> [-ResourceGroupName] <String>
- [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,21 +57,6 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

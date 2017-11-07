@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Automation.dll-Help.xml
-Module Name: AzureRM.Automation
 ms.assetid: 89C931AE-DA81-47A7-80E4-159C36497DA0
 online version: 
 schema: 2.0.0
@@ -16,20 +15,19 @@ Gets metadata for DSC node configurations in Automation.
 ### ByAll (Default)
 ```
 Get-AzureRmAutomationDscNodeConfiguration [-RollupStatus <String>] [-ResourceGroupName] <String>
- [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ### ByNodeConfigurationName
 ```
 Get-AzureRmAutomationDscNodeConfiguration -Name <String> [-ResourceGroupName] <String>
- [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ### ByConfigurationName
 ```
 Get-AzureRmAutomationDscNodeConfiguration -ConfigurationName <String> [-RollupStatus <String>]
- [-ResourceGroupName] <String> [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-ResourceGroupName] <String> [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -88,21 +86,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

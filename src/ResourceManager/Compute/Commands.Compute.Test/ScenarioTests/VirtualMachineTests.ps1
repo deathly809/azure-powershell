@@ -1541,8 +1541,6 @@ function Test-VirtualMachinePlan
 <#
 .SYNOPSIS
 Test Virtual Machines Plan 2
-.Description
-AzureAutomationTest
 #>
 function Test-VirtualMachinePlan2
 {
@@ -1722,8 +1720,6 @@ function Test-VirtualMachineTags
 <#
 .SYNOPSIS
 Test Virtual Machines with VMAgent and AutoUpdate
-.Description
-AzureAutomationTest
 #>
 function Test-VirtualMachineWithVMAgentAutoUpdate
 {
@@ -1828,8 +1824,6 @@ function Test-VirtualMachineWithVMAgentAutoUpdate
 <#
 .SYNOPSIS
 Test Virtual Machines with VMAgent and AutoUpdate
-.Description
-AzureAutomationTest
 #>
 function Test-LinuxVirtualMachine
 {
@@ -1931,10 +1925,6 @@ function Test-LinuxVirtualMachine
 }
 
 # Test Image Cmdlet Output Format
-<#
-.Description
-AzureAutomationTest
-#>
 function Test-VMImageCmdletOutputFormat
 {
     $locStr = Get-ComputeVMLocation;
@@ -1975,7 +1965,7 @@ function Test-GetVMSizeFromAllLocations
 
 function get_all_vm_locations
 {
-    if ((Get-ComputeTestMode) -ne 'Playback')
+    if ([Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::Mode -ne [Microsoft.Azure.Test.HttpRecorder.HttpRecorderMode]::Playback)
     {
         $namespace = "Microsoft.Compute"
         $type = "virtualMachines"

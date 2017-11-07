@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Cdn.dll-Help.xml
-Module Name: AzureRM.Cdn
 ms.assetid: 3A4F8442-1268-44BC-91ED-47C03CD20C47
 online version: 
 schema: 2.0.0
@@ -13,16 +12,15 @@ Removes a CDN profile.
 
 ## SYNTAX
 
-### ByFieldsParameterSet
+### Parameter Set for fields parameters
 ```
-Remove-AzureRmCdnProfile -ProfileName <String> -ResourceGroupName <String> [-PassThru] [-Force]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmCdnProfile -ProfileName <String> -ResourceGroupName <String> [-PassThru] [-Force] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
-### ByObjectParameterSet
+### Parameter Set for object parameters
 ```
-Remove-AzureRmCdnProfile -CdnProfile <PSProfile> [-PassThru] [-Force]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmCdnProfile -CdnProfile <PSProfile> [-PassThru] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,28 +40,13 @@ Specifies the profile that this cmdlet removes.
 
 ```yaml
 Type: PSProfile
-Parameter Sets: ByObjectParameterSet
+Parameter Sets: Parameter Set for object parameters
 Aliases: 
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -103,7 +86,7 @@ Specifies the name of the profile that this cmdlet removes.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -118,7 +101,7 @@ Specifies the name of the resource group to which the profile belongs.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -165,6 +148,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PSProfile
+
 Parameter 'CdnProfile' accepts value of type 'PSProfile' from the pipeline
 
 ## OUTPUTS

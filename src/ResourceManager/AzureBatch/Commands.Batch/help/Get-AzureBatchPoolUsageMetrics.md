@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Batch.dll-Help.xml
-Module Name: AzureRM.Batch
 ms.assetid: 4B373447-3078-4C1F-932E-8337AB170DEB
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Gets pool usage metrics for a Batch account.
 
 ```
 Get-AzureBatchPoolUsageMetrics [-StartTime <DateTime>] [-EndTime <DateTime>] [-Filter <String>]
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,21 +103,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -EndTime
 Specifies the end of a time range for which this cmdlet gets usage metrics.
 Specify a time at least two hours earlier.
@@ -176,6 +160,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### BatchAccountContext
+
 Parameter 'BatchContext' accepts value of type 'BatchAccountContext' from the pipeline
 
 ## OUTPUTS

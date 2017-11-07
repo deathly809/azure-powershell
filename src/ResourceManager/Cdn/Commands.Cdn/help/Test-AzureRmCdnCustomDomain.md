@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Cdn.dll-Help.xml
-Module Name: AzureRM.Cdn
 ms.assetid: 8C4E824F-FB4A-4DE7-8FD9-3FDA3848F25C
 online version: 
 schema: 2.0.0
@@ -13,16 +12,15 @@ Checks whether a custom domain can be added to an endpoint.
 
 ## SYNTAX
 
-### ByFieldsParameterSet (Default)
+### Parameter Set for fields parameters (Default)
 ```
 Test-AzureRmCdnCustomDomain -EndpointName <String> -ProfileName <String> -ResourceGroupName <String>
- -CustomDomainHostName <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -CustomDomainHostName <String> [<CommonParameters>]
 ```
 
-### ByObjectParameterSet
+### Parameter Set for object parameters
 ```
-Test-AzureRmCdnCustomDomain -CdnEndpoint <PSEndpoint> -CustomDomainHostName <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Test-AzureRmCdnCustomDomain -CdnEndpoint <PSEndpoint> -CustomDomainHostName <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,7 +40,7 @@ Specifies the endpoint to which you want to add the custom domain.
 
 ```yaml
 Type: PSEndpoint
-Parameter Sets: ByObjectParameterSet
+Parameter Sets: Parameter Set for object parameters
 Aliases: 
 
 Required: True
@@ -67,27 +65,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -EndpointName
 Specifies the name of the endpoint to which you want to add the custom domain.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -102,7 +85,7 @@ Specifies the name of the profile.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -117,7 +100,7 @@ Specifies the name of the resource group.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -133,6 +116,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PSEndpoint
+
 Parameter 'CdnEndpoint' accepts value of type 'PSEndpoint' from the pipeline
 
 ## OUTPUTS

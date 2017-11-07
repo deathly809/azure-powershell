@@ -14,8 +14,8 @@
 
 <#
 .SYNOPSIS
-Creates a self-hosted integration runtime and then does operations.
-Deletes the created integration runtime at the end.
+Create an self-hosted integration runtime and then do operations.
+Delete the created integration runtime after test finishes.
 #>
 function Test-SelfHosted-IntegrationRuntime
 {
@@ -81,14 +81,14 @@ function Test-SelfHosted-IntegrationRuntime
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }
 
 <#
 .SYNOPSIS
-Creates a managed elastic integration runtime and then does operations.
-Deletes the created integration runtime at the end.
+Create an managed elastic integration runtime and then do operations.
+Delete the created integration runtime after test finishes.
 #>
 function Test-ManagedElastic-IntegrationRuntime
 {
@@ -126,14 +126,14 @@ function Test-ManagedElastic-IntegrationRuntime
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }
 
 
 <#
 .SYNOPSIS
-Creates a self-hosted integration runtime and then does piping operations.
+Create an self-hosted integration runtime and then do piping operations.
 #>
 function Test-IntegrationRuntime-Piping
 {
@@ -167,6 +167,6 @@ function Test-IntegrationRuntime-Piping
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }

@@ -15,8 +15,6 @@
 <#
 .SYNOPSIS
 Test Virtual Machine Run Command Get
-.Description
-AzureAutomationTest
 #>
 function Test-VirtualMachineGetRunCommand
 {

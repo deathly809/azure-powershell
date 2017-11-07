@@ -29,12 +29,12 @@ namespace Microsoft.Azure.Commands.Resources
         /// <summary>
         /// List resources group by name parameter set.
         /// </summary>
-        internal const string ResourceGroupNameParameterSet = "RemoveByResourceGroupName";
+        internal const string ResourceGroupNameParameterSet = "Lists the resource group based in the name.";
 
         /// <summary>
         /// List resources group by Id parameter set.
         /// </summary>
-        internal const string ResourceGroupIdParameterSet = "RemoveByResourceGroupId";
+        internal const string ResourceGroupIdParameterSet = "Lists the resource group based in the Id.";
 
         [Alias("ResourceGroupName")]
         [Parameter(Position = 0, Mandatory = true, ParameterSetName = ResourceGroupNameParameterSet, ValueFromPipelineByPropertyName = true, HelpMessage = "The name of the resource group.")]

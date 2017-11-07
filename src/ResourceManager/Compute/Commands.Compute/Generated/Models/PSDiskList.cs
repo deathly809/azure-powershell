@@ -25,7 +25,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation.Models
     {
         public PSDisk ToPSDisk ()
         {
-            return ComputeAutomationAutoMapperProfile.Mapper.Map<PSDisk>(this);
+            return AutoMapper.Mapper.Map<PSDisk>(this);
         }
     }
 }

@@ -26,11 +26,14 @@ namespace Microsoft.Azure.Commands.MachineLearningCompute.Cmdlets
     [OutputType(typeof(PSUpdateSystemServicesResponse))]
     public class UpdateAzureRmMlOpClusterSystemService : MachineLearningComputeCmdletBase
     {
-        protected const string CmdletParametersParameterSet = "StartUpdateWithNameAndResourceGroup";
+        protected const string CmdletParametersParameterSet =
+            "Start a system services update from cmdlet input parameters.";
 
-        protected const string ObjectParameterSet = "StartUpdateWithInputObject";
+        protected const string ObjectParameterSet =
+            "Start a system services update from an PSOperationalizationCluster instance definition.";
 
-        protected const string ResourceIdParameterSet = "StartUpdateWithResourceId";
+        protected const string ResourceIdParameterSet =
+            "Start a system services update from an Azure resouce id.";
 
         [Parameter(ParameterSetName = CmdletParametersParameterSet,
             Mandatory = true, 

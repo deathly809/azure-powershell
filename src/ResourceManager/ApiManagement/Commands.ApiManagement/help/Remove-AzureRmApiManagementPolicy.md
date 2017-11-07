@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.dll-Help.xml
-Module Name: AzureRM.ApiManagement
 ms.assetid: 466AFB8C-C272-4A4F-8E13-A4DBD6EE3A85
 online version: 
 schema: 2.0.0
@@ -13,28 +12,28 @@ Removes the API Management policy from a specified scope.
 
 ## SYNTAX
 
-### RemoveTenantLevel (Default)
+### Tenant level (Default)
 ```
-Remove-AzureRmApiManagementPolicy -Context <PsApiManagementContext> [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
-```
-
-### RemoveProductLevel
-```
-Remove-AzureRmApiManagementPolicy -Context <PsApiManagementContext> -ProductId <String> [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmApiManagementPolicy -Context <PsApiManagementContext> [-PassThru] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
-### RemoveApiLevel
+### Product level
 ```
-Remove-AzureRmApiManagementPolicy -Context <PsApiManagementContext> -ApiId <String> [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmApiManagementPolicy -Context <PsApiManagementContext> -ProductId <String> [-PassThru] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
-### RemoveOperationLevel
+### API level
+```
+Remove-AzureRmApiManagementPolicy -Context <PsApiManagementContext> -ApiId <String> [-PassThru] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
+```
+
+### Operation level
 ```
 Remove-AzureRmApiManagementPolicy -Context <PsApiManagementContext> -ApiId <String> -OperationId <String>
- [-PassThru] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,32 +43,28 @@ The **Remove-AzureRmApiManagementPolicy** cmdlet removes the API Management poli
 
 ### Example 1: Remove the tenant level policy
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Remove-AzureRmApiManagementPolicy -Context $apimContext
+PS C:\>Remove-AzureRmApiManagementPolicy -Context $APImContext
 ```
 
 This command removes tenant level policy from API Management.
 
 ### Example 2: Remove the product-scope policy
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Remove-AzureRmApiManagementPolicy -Context $apimContext -ProductId "0123456789"
+PS C:\>Remove-AzureRmApiManagementPolicy -Context $APImContext -ProductId "0123456789"
 ```
 
 This command removes product-scope policy from API Management.
 
 ### Example 3: Remove the API-scope policy
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Remove-AzureRmApiManagementPolicy -Context $apimContext -ApiId "9876543210"
+PS C:\>Remove-AzureRmApiManagementPolicy -Context $APImContext -ApiId "9876543210"
 ```
 
 This command removes API-scope policy from API Management.
 
 ### Example 4: Remove the operation-scope policy
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Remove-AzureRmApiManagementPolicy -Context $apimContext -ApiId "9876543210" -OperationId "777"
+PS C:\>Remove-AzureRmApiManagementPolicy -Context $APImContext -ApiId "9876543210" -OperationId "777"
 ```
 
 This command removes operation-scope policy from API Management.
@@ -82,7 +77,7 @@ If you specify this parameter, the cmdlet removes the API-scope policy.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveApiLevel, RemoveOperationLevel
+Parameter Sets: API level, Operation level
 Aliases: 
 
 Required: True
@@ -107,28 +102,13 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -OperationId
 Specifies the identifier of an existing operation.
 If you specify this parameter with the *ApiId* parameter, this cmdlet removes the operation-scope policy.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveOperationLevel
+Parameter Sets: Operation level
 Aliases: 
 
 Required: True
@@ -159,7 +139,7 @@ If you specify this parameter, the cmdlet removes the product-scope policy.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveProductLevel
+Parameter Sets: Product level
 Aliases: 
 
 Required: True

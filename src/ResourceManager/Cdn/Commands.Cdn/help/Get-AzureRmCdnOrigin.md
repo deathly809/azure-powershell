@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Cdn.dll-Help.xml
-Module Name: AzureRM.Cdn
 ms.assetid: 91919242-59ED-4938-A3A3-23A66F85FBC1
 online version: 
 schema: 2.0.0
@@ -13,16 +12,15 @@ Gets a CDN origin server.
 
 ## SYNTAX
 
-### ByFieldsParameterSet (Default)
+### Parameter Set for fields parameters (Default)
 ```
 Get-AzureRmCdnOrigin [-OriginName <String>] -EndpointName <String> -ProfileName <String>
- -ResourceGroupName <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -ResourceGroupName <String> [<CommonParameters>]
 ```
 
-### ByObjectParameterSet
+### Parameter Set for object parameters
 ```
-Get-AzureRmCdnOrigin [-OriginName <String>] -CdnEndpoint <PSEndpoint>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmCdnOrigin [-OriginName <String>] -CdnEndpoint <PSEndpoint> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,7 +40,7 @@ Specifies the CDN endpoint object to which the origin belongs.
 
 ```yaml
 Type: PSEndpoint
-Parameter Sets: ByObjectParameterSet
+Parameter Sets: Parameter Set for object parameters
 Aliases: 
 
 Required: True
@@ -52,27 +50,12 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -EndpointName
 Specifies the name of the endpoint to which the origin server belongs.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -102,7 +85,7 @@ Specifies the name of the profile to which the origin server belongs.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -117,7 +100,7 @@ Specifies the name of the resource group to which the origin server belongs.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -133,6 +116,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PSEndpoint
+
 Parameter 'CdnEndpoint' accepts value of type 'PSEndpoint' from the pipeline
 
 ## OUTPUTS

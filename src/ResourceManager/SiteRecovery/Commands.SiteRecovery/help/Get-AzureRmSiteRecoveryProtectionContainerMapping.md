@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: F3E1BEB5-B565-4618-9AEF-DB85A1AB2163
 online version: 
 schema: 2.0.0
@@ -16,13 +15,13 @@ Gets Azure Site Recovery Protection Container mappings.
 ### ByObject (Default)
 ```
 Get-AzureRmSiteRecoveryProtectionContainerMapping -ProtectionContainer <ASRProtectionContainer>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### ByObjectWithName
 ```
 Get-AzureRmSiteRecoveryProtectionContainerMapping -Name <String> -ProtectionContainer <ASRProtectionContainer>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +30,6 @@ The **Get-AzureRmSiteRecoveryProtectionContainerMapping** cmdlet gets informatio
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the Protection Container mapping.
@@ -83,6 +67,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRProtectionContainer
+
 Parameter 'ProtectionContainer' accepts value of type 'ASRProtectionContainer' from the pipeline
 
 ## OUTPUTS

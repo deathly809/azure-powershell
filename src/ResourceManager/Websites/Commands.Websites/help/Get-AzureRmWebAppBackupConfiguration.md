@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Websites.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 8337BEA9-4927-4718-83B9-F3F567BE0FBD
 online version: 
 schema: 2.0.0
@@ -15,13 +14,12 @@ schema: 2.0.0
 ### FromResourceName
 ```
 Get-AzureRmWebAppBackupConfiguration [-ResourceGroupName] <String> [-Name] <String> [[-Slot] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### FromWebApp
 ```
-Get-AzureRmWebAppBackupConfiguration [-WebApp] <Site> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmWebAppBackupConfiguration [-WebApp] <Site> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,21 +35,6 @@ PS C:\>Get-AzureRmWebAppBackupConfiguration -ResourceGroupName "Default-Web-West
 This command gets the backup configuration from the Web App named WebAppStandard that belongs to the resource group Default-Web-WestUS.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 WebApp Name
@@ -119,6 +102,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Site
+
 Parameter 'WebApp' accepts value of type 'Site' from the pipeline
 
 ## OUTPUTS

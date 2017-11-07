@@ -145,7 +145,6 @@ namespace StaticAnalysis.SignatureVerifier
         {
             "Access",
             "Address",
-            "Alias",
             "Anonymous",
             "Diagnostics",
             "Express",
@@ -156,10 +155,8 @@ namespace StaticAnalysis.SignatureVerifier
             "InMinutes",
             "InMonths",
             "InSeconds",
-            "Insights",
             "Loss",
             "Mbps",
-            "Permissions",
             "Process",
             "Progress",
             "SaveAs",

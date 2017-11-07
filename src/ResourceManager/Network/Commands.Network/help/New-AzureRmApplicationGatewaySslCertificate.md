@@ -14,7 +14,7 @@ Creates an SSL certificate for an Azure application gateway.
 ## SYNTAX
 
 ```
-New-AzureRmApplicationGatewaySslCertificate -Name <String> -CertificateFile <String> -Password <SecureString>
+New-AzureRmApplicationGatewaySslCertificate -Name <String> -CertificateFile <String> -Password <String>
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
@@ -25,8 +25,7 @@ The **New-AzureRmApplicationGatewaySslCertificate** cmdlet creates an SSL certif
 
 ### Example 1: Create an SSL certificate for an Azure application gateway.
 ```
-PS C:\> $password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
-PS C:\> $cert = New-AzureRmApplicationGatewaySslCertificate -Name "Cert01" -CertificateFile "D:\cert01.pfx" -Password $password
+PS C:\>$Cert = New-AzureRmApplicationGatewaySslCertificate -Name "Cert01" -CertificateFile "D:\cert01.pfx" -Password "Password01"
 ```
 
 This command creates a SSL certificate named Cert01 for the default application gateway and stores the result in the variable named $Cert.
@@ -82,7 +81,7 @@ Accept wildcard characters: False
 Specifies the password of the SSL that this cmdlet creates.
 
 ```yaml
-Type: SecureString
+Type: String
 Parameter Sets: (All)
 Aliases: 
 

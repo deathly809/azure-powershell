@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: DE1D5A0D-2545-4F01-98B5-684ED0D25230
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Removes a Site Recovery site from the current vault.
 ## SYNTAX
 
 ```
-Remove-AzureRmSiteRecoverySite -Site <ASRSite> [-Force] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Remove-AzureRmSiteRecoverySite -Site <ASRSite> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,21 +22,6 @@ The **Remove-AzureRmSiteRecoverySite** cmdlet deletes an Azure Site Recovery sit
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Forces the command to run without asking for user confirmation.
@@ -108,6 +91,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRSite
+
 Parameter 'Site' accepts value of type 'ASRSite' from the pipeline
 
 ## OUTPUTS

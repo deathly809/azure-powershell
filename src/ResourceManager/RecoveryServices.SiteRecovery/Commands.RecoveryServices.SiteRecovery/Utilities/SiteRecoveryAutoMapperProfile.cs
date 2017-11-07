@@ -50,689 +50,682 @@ namespace Microsoft.Azure.Commands.RecoveryServices.SiteRecovery
 
     public class SiteRecoveryAutoMapperProfile : AutoMapper.Profile
     {
-        private static IMapper _mapper;
+        private static readonly Lazy<bool> initialize;
 
-        private static readonly object _lock = new object();
-
-        public static IMapper Mapper
+        static SiteRecoveryAutoMapperProfile()
         {
-            get
-            {
-                lock(_lock)
+            initialize = new Lazy<bool>(
+                () =>
                 {
-                    if (_mapper == null)
-                    {
-                        Initialize();
-                    }
-
-                    return _mapper;
-                }
-            }
+                    Mapper.AddProfile<SiteRecoveryAutoMapperProfile>();
+                    return true;
+                });
         }
 
         public override string ProfileName => "SiteRecoveryAutoMapperProfile";
 
-        private static void Initialize()
+        public static bool Initialize()
         {
-            var config = new MapperConfiguration(cfg => {
-                var mappingExpression = cfg
+            return initialize.Value;
+        }
+
+        protected override void Configure()
+        {
+            var mappingExpression = Mapper
                 .CreateMap<Rest.Azure.AzureOperationResponse, PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpression.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpression.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionFabric = cfg
-                    .CreateMap<AzureOperationResponse<Fabric>, PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionFabric = Mapper
+                .CreateMap<AzureOperationResponse<Fabric>, PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionFabric.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionFabric.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionPolicy = cfg
-                    .CreateMap<AzureOperationResponse<Policy>, PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionPolicy = Mapper
+                .CreateMap<AzureOperationResponse<Policy>, PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionPolicy.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionPolicy.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionProtectionContainer = cfg
-                    .CreateMap<AzureOperationResponse<ProtectionContainer>,
-                        PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionProtectionContainer = Mapper
+                .CreateMap<AzureOperationResponse<ProtectionContainer>,
+                    PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionProtectionContainer.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionProtectionContainer.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionProtectableItem = cfg
-                    .CreateMap<AzureOperationResponse<ProtectableItem>,
-                        PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionProtectableItem = Mapper
+                .CreateMap<AzureOperationResponse<ProtectableItem>,
+                    PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionProtectableItem.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionProtectableItem.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionReplicationProtectedItem = cfg
-                    .CreateMap<AzureOperationResponse<ReplicationProtectedItem>,
-                        PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionReplicationProtectedItem = Mapper
+                .CreateMap<AzureOperationResponse<ReplicationProtectedItem>,
+                    PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionReplicationProtectedItem.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionReplicationProtectedItem.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionRecoveryPlan = cfg
-                    .CreateMap<AzureOperationResponse<RecoveryPlan>, PSSiteRecoveryLongRunningOperation
-                    >();
+            var mappingExpressionRecoveryPlan = Mapper
+                .CreateMap<AzureOperationResponse<RecoveryPlan>, PSSiteRecoveryLongRunningOperation
+                >();
 
-                mappingExpressionRecoveryPlan.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionRecoveryPlan.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionJob = cfg
-                    .CreateMap<AzureOperationResponse<Job>, PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionJob = Mapper
+                .CreateMap<AzureOperationResponse<Job>, PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionJob.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionJob.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionProtectionContainerMapping = cfg
-                    .CreateMap<AzureOperationResponse<ProtectionContainerMapping>,
-                        PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionProtectionContainerMapping = Mapper
+                .CreateMap<AzureOperationResponse<ProtectionContainerMapping>,
+                    PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionProtectionContainerMapping.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionProtectionContainerMapping.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionProtectionNetworkMapping = cfg
-                    .CreateMap<AzureOperationResponse<NetworkMapping>,
-                        PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionProtectionNetworkMapping = Mapper
+                .CreateMap<AzureOperationResponse<NetworkMapping>,
+                    PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionProtectionNetworkMapping.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionProtectionNetworkMapping.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionProtectionStorageClassification = cfg
-                    .CreateMap<AzureOperationResponse<StorageClassification>,
-                        PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionProtectionStorageClassification = Mapper
+                .CreateMap<AzureOperationResponse<StorageClassification>,
+                    PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionProtectionStorageClassification.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
+            mappingExpressionProtectionStorageClassification.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
 
-                var mappingExpressionProtectionStorageClassificationMapping = cfg
-                    .CreateMap<AzureOperationResponse<StorageClassificationMapping>,
-                        PSSiteRecoveryLongRunningOperation>();
+            var mappingExpressionProtectionStorageClassificationMapping = Mapper
+                .CreateMap<AzureOperationResponse<StorageClassificationMapping>,
+                    PSSiteRecoveryLongRunningOperation>();
 
-                mappingExpressionProtectionStorageClassificationMapping.ForMember(
-                        c => c.Location,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Location") ? r.Response.Headers
-                                .GetValues("Location")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.Status,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .Status))
-                    .ForMember(
-                        c => c.CorrelationRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
-                                .Headers.GetValues("x-ms-correlation-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ClientRequestId,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
-                                .GetValues("x-ms-request-id")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.ContentType,
-                        o => o.MapFrom(
-                            r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
-                                    r.Response.Content.ReadAsStringAsync()
-                                        .Result)
-                                .ContentType))
-                    .ForMember(
-                        c => c.RetryAfter,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
-                                .GetValues("Retry-After")
-                                .FirstOrDefault() : null))
-                    .ForMember(
-                        c => c.Date,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Date") ? r.Response.Headers
-                                .GetValues("Date")
-                                .FirstOrDefault() : ""))
-                    .ForMember(
-                        c => c.AsyncOperation,
-                        o => o.MapFrom(
-                            r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
-                                .Headers.GetValues("Azure-AsyncOperation")
-                                .FirstOrDefault() : ""));
-            });
-
-            _mapper = config.CreateMapper();
+            mappingExpressionProtectionStorageClassificationMapping.ForMember(
+                    c => c.Location,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Location") ? r.Response.Headers
+                            .GetValues("Location")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.Status,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .Status))
+                .ForMember(
+                    c => c.CorrelationRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-correlation-request-id") ? r.Response
+                            .Headers.GetValues("x-ms-correlation-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ClientRequestId,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("x-ms-request-id") ? r.Response.Headers
+                            .GetValues("x-ms-request-id")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.ContentType,
+                    o => o.MapFrom(
+                        r => JsonConvert.DeserializeObject<PSSiteRecoveryLongRunningOperation>(
+                                r.Response.Content.ReadAsStringAsync()
+                                    .Result)
+                            .ContentType))
+                .ForMember(
+                    c => c.RetryAfter,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Retry-After") ? r.Response.Headers
+                            .GetValues("Retry-After")
+                            .FirstOrDefault() : null))
+                .ForMember(
+                    c => c.Date,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Date") ? r.Response.Headers
+                            .GetValues("Date")
+                            .FirstOrDefault() : ""))
+                .ForMember(
+                    c => c.AsyncOperation,
+                    o => o.MapFrom(
+                        r => r.Response.Headers.Contains("Azure-AsyncOperation") ? r.Response
+                            .Headers.GetValues("Azure-AsyncOperation")
+                            .FirstOrDefault() : ""));
         }
     }
 }

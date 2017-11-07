@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: 019EFD94-4087-45F6-812D-FBDFE1B2E48A
 online version: 
 schema: 2.0.0
@@ -14,7 +13,7 @@ Gets a log profile.
 ## SYNTAX
 
 ```
-Get-AzureRmLogProfile [-Name <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmLogProfile [-Name <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,21 +27,6 @@ The **Get-AzureRmLogProfile** cmdlet gets a log profile.
 ```
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the log profile to get.

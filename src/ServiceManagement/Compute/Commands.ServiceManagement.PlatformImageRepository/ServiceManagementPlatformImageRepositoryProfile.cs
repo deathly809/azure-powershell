@@ -23,82 +23,71 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.PlatformImageReposit
 {
     public class ServiceManagementPlatformImageRepositoryProfile : Profile
     {
-        private static IMapper _mapper = null;
+        private static readonly Lazy<bool> initialize;
 
-        private static readonly object _lock = new object();
-
-        public static IMapper Mapper
+        static ServiceManagementPlatformImageRepositoryProfile()
         {
-            get
+            initialize = new Lazy<bool>(() =>
             {
-                lock(_lock)
-                {
-                    if (_mapper == null)
-                    {
-                        Initialize();
-                    }
-
-                    return _mapper;
-                }
-            }
+                Mapper.AddProfile<ServiceManagementPlatformImageRepositoryProfile>();
+                return true;
+            });
         }
 
-        public static void Initialize()
+        public static bool Initialize()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<ServiceManagementPlatformImageRepositoryProfile>();
-
-                cfg.CreateMap<NewAzurePlatformExtensionCertificateConfigCommand, ExtensionCertificateConfig>()
-                  .ForMember(c => c.ThumbprintRequired, o => o.MapFrom(r => r.ThumbprintRequired.IsPresent));
-
-                cfg.CreateMap<ExtensionCertificateConfig, ExtensionCertificateConfiguration>();
-                cfg.CreateMap<ExtensionLocalResourceConfig, ExtensionLocalResourceConfiguration>();
-                cfg.CreateMap<ExtensionInternalEndpoint, ExtensionEndpointConfiguration.InternalEndpoint>();
-                cfg.CreateMap<ExtensionInputEndpoint, ExtensionEndpointConfiguration.InputEndpoint>();
-                cfg.CreateMap<ExtensionInstanceInputEndpoint, ExtensionEndpointConfiguration.InstanceInputEndpoint>();
-                cfg.CreateMap<ExtensionEndpointConfigSet, ExtensionEndpointConfiguration>();
-
-                cfg.CreateMap<ExtensionImage, ExtensionImageContext>()
-                      .ForMember(c => c.ThumbprintAlgorithm, o => o.MapFrom(r => r.Certificate.ThumbprintAlgorithm))
-                      .ForMember(c => c.ExtensionName, o => o.MapFrom(r => r.Type));
-
-                cfg.CreateMap<PublishAzurePlatformExtensionCommand, ExtensionImageRegisterParameters>()
-                      .ForMember(c => c.IsJsonExtension, o => o.MapFrom(r => !r.XmlExtension.IsPresent))
-                      .ForMember(c => c.Type, o => o.MapFrom(r => r.ExtensionName))
-                      .ForMember(c => c.ProviderNameSpace, o => o.MapFrom(r => r.Publisher))
-                      .ForMember(c => c.BlockRoleUponFailure, o => o.MapFrom(r => r.BlockRoleUponFailure.IsPresent))
-                      .ForMember(c => c.DisallowMajorVersionUpgrade, o => o.MapFrom(r => r.DisallowMajorVersionUpgrade.IsPresent))
-                      .ForMember(c => c.Certificate, o => o.MapFrom(r => r.CertificateConfig))
-                      .ForMember(c => c.ExtensionEndpoints, o => o.MapFrom(r => r.EndpointConfig))
-                      .ForMember(c => c.LocalResources, o => o.MapFrom(r => r.LocalResourceConfig == null ? null : r.LocalResourceConfig.LocalResources))
-                      .ForMember(c => c.PublisherName, o => o.MapFrom(r => r != null ? (string)null : null))
-                      .ForMember(c => c.SupportedOS, o => o.MapFrom(r => r.SupportedOS ?? ExtensionImageSupportedOperatingSystemType.Windows));
-
-                cfg.CreateMap<PublishAzurePlatformExtensionCommand, ExtensionImageUpdateParameters>()
-                      .ForMember(c => c.IsJsonExtension, o => o.MapFrom(r => !r.XmlExtension.IsPresent))
-                      .ForMember(c => c.Type, o => o.MapFrom(r => r.ExtensionName))
-                      .ForMember(c => c.ProviderNameSpace, o => o.MapFrom(r => r.Publisher))
-                      .ForMember(c => c.BlockRoleUponFailure, o => o.MapFrom(r => r.BlockRoleUponFailure.IsPresent))
-                      .ForMember(c => c.DisallowMajorVersionUpgrade, o => o.MapFrom(r => r.DisallowMajorVersionUpgrade.IsPresent))
-                      .ForMember(c => c.Certificate, o => o.MapFrom(r => r.CertificateConfig))
-                      .ForMember(c => c.ExtensionEndpoints, o => o.MapFrom(r => r.EndpointConfig))
-                      .ForMember(c => c.LocalResources, o => o.MapFrom(r => r.LocalResourceConfig == null ? null : r.LocalResourceConfig.LocalResources))
-                      .ForMember(c => c.PublisherName, o => o.MapFrom(r => r != null ? (string)null : null))
-                      .ForMember(c => c.SupportedOS, o => o.MapFrom(r => r.SupportedOS ?? ExtensionImageSupportedOperatingSystemType.Windows));
-
-                cfg.CreateMap<SetAzurePlatformExtensionCommand, ExtensionImageUpdateParameters>()
-                      .ForMember(c => c.Type, o => o.MapFrom(r => r.ExtensionName))
-                      .ForMember(c => c.ProviderNameSpace, o => o.MapFrom(r => r.Publisher))
-                      .ForMember(c => c.PublisherName, o => o.MapFrom(r => r != null ? (string)null : null));
-            });
-
-            _mapper = config.CreateMapper();
+            return ServiceManagementProfile.Initialize() && initialize.Value;
         }
 
         public override string ProfileName
         {
             get { return "ServiceManagementPlatformImageRepositoryProfile"; }
+        }
+
+        protected override void Configure()
+        {
+            Mapper.CreateMap<NewAzurePlatformExtensionCertificateConfigCommand, ExtensionCertificateConfig>()
+                  .ForMember(c => c.ThumbprintRequired, o => o.MapFrom(r => r.ThumbprintRequired.IsPresent));
+
+            Mapper.CreateMap<ExtensionCertificateConfig, ExtensionCertificateConfiguration>();
+            Mapper.CreateMap<ExtensionLocalResourceConfig, ExtensionLocalResourceConfiguration>();
+            Mapper.CreateMap<ExtensionInternalEndpoint, ExtensionEndpointConfiguration.InternalEndpoint>();
+            Mapper.CreateMap<ExtensionInputEndpoint, ExtensionEndpointConfiguration.InputEndpoint>();
+            Mapper.CreateMap<ExtensionInstanceInputEndpoint, ExtensionEndpointConfiguration.InstanceInputEndpoint>();
+            Mapper.CreateMap<ExtensionEndpointConfigSet, ExtensionEndpointConfiguration>();
+
+            Mapper.CreateMap<ExtensionImage, ExtensionImageContext>()
+                  .ForMember(c => c.ThumbprintAlgorithm, o => o.MapFrom(r => r.Certificate.ThumbprintAlgorithm))
+                  .ForMember(c => c.ExtensionName, o => o.MapFrom(r => r.Type));
+
+            Mapper.CreateMap<PublishAzurePlatformExtensionCommand, ExtensionImageRegisterParameters>()
+                  .ForMember(c => c.IsJsonExtension, o => o.MapFrom(r => !r.XmlExtension.IsPresent))
+                  .ForMember(c => c.Type, o => o.MapFrom(r => r.ExtensionName))
+                  .ForMember(c => c.ProviderNameSpace, o => o.MapFrom(r => r.Publisher))
+                  .ForMember(c => c.BlockRoleUponFailure, o => o.MapFrom(r => r.BlockRoleUponFailure.IsPresent))
+                  .ForMember(c => c.DisallowMajorVersionUpgrade, o => o.MapFrom(r => r.DisallowMajorVersionUpgrade.IsPresent))
+                  .ForMember(c => c.Certificate, o => o.MapFrom(r => r.CertificateConfig))
+                  .ForMember(c => c.ExtensionEndpoints, o => o.MapFrom(r => r.EndpointConfig))
+                  .ForMember(c => c.LocalResources, o => o.MapFrom(r => r.LocalResourceConfig == null ? null : r.LocalResourceConfig.LocalResources))
+                  .ForMember(c => c.PublisherName, o => o.MapFrom(r => r != null ? (string)null : null))
+                  .ForMember(c => c.SupportedOS, o => o.MapFrom(r => r.SupportedOS ?? ExtensionImageSupportedOperatingSystemType.Windows));
+
+            Mapper.CreateMap<PublishAzurePlatformExtensionCommand, ExtensionImageUpdateParameters>()
+                  .ForMember(c => c.IsJsonExtension, o => o.MapFrom(r => !r.XmlExtension.IsPresent))
+                  .ForMember(c => c.Type, o => o.MapFrom(r => r.ExtensionName))
+                  .ForMember(c => c.ProviderNameSpace, o => o.MapFrom(r => r.Publisher))
+                  .ForMember(c => c.BlockRoleUponFailure, o => o.MapFrom(r => r.BlockRoleUponFailure.IsPresent))
+                  .ForMember(c => c.DisallowMajorVersionUpgrade, o => o.MapFrom(r => r.DisallowMajorVersionUpgrade.IsPresent))
+                  .ForMember(c => c.Certificate, o => o.MapFrom(r => r.CertificateConfig))
+                  .ForMember(c => c.ExtensionEndpoints, o => o.MapFrom(r => r.EndpointConfig))
+                  .ForMember(c => c.LocalResources, o => o.MapFrom(r => r.LocalResourceConfig == null ? null : r.LocalResourceConfig.LocalResources))
+                  .ForMember(c => c.PublisherName, o => o.MapFrom(r => r != null ? (string)null : null))
+                  .ForMember(c => c.SupportedOS, o => o.MapFrom(r => r.SupportedOS ?? ExtensionImageSupportedOperatingSystemType.Windows));
+
+            Mapper.CreateMap<SetAzurePlatformExtensionCommand, ExtensionImageUpdateParameters>()
+                  .ForMember(c => c.Type, o => o.MapFrom(r => r.ExtensionName))
+                  .ForMember(c => c.ProviderNameSpace, o => o.MapFrom(r => r.Publisher))
+                  .ForMember(c => c.PublisherName, o => o.MapFrom(r => r != null ? (string)null : null));
         }
     }
 }

@@ -12,19 +12,10 @@ Updates managed application definition
 
 ## SYNTAX
 
-### SetByNameAndResourceGroup (Default)
 ```
 Set-AzureRmManagedApplicationDefinition -Name <String> -ResourceGroupName <String> [-DisplayName <String>]
  [-Description <String>] [-PackageFileUri <String>] [-Authorization <String[]>] [-Tag <Hashtable>]
  [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
-```
-
-### SetById
-```
-Set-AzureRmManagedApplicationDefinition -Id <String> [-DisplayName <String>] [-Description <String>]
- [-PackageFileUri <String>] [-Authorization <String[]>] [-Tag <Hashtable>] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -118,27 +109,12 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Id
-The fully qualified managed application definition Id, including the subscription. e.g. /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName
-
-```yaml
-Type: String
-Parameter Sets: SetById
-Aliases: ResourceId
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
 ### -Name
 The managed application definition name.
 
 ```yaml
 Type: String
-Parameter Sets: SetByNameAndResourceGroup
+Parameter Sets: (All)
 Aliases: 
 
 Required: True
@@ -183,7 +159,7 @@ The resource group name.
 
 ```yaml
 Type: String
-Parameter Sets: SetByNameAndResourceGroup
+Parameter Sets: (All)
 Aliases: 
 
 Required: True
@@ -239,18 +215,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ### System.String
 System.String[]
 System.Collections.Hashtable
 
+
 ## OUTPUTS
 
 ### System.Management.Automation.PSObject
+
 
 ## NOTES
 

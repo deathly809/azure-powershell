@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 070DA86E-9EA4-4777-9D53-64B58B4401B8
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Imports a Site Recovery vault settings file.
 ## SYNTAX
 
 ```
-Import-AzureRmSiteRecoveryVaultSettingsFile [-Path] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Import-AzureRmSiteRecoveryVaultSettingsFile [-Path] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,21 +22,6 @@ The **Import-AzureRmSiteRecoveryVaultSettingsFile** cmdlet imports an Azure Site
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Path
 Specifies the path of the Site Recovery vault settings file.

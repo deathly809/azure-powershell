@@ -25,11 +25,14 @@ namespace Microsoft.Azure.Commands.MachineLearningCompute.Cmdlets
     [OutputType(typeof(void))]
     public class RemoveAzureRmMlOpCluster : MachineLearningComputeCmdletBase
     {
-        protected const string CmdletParametersParameterSet = "RemoveByNameAndResourceGroup";
+        protected const string CmdletParametersParameterSet =
+            "Remove an operationalization cluster from cmdlet input parameters.";
 
-        protected const string ObjectParameterSet = "RemoveByInputObject";
+        protected const string ObjectParameterSet =
+            "Remove an operationalization cluster from an OperationalizationCluster instance definition.";
 
-        protected const string ResourceIdParameterSet = "RemoveByResourceId";
+        protected const string ResourceIdParameterSet =
+            "Remove an operationalization cluster from an Azure resouce id.";
 
         [Parameter(ParameterSetName = CmdletParametersParameterSet,
             Mandatory = true, 

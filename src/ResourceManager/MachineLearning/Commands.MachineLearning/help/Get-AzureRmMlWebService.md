@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
-Module Name: AzureRM.MachineLearning
 online version: 
 schema: 2.0.0
 ---
@@ -13,8 +12,7 @@ Retrieves the summary information for one or more web services.
 ## SYNTAX
 
 ```
-Get-AzureRmMlWebService [-ResourceGroupName <String>] [-Name <String>] [-Region <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmMlWebService [-ResourceGroupName <String>] [-Name <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,38 +50,8 @@ Get-AzureRmMlWebService -ResourceGroupName "myresourcegroup"
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 The name of the web service for which the details are retrieved.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Region
-The name of regio
 
 ```yaml
 Type: String

@@ -32,12 +32,12 @@ namespace Microsoft.Azure.Commands.ResourceManager.Cmdlets.Implementation
         /// <summary>
         /// The policy Id parameter set.
         /// </summary>
-        internal const string PolicyAssignmentIdParameterSet = "SetByPolicyAssignmentId";
+        internal const string PolicyAssignmentIdParameterSet = "The policy assignment Id parameter set.";
 
         /// <summary>
         /// The policy name parameter set.
         /// </summary>
-        internal const string PolicyAssignmentNameParameterSet = "SetByPolicyAssignmentName";
+        internal const string PolicyAssignmentNameParameterSet = "The policy assignment name parameter set.";
 
         /// <summary>
         /// Gets or sets the policy assignment name parameter.

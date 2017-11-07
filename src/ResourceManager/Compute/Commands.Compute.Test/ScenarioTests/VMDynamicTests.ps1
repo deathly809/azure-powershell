@@ -14,7 +14,7 @@
 
 function get_all_vm_locations
 {
-    if ((Get-ComputeTestMode) -ne 'Playback')
+    if ([Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::Mode -ne [Microsoft.Azure.Test.HttpRecorder.HttpRecorderMode]::Playback)
     {
         $namespace = "Microsoft.Compute"
         $type = "virtualMachines"

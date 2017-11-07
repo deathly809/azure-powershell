@@ -33,9 +33,9 @@ namespace Microsoft.Azure.Commands.DataFactoryV2.Test
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestStartTriggerThrowsWithoutPipeline()
+        public void TestTriggerStartStop()
         {
-            RunPowerShellTest("Test-StartTriggerThrowsWithoutPipeline");
+            RunPowerShellTest("Test-StartStopTrigger");
         }
 
         [Fact]
@@ -43,13 +43,6 @@ namespace Microsoft.Azure.Commands.DataFactoryV2.Test
         public void TestTriggerRun()
         {
             RunPowerShellTest("Test-TriggerRun");
-        }
-
-        [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestTriggerWithResourceId()
-        {
-            RunPowerShellTest("Test-TriggerWithResourceId");
         }
     }
 }

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.HDInsight.dll-Help.xml
-Module Name: AzureRM.HDInsight
 ms.assetid: 2C06626F-E5A9-48C2-AEA2-B448AD254C2E
 online version: 
 schema: 2.0.0
@@ -19,8 +18,7 @@ New-AzureRmHDInsightClusterConfig [-DefaultStorageAccountName <String>] [-Defaul
  [-HiveMetastore <AzureHDInsightMetastore>] [-HeadNodeSize <String>] [-WorkerNodeSize <String>]
  [-EdgeNodeSize <String>] [-ZookeeperNodeSize <String>] [-ClusterType <String>] [-ClusterTier <Tier>]
  [-ObjectId <Guid>] [-CertificateFileContents <Byte[]>] [-CertificateFilePath <String>]
- [-CertificatePassword <String>] [-AadTenantId <Guid>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-CertificatePassword <String>] [-AadTenantId <Guid>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -167,21 +165,6 @@ The acceptable values for this parameter are:
 Type: String
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named

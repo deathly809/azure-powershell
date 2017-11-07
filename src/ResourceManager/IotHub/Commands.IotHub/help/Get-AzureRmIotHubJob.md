@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.IotHub.dll-Help.xml
-Module Name: AzureRM.IotHub
 online version: 
 schema: 2.0.0
 ---
@@ -13,8 +12,7 @@ Gets the information about an IotHub job.
 ## SYNTAX
 
 ```
-Get-AzureRmIotHubJob [-ResourceGroupName] <String> [-Name] <String> [[-JobId] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmIotHubJob [-ResourceGroupName] <String> [-Name] <String> [[-JobId] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,21 +37,6 @@ PS C:\> Get-AzureRmIotHubJob -ResourceGroupName "myresourcegroup" -Name "myiothu
 Gets information about the job with the identifier "3630fc31-4caa-43e8-a232-ea0577221cb2" for the IotHub named "myiothub"
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -JobId
 The Job Identifier. 

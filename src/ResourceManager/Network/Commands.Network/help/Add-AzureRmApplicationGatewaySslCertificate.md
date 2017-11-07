@@ -15,8 +15,7 @@ Adds an SSL certificate to an application gateway.
 
 ```
 Add-AzureRmApplicationGatewaySslCertificate -ApplicationGateway <PSApplicationGateway> -Name <String>
- -CertificateFile <String> -Password <SecureString> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -CertificateFile <String> -Password <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,9 +25,8 @@ The **Add-AzureRmApplicationGatewaySslCertificate** cmdlet adds an SSL certifica
 
 ### Example 1: Add an SSL certificate to an application gateway.
 ```
-PS C:\> $AppGW = Get-AzureRmApplicationGateway -Name "ApplicationGateway01" -ResourceGroupName "ResourceGroup01"
-PS C:\> $password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
-PS C:\> $AppGW = Add-AzureRmApplicationGatewaySslCertificate -ApplicationGateway $AppGW -Name "Cert01" -CertificateFile "D:\cert01.pfx" -Password $password
+PS C:\>$AppGW = Get-AzureRmApplicationGateway -Name "ApplicationGateway01" -ResourceGroupName "ResourceGroup01"
+PS C:\> $AppGW = Add-AzureRmApplicationGatewaySslCertificate -ApplicationGateway $AppGW -Name "Cert01" -CertificateFile "D:\cert01.pfx" -Password "Password01"
 ```
 
 This command gets an application gateway named ApplicationGateway01 and then adds an SSL certificate named Cert01 to it.
@@ -99,7 +97,7 @@ Accept wildcard characters: False
 Specifies the password of the SSL certificate that this cmdlet adds.
 
 ```yaml
-Type: SecureString
+Type: String
 Parameter Sets: (All)
 Aliases: 
 

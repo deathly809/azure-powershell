@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: A837077C-0A79-431C-93D2-799B2134EE69
 online version: 
 schema: 2.0.0
@@ -13,22 +12,19 @@ Gets alert rules.
 
 ## SYNTAX
 
-### GetByResourceGroup
+### Parameters for Get-AzureRmAlertRule cmdlet
 ```
-Get-AzureRmAlertRule -ResourceGroup <String> [-DetailedOutput] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
-```
-
-### GetByName
-```
-Get-AzureRmAlertRule -ResourceGroup <String> -Name <String> [-DetailedOutput]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmAlertRule -ResourceGroup <String> [-DetailedOutput] [<CommonParameters>]
 ```
 
-### GetByResourceUri
+### Parameters for Get-AzureRmAlertRule cmdlet using name
 ```
-Get-AzureRmAlertRule -ResourceGroup <String> -TargetResourceId <String> [-DetailedOutput]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmAlertRule -ResourceGroup <String> -Name <String> [-DetailedOutput] [<CommonParameters>]
+```
+
+### Parameters for Get-AzureRmAlertRule cmdlet using target resource uri
+```
+Get-AzureRmAlertRule -ResourceGroup <String> -TargetResourceId <String> [-DetailedOutput] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,21 +58,6 @@ The *DetailedOutput* parameter is specified, so the output is detailed.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DetailedOutput
 Displays full details in the output.
 
@@ -97,7 +78,7 @@ Specifies the name of the alert rule to get.
 
 ```yaml
 Type: String
-Parameter Sets: GetByName
+Parameter Sets: Parameters for Get-AzureRmAlertRule cmdlet using name
 Aliases: 
 
 Required: True
@@ -127,7 +108,7 @@ Specifies the ID of the target resource.
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceUri
+Parameter Sets: Parameters for Get-AzureRmAlertRule cmdlet using target resource uri
 Aliases: 
 
 Required: True

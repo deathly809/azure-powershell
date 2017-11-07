@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 612D343A-89BA-491C-B20B-147715A2EF4F
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Removes an Azure Site Recovery Fabric.
 ## SYNTAX
 
 ```
-Remove-AzureRmSiteRecoveryFabric -Fabric <ASRFabric> [-Force] [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmSiteRecoveryFabric -Fabric <ASRFabric> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,21 +22,6 @@ The **Remove-AzureRmSiteRecoveryFabric** cmdlet removes an Azure Site Recovery F
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fabric
 Specifies the Azure Site Recovery Fabric object.
@@ -108,6 +91,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRFabric
+
 Parameter 'Fabric' accepts value of type 'ASRFabric' from the pipeline
 
 ## OUTPUTS

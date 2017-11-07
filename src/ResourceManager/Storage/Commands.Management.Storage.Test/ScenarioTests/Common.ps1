@@ -14,30 +14,11 @@
 
 <#
 .SYNOPSIS
-Gets test mode - 'Record' or 'Playback'
-#>
-function Get-StorageTestMode {
-    try {
-        $testMode = [Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::Mode;
-        $testMode = $testMode.ToString();
-    } catch {
-        if ($PSItem.Exception.Message -like '*Unable to find type*') {
-            $testMode = 'Record';
-        } else {
-            throw;
-        }
-    }
-
-    return $testMode
-}
-
-<#
-.SYNOPSIS
 Cleans the created resource groups
 #>
 function Clean-ResourceGroup($rgname)
 {
-    if ((Get-StorageTestMode) -ne 'Playback') {
+    if ([Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::Mode -ne [Microsoft.Azure.Test.HttpRecorder.HttpRecorderMode]::Playback) {
         Remove-AzureRmResourceGroup -Name $rgname -Force
     }
 }
@@ -133,13 +114,16 @@ function Get-StorageManagementTestResourceName
         }
     }
     
+    $oldErrorActionPreferenceValue = $ErrorActionPreference;
+    $ErrorActionPreference = "SilentlyContinue";
+    
     try
     {
         $assetName = [Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::GetAssetName($testName, "pstestrg");
     }
     catch
     {
-        if ($PSItem.Exception.Message -like '*Unable to find type*')
+        if (($Error.Count -gt 0) -and ($Error[0].Exception.Message -like '*Unable to find type*'))
         {
             $assetName = Get-RandomItemName;
         }
@@ -147,6 +131,10 @@ function Get-StorageManagementTestResourceName
         {
             throw;
         }
+    }
+    finally
+    {
+        $ErrorActionPreference = $oldErrorActionPreferenceValue;
     }
 
     return $assetName

@@ -1,8 +1,7 @@
 ---
 external help file: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.dll-Help.xml
-Module Name: AzureRM.ApiManagement
 ms.assetid: 894297BF-2771-4871-9E4C-8684364DAC4B
-online version: 
+online version:
 schema: 2.0.0
 ---
 
@@ -12,38 +11,33 @@ schema: 2.0.0
 
 ## SYNTAX
 
-### GetAllProperties (Default)
+### Get all properties (Default)
 ```
-Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
-```
-
-### GetByPropertyId
-```
-Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [-PropertyId <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [<CommonParameters>]
 ```
 
-### GetByName
+### Get by property ID
 ```
-Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [-Name <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [-PropertyId <String>] [<CommonParameters>]
 ```
 
-### GetByTag
+### Find properties containing Name
 ```
-Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [-Tag <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [-Name <String>] [<CommonParameters>]
+```
+
+### Find properties by Tag
+```
+Get-AzureRmApiManagementProperty -Context <PsApiManagementContext> [-Tag <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
 ## EXAMPLES
 
-### Example 1: Get Property by name
+### 1:
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementProperty -Context $apimContext -Name "sql-connectionstring"
+PS C:\> Get-AzureRmApiManagementProperty -Context $Context -Name $PropertyName
 ```
 
 ## PARAMETERS
@@ -52,7 +46,7 @@ PS C:\>Get-AzureRmApiManagementProperty -Context $apimContext -Name "sql-connect
 ```yaml
 Type: PsApiManagementContext
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -61,26 +55,11 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 ```yaml
 Type: String
-Parameter Sets: GetByName
-Aliases: 
+Parameter Sets: Find properties containing Name
+Aliases:
 
 Required: False
 Position: Named
@@ -92,8 +71,8 @@ Accept wildcard characters: False
 ### -PropertyId
 ```yaml
 Type: String
-Parameter Sets: GetByPropertyId
-Aliases: 
+Parameter Sets: Get by property ID
+Aliases:
 
 Required: False
 Position: Named
@@ -109,8 +88,8 @@ Key-value pairs in the form of a hash table. For example:
 
 ```yaml
 Type: String
-Parameter Sets: GetByTag
-Aliases: 
+Parameter Sets: Find properties by Tag
+Aliases:
 
 Required: False
 Position: Named
@@ -133,4 +112,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

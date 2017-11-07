@@ -12,16 +12,16 @@ Removes a policy set definition.
 
 ## SYNTAX
 
-### RemoveByNameAndResourceGroup (Default)
+### The policy set definition name parameter set. (Default)
 ```
-Remove-AzureRmPolicySetDefinition -Name <String> [-Force] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmPolicySetDefinition -Name <String> [-Force] [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
-### RemoveById
+### The policy set definition Id parameter set.
 ```
-Remove-AzureRmPolicySetDefinition -Id <String> [-Force] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmPolicySetDefinition -Id <String> [-Force] [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,21 +58,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Force
 Do not ask for confirmation.
 
@@ -95,7 +80,7 @@ e.g.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveById
+Parameter Sets: The policy set definition Id parameter set.
 Aliases: ResourceId
 
 Required: True
@@ -110,7 +95,7 @@ The policy set definition name.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByNameAndResourceGroup
+Parameter Sets: The policy set definition name parameter set.
 Aliases: 
 
 Required: True

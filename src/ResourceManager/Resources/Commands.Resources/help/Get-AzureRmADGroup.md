@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Resources.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 85DDA491-7A7D-4217-B0E3-72CDC3787889
 online version: 
 schema: 2.0.0
@@ -15,17 +14,17 @@ Filters active directory groups.
 
 ### EmptyParameterSet (Default)
 ```
-Get-AzureRmADGroup [-ObjectId <Guid>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmADGroup [-ObjectId <Guid>] [<CommonParameters>]
 ```
 
 ### SearchStringParameterSet
 ```
-Get-AzureRmADGroup -SearchString <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmADGroup -SearchString <String> [<CommonParameters>]
 ```
 
 ### ObjectIdParameterSet
 ```
-Get-AzureRmADGroup -ObjectId <Guid> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmADGroup -ObjectId <Guid> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,21 +54,6 @@ PS C:\> Get-AzureRmADGroup
 Gets all AD groups
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -ObjectId
 Object id of the group.

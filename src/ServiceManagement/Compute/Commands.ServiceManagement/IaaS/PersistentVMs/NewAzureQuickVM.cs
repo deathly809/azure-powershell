@@ -295,9 +295,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
                         null,
                         operationDescription,
                         () => this.ComputeClient.ServiceCertificates.Create(this.ServiceName, parameters),
-                        (s, r) => ContextFactory(r, s,
-                                    ServiceManagementProfile.Mapper.Map<OperationStatusResponse, ManagementOperationContext>,
-                                    ServiceManagementProfile.Mapper.Map));
+                        (s, r) => ContextFactory<OperationStatusResponse, ManagementOperationContext>(r, s));
                 }
 
                 if (X509Certificates != null)
@@ -315,9 +313,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
                             null,
                             operationDescription,
                             () => this.ComputeClient.ServiceCertificates.Create(this.ServiceName, current.CertificateFile),
-                            (s, r) => ContextFactory(r, s,
-                                        ServiceManagementProfile.Mapper.Map<OperationStatusResponse, ManagementOperationContext>,
-                                        ServiceManagementProfile.Mapper.Map));
+                            (s, r) => ContextFactory<OperationStatusResponse, ManagementOperationContext>(r, s));
                     }
                 }
             }
@@ -407,7 +403,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
                 RoleSize                    = InstanceSize,
                 RoleType                    = "PersistentVMRole",
                 Label                       = ServiceName,
-                OSVirtualHardDisk           = _isVMImage ? null : ServiceManagementProfile.Mapper.Map<Management.Compute.Models.OSVirtualHardDisk>(
+                OSVirtualHardDisk           = _isVMImage ? null : Mapper.Map<Management.Compute.Models.OSVirtualHardDisk>(
                                               new OSVirtualHardDisk
                                               {
                                                   DiskName        = null,
@@ -418,7 +414,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
                 VMImageName                 = _isVMImage ? this.ImageName : null,
                 MediaLocation               = _isVMImage && !string.IsNullOrEmpty(this.MediaLocation) ? new Uri(this.MediaLocation) : null,
                 ProvisionGuestAgent         = !this.DisableGuestAgent,
-                ResourceExtensionReferences = this.DisableGuestAgent ? null : ServiceManagementProfile.Mapper.Map<List<Management.Compute.Models.ResourceExtensionReference>>(
+                ResourceExtensionReferences = this.DisableGuestAgent ? null : Mapper.Map<List<Management.Compute.Models.ResourceExtensionReference>>(
                     new VirtualMachineExtensionImageFactory(this.ComputeClient).MakeList(
                         VirtualMachineBGInfoExtensionCmdletBase.ExtensionDefaultPublisher,
                         VirtualMachineBGInfoExtensionCmdletBase.ExtensionDefaultName,

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 01AE09A8-B779-475A-9E86-776E0774E89E
 online version: 
 schema: 2.0.0
@@ -15,31 +14,29 @@ Gets information about Site Recovery network mappings for the current vault.
 
 ### Default (Default)
 ```
-Get-AzureRmSiteRecoveryNetworkMapping [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryNetworkMapping [<CommonParameters>]
 ```
 
 ### EnterpriseToEnterprise
 ```
 Get-AzureRmSiteRecoveryNetworkMapping -PrimaryFabric <ASRFabric> -RecoveryFabric <ASRFabric>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### EnterpriseToAzure
 ```
-Get-AzureRmSiteRecoveryNetworkMapping -PrimaryFabric <ASRFabric> [-Azure]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryNetworkMapping -PrimaryFabric <ASRFabric> [-Azure] [<CommonParameters>]
 ```
 
 ### EnterpriseToAzureLegacy
 ```
-Get-AzureRmSiteRecoveryNetworkMapping [-Azure] -PrimaryServer <ASRServer>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryNetworkMapping [-Azure] -PrimaryServer <ASRServer> [<CommonParameters>]
 ```
 
 ### EnterpriseToEnterpriseLegacy
 ```
 Get-AzureRmSiteRecoveryNetworkMapping -PrimaryServer <ASRServer> -RecoveryServer <ASRServer>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,21 +55,6 @@ Parameter Sets: EnterpriseToAzure, EnterpriseToAzureLegacy
 Aliases: 
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -137,9 +119,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRFabric
+
 Parameter 'PrimaryFabric' accepts value of type 'ASRFabric' from the pipeline
 
 ### ASRServer
+
 Parameter 'PrimaryServer' accepts value of type 'ASRServer' from the pipeline
 
 ## OUTPUTS

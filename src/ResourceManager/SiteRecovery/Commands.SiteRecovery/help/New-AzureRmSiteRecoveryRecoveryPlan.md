@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 1166EC21-5626-41F6-9CCE-2169CF202575
 online version: 
 schema: 2.0.0
@@ -16,40 +15,37 @@ Creates a site recovery plan in Site Recovery.
 ### EnterpriseToEnterprise (Default)
 ```
 New-AzureRmSiteRecoveryRecoveryPlan -Name <String> -PrimaryFabric <ASRFabric> -RecoveryFabric <ASRFabric>
- -ReplicationProtectedItem <ASRReplicationProtectedItem[]> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -ReplicationProtectedItem <ASRReplicationProtectedItem[]> [<CommonParameters>]
 ```
 
 ### EnterpriseToAzure
 ```
 New-AzureRmSiteRecoveryRecoveryPlan -Name <String> -PrimaryFabric <ASRFabric> [-Azure]
  -FailoverDeploymentModel <String> -ReplicationProtectedItem <ASRReplicationProtectedItem[]>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### EnterpriseToEnterpriseLegacy
 ```
 New-AzureRmSiteRecoveryRecoveryPlan -Name <String> -PrimaryServer <ASRServer> -RecoveryServer <ASRServer>
- -ProtectionEntityList <ASRProtectionEntity[]> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -ProtectionEntityList <ASRProtectionEntity[]> [<CommonParameters>]
 ```
 
 ### EnterpriseToAzureLegacy
 ```
 New-AzureRmSiteRecoveryRecoveryPlan -Name <String> [-Azure] -FailoverDeploymentModel <String>
- -PrimaryServer <ASRServer> -ProtectionEntityList <ASRProtectionEntity[]>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -PrimaryServer <ASRServer> -ProtectionEntityList <ASRProtectionEntity[]> [<CommonParameters>]
 ```
 
 ### HyperVSiteToAzureLegacy
 ```
 New-AzureRmSiteRecoveryRecoveryPlan -Name <String> -FailoverDeploymentModel <String> -PrimarySite <ASRSite>
- -ProtectionEntityList <ASRProtectionEntity[]> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -ProtectionEntityList <ASRProtectionEntity[]> [<CommonParameters>]
 ```
 
 ### ByRPFile
 ```
-New-AzureRmSiteRecoveryRecoveryPlan -Path <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+New-AzureRmSiteRecoveryRecoveryPlan -Path <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,21 +71,6 @@ Parameter Sets: EnterpriseToAzure, EnterpriseToAzureLegacy
 Aliases: 
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -235,9 +216,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRProtectionEntity[]
+
 Parameter 'ProtectionEntityList' accepts value of type 'ASRProtectionEntity[]' from the pipeline
 
 ### ASRReplicationProtectedItem[]
+
 Parameter 'ReplicationProtectedItem' accepts value of type 'ASRReplicationProtectedItem[]' from the pipeline
 
 ## OUTPUTS

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.DataLakeAnalytics.dll-Help.xml
-Module Name: AzureRM.DataLakeAnalytics
 ms.assetid: A0293D80-5935-4D2C-AF11-2837FEC95760
 online version: 
 schema: 2.0.0
@@ -13,18 +12,17 @@ Gets a Data Lake Analytics job.
 
 ## SYNTAX
 
-### GetAllInResourceGroupAndAccount (Default)
+### All In Resource Group and Account (Default)
 ```
 Get-AzureRmDataLakeAnalyticsJob [-Account] <String> [[-Name] <String>] [[-Submitter] <String>]
  [[-SubmittedAfter] <DateTimeOffset>] [[-SubmittedBefore] <DateTimeOffset>] [[-State] <JobState[]>]
- [[-Result] <JobResult[]>] [-Top <Int32>] [-PipelineId <Guid>] [-RecurrenceId <Guid>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [[-Result] <JobResult[]>] [-Top <Int32>] [-PipelineId <Guid>] [-RecurrenceId <Guid>] [<CommonParameters>]
 ```
 
-### GetBySpecificJobInformation
+### Specific JobInformation
 ```
 Get-AzureRmDataLakeAnalyticsJob [-Account] <String> [-JobId] <Guid> [[-Include] <ExtendedJobData>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,21 +62,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Include
 Specifies options that indicate the type of additional information to retrieve about the job.
 The acceptable values for this parameter are:
@@ -90,7 +73,7 @@ The acceptable values for this parameter are:
 
 ```yaml
 Type: ExtendedJobData
-Parameter Sets: GetBySpecificJobInformation
+Parameter Sets: Specific JobInformation
 Aliases: 
 Accepted values: None, All, DebugInfo, Statistics
 
@@ -106,7 +89,7 @@ Specifies the ID of the job to get.
 
 ```yaml
 Type: Guid
-Parameter Sets: GetBySpecificJobInformation
+Parameter Sets: Specific JobInformation
 Aliases: 
 
 Required: True
@@ -127,7 +110,7 @@ The acceptable values for this parameter are:
 
 ```yaml
 Type: String
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 
 Required: False
@@ -142,7 +125,7 @@ An optional ID that indicates only jobs part of the specified pipeline should be
 
 ```yaml
 Type: Guid
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 
 Required: False
@@ -157,7 +140,7 @@ An optional ID that indicates only jobs part of the specified recurrence should 
 
 ```yaml
 Type: Guid
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 
 Required: False
@@ -178,7 +161,7 @@ The acceptable values for this parameter are:
 
 ```yaml
 Type: JobResult[]
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 Accepted values: None, Succeeded, Cancelled, Failed
 
@@ -205,7 +188,7 @@ The acceptable values for this parameter are:
 
 ```yaml
 Type: JobState[]
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 Accepted values: Accepted, Compiling, Ended, New, Queued, Running, Scheduling, Starting, Paused, WaitingForCapacity
 
@@ -222,7 +205,7 @@ Use this parameter to filter the job list result to jobs submitted after the spe
 
 ```yaml
 Type: DateTimeOffset
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 
 Required: False
@@ -238,7 +221,7 @@ Use this parameter to filter the job list result to jobs submitted before the sp
 
 ```yaml
 Type: DateTimeOffset
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 
 Required: False
@@ -254,7 +237,7 @@ Use this parameter to filter the job list results to jobs submitted by a specifi
 
 ```yaml
 Type: String
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 
 Required: False
@@ -269,7 +252,7 @@ An optional value which indicates the number of jobs to return. Default value is
 
 ```yaml
 Type: Int32
-Parameter Sets: GetAllInResourceGroupAndAccount
+Parameter Sets: All In Resource Group and Account
 Aliases: 
 
 Required: False
@@ -285,6 +268,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Guid
+
 Parameter 'JobId' accepts value of type 'Guid' from the pipeline
 
 ## OUTPUTS
@@ -292,7 +276,7 @@ Parameter 'JobId' accepts value of type 'Guid' from the pipeline
 ### JobInformation
 The specified job information details
 
-### List<PSJobInformationBasic>
+### List<JobInformation>
 The list of jobs in the specified Data Lake Analytics account.
 
 ## NOTES

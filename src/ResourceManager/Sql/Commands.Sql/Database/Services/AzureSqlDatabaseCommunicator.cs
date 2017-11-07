@@ -21,7 +21,6 @@ using Microsoft.Azure.Management.Sql;
 using Microsoft.Azure.Management.Sql.LegacySdk;
 using Microsoft.Azure.Management.Sql.LegacySdk.Models;
 using Microsoft.WindowsAzure.Management.Storage;
-using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Azure.Commands.Sql.Database.Services
@@ -69,9 +68,9 @@ namespace Microsoft.Azure.Commands.Sql.Database.Services
         /// <summary>
         /// Gets the Azure Sql Database
         /// </summary>
-        public Management.Sql.Models.Database Get(string resourceGroupName, string serverName, string databaseName)
+        public Management.Sql.LegacySdk.Models.Database Get(string resourceGroupName, string serverName, string databaseName)
         {
-            return GetCurrentSqlClient().Databases.Get(resourceGroupName, serverName, databaseName);
+            return GetLegacySqlClient().Databases.Get(resourceGroupName, serverName, databaseName).Database;
         }
 
         /// <summary>
@@ -85,9 +84,9 @@ namespace Microsoft.Azure.Commands.Sql.Database.Services
         /// <summary>
         /// Lists Azure Sql Databases
         /// </summary>
-        public IList<Management.Sql.Models.Database> List(string resourceGroupName, string serverName)
+        public IList<Management.Sql.LegacySdk.Models.Database> List(string resourceGroupName, string serverName)
         {
-            return new List<Management.Sql.Models.Database>(GetCurrentSqlClient().Databases.ListByServer(resourceGroupName, serverName));
+            return GetLegacySqlClient().Databases.List(resourceGroupName, serverName).Databases;
         }
 
         /// <summary>
@@ -112,22 +111,6 @@ namespace Microsoft.Azure.Commands.Sql.Database.Services
         public Management.Sql.Models.Database CreateOrUpdate(string resourceGroupName, string serverName, string databaseName, Management.Sql.Models.Database parameters)
         {
             return GetCurrentSqlClient().Databases.CreateOrUpdate(resourceGroupName, serverName, databaseName, parameters);
-        }
-
-        /// <summary>
-        /// Lists database activities
-        /// </summary>
-        public Microsoft.Rest.Azure.IPage<Management.Sql.Models.DatabaseOperation> ListOperations(string resourceGroupName, string serverName, string databaseName)
-        {
-            return GetCurrentSqlClient().DatabaseOperations.ListByDatabase(resourceGroupName, serverName, databaseName);
-        }
-
-        /// <summary>
-        /// Cancels database activity
-        /// </summary>
-        public void CancelOperation(string resourceGroupName, string serverName, string databaseName, Guid operationId)
-        {
-            GetCurrentSqlClient().DatabaseOperations.Cancel(resourceGroupName, serverName, databaseName, operationId);
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.DataLakeStore.dll-Help.xml
-Module Name: AzureRM.DataLakeStore
 ms.assetid: 0671D833-8B3A-4480-A576-92F1A9E8CE92
 online version: 
 schema: 2.0.0
@@ -13,18 +12,17 @@ Modifies an entry in the ACL of a file or folder in Data Lake Store.
 
 ## SYNTAX
 
-### SetByACLObject (Default)
+### Set ACL Entries using ACL object (Default)
 ```
 Set-AzureRmDataLakeStoreItemAclEntry [-Account] <String> [-Path] <DataLakeStorePathInstance>
- [-Acl] <DataLakeStoreItemAce[]> [-PassThru] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-Acl] <DataLakeStoreItemAce[]> [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### SetSpecificACE
+### Set specific ACE
 ```
 Set-AzureRmDataLakeStoreItemAclEntry [-Account] <String> [-Path] <DataLakeStorePathInstance>
- [-AceType] <AceType> [[-Id] <Guid>] [-Permissions] <Permission> [-Default] [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-AceType] <AceType> [[-Id] <Guid>] [-Permissions] <Permission> [-Default] [-PassThru] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,7 +65,7 @@ The acceptable values for this parameter are:
 
 ```yaml
 Type: AceType
-Parameter Sets: SetSpecificACE
+Parameter Sets: Set specific ACE
 Aliases: 
 Accepted values: User, Group, Mask, Other
 
@@ -83,7 +81,7 @@ Specifies the ACL object that contains the entries to modify.
 
 ```yaml
 Type: DataLakeStoreItemAce[]
-Parameter Sets: SetByACLObject
+Parameter Sets: Set ACL Entries using ACL object
 Aliases: 
 
 Required: True
@@ -98,7 +96,7 @@ Indicates that this operation modifies the default ACE from the specified ACL.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: SetSpecificACE
+Parameter Sets: Set specific ACE
 Aliases: 
 
 Required: False
@@ -108,27 +106,12 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Id
 Specifies the object ID of the AzureActive Directory user, group, or service principal for which to modify an ACE.
 
 ```yaml
 Type: Guid
-Parameter Sets: SetSpecificACE
+Parameter Sets: Set specific ACE
 Aliases: 
 
 Required: False
@@ -183,7 +166,7 @@ The acceptable values for this parameter are:
 
 ```yaml
 Type: Permission
-Parameter Sets: SetSpecificACE
+Parameter Sets: Set specific ACE
 Aliases: 
 
 Required: True
@@ -230,6 +213,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### DataLakeStoreItemAce[]
+
 Parameter 'Acl' accepts value of type 'DataLakeStoreItemAce[]' from the pipeline
 
 ## OUTPUTS

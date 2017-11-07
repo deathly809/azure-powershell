@@ -64,7 +64,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.PlatformImageReposit
         protected override void ProcessRecord()
         {
             ServiceManagementPlatformImageRepositoryProfile.Initialize();
-            WriteObject(ServiceManagementPlatformImageRepositoryProfile.Mapper.Map<ExtensionCertificateConfig>(this));
+            WriteObject(Mapper.Map<ExtensionCertificateConfig>(this));
         }
     }
 }

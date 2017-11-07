@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.HDInsight.dll-Help.xml
-Module Name: AzureRM.HDInsight
 ms.assetid: 2C2AF43D-18BF-4036-A355-FC27E406B18A
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Adds an Azure Storage key to a cluster configuration object.
 
 ```
 Add-AzureRmHDInsightStorage [-Config] <AzureHDInsightConfig> [-StorageAccountName] <String>
- [-StorageAccountKey] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-StorageAccountKey] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,21 +86,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -StorageAccountKey
 Specifies the storage account key for the storage account to be added to the new cluster.
 
@@ -138,6 +122,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### AzureHDInsightConfig
+
 Parameter 'Config' accepts value of type 'AzureHDInsightConfig' from the pipeline
 
 ## OUTPUTS

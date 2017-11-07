@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Sql.dll-Help.xml
-Module Name: AzureRM.Sql
 ms.assetid: DCAB75A1-B4EF-4C41-9D6B-A954B6DB0028
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Removes the threat detection policy from a server.
 
 ```
 Remove-AzureRmSqlServerThreatDetectionPolicy [-PassThru] -ServerName <String> [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,21 +32,6 @@ PS C:\> Remove-AzureRmSqlServerThreatDetectionPolicy -ResourceGroupName "Resourc
 This command removes the threat detection policy from a server named Server01.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -PassThru
 Returns an object representing the item with which you are working.

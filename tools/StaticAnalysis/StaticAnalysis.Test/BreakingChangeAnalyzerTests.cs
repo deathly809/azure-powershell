@@ -400,7 +400,7 @@ namespace StaticAnalysis.Test
                             .SingleOrDefault<int>().Equals(BreakingChangeProblemId.ValueFromPipelineByPropertyName));
         }
 
-        [Fact(Skip = "Will fix as part of breaking change tool refactor: https://github.com/Azure/azure-powershell/issues/3507")]
+        [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void AddParameterSet()
         {

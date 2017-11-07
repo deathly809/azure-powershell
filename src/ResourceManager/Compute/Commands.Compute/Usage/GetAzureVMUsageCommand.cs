@@ -15,7 +15,6 @@
 using AutoMapper;
 using Microsoft.Azure.Commands.Compute.Common;
 using Microsoft.Azure.Commands.Compute.Models;
-using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute.Models;
 using Microsoft.Rest.Azure;
 using System.Collections.Generic;
@@ -32,7 +31,6 @@ namespace Microsoft.Azure.Commands.Compute
            Position = 0,
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "The location name.")]
-        [LocationCompleter("Microsoft.Compute/locations/usages")]
         [ValidateNotNullOrEmpty]
         public string Location { get; set; }
 
@@ -47,8 +45,8 @@ namespace Microsoft.Azure.Commands.Compute
                 var psResultList = new List<PSUsage>();
                 foreach (var item in result.Body)
                 {
-                    var psItem = ComputeAutoMapperProfile.Mapper.Map<PSUsage>(result);
-                    psItem = ComputeAutoMapperProfile.Mapper.Map(item, psItem);
+                    var psItem = Mapper.Map<PSUsage>(result);
+                    psItem = Mapper.Map(item, psItem);
                     psResultList.Add(psItem);
                 }
 

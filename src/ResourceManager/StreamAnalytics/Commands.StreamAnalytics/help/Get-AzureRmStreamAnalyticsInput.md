@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.StreamAnalytics.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: F371FD62-D138-4610-84A1-93EDC42D6AAC
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Gets Stream Analytics job inputs.
 
 ```
 Get-AzureRmStreamAnalyticsInput [-JobName] <String> [[-Name] <String>] [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,21 +37,6 @@ PS C:\>Get-AzureRmStreamAnalyticsInput -ResourceGroupName "StreamAnalytics-Defau
 This command returns information about the input named EntryStream defined on the job StreamingJob.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -JobName
 Specifies the name of the Azure Stream Analytics job to which the Azure Stream Analytics input belongs.

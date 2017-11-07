@@ -36,7 +36,7 @@ namespace Microsoft.Azure.Commands.Compute
                 {
                     foreach (var t in c)
                     {
-                        s.Add(ComputeAutoMapperProfile.Mapper.Map<T>(t));
+                        s.Add(Mapper.Map<T>(t));
                     }
                 }
             });
@@ -47,34 +47,14 @@ namespace Microsoft.Azure.Commands.Compute
 
     public class ComputeAutoMapperProfile : AutoMapper.Profile
     {
-        private static IMapper _mapper = null;
-
-        private static readonly object _lock = new object();
-
-        public static IMapper Mapper
-        {
-            get
-            {
-                lock(_lock)
-                {
-                    if (_mapper == null)
-                    {
-                        Initialize();
-                    }
-
-                    return _mapper;
-                }
-            }
-        }
-
         public override string ProfileName
         {
             get { return "ComputeAutoMapperProfile"; }
         }
 
-        private static void Initialize()
+        public static void Initialize()
         {
-            var config = new MapperConfiguration(cfg => {
+            Mapper.Initialize(cfg => {
                 cfg.AddProfile<ComputeAutoMapperProfile>();
 
                 // => PSComputeLongrunningOperation
@@ -240,7 +220,6 @@ namespace Microsoft.Azure.Commands.Compute
                 cfg.CreateMap<TO.PSVmssVMDiskEncryptionStatusContext, TO.PSVmssVMDiskEncryptionStatusContextList>();
             });
 
-            _mapper = config.CreateMapper();
         }
     }
 }

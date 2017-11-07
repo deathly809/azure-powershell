@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceBus.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -13,8 +12,8 @@ Removes the subscription to a topic from the specified Service Bus namespace.
 ## SYNTAX
 
 ```
-Remove-AzureRmServiceBusSubscription [-ResourceGroupName] <String> [-Namespace] <String> [-Topic] <String>
- [-Name] <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmServiceBusSubscription [-ResourceGroup] <String> [-NamespaceName] <String> [-TopicName] <String>
+ [-SubscriptionName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,43 +30,13 @@ Removes the subscription `SB-TopicSubscription-Example1` to the topic `SB-Topic_
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Name
-Subscription Name.
+### -NamespaceName
+The Service Bus namespace name.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: SubscriptionName
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Namespace
-Namespace Name.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: NamespaceName
+Aliases: 
 
 Required: True
 Position: 1
@@ -76,13 +45,13 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ResourceGroupName
-The name of the resource group
+### -ResourceGroup
+The name of the resource group.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: ResourceGroup
+Aliases: 
 
 Required: True
 Position: 0
@@ -91,13 +60,28 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Topic
-Topic Name.
+### -SubscriptionName
+The subscription name.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: TopicName
+Aliases: 
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -TopicName
+The Service Bus topic name.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
 
 Required: True
 Position: 1

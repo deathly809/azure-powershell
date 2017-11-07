@@ -233,7 +233,7 @@ namespace Microsoft.Azure.Commands.DataLakeAnalytics.Models
             return _accountClient.Account.Get(resourceGroupName, accountName);
         }
 
-        public List<DataLakeAnalyticsAccountBasic> ListAccounts(string resourceGroupName, string filter, int? top, int? skip)
+        public List<DataLakeAnalyticsAccount> ListAccounts(string resourceGroupName, string filter, int? top, int? skip)
         {
             var parameters = new ODataQuery<DataLakeAnalyticsAccount>
             {
@@ -242,7 +242,7 @@ namespace Microsoft.Azure.Commands.DataLakeAnalytics.Models
                 Skip = skip
             };
 
-            var accountList = new List<DataLakeAnalyticsAccountBasic>();
+            var accountList = new List<DataLakeAnalyticsAccount>();
             var response = string.IsNullOrEmpty(resourceGroupName)
                 ? _accountClient.Account.List(parameters)
                 : _accountClient.Account.ListByResourceGroup(resourceGroupName, parameters);
@@ -406,7 +406,7 @@ namespace Microsoft.Azure.Commands.DataLakeAnalytics.Models
             return toReturn;
         }
 
-        private IPage<DataLakeAnalyticsAccountBasic> ListAccountsWithNextLink(string nextLink)
+        private IPage<DataLakeAnalyticsAccount> ListAccountsWithNextLink(string nextLink)
         {
             return _accountClient.Account.ListNext(nextLink);
         }
@@ -1237,14 +1237,17 @@ namespace Microsoft.Azure.Commands.DataLakeAnalytics.Models
             return _jobClient.Job.Get(accountName, jobId);
         }
 
-        public JobInformation SubmitJob(string accountName, Guid jobId, CreateJobParameters jobToSubmit)
+        public JobInformation SubmitJob(string accountName, JobInformation jobToSubmit)
         {
-            return _jobClient.Job.Create(accountName, jobId, jobToSubmit);
+            return
+                _jobClient.Job.Create(accountName, jobToSubmit.JobId.GetValueOrDefault(),
+                    jobToSubmit);
         }
 
-        public JobInformation BuildJob(string accountName, BuildJobParameters jobToBuild)
+        public JobInformation BuildJob(string accountName, JobInformation jobToBuild)
         {
-            return _jobClient.Job.Build(accountName, jobToBuild);
+            return
+                _jobClient.Job.Build(accountName, jobToBuild);
         }
 
         public void CancelJob(string accountName, Guid jobId)
@@ -1262,7 +1265,7 @@ namespace Microsoft.Azure.Commands.DataLakeAnalytics.Models
             return _jobClient.Job.GetStatistics(accountName, jobId);
         }
 
-        public List<JobInformationBasic> ListJobs(string accountName, string filter, int? top,
+        public List<JobInformation> ListJobs(string accountName, string filter, int? top,
             int? skip, string orderBy, out bool moreJobs)
         {
             moreJobs = false;
@@ -1279,7 +1282,7 @@ namespace Microsoft.Azure.Commands.DataLakeAnalytics.Models
                 OrderBy = orderBy
             };
 
-            var jobList = new List<JobInformationBasic>();
+            var jobList = new List<JobInformation>();
             var response = _jobClient.Job.List(accountName, parameters);
             var curCount = 0;
             jobList.AddRange(response);
@@ -1359,7 +1362,7 @@ namespace Microsoft.Azure.Commands.DataLakeAnalytics.Models
 
         #region private helpers
 
-        private IPage<JobInformationBasic> ListJobsWithNextLink(string nextLink)
+        private IPage<JobInformation> ListJobsWithNextLink(string nextLink)
         {
             return _jobClient.Job.ListNext(nextLink);
         }

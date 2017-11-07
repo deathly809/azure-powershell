@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 3B879056-5BF3-4262-8BAA-E79589149370
 online version: 
 schema: 2.0.0
@@ -15,19 +14,17 @@ Gets a recovery plan in Site Recovery.
 
 ### Default (Default)
 ```
-Get-AzureRmSiteRecoveryRecoveryPlan [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryRecoveryPlan [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Get-AzureRmSiteRecoveryRecoveryPlan -Name <String> [[-Path] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryRecoveryPlan -Name <String> [[-Path] <String>] [<CommonParameters>]
 ```
 
 ### ByFriendlyName
 ```
-Get-AzureRmSiteRecoveryRecoveryPlan -FriendlyName <String> [[-Path] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryRecoveryPlan -FriendlyName <String> [[-Path] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,21 +33,6 @@ The **Get-AzureRmSiteRecoveryRecoveryPlan** cmdlet gets a recovery plan in Azure
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -FriendlyName
 Specifies the friendly name of the recovery plan that this cmdlet gets.

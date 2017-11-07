@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Websites.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: D70A61D8-0C9A-4BDB-A546-37C32D25797C
 online version: 
 schema: 2.0.0
@@ -15,13 +14,12 @@ Starts an Azure Web App.
 
 ### S1
 ```
-Start-AzureRmWebApp [-ResourceGroupName] <String> [-Name] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Start-AzureRmWebApp [-ResourceGroupName] <String> [-Name] <String> [<CommonParameters>]
 ```
 
 ### S2
 ```
-Start-AzureRmWebApp [-WebApp] <Site> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Start-AzureRmWebApp [-WebApp] <Site> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,21 +35,6 @@ PS C:\>Start-AzureRmWebApp -ResourceGroupName "Default-Web-WestUS" -Name "Contos
 This command starts the Web App named ContosoWebApp that belongs to the resource group named Default-Web-WestUS.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 WebApp Name
@@ -104,6 +87,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Site
+
 Parameter 'WebApp' accepts value of type 'Site' from the pipeline
 
 ## OUTPUTS

@@ -12,6 +12,7 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
@@ -21,7 +22,7 @@ using Microsoft.Azure.Commands.DataFactoryV2.Models;
 namespace Microsoft.Azure.Commands.DataFactoryV2
 {
     [Cmdlet(VerbsCommon.Get, Constants.Trigger, DefaultParameterSetName = ParameterSetNames.ByFactoryName), OutputType(typeof(List<PSTrigger>), typeof(PSTrigger))]
-    public class GetAzureDataFactoryTriggerCommand : DataFactoryContextBaseGetCmdlet
+    public class GetAzureDataFactoryTriggerCommand : DataFactoryContextBaseCmdlet
     {
         [Parameter(ParameterSetName = ParameterSetNames.ByFactoryName, Position = 2, Mandatory = false, ValueFromPipelineByPropertyName = true,
             HelpMessage = Constants.HelpTriggerName)]
@@ -29,13 +30,16 @@ namespace Microsoft.Azure.Commands.DataFactoryV2
             HelpMessage = Constants.HelpTriggerName)]
         [ValidateNotNullOrEmpty]
         [Alias(Constants.TriggerName)]
-        public override string Name { get; set; }
+        public string Name { get; set; }
 
         [EnvironmentPermission(SecurityAction.Demand, Unrestricted = true)]
         public override void ExecuteCmdlet()
         {
-            ByResourceId();
-            ByFactoryObject();
+            if (ParameterSetName.Equals(ParameterSetNames.ByFactoryObject, StringComparison.OrdinalIgnoreCase))
+            {
+                DataFactoryName = DataFactory.DataFactoryName;
+                ResourceGroupName = DataFactory.ResourceGroupName;
+            }
 
             AdfEntityFilterOptions filterOptions = new AdfEntityFilterOptions()
             {

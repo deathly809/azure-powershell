@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Cdn.dll-Help.xml
-Module Name: AzureRM.Cdn
 ms.assetid: A8C6F3BC-EE93-49A4-BF7B-8420967EEB7B
 online version: 
 schema: 2.0.0
@@ -13,24 +12,24 @@ Creates a CDN endpoint.
 
 ## SYNTAX
 
-### ByFieldsParameterSet (Default)
+### Parameter Set for fields parameters (Default)
 ```
 New-AzureRmCdnEndpoint -EndpointName <String> -ProfileName <String> -ResourceGroupName <String>
  -Location <String> [-OriginHostHeader <String>] [-OriginPath <String>] [-ContentTypesToCompress <String[]>]
  [-IsCompressionEnabled <Boolean>] [-IsHttpAllowed <Boolean>] [-IsHttpsAllowed <Boolean>]
  [-QueryStringCachingBehavior <PSQueryStringCachingBehavior>] -OriginName <String> -OriginHostName <String>
  [-HttpPort <Int32>] [-HttpsPort <Int32>] [-OptimizationType <String>] [-GeoFilters <PSGeoFilter[]>]
- [-Tags <Hashtable>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Tags <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByObjectParameterSet
+### Parameter Set for object parameters
 ```
 New-AzureRmCdnEndpoint -EndpointName <String> -CdnProfile <PSProfile> [-OriginHostHeader <String>]
  [-OriginPath <String>] [-ContentTypesToCompress <String[]>] [-IsCompressionEnabled <Boolean>]
  [-IsHttpAllowed <Boolean>] [-IsHttpsAllowed <Boolean>]
  [-QueryStringCachingBehavior <PSQueryStringCachingBehavior>] -OriginName <String> -OriginHostName <String>
  [-HttpPort <Int32>] [-HttpsPort <Int32>] [-OptimizationType <String>] [-GeoFilters <PSGeoFilter[]>]
- [-Tags <Hashtable>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Tags <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,7 +49,7 @@ Specifies the CDN profile object to which the endpoint is added.
 
 ```yaml
 Type: PSProfile
-Parameter Sets: ByObjectParameterSet
+Parameter Sets: Parameter Set for object parameters
 Aliases: 
 
 Required: True
@@ -67,21 +66,6 @@ Specifies an array of content types to compress from the edge node to the client
 Type: String[]
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -200,7 +184,7 @@ Specifies the resource location of the endpoint.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -290,7 +274,7 @@ Specifies the name of the profile.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -321,7 +305,7 @@ Specifies the name of the resource group to which this endpoint belongs.
 
 ```yaml
 Type: String
-Parameter Sets: ByFieldsParameterSet
+Parameter Sets: Parameter Set for fields parameters
 Aliases: 
 
 Required: True
@@ -383,6 +367,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PSProfile
+
 Parameter 'CdnProfile' accepts value of type 'PSProfile' from the pipeline
 
 ## OUTPUTS

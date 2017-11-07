@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.DataLakeStore.dll-Help.xml
-Module Name: AzureRM.DataLakeStore
 ms.assetid: 234D579E-B62D-4D70-8D2E-22AC0D9AC513
 online version: 
 schema: 2.0.0
@@ -13,21 +12,19 @@ Gets details of a Data Lake Store account.
 
 ## SYNTAX
 
-### GetAllInSubscription (Default)
+### All In Subscription (Default)
 ```
-Get-AzureRmDataLakeStoreAccount [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetByResourceGroup
-```
-Get-AzureRmDataLakeStoreAccount [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmDataLakeStoreAccount [<CommonParameters>]
 ```
 
-### GetBySpecificAccount
+### All In Resource Group
 ```
-Get-AzureRmDataLakeStoreAccount [[-ResourceGroupName] <String>] [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmDataLakeStoreAccount [-ResourceGroupName] <String> [<CommonParameters>]
+```
+
+### Specific Account
+```
+Get-AzureRmDataLakeStoreAccount [[-ResourceGroupName] <String>] [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,27 +41,12 @@ This command gets the account named ContosoADL.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 Specifies the name of the account to get.
 
 ```yaml
 Type: String
-Parameter Sets: GetBySpecificAccount
+Parameter Sets: Specific Account
 Aliases: 
 
 Required: True
@@ -79,7 +61,7 @@ Specifies the name of the resource group that contains the Data Lake Store accou
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceGroup
+Parameter Sets: All In Resource Group
 Aliases: 
 
 Required: True
@@ -91,7 +73,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GetBySpecificAccount
+Parameter Sets: Specific Account
 Aliases: 
 
 Required: False
@@ -111,7 +93,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### PSDataLakeStoreAccount
 The specific Data Lake Store account asked for.
 
-### List<PSDataLakeStoreAccountBasic>
+### List<PSDataLakeStoreAccount>
 A list of Data Lake Store accounts in the resource group or subscription specified.
 
 ## NOTES

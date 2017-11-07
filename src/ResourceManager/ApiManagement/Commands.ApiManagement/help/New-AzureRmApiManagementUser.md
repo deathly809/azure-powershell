@@ -14,8 +14,8 @@ Registers a new user.
 
 ```
 New-AzureRmApiManagementUser -Context <PsApiManagementContext> [-UserId <String>] -FirstName <String>
- -LastName <String> -Email <String> -Password <SecureString> [-State <PsApiManagementUserState>]
- [-Note <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -LastName <String> -Email <String> -Password <String> [-State <PsApiManagementUserState>] [-Note <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,7 @@ The **New-AzureRmApiManagementUser** cmdlet registers a new user.
 
 ### Example 1: Register a new user
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>$securePassword = ConvertTo-SecureString "qwerty" -AsPlainText -Force
-PS C:\>New-AzureRmApiManagementUser -Context $apimContext -FirstName "Patti" -LastName "Fuller" -Email "Patti.Fuller@contoso.com" -Password $securePassword
+PS C:\>New-AzureRmApiManagementUser -Context $apimContext -FirstName "Patti" -LastName "Fuller" -Email "Patti.Fuller@contoso.com" -Password "qwerty"
 ```
 
 This command registers a new user named Patti Fuller.
@@ -46,21 +44,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -133,7 +116,7 @@ Specifies the user password.
 This parameter is required.
 
 ```yaml
-Type: SecureString
+Type: String
 Parameter Sets: (All)
 Aliases: 
 

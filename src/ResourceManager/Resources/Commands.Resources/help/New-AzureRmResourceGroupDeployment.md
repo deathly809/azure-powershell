@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Cmdlets.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 6E2F0D5E-E683-46F3-B48B-55C4864F3308
 online version: 
 schema: 2.0.0
@@ -13,66 +12,60 @@ Adds an Azure deployment to a resource group.
 
 ## SYNTAX
 
-### ByTemplateFileWithNoParameters (Default)
+### Deployment via template file without parameters (Default)
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
- [-DeploymentDebugLogLevel <String>] [-Force] -TemplateFile <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-DeploymentDebugLogLevel <String>] [-Force] -TemplateFile <String> [-ApiVersion <String>] [-Pre] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
-### ByTemplateFileAndParameterObject
+### Deployment via template file and template parameters object
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
  [-DeploymentDebugLogLevel <String>] [-Force] -TemplateParameterObject <Hashtable> -TemplateFile <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByTemplateUriAndParameterObject
+### Deployment via template uri and template parameters object
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
  [-DeploymentDebugLogLevel <String>] [-Force] -TemplateParameterObject <Hashtable> -TemplateUri <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByTemplateFileAndParameterFile
+### Deployment via template file and template parameters file
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
  [-DeploymentDebugLogLevel <String>] [-Force] -TemplateParameterFile <String> -TemplateFile <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByTemplateUriAndParameterFile
+### Deployment via template uri and template parameters file
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
  [-DeploymentDebugLogLevel <String>] [-Force] -TemplateParameterFile <String> -TemplateUri <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByTemplateFileAndParameterUri
+### Deployment via template file template parameters uri
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
  [-DeploymentDebugLogLevel <String>] [-Force] -TemplateParameterUri <String> -TemplateFile <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByTemplateUriAndParameterUri
+### Deployment via template uri and template parameters uri
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
  [-DeploymentDebugLogLevel <String>] [-Force] -TemplateParameterUri <String> -TemplateUri <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByTemplateUriWithNoParameters
+### Deployment via template uri without parameters
 ```
 New-AzureRmResourceGroupDeployment [-Name <String>] -ResourceGroupName <String> [-Mode <DeploymentMode>]
- [-DeploymentDebugLogLevel <String>] [-Force] -TemplateUri <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-DeploymentDebugLogLevel <String>] [-Force] -TemplateUri <String> [-ApiVersion <String>] [-Pre] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -118,21 +111,6 @@ You can specify a different version than the default version.
 Type: String
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -246,7 +224,7 @@ This can be a custom template or a gallery template that is saved as a JSON file
 
 ```yaml
 Type: String
-Parameter Sets: ByTemplateFileWithNoParameters, ByTemplateFileAndParameterObject, ByTemplateFileAndParameterFile, ByTemplateFileAndParameterUri
+Parameter Sets: Deployment via template file without parameters, Deployment via template file and template parameters object, Deployment via template file and template parameters file, Deployment via template file template parameters uri
 Aliases: 
 
 Required: True
@@ -265,7 +243,7 @@ To use the dynamic parameters, type a minus sign (-) to indicate a parameter nam
 
 ```yaml
 Type: String
-Parameter Sets: ByTemplateFileAndParameterFile, ByTemplateUriAndParameterFile
+Parameter Sets: Deployment via template file and template parameters file, Deployment via template uri and template parameters file
 Aliases: 
 
 Required: True
@@ -283,7 +261,7 @@ Template parameters are dynamically added to the command when you specify a temp
 
 ```yaml
 Type: Hashtable
-Parameter Sets: ByTemplateFileAndParameterObject, ByTemplateUriAndParameterObject
+Parameter Sets: Deployment via template file and template parameters object, Deployment via template uri and template parameters object
 Aliases: 
 
 Required: True
@@ -298,7 +276,7 @@ Specifies the URI of a template parameters file.
 
 ```yaml
 Type: String
-Parameter Sets: ByTemplateFileAndParameterUri, ByTemplateUriAndParameterUri
+Parameter Sets: Deployment via template file template parameters uri, Deployment via template uri and template parameters uri
 Aliases: 
 
 Required: True
@@ -314,7 +292,7 @@ This file can be a custom template or a gallery template that is saved as a JSON
 
 ```yaml
 Type: String
-Parameter Sets: ByTemplateUriAndParameterObject, ByTemplateUriAndParameterFile, ByTemplateUriAndParameterUri, ByTemplateUriWithNoParameters
+Parameter Sets: Deployment via template uri and template parameters object, Deployment via template uri and template parameters file, Deployment via template uri and template parameters uri, Deployment via template uri without parameters
 Aliases: 
 
 Required: True

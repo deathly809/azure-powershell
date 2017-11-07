@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: 1CA26790-C791-4BFD-B986-70F28E3B095B
 online version: 
 schema: 2.0.0
@@ -13,16 +12,8 @@ Gets action group(s).
 
 ## SYNTAX
 
-### BySubscriptionOrResourceGroup (Default)
 ```
-Get-AzureRmActionGroup [-ResourceGroupName <String>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
-```
-
-### ByName
-```
-Get-AzureRmActionGroup -ResourceGroupName <String> -Name <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmActionGroup [-Name <String>] [-ResourceGroup <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,42 +44,12 @@ This command lists one (a list with a single element) action group.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 The name of the action group.
 
 ```yaml
-Type: String
-Parameter Sets: ByName
-Aliases: 
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -ResourceGroupName
-The resource group name
-
-```yaml
-Type: String
-Parameter Sets: BySubscriptionOrResourceGroup
+Type: System.String
+Parameter Sets: (All)
 Aliases: 
 
 Required: False
@@ -98,12 +59,16 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -ResourceGroup
+The name of the resource group where the action group exists.
+If Name is not null or empty, this parameter must contain and non empty string.
+
 ```yaml
-Type: String
-Parameter Sets: ByName
+Type: System.String
+Parameter Sets: (All)
 Aliases: 
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)

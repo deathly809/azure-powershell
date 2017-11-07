@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServerManagement.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 5981D3D8-E2E7-4905-8CD0-8BDC35BB39AC
 online version: 
 schema: 2.0.0
@@ -16,13 +15,13 @@ Creates a Server Management session.
 ### ByName
 ```
 New-AzureRmServerManagementSession [-ResourceGroupName] <String> [-NodeName] <String> [-SessionName <String>]
- [-Credential <PSCredential>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-Credential <PSCredential>] [<CommonParameters>]
 ```
 
 ### ByNode
 ```
 New-AzureRmServerManagementSession [-Node] <Node> [-SessionName <String>] [-Credential <PSCredential>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,21 +45,6 @@ For more information, type `Get-Help Get-Credential`.
 Type: PSCredential
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -137,6 +121,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Node
+
 Parameter 'Node' accepts value of type 'Node' from the pipeline
 
 ## OUTPUTS

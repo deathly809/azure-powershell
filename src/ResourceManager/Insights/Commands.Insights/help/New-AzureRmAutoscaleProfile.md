@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: A4C605DD-9B2E-4EE9-BD1F-1352D605C33F
 online version: 
 schema: 2.0.0
@@ -13,23 +12,23 @@ Creates an Autoscale profile.
 
 ## SYNTAX
 
-### CreateWithoutScheduledTimes
+### Parameters for New-AzureRmAutoscaleProfile cmdlet without scheduled times
 ```
 New-AzureRmAutoscaleProfile -Name <String> -DefaultCapacity <String> -MaximumCapacity <String>
  -MinimumCapacity <String>
- -Rules <System.Collections.Generic.List`1[Microsoft.Azure.Management.Monitor.Management.Models.ScaleRule]>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -Rules <System.Collections.Generic.List`1[Microsoft.Azure.Management.Insights.Models.ScaleRule]>
+ [<CommonParameters>]
 ```
 
-### CreateWithFixedDateScheduling
+### Parameters for New-AzureRmAutoscaleProfile cmdlet using fix date scheduling
 ```
 New-AzureRmAutoscaleProfile -Name <String> -DefaultCapacity <String> -MaximumCapacity <String>
  -MinimumCapacity <String> -StartTimeWindow <DateTime> -EndTimeWindow <DateTime> -TimeWindowTimeZone <String>
- -Rules <System.Collections.Generic.List`1[Microsoft.Azure.Management.Monitor.Management.Models.ScaleRule]>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -Rules <System.Collections.Generic.List`1[Microsoft.Azure.Management.Insights.Models.ScaleRule]>
+ [<CommonParameters>]
 ```
 
-### CreateUsingRecurrentScheduling
+### Parameters for New-AzureRmAutoscaleProfile cmdlet using recurrent scheduling
 ```
 New-AzureRmAutoscaleProfile -Name <String> -DefaultCapacity <String> -MaximumCapacity <String>
  -MinimumCapacity <String> -RecurrenceFrequency <RecurrenceFrequency>
@@ -37,8 +36,8 @@ New-AzureRmAutoscaleProfile -Name <String> -DefaultCapacity <String> -MaximumCap
  -ScheduleHours <System.Collections.Generic.List`1[System.Nullable`1[System.Int32]]>
  -ScheduleMinutes <System.Collections.Generic.List`1[System.Nullable`1[System.Int32]]>
  -ScheduleTimeZone <String>
- -Rules <System.Collections.Generic.List`1[Microsoft.Azure.Management.Monitor.Management.Models.ScaleRule]>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -Rules <System.Collections.Generic.List`1[Microsoft.Azure.Management.Insights.Models.ScaleRule]>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -137,27 +136,12 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -EndTimeWindow
 Specifies the end of the time window.
 
 ```yaml
 Type: DateTime
-Parameter Sets: CreateWithFixedDateScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using fix date scheduling
 Aliases: 
 
 Required: True
@@ -229,7 +213,7 @@ Not all of these values are supported.
 
 ```yaml
 Type: RecurrenceFrequency
-Parameter Sets: CreateUsingRecurrentScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using recurrent scheduling
 Aliases: 
 Accepted values: None, Second, Minute, Hour, Day, Week, Month, Year
 
@@ -244,7 +228,7 @@ Accept wildcard characters: False
 Specifies the list of rules to add to the profile.
 
 ```yaml
-Type: System.Collections.Generic.List`1[Microsoft.Azure.Management.Monitor.Management.Models.ScaleRule]
+Type: System.Collections.Generic.List`1[Microsoft.Azure.Management.Insights.Models.ScaleRule]
 Parameter Sets: (All)
 Aliases: 
 
@@ -260,7 +244,7 @@ Specifies the scheduled days.
 
 ```yaml
 Type: System.Collections.Generic.List`1[System.String]
-Parameter Sets: CreateUsingRecurrentScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using recurrent scheduling
 Aliases: 
 
 Required: True
@@ -275,7 +259,7 @@ Specifies the scheduled hours.
 
 ```yaml
 Type: System.Collections.Generic.List`1[System.Nullable`1[System.Int32]]
-Parameter Sets: CreateUsingRecurrentScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using recurrent scheduling
 Aliases: 
 
 Required: True
@@ -290,7 +274,7 @@ Specifies the scheduled minutes.
 
 ```yaml
 Type: System.Collections.Generic.List`1[System.Nullable`1[System.Int32]]
-Parameter Sets: CreateUsingRecurrentScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using recurrent scheduling
 Aliases: 
 
 Required: True
@@ -305,7 +289,7 @@ Specifies the time zone of the schedule.
 
 ```yaml
 Type: String
-Parameter Sets: CreateUsingRecurrentScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using recurrent scheduling
 Aliases: 
 
 Required: True
@@ -320,7 +304,7 @@ Specifies the start of the time window.
 
 ```yaml
 Type: DateTime
-Parameter Sets: CreateWithFixedDateScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using fix date scheduling
 Aliases: 
 
 Required: True
@@ -335,7 +319,7 @@ Specifies the time zone of the time window.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithFixedDateScheduling
+Parameter Sets: Parameters for New-AzureRmAutoscaleProfile cmdlet using fix date scheduling
 Aliases: 
 
 Required: True

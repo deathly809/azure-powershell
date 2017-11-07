@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Sql.dll-Help.xml
-Module Name: AzureRM.Sql
 ms.assetid: 51AF8EFB-F0C1-41E0-BBC5-E48FB1B8672C
 online version: 
 schema: 2.0.0
@@ -16,14 +15,13 @@ Creates a firewall rule for a SQL Database server.
 ### UserSpecifiedRuleSet
 ```
 New-AzureRmSqlServerFirewallRule -FirewallRuleName <String> -StartIpAddress <String> -EndIpAddress <String>
- [-ServerName] <String> [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-ServerName] <String> [-ResourceGroupName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### AzureIpRuleSet
 ```
 New-AzureRmSqlServerFirewallRule [-AllowAllAzureIPs] [-ServerName] <String> [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,21 +61,6 @@ If you want to allow Azure IPs to access the server, this parameter should be us
 Type: SwitchParameter
 Parameter Sets: AzureIpRuleSet
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named

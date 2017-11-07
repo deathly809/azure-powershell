@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Batch.dll-Help.xml
-Module Name: AzureRM.Batch
 ms.assetid: D077DB50-12BC-45AB-8EAC-57810DA83035
 online version: 
 schema: 2.0.0
@@ -16,26 +15,25 @@ Gets an RDP file from a compute node.
 ### Id_Path (Default)
 ```
 Get-AzureBatchRemoteDesktopProtocolFile [-PoolId] <String> [-ComputeNodeId] <String> -DestinationPath <String>
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ### Id_Stream
 ```
 Get-AzureBatchRemoteDesktopProtocolFile [-PoolId] <String> [-ComputeNodeId] <String>
- -DestinationStream <Stream> -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -DestinationStream <Stream> -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ### InputObject_Path
 ```
 Get-AzureBatchRemoteDesktopProtocolFile [[-ComputeNode] <PSComputeNode>] -DestinationPath <String>
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ### InputObject_Stream
 ```
 Get-AzureBatchRemoteDesktopProtocolFile [[-ComputeNode] <PSComputeNode>] -DestinationStream <Stream>
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -121,21 +119,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DestinationPath
 Specifies the file path where this cmdlet saves the .rdp file.
 
@@ -188,9 +171,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### BatchAccountContext
+
 Parameter 'BatchContext' accepts value of type 'BatchAccountContext' from the pipeline
 
 ### PSComputeNode
+
 Parameter 'ComputeNode' accepts value of type 'PSComputeNode' from the pipeline
 
 ## OUTPUTS

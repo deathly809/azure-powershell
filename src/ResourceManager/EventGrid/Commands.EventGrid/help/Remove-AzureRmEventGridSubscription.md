@@ -12,29 +12,22 @@ Removes an Azure Event Grid event subscription.
 
 ## SYNTAX
 
-### ResourceGroupNameParameterSet (Default)
+### EventSubscriptionNameParameterSet (Default)
 ```
 Remove-AzureRmEventGridSubscription [-EventSubscriptionName] <String> [[-ResourceGroupName] <String>]
- [-PassThru] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-TopicName] <String>] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ResourceIdEventSubscriptionParameterSet
 ```
 Remove-AzureRmEventGridSubscription [-ResourceId] <String> [-EventSubscriptionName] <String> [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### EventSubscriptionInputObjectSet
 ```
 Remove-AzureRmEventGridSubscription [-InputObject] <PSTopic> [-EventSubscriptionName] <String> [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
-```
-
-### TopicNameParameterSet
-```
-Remove-AzureRmEventGridSubscription [-EventSubscriptionName] <String> [-ResourceGroupName] <String>
- [-TopicName] <String> [-PassThru] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -79,27 +72,12 @@ Removes the event subscription \`EventSubscription1\` to an Event Grid Topic.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -EventSubscriptionName
 Name of the event subscription that needs to be removed.
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, TopicNameParameterSet
+Parameter Sets: EventSubscriptionNameParameterSet, ResourceIdEventSubscriptionParameterSet
 Aliases: 
 
 Required: True
@@ -156,22 +134,10 @@ Resource Group Name.
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet
+Parameter Sets: EventSubscriptionNameParameterSet
 Aliases: ResourceGroup
 
 Required: False
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String
-Parameter Sets: TopicNameParameterSet
-Aliases: ResourceGroup
-
-Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -198,10 +164,10 @@ Event Grid Topic Name.
 
 ```yaml
 Type: String
-Parameter Sets: TopicNameParameterSet
+Parameter Sets: EventSubscriptionNameParameterSet
 Aliases: 
 
-Required: True
+Required: False
 Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)

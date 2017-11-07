@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 6BCB36BC-F5E6-4EDD-983C-8BDE7A9B004D
 online version: 
 schema: 2.0.0
@@ -13,7 +12,7 @@ Enables encryption on a running IaaS virtual machine in Azure.
 
 ## SYNTAX
 
-### AADClientSecretParameterSet (Default)
+### AAD Client Secret Parameters (Default)
 ```
 Set-AzureRmVMDiskEncryptionExtension [-ResourceGroupName] <String> [-VMName] <String> [-AadClientID] <String>
  [-AadClientSecret] <String> [-DiskEncryptionKeyVaultUrl] <String> [-DiskEncryptionKeyVaultId] <String>
@@ -23,7 +22,7 @@ Set-AzureRmVMDiskEncryptionExtension [-ResourceGroupName] <String> [-VMName] <St
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### AADClientCertParameterSet
+### AAD Client Cert Parameters
 ```
 Set-AzureRmVMDiskEncryptionExtension [-ResourceGroupName] <String> [-VMName] <String> [-AadClientID] <String>
  [-AadClientCertThumbprint] <String> [-DiskEncryptionKeyVaultUrl] <String> [-DiskEncryptionKeyVaultId] <String>
@@ -194,7 +193,7 @@ The certificate must be previously deployed to the virtual machine local compute
 
 ```yaml
 Type: String
-Parameter Sets: AADClientCertParameterSet
+Parameter Sets: AAD Client Cert Parameters
 Aliases: 
 
 Required: True
@@ -224,7 +223,7 @@ Specifies the client secret of the Azure AD application that has permissions to 
 
 ```yaml
 Type: String
-Parameter Sets: AADClientSecretParameterSet
+Parameter Sets: AAD Client Secret Parameters
 Aliases: 
 
 Required: True

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.TrafficManager.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 4556C345-55D0-431C-B980-219D5ED14E5F
 online version: 
 schema: 2.0.0
@@ -16,13 +15,12 @@ Gets an endpoint for a Traffic Manager profile.
 ### Fields
 ```
 Get-AzureRmTrafficManagerEndpoint -Name <String> -Type <String> -ProfileName <String>
- -ResourceGroupName <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -ResourceGroupName <String> [<CommonParameters>]
 ```
 
 ### Object
 ```
-Get-AzureRmTrafficManagerEndpoint -TrafficManagerEndpoint <TrafficManagerEndpoint>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmTrafficManagerEndpoint -TrafficManagerEndpoint <TrafficManagerEndpoint> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,21 +41,6 @@ PS C:\>$TrafficManagerEndpoint = Get-AzureRmTrafficManagerEndpoint -Name "contos
 This command gets the Azure endpoint named contoso from the profile named ContosoProfile in the resource group named ResourceGroup11, and then stores that object in the $TrafficManagerEndpoint variable.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the Traffic Manager endpoint that this cmdlet gets.
@@ -147,6 +130,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### TrafficManagerEndpoint
+
 Parameter 'TrafficManagerEndpoint' accepts value of type 'TrafficManagerEndpoint' from the pipeline
 
 ## OUTPUTS

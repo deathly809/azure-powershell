@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 7C15B0AA-D97E-4715-9AD4-971731527D09
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Gets Site Recovery vaults from the current subscription.
 ## SYNTAX
 
 ```
-Get-AzureRmSiteRecoveryVault [-ResourceGroupName <String>] [-Name <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryVault [-ResourceGroupName <String>] [-Name <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,21 +22,6 @@ The **Get-AzureRmSiteRecoveryVault** cmdlet gets a list of Azure Site Recovery v
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the vault.

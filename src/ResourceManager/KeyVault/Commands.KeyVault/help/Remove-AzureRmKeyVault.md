@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.KeyVault.dll-Help.xml
-Module Name: AzureRM.KeyVault
 ms.assetid: 7A929BA8-02D9-4BBE-AFF3-B8781F8DDAD9
 online version: http://go.microsoft.com/fwlink/?LinkId=690162
 schema: 2.0.0
@@ -16,13 +15,13 @@ Deletes a key vault.
 ### ByAvailableVault
 ```
 Remove-AzureRmKeyVault [-VaultName] <String> [[-ResourceGroupName] <String>] [[-Location] <String>] [-Force]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ByDeletedVault
 ```
-Remove-AzureRmKeyVault [-VaultName] <String> [-Location] <String> [-Force] [-InRemovedState]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmKeyVault [-VaultName] <String> [-Location] <String> [-Force] [-InRemovedState] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,21 +48,6 @@ This command removes the key vault named Contoso03Vault from the named resource 
 If you do not specify the resource group name, the cmdlet searches for the named key vault to delete in your current subscription.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Indicates that the cmdlet does not prompt you for confirmation.
@@ -132,7 +116,7 @@ Parameter Sets: ByAvailableVault
 Aliases: 
 
 Required: False
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -147,7 +131,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

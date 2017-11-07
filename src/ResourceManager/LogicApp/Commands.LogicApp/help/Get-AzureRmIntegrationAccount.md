@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.LogicApp.dll-Help.xml
-Module Name: AzureRM.LogicApp
 ms.assetid: 7BCF2086-05FA-43FB-9D19-7277374CB03E
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Gets integration accounts.
 ## SYNTAX
 
 ```
-Get-AzureRmIntegrationAccount [-ResourceGroupName <String>] [-Name <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmIntegrationAccount [-ResourceGroupName <String>] [-Name <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,21 +70,6 @@ ChangedTime : 3/26/2016 4:26:07 PM
 This command gets all the integration accounts in your Azure subscription.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of an integration account.

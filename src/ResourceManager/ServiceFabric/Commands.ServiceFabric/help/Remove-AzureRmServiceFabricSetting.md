@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceFabric.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -15,14 +14,13 @@ Remove one or multiple Service Fabric setting from the cluster.
 ### OneSetting
 ```
 Remove-AzureRmServiceFabricSetting [-ResourceGroupName] <String> [-Name] <String> -Section <String>
- -Parameter <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ -Parameter <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### BatchSettings
 ```
 Remove-AzureRmServiceFabricSetting [-ResourceGroupName] <String> [-Name] <String>
- -SettingsSectionDescription <PSSettingsSectionDescription[]> [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ -SettingsSectionDescription <PSSettingsSectionDescription[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,21 +36,6 @@ PS c:> Remove-AzureRmServiceFabricSetting -ResourceGroupName 'Group1' -Name 'Con
 This command will remove settings 'MaxCursors' under 'EseStore' section.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specify the name of the cluster.

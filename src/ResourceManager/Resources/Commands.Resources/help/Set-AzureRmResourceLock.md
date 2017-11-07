@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Cmdlets.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 770093CD-CE2A-4076-8A28-F4DCFFB7A075
 online version: 
 schema: 2.0.0
@@ -13,60 +12,56 @@ Modifies a resource lock.
 
 ## SYNTAX
 
-### BySpecifiedScope (Default)
+### A lock at the specified scope. (Default)
 ```
 Set-AzureRmResourceLock -LockName <String> -LockLevel <LockLevel> [-LockNotes <String>] [-Force]
- -Scope <String> [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
- [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -Scope <String> [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>]
+ [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByResourceGroup
+### A lock at the resource group scope.
 ```
 Set-AzureRmResourceLock -LockName <String> -LockLevel <LockLevel> [-LockNotes <String>] [-Force]
- -ResourceGroupName <String> [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
- [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -ResourceGroupName <String> [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>]
+ [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### ByResourceGroupLevel
+### A lock at the resource group resource scope.
 ```
 Set-AzureRmResourceLock -LockName <String> -LockLevel <LockLevel> [-LockNotes <String>] [-Force]
  -ResourceName <String> -ResourceType <String> -ResourceGroupName <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
-```
-
-### BySubscription
-```
-Set-AzureRmResourceLock -LockName <String> -LockLevel <LockLevel> [-LockNotes <String>] [-Force]
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
  [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
-### BySubscriptionLevel
+### A lock at the subscription scope.
+```
+Set-AzureRmResourceLock -LockName <String> -LockLevel <LockLevel> [-LockNotes <String>] [-Force]
+ [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>] [-InformationVariable <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+### A lock at the subscription resource scope.
 ```
 Set-AzureRmResourceLock -LockName <String> -LockLevel <LockLevel> [-LockNotes <String>] [-Force]
  -ResourceName <String> -ResourceType <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
-### ByTenantLevel
+### A lock at the tenant resource scope.
 ```
 Set-AzureRmResourceLock -LockName <String> -LockLevel <LockLevel> [-LockNotes <String>] [-Force]
  -ResourceName <String> -ResourceType <String> [-TenantLevel] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
-```
-
-### ByLockId
-```
-Set-AzureRmResourceLock -LockLevel <LockLevel> [-LockNotes <String>] [-Force] -LockId <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
  [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
+```
+
+### A lock, by Id.
+```
+Set-AzureRmResourceLock -LockLevel <LockLevel> [-LockNotes <String>] [-Force] -LockId <String>
+ [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>] [-InformationVariable <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -91,21 +86,6 @@ If you do not specify a version, this cmdlet uses the latest available version.
 Type: String
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -173,7 +153,7 @@ Specifies the ID of the lock that this cmdlet modifies.
 
 ```yaml
 Type: String
-Parameter Sets: ByLockId
+Parameter Sets: A lock, by Id.
 Aliases: Id, ResourceId
 
 Required: True
@@ -204,7 +184,7 @@ Specifies the name of the lock that this cmdlet modifies.
 
 ```yaml
 Type: String
-Parameter Sets: BySpecifiedScope, ByResourceGroup, ByResourceGroupLevel, BySubscription, BySubscriptionLevel, ByTenantLevel
+Parameter Sets: A lock at the specified scope., A lock at the resource group scope., A lock at the resource group resource scope., A lock at the subscription scope., A lock at the subscription resource scope., A lock at the tenant resource scope.
 Aliases: ExtensionResourceName, Name
 
 Required: True
@@ -249,7 +229,7 @@ Specifies the name of the resource group for which the lock applies.
 
 ```yaml
 Type: String
-Parameter Sets: ByResourceGroup, ByResourceGroupLevel
+Parameter Sets: A lock at the resource group scope., A lock at the resource group resource scope.
 Aliases: 
 
 Required: True
@@ -267,7 +247,7 @@ Server`/`Database
 
 ```yaml
 Type: String
-Parameter Sets: ByResourceGroupLevel, BySubscriptionLevel, ByTenantLevel
+Parameter Sets: A lock at the resource group resource scope., A lock at the subscription resource scope., A lock at the tenant resource scope.
 Aliases: 
 
 Required: True
@@ -282,7 +262,7 @@ Specifies the resource type for which the lock applies.
 
 ```yaml
 Type: String
-Parameter Sets: ByResourceGroupLevel, BySubscriptionLevel, ByTenantLevel
+Parameter Sets: A lock at the resource group resource scope., A lock at the subscription resource scope., A lock at the tenant resource scope.
 Aliases: 
 
 Required: True
@@ -304,7 +284,7 @@ To specify a resource group, use the following format:
 
 ```yaml
 Type: String
-Parameter Sets: BySpecifiedScope
+Parameter Sets: A lock at the specified scope.
 Aliases: 
 
 Required: True
@@ -319,7 +299,7 @@ Indicates that this cmdlet operates at the tenant level.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: ByTenantLevel
+Parameter Sets: A lock at the tenant resource scope.
 Aliases: 
 
 Required: True

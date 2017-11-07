@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.KeyVault.dll-Help.xml
-Module Name: AzureRM.KeyVault
 ms.assetid: 8C9B33EE-10DE-4803-B76D-FE9FC2AC3372
 online version: http://go.microsoft.com/fwlink/?LinkId=690298
 schema: 2.0.0
@@ -15,25 +14,22 @@ Gets the secrets in a key vault.
 
 ### ByVaultName (Default)
 ```
-Get-AzureKeyVaultSecret [-VaultName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureKeyVaultSecret [-VaultName] <String> [<CommonParameters>]
 ```
 
 ### BySecretName
 ```
-Get-AzureKeyVaultSecret [-VaultName] <String> [-Name] <String> [[-Version] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureKeyVaultSecret [-VaultName] <String> [-Name] <String> [[-Version] <String>] [<CommonParameters>]
 ```
 
 ### BySecretVersions
 ```
-Get-AzureKeyVaultSecret [-VaultName] <String> [-Name] <String> [-IncludeVersions]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureKeyVaultSecret [-VaultName] <String> [-Name] <String> [-IncludeVersions] [<CommonParameters>]
 ```
 
 ### ByDeletedSecrets
 ```
-Get-AzureKeyVaultSecret [-VaultName] <String> [[-Name] <String>] [-InRemovedState]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureKeyVaultSecret [-VaultName] <String> [[-Name] <String>] [-InRemovedState] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -95,21 +91,6 @@ This command will return metadata such as the deletion date, and the scheduled p
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -IncludeVersions
 Indicates that this cmdlet gets all versions of a secret.
 The current version of a secret is the first one on the list.
@@ -130,9 +111,7 @@ Accept wildcard characters: False
 ```
 
 ### -InRemovedState
-Specifies whether to show the previously deleted secrets in the output
-
-```yaml
+Specifies whether to show the previously deleted secrets in the output.```yaml
 Type: SwitchParameter
 Parameter Sets: ByDeletedSecrets
 Aliases: 
@@ -153,7 +132,7 @@ Parameter Sets: BySecretName, BySecretVersions
 Aliases: SecretName
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -165,7 +144,7 @@ Parameter Sets: ByDeletedSecrets
 Aliases: SecretName
 
 Required: False
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -181,7 +160,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -197,7 +176,7 @@ Parameter Sets: BySecretName
 Aliases: SecretVersion
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

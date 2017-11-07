@@ -13,8 +13,7 @@ Creates an instance of PsAzureApiManagementContext.
 ## SYNTAX
 
 ```
-New-AzureRmApiManagementContext -ResourceGroupName <String> -ServiceName <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+New-AzureRmApiManagementContext -ResourceGroupName <String> -ServiceName <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +30,6 @@ PS C:\>$ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "Con
 This command creates an instance of **PsApiManagementContext**.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -ResourceGroupName
 Specifies the name of the resource group under which an API Management service is deployed.

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Relay.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -15,20 +14,16 @@ Gets the description of a specified authorization rule for a given Relay entitie
 ### NamespaceAuthorizationRuleSet (Default)
 ```
 Get-AzureRmRelayAuthorizationRule [-ResourceGroupName] <String> [-Namespace] <String> [[-Name] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
 ### WcfRelayAuthorizationRuleSet
 ```
-Get-AzureRmRelayAuthorizationRule [-ResourceGroupName] <String> [[-Namespace] <String>] [-WcfRelay] <String>
- [[-Name] <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmRelayAuthorizationRule [-ResourceGroupName] <String> [[-Namespace] <String>] [-WcfRelay] <String> [[-Name] <String>]
 ```
 
 ### HybridConnectionAuthorizationRuleSet
 ```
-Get-AzureRmRelayAuthorizationRule [-ResourceGroupName] <String> [[-Namespace] <String>]
- [-HybridConnection] <String> [[-Name] <String>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRelayAuthorizationRule [-ResourceGroupName] <String> [[-Namespace] <String>] [-HybridConnection] <String> [[-Name] <String>]
 ```
 
 ## DESCRIPTION
@@ -56,23 +51,7 @@ PS C:\> Get-AzureRmRelayHybridConnectionAuthorizationRule -ResourceGroupName Def
 ```
 
 Returns the specified authorization rule description for a given HybridConnection.
-
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -HybridConnection
 HybridConnection Name.
@@ -160,7 +139,6 @@ Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -172,7 +150,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### -NamespaceName
  System.String 
  
-
 ### -HybridConnectionsName
  System.String 
 
@@ -181,6 +158,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### -Name
  System.String
+
 
 ## OUTPUTS
 
@@ -206,6 +184,7 @@ Name   : AuthoRule1
 Type   : Microsoft.Relay/AuthorizationRules
 Id     : /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.Relay/namespaces/TestNameSpace-Relay1/HybridConnections/Test
          HybridConnection/authorizationRules/AuthoRule1
+
 
 ## NOTES
 

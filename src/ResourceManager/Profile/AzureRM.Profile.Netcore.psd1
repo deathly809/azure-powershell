@@ -77,8 +77,7 @@ CmdletsToExport = 'Disable-AzureRmDataCollection', 'Enable-AzureRmDataCollection
                'Set-AzureRmEnvironment', 'Add-AzureRmEnvironment', 
                'Get-AzureRmSubscription', 'Add-AzureRmAccount', 'Get-AzureRmContext', 
                'Set-AzureRmContext', 'Import-AzureRmContext', 'Save-AzureRmContext', 
-               'Get-AzureRmTenant', 'Send-Feedback', 'Resolve-AzureRmError', 
-               'Set-AzureRmDefault', 'Get-AzureRmDefault', 'Clear-AzureRmDefault'
+               'Get-AzureRmTenant', 'Send-Feedback', 'Resolve-AzureRmError'
 
 # Variables to export from this module
 # VariablesToExport = @()

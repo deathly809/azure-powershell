@@ -16,8 +16,7 @@ Sets API operation details.
 Set-AzureRmApiManagementOperation -Context <PsApiManagementContext> -ApiId <String> -OperationId <String>
  -Name <String> -Method <String> -UrlTemplate <String> [-Description <String>]
  [-TemplateParameters <PsApiManagementParameter[]>] [-Request <PsApiManagementRequest>]
- [-Responses <PsApiManagementResponse[]>] [-PassThru] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-Responses <PsApiManagementResponse[]>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,8 +26,7 @@ The **Set-AzureRmApiManagementOperation** cmdlet sets API operation details.
 
 ### Example 1: Set the operation details
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>New-AzureRmApiManagementOperation -Context $apimContext -ApiId $APIID -OperationId $OperationId -Name "Get Resource" -Method GET -UrlTemplate "/newresource" -Description "Use this operation to get newresource"
+PS C:\>New-AzureRmApiManagementOperation -Context $APImContext -ApiId $APIID -OperationId $OperationId -Name "Get Resource" -Method GET -UrlTemplate "/newresource" -Description "Use this operation to get newresource"
 ```
 
 This command sets the operation details for API management.
@@ -62,21 +60,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

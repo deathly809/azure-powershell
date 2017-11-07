@@ -7,7 +7,7 @@ schema: 2.0.0
 # New-AzureRmImage
 
 ## SYNOPSIS
-Creates an image.
+Creats an image.
 
 ## SYNTAX
 

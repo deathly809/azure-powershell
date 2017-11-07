@@ -24,12 +24,6 @@ Get-AzureRmDataFactoryV2Dataset [[-Name] <String>] [-DataFactory] <PSDataFactory
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
-### ByResourceId
-```
-Get-AzureRmDataFactoryV2Dataset -ResourceId <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
-```
-
 ## DESCRIPTION
 The Get-AzureRmDataFactoryV2Dataset cmdlet gets information about datasets in Azure Data Factory.
 If you specify the name of a dataset, this cmdlet gets information about that dataset.
@@ -130,7 +124,7 @@ Specifies the name of the dataset about which to get information.
 
 ```yaml
 Type: String
-Parameter Sets: ByFactoryName, ByFactoryObject
+Parameter Sets: (All)
 Aliases: DatasetName
 
 Required: False
@@ -151,21 +145,6 @@ Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -ResourceId
-The Azure resource ID.
-
-```yaml
-Type: String
-Parameter Sets: ByResourceId
-Aliases: 
-
-Required: True
-Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

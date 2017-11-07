@@ -19,38 +19,29 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Preview
 {
     public class ServiceManagementPreviewProfile : Profile
     {
-        private static IMapper _mapper = null;
+        private static readonly Lazy<bool> initialize;
 
-        private static readonly object _lock = new object();
-
-        public static IMapper Mapper
+        static ServiceManagementPreviewProfile()
         {
-            get
+            initialize = new Lazy<bool>(() =>
             {
-                lock(_lock)
-                {
-                    if (_mapper == null)
-                    {
-                        Initialize();
-                    }
-
-                    return _mapper;
-                }
-            }
+                Mapper.AddProfile<ServiceManagementPreviewProfile>();
+                return true;
+            });
         }
 
-        public static void Initialize()
+        public static bool Initialize()
         {
-            var config = new MapperConfiguration(cfg => {
-                cfg.AddProfile<ServiceManagementPreviewProfile>();
-            });
-
-            _mapper = config.CreateMapper();
+            return ServiceManagementProfile.Initialize() && initialize.Value;
         }
 
         public override string ProfileName
         {
             get { return "ServiceManagementPreviewProfile"; }
+        }
+
+        protected override void Configure()
+        {
         }
     }
 }

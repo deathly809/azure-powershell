@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Sql.dll-Help.xml
-Module Name: AzureRM.Sql
 online version: 
 schema: 2.0.0
 ---
@@ -14,7 +13,7 @@ Returns information about Azure SQL Database Sync Groups.
 
 ```
 Get-AzureRmSqlSyncGroup [[-Name] <String>] [-ServerName] <String> [-DatabaseName] <String>
- [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-ResourceGroupName] <String>
 ```
 
 ## DESCRIPTION
@@ -22,6 +21,7 @@ The **Get-AzureRmSqlSyncGroup** cmdlet returns information about one or more Azu
 Specify the name of a sync group to see information for only that sync group.
 
 ## EXAMPLES
+
 
 ### Example 1: Get all instances of Azure SQL Sync Group assigned to an Azure SQL Database
 ```
@@ -52,7 +52,7 @@ HubDatabaseUserName         : myAccount
 HubDatabasePassword         : 
 SyncState                   : NotReady
 LastSyncTime                : 1/1/0001 12:00:00 AM
-Schema                      :
+Schema                      : 
 ```
 
 This command gets information about all the Azure SQL Database Sync Groups assigned to an Azure SQL Database.
@@ -72,7 +72,7 @@ HubDatabaseUserName         : myAccount
 HubDatabasePassword         : 
 SyncState                   : NotReady
 LastSyncTime                : 1/1/0001 12:00:00 AM
-Schema                      :
+Schema                      : 
 ```
 
 This command gets information about the Azure SQL Database Sync Group with name "SyncGroup01"
@@ -91,21 +91,6 @@ Required: True
 Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -153,9 +138,6 @@ Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

@@ -19,6 +19,7 @@
 // Changes to this file may cause incorrect behavior and will be lost if the
 // code is regenerated.
 
+using AutoMapper;
 using Microsoft.Azure.Commands.Compute.Automation.Models;
 using Microsoft.Azure.Management.Compute;
 using Microsoft.Azure.Management.Compute.Models;
@@ -123,6 +124,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
     {
         protected override void ProcessRecord()
         {
+            AutoMapper.Mapper.AddProfile<ComputeAutomationAutoMapperProfile>();
             ExecuteClientAction(() =>
             {
                 string location = this.Location;
@@ -132,7 +134,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 {
                     var result = VirtualMachineRunCommandsClient.Get(location, commandId);
                     var psObject = new PSRunCommandDocument();
-                    ComputeAutomationAutoMapperProfile.Mapper.Map<RunCommandDocument, PSRunCommandDocument>(result, psObject);
+                    Mapper.Map<RunCommandDocument, PSRunCommandDocument>(result, psObject);
                     WriteObject(psObject);
                 }
                 else if (!string.IsNullOrEmpty(location))
@@ -152,7 +154,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     var psObject = new List<PSRunCommandDocumentBase>();
                     foreach (var r in resultList)
                     {
-                        psObject.Add(ComputeAutomationAutoMapperProfile.Mapper.Map<RunCommandDocumentBase, PSRunCommandDocumentBase>(r));
+                        psObject.Add(Mapper.Map<RunCommandDocumentBase, PSRunCommandDocumentBase>(r));
                     }
                     WriteObject(psObject, true);
                 }

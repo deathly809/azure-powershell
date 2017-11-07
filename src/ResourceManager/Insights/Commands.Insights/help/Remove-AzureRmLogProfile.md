@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: DDA137FD-4EB3-4FB7-A202-978922038AFC
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Removes a log profile.
 ## SYNTAX
 
 ```
-Remove-AzureRmLogProfile -Name <String> [-PassThru] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Remove-AzureRmLogProfile -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +28,6 @@ The **Remove-AzureRmLogProfile** cmdlet removes a log profile.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 Specifies the name of the log profile to remove.
 
@@ -57,21 +40,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -PassThru
-{{Fill PassThru Description}}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

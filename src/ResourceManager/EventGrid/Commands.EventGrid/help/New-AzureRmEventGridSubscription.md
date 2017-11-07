@@ -12,36 +12,36 @@ Creates a new Azure Event Grid Event Subscription to a topic, Azure resource, Az
 
 ## SYNTAX
 
-### ResourceGroupNameParameterSet (Default)
+### CustomTopicEventSubscriptionParameterSet (Default)
 ```
 New-AzureRmEventGridSubscription [-EventSubscriptionName] <String> [-Endpoint] <String>
- [[-ResourceGroupName] <String>] [[-EndpointType] <String>] [[-SubjectBeginsWith] <String>]
+ [-ResourceGroupName] <String> [-TopicName] <String> [[-EndpointType] <String>] [[-SubjectBeginsWith] <String>]
  [[-SubjectEndsWith] <String>] [-SubjectCaseSensitive] [[-IncludedEventType] <String[]>] [[-Label] <String[]>]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ResourceIdEventSubscriptionParameterSet
 ```
 New-AzureRmEventGridSubscription [-ResourceId] <String> [-EventSubscriptionName] <String> [-Endpoint] <String>
  [[-EndpointType] <String>] [[-SubjectBeginsWith] <String>] [[-SubjectEndsWith] <String>]
- [-SubjectCaseSensitive] [[-IncludedEventType] <String[]>] [[-Label] <String[]>]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-SubjectCaseSensitive] [[-IncludedEventType] <String[]>] [[-Label] <String[]>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### EventSubscriptionInputObjectSet
 ```
 New-AzureRmEventGridSubscription [-InputObject] <PSTopic> [-EventSubscriptionName] <String>
  [-Endpoint] <String> [[-EndpointType] <String>] [[-SubjectBeginsWith] <String>] [[-SubjectEndsWith] <String>]
- [-SubjectCaseSensitive] [[-IncludedEventType] <String[]>] [[-Label] <String[]>]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-SubjectCaseSensitive] [[-IncludedEventType] <String[]>] [[-Label] <String[]>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
-### CustomTopicEventSubscriptionParameterSet
+### ResourceGroupNameParameterSet
 ```
 New-AzureRmEventGridSubscription [-EventSubscriptionName] <String> [-Endpoint] <String>
- [-ResourceGroupName] <String> [-TopicName] <String> [[-EndpointType] <String>] [[-SubjectBeginsWith] <String>]
+ [[-ResourceGroupName] <String>] [[-EndpointType] <String>] [[-SubjectBeginsWith] <String>]
  [[-SubjectEndsWith] <String>] [-SubjectCaseSensitive] [[-IncludedEventType] <String[]>] [[-Label] <String[]>]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -99,28 +99,13 @@ Creates a new event subscription \`EventSubscription1\` to an EventHub namespace
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Endpoint
 Event subscription destination endpoint.
 This can be a webhook URL or the Azure resource ID of an EventHub.
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, CustomTopicEventSubscriptionParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet, ResourceIdEventSubscriptionParameterSet, ResourceGroupNameParameterSet
 Aliases: 
 
 Required: True
@@ -148,7 +133,7 @@ This can be webhook or eventhub
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, CustomTopicEventSubscriptionParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet, ResourceIdEventSubscriptionParameterSet, ResourceGroupNameParameterSet
 Aliases: 
 Accepted values: webhook, eventhub
 
@@ -177,7 +162,7 @@ The name of the event subscription
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, CustomTopicEventSubscriptionParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet, ResourceIdEventSubscriptionParameterSet, ResourceGroupNameParameterSet
 Aliases: 
 
 Required: True
@@ -204,7 +189,7 @@ Filter that specifies a list of event types to include.If not specified, all eve
 
 ```yaml
 Type: String[]
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, CustomTopicEventSubscriptionParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet, ResourceIdEventSubscriptionParameterSet, ResourceGroupNameParameterSet
 Aliases: 
 
 Required: False
@@ -246,7 +231,7 @@ Labels for the event subscription
 
 ```yaml
 Type: String[]
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, CustomTopicEventSubscriptionParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet, ResourceIdEventSubscriptionParameterSet, ResourceGroupNameParameterSet
 Aliases: 
 
 Required: False
@@ -273,10 +258,10 @@ The resource group of the topic.
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet
 Aliases: ResourceGroup
 
-Required: False
+Required: True
 Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -285,10 +270,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: CustomTopicEventSubscriptionParameterSet
+Parameter Sets: ResourceGroupNameParameterSet
 Aliases: ResourceGroup
 
-Required: True
+Required: False
 Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -316,7 +301,7 @@ If not specified, events with all subject prefixes will be included.
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, CustomTopicEventSubscriptionParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet, ResourceIdEventSubscriptionParameterSet, ResourceGroupNameParameterSet
 Aliases: 
 
 Required: False
@@ -360,7 +345,7 @@ If not specified, events with all subject suffixes will be included.
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet, ResourceIdEventSubscriptionParameterSet, CustomTopicEventSubscriptionParameterSet
+Parameter Sets: CustomTopicEventSubscriptionParameterSet, ResourceIdEventSubscriptionParameterSet, ResourceGroupNameParameterSet
 Aliases: 
 
 Required: False

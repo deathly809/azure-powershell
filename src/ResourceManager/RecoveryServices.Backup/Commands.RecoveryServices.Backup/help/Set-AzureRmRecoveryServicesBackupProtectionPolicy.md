@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.RecoveryServices.Backup.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: D614B509-82DD-42FB-B975-D72CD3355E3E
 online version: 
 schema: 2.0.0
@@ -15,8 +14,7 @@ Modifies a Backup protection policy.
 
 ```
 Set-AzureRmRecoveryServicesBackupProtectionPolicy [-Policy] <PolicyBase>
- [[-RetentionPolicy] <RetentionPolicyBase>] [[-SchedulePolicy] <SchedulePolicyBase>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [[-RetentionPolicy] <RetentionPolicyBase>] [[-SchedulePolicy] <SchedulePolicyBase>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,21 +56,6 @@ The seventh command gets the Backup protection policy named NewPolicy, and then 
 The final command modifies the Backup protection policy in $Pol using schedule policy in $SchPol and the retention policy in $RetPol.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Policy
 Specifies the Backup protection policy that this cmdlet modifies.
@@ -128,6 +111,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PolicyBase
+
 Parameter 'Policy' accepts value of type 'PolicyBase' from the pipeline
 
 ## OUTPUTS

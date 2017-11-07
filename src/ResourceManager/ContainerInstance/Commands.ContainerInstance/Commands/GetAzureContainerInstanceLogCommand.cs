@@ -73,7 +73,7 @@ namespace Microsoft.Azure.Commands.ContainerInstance
         [ValidateNotNullOrEmpty]
         public int? Tail { get; set; }
 
-        public override void ExecuteCmdlet()
+        protected override void ExecuteCmdletInternal()
         {
             var resourceGroupName = this.InputContainerGroup?.ResourceGroupName ?? this.ResourceGroupName;
             var containerGroupName = this.InputContainerGroup?.Name ?? this.ContainerGroupName;

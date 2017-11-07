@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Resources.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 0C8C07CA-6720-452F-A952-48C76EBF3BBD
 online version: 
 schema: 2.0.0
@@ -14,8 +13,8 @@ Deletes the azure active directory service principal.
 ## SYNTAX
 
 ```
-Remove-AzureRmADServicePrincipal -ObjectId <Guid> [-PassThru] [-Force]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmADServicePrincipal -ObjectId <Guid> [-PassThru] [-Force] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +30,6 @@ PS C:\> Remove-AzureRmADServicePrincipal -ObjectId 61b5d8ea-fdc6-40a2-8d5b-ad447
 Deletes the given azure active directory service principal.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 {{Fill Force Description}}

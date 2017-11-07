@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.KeyVault.dll-Help.xml
-Module Name: AzureRM.KeyVault
 ms.assetid: 2659C06A-AE5B-4F7B-B9EF-069A74E12560
 online version: 
 schema: 2.0.0
@@ -14,8 +13,8 @@ Deletes a certificate operation from a key vault.
 ## SYNTAX
 
 ```
-Remove-AzureKeyVaultCertificateOperation [-VaultName] <String> [-Name] <String> [-Force] [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureKeyVaultCertificateOperation [-VaultName] <String> [-Name] <String> [-Force] [-PassThru] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +30,6 @@ PS C:\>Remove-AzureKeyVaultCertificateOperation -VaultName "ContosoKV01" -Name "
 This command removes the certificate operation named TestCert01 from the ContosoKV01 key vault without prompting for confirmation.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Forces the command to run without asking for user confirmation.
@@ -71,7 +55,7 @@ Parameter Sets: (All)
 Aliases: CertificateName
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -102,7 +86,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

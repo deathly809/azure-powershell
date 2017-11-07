@@ -13,24 +13,23 @@ Gets policy assignments.
 
 ## SYNTAX
 
-### GetAllPolicyAssignments (Default)
+### The list all policy assignments parameter set. (Default)
 ```
-Get-AzureRmPolicyAssignment [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
- [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
+Get-AzureRmPolicyAssignment [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>]
+ [-InformationVariable <String>] [<CommonParameters>]
 ```
 
-### GetPolicyAssignmentName
+### The policy assignment name parameter set.
 ```
 Get-AzureRmPolicyAssignment [-Name <String>] -Scope <String> [-PolicyDefinitionId <String>]
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
- [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>] [-InformationVariable <String>]
+ [<CommonParameters>]
 ```
 
-### GetPolicyAssignmentId
+### The policy assignment Id parameter set.
 ```
 Get-AzureRmPolicyAssignment -Id <String> [-PolicyDefinitionId <String>] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,27 +74,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Id
 Specifies the fully qualified resource ID for the policy assignment that this cmdlet gets.
 
 ```yaml
 Type: String
-Parameter Sets: GetPolicyAssignmentId
+Parameter Sets: The policy assignment Id parameter set.
 Aliases: ResourceId
 
 Required: True
@@ -149,7 +133,7 @@ Specifies the name of the policy assignment that this cmdlet gets.
 
 ```yaml
 Type: String
-Parameter Sets: GetPolicyAssignmentName
+Parameter Sets: The policy assignment name parameter set.
 Aliases: 
 
 Required: False
@@ -164,7 +148,7 @@ Specifies the ID of the policy definition of the policy assignments that this cm
 
 ```yaml
 Type: String
-Parameter Sets: GetPolicyAssignmentName, GetPolicyAssignmentId
+Parameter Sets: The policy assignment name parameter set., The policy assignment Id parameter set.
 Aliases: 
 
 Required: False
@@ -194,7 +178,7 @@ Specifies the scope at which the policy is applied for the assignment that this 
 
 ```yaml
 Type: String
-Parameter Sets: GetPolicyAssignmentName
+Parameter Sets: The policy assignment name parameter set.
 Aliases: 
 
 Required: True

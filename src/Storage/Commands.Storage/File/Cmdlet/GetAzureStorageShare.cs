@@ -18,7 +18,6 @@ namespace Microsoft.WindowsAzure.Commands.Storage.File.Cmdlet
     using Azure.Commands.Common.Authentication.Abstractions;
     using Microsoft.WindowsAzure.Commands.Common.Storage;
     using Microsoft.WindowsAzure.Storage.File;
-    using System;
     using System.Globalization;
     using System.Management.Automation;
 
@@ -29,7 +28,7 @@ namespace Microsoft.WindowsAzure.Commands.Storage.File.Cmdlet
             Position = 0,
             Mandatory = true,
             ParameterSetName = Constants.SpecificParameterSetName,
-            HelpMessage = "Name of the file share to be received.")]
+            HelpMessage = "Name of the file share to be listed.")]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
@@ -38,14 +37,6 @@ namespace Microsoft.WindowsAzure.Commands.Storage.File.Cmdlet
             ParameterSetName = Constants.MatchingPrefixParameterSetName,
             HelpMessage = "A prefix of the file shares to be listed.")]
         public string Prefix { get; set; }
-
-        [Parameter(
-        Position = 1,
-        Mandatory = false,
-        ParameterSetName = Constants.SpecificParameterSetName,
-        HelpMessage = "SnapshotTime of the file share snapshot to be received.")]
-                [ValidateNotNullOrEmpty]
-                public DateTimeOffset? SnapshotTime { get; set; }
 
         [Parameter(
             ValueFromPipeline = true,
@@ -67,7 +58,7 @@ namespace Microsoft.WindowsAzure.Commands.Storage.File.Cmdlet
                 {
                     case Constants.SpecificParameterSetName:
                         NamingUtil.ValidateShareName(this.Name, false);
-                        var share = this.Channel.GetShareReference(this.Name, this.SnapshotTime);
+                        var share = this.Channel.GetShareReference(this.Name);
                         await this.Channel.FetchShareAttributesAsync(share, null, this.RequestOptions, this.OperationContext, this.CmdletCancellationToken).ConfigureAwait(false);
                         this.OutputStream.WriteObject(taskId, share);
 

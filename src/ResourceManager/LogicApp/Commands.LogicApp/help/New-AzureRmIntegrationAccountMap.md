@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.LogicApp.dll-Help.xml
-Module Name: AzureRM.LogicApp
 ms.assetid: DF71430C-F33F-409B-A550-CC7285252E91
 online version: 
 schema: 2.0.0
@@ -16,7 +15,7 @@ Creates an integration account map.
 ```
 New-AzureRmIntegrationAccountMap -ResourceGroupName <String> -Name <String> -MapName <String>
  [-MapFilePath <String>] [-MapDefinition <String>] [-MapType <String>] [-ContentType <String>]
- [-Metadata <Object>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Metadata <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,21 +60,6 @@ This cmdlet supports application/xml as a map content type.
 Type: String
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Cmdlets.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 3FBF91B8-8EF9-4E05-AD7E-AEFC6EBBFB8E
 online version: 
 schema: 2.0.0
@@ -13,53 +12,49 @@ Gets a resource lock.
 
 ## SYNTAX
 
-### ByResourceGroup
+### A lock at the resource group scope.
 ```
 Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -ResourceGroupName <String> [-ApiVersion <String>]
- [-Pre] [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
+ [-Pre] [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
+```
+
+### A lock at the resource group resource scope.
+```
+Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -ResourceName <String> -ResourceType <String>
+ -ResourceGroupName <String> [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>]
  [-InformationVariable <String>] [<CommonParameters>]
 ```
 
-### ByResourceGroupLevel
-```
-Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -ResourceName <String> -ResourceType <String>
- -ResourceGroupName <String> [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
- [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
-```
-
-### BySpecifiedScope
+### A lock at the specified scope.
 ```
 Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -Scope <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
 ```
 
-### BySubscription
+### A lock at the subscription scope.
 ```
 Get-AzureRmResourceLock [-LockName <String>] [-AtScope] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
+```
+
+### A lock at the subscription resource scope.
+```
+Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -ResourceName <String> -ResourceType <String>
+ [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>] [-InformationVariable <String>]
+ [<CommonParameters>]
+```
+
+### A lock at the tenant resource scope.
+```
+Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -ResourceName <String> -ResourceType <String>
+ [-TenantLevel] [-ApiVersion <String>] [-Pre] [-InformationAction <ActionPreference>]
  [-InformationVariable <String>] [<CommonParameters>]
 ```
 
-### BySubscriptionLevel
-```
-Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -ResourceName <String> -ResourceType <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
- [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
-```
-
-### ByTenantLevel
-```
-Get-AzureRmResourceLock [-LockName <String>] [-AtScope] -ResourceName <String> -ResourceType <String>
- [-TenantLevel] [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
- [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
-```
-
-### ByLockId
+### A lock, by Id.
 ```
 Get-AzureRmResourceLock [-AtScope] -LockId <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,21 +95,6 @@ If you do not specify this parameter, the cmdlet returns all locks at, above, or
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -167,7 +147,7 @@ Specifies the ID of the lock that this cmdlet gets.
 
 ```yaml
 Type: String
-Parameter Sets: ByLockId
+Parameter Sets: A lock, by Id.
 Aliases: Id, ResourceId
 
 Required: True
@@ -182,7 +162,7 @@ Specifies the name of the lock that this cmdlet gets.
 
 ```yaml
 Type: String
-Parameter Sets: ByResourceGroup, ByResourceGroupLevel, BySpecifiedScope, BySubscription, BySubscriptionLevel, ByTenantLevel
+Parameter Sets: A lock at the resource group scope., A lock at the resource group resource scope., A lock at the specified scope., A lock at the subscription scope., A lock at the subscription resource scope., A lock at the tenant resource scope.
 Aliases: ExtensionResourceName, Name
 
 Required: False
@@ -213,7 +193,7 @@ This cmdlet gets locks for this resource group.
 
 ```yaml
 Type: String
-Parameter Sets: ByResourceGroup, ByResourceGroupLevel
+Parameter Sets: A lock at the resource group scope., A lock at the resource group resource scope.
 Aliases: 
 
 Required: True
@@ -229,7 +209,7 @@ This cmdlet gets locks for this resource.
 
 ```yaml
 Type: String
-Parameter Sets: ByResourceGroupLevel, BySubscriptionLevel, ByTenantLevel
+Parameter Sets: A lock at the resource group resource scope., A lock at the subscription resource scope., A lock at the tenant resource scope.
 Aliases: 
 
 Required: True
@@ -245,7 +225,7 @@ This cmdlet gets locks for this resource.
 
 ```yaml
 Type: String
-Parameter Sets: ByResourceGroupLevel, BySubscriptionLevel, ByTenantLevel
+Parameter Sets: A lock at the resource group resource scope., A lock at the subscription resource scope., A lock at the tenant resource scope.
 Aliases: 
 
 Required: True
@@ -261,7 +241,7 @@ The cmdlet gets locks for this scope.
 
 ```yaml
 Type: String
-Parameter Sets: BySpecifiedScope
+Parameter Sets: A lock at the specified scope.
 Aliases: 
 
 Required: True
@@ -276,7 +256,7 @@ Indicates that this cmdlet operates at the tenant level.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: ByTenantLevel
+Parameter Sets: A lock at the tenant resource scope.
 Aliases: 
 
 Required: True

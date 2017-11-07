@@ -12,22 +12,19 @@ Gets the details of an Event Grid topic, or gets a list of all Event Grid topics
 
 ## SYNTAX
 
-### ResourceGroupNameParameterSet (Default)
+### TopicNameParameterSet (Default)
 ```
-Get-AzureRmEventGridTopic [[-ResourceGroupName] <String>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmEventGridTopic [-ResourceGroupName] <String> [-Name] <String> [<CommonParameters>]
 ```
 
-### TopicNameParameterSet
+### ResourceGroupNameParameterSet
 ```
-Get-AzureRmEventGridTopic [-ResourceGroupName] <String> [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmEventGridTopic [[-ResourceGroupName] <String>] [<CommonParameters>]
 ```
 
 ### ResourceIdEventSubscriptionParameterSet
 ```
-Get-AzureRmEventGridTopic [-ResourceId] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmEventGridTopic [-ResourceId] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,21 +64,6 @@ List all the Event Grid topics in the subscription.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 EventGrid Topic Name.
 
@@ -102,10 +84,10 @@ Resource Group Name.
 
 ```yaml
 Type: String
-Parameter Sets: ResourceGroupNameParameterSet
+Parameter Sets: TopicNameParameterSet
 Aliases: ResourceGroup
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -114,10 +96,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: TopicNameParameterSet
+Parameter Sets: ResourceGroupNameParameterSet
 Aliases: ResourceGroup
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)

@@ -19,6 +19,7 @@
 // Changes to this file may cause incorrect behavior and will be lost if the
 // code is regenerated.
 
+using AutoMapper;
 using Microsoft.Azure.Commands.Compute.Automation.Models;
 using Microsoft.Azure.Management.Compute;
 using Microsoft.Azure.Management.Compute.Models;
@@ -139,6 +140,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
     {
         protected override void ProcessRecord()
         {
+            AutoMapper.Mapper.AddProfile<ComputeAutomationAutoMapperProfile>();
             ExecuteClientAction(() =>
             {
                 string resourceGroupName = this.ResourceGroupName;
@@ -148,7 +150,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 {
                     var result = ContainerServicesClient.Get(resourceGroupName, containerServiceName);
                     var psObject = new PSContainerService();
-                    ComputeAutomationAutoMapperProfile.Mapper.Map<ContainerService, PSContainerService>(result, psObject);
+                    Mapper.Map<ContainerService, PSContainerService>(result, psObject);
                     WriteObject(psObject);
                 }
                 else if (!string.IsNullOrEmpty(resourceGroupName))
@@ -168,7 +170,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     var psObject = new List<PSContainerServiceList>();
                     foreach (var r in resultList)
                     {
-                        psObject.Add(ComputeAutomationAutoMapperProfile.Mapper.Map<ContainerService, PSContainerServiceList>(r));
+                        psObject.Add(Mapper.Map<ContainerService, PSContainerServiceList>(r));
                     }
                     WriteObject(psObject, true);
                 }
@@ -189,7 +191,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                     var psObject = new List<PSContainerServiceList>();
                     foreach (var r in resultList)
                     {
-                        psObject.Add(ComputeAutomationAutoMapperProfile.Mapper.Map<ContainerService, PSContainerServiceList>(r));
+                        psObject.Add(Mapper.Map<ContainerService, PSContainerServiceList>(r));
                     }
                     WriteObject(psObject, true);
                 }

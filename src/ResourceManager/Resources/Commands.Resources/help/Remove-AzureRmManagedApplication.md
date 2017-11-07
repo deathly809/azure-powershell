@@ -12,16 +12,16 @@ Removes a managed application
 
 ## SYNTAX
 
-### RemoveByNameAndResourceGroup (Default)
+### The managed application name parameter set. (Default)
 ```
 Remove-AzureRmManagedApplication -Name <String> -ResourceGroupName <String> [-Force] [-ApiVersion <String>]
- [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-Pre] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
 ```
 
-### RemoveById
+### The managed application Id parameter set.
 ```
 Remove-AzureRmManagedApplication -Id <String> [-Force] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -95,7 +95,7 @@ e.g.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveById
+Parameter Sets: The managed application Id parameter set.
 Aliases: ResourceId
 
 Required: True
@@ -110,7 +110,7 @@ The managed application name.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByNameAndResourceGroup
+Parameter Sets: The managed application name parameter set.
 Aliases: 
 
 Required: True
@@ -140,7 +140,7 @@ The resource group name.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByNameAndResourceGroup
+Parameter Sets: The managed application name parameter set.
 Aliases: 
 
 Required: True
@@ -181,16 +181,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ### System.String
 
+
 ## OUTPUTS
 
 ### System.Boolean
+
 
 ## NOTES
 

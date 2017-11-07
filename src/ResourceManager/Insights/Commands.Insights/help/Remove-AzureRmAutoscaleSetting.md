@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: 6140E973-D7AB-4A28-A4FA-818E08129372
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Removes an Autoscale setting.
 ## SYNTAX
 
 ```
-Remove-AzureRmAutoscaleSetting -ResourceGroup <String> -Name <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Remove-AzureRmAutoscaleSetting -ResourceGroup <String> -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +28,6 @@ You must specify the name of the setting and the name of the resource group to w
 ```
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the Autoscale setting to remove.

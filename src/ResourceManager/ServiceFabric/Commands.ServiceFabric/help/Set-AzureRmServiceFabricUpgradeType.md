@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceFabric.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -15,15 +14,13 @@ Change the Service Fabric upgrade type of the cluster.
 ### Automatic
 ```
 Set-AzureRmServiceFabricUpgradeType [-ResourceGroupName] <String> [-Name] <String>
- -UpgradeMode <ClusterUpgradeMode> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -UpgradeMode <ClusterUpgradeMode> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### Manual
 ```
 Set-AzureRmServiceFabricUpgradeType [-ResourceGroupName] <String> [-Name] <String>
- -UpgradeMode <ClusterUpgradeMode> -Version <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ -UpgradeMode <ClusterUpgradeMode> -Version <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,21 +36,6 @@ PS c:> Set-AzureRmServiceFabricUpgradeType -ResourceGroupName 'Group1' -Name 'Co
 This command will set the cluster upgrade mode to automatic.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specify the name of the cluster.

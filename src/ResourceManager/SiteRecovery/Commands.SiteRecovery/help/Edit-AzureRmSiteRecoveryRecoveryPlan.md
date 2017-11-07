@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 59C3E7D7-530F-4D07-904E-41610ECE9253
 online version: 
 schema: 2.0.0
@@ -15,41 +14,37 @@ Edits a Site Recovery plan.
 
 ### AppendGroup (Default)
 ```
-Edit-AzureRmSiteRecoveryRecoveryPlan -RecoveryPlan <ASRRecoveryPlan> [-AppendGroup]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Edit-AzureRmSiteRecoveryRecoveryPlan -RecoveryPlan <ASRRecoveryPlan> [-AppendGroup] [<CommonParameters>]
 ```
 
 ### RemoveGroup
 ```
 Edit-AzureRmSiteRecoveryRecoveryPlan -RecoveryPlan <ASRRecoveryPlan> -RemoveGroup <ASRRecoveryPlanGroup>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### AddProtectedEntities
 ```
 Edit-AzureRmSiteRecoveryRecoveryPlan -RecoveryPlan <ASRRecoveryPlan> -Group <ASRRecoveryPlanGroup>
- -AddProtectedEntities <ASRProtectionEntity[]> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -AddProtectedEntities <ASRProtectionEntity[]> [<CommonParameters>]
 ```
 
 ### RemoveProtectedEntities
 ```
 Edit-AzureRmSiteRecoveryRecoveryPlan -RecoveryPlan <ASRRecoveryPlan> -Group <ASRRecoveryPlanGroup>
- -RemoveProtectedEntities <ASRProtectionEntity[]> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -RemoveProtectedEntities <ASRProtectionEntity[]> [<CommonParameters>]
 ```
 
 ### AddReplicationProtectedItems
 ```
 Edit-AzureRmSiteRecoveryRecoveryPlan -RecoveryPlan <ASRRecoveryPlan> -Group <ASRRecoveryPlanGroup>
- -AddProtectedItems <ASRReplicationProtectedItem[]> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -AddProtectedItems <ASRReplicationProtectedItem[]> [<CommonParameters>]
 ```
 
 ### RemoveReplicationProtectedItems
 ```
 Edit-AzureRmSiteRecoveryRecoveryPlan -RecoveryPlan <ASRRecoveryPlan> -Group <ASRRecoveryPlanGroup>
- -RemoveProtectedItems <ASRReplicationProtectedItem[]> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -RemoveProtectedItems <ASRReplicationProtectedItem[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -96,21 +91,6 @@ Parameter Sets: AppendGroup
 Aliases: 
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -196,6 +176,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRRecoveryPlan
+
 Parameter 'RecoveryPlan' accepts value of type 'ASRRecoveryPlan' from the pipeline
 
 ## OUTPUTS

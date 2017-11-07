@@ -113,7 +113,7 @@ function Test-GetAzureRmVMDscExtension
 #helper methods for ARM 
 function Get-DefaultResourceGroupLocation
 {
-	if ((Get-ComputeTestMode) -ne 'Playback')
+	if ([Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::Mode -ne [Microsoft.Azure.Test.HttpRecorder.HttpRecorderMode]::Playback)
 	{
 		$namespace = "Microsoft.Resources" 
 		$type = "resourceGroups" 

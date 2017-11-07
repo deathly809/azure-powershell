@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.RecoveryServices.Backup.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 707A3E57-AF46-44B3-A491-89554900EF03
 online version: 
 schema: 2.0.0
@@ -15,14 +14,12 @@ Gets details for a Backup job.
 
 ### JobFilterSet (Default)
 ```
-Get-AzureRmRecoveryServicesBackupJobDetails [-Job] <JobBase> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRecoveryServicesBackupJobDetails [-Job] <JobBase> [<CommonParameters>]
 ```
 
 ### IdFilterSet
 ```
-Get-AzureRmRecoveryServicesBackupJobDetails [-JobId] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRecoveryServicesBackupJobDetails [-JobId] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,21 +43,6 @@ The second command gets the job details for the failed jobs in $Jobs, and then s
 The final command displays error details for the failed jobs.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Job
 Specifies the job to get.

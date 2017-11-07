@@ -41,42 +41,42 @@ namespace Microsoft.Azure.Commands.ResourceManager.Cmdlets.Implementation
         /// <summary>
         /// The paramterless set
         /// </summary>
-        internal const string ParameterlessSet = "GetAllResources";
+        internal const string ParameterlessSet = "The list all resources parameter set.";
 
         /// <summary>
         /// The get resource parameter set.
         /// </summary>
-        internal const string GetResourceByNameTypeParameterSet = "GetByResourceNameAndType";
+        internal const string GetResourceByNameTypeParameterSet = "Get a resource by name and type.";
 
         /// <summary>
         /// The list tenant resources parameter set.
         /// </summary>
-        internal const string ListTenantResourcesParameterSet = "GetBySpecifiedScopeAtTenantLevel";
+        internal const string ListTenantResourcesParameterSet = "Lists the resources based on the specified scope at the tenant level.";
 
         /// <summary>
         /// The get tenant resource parameter set.
         /// </summary>
-        internal const string GetTenantResourceParameterSet = "GetByTenantLevel";
+        internal const string GetTenantResourceParameterSet = "Get a single resource at the tenant level.";
 
         /// <summary>
         /// The get resource Id parameter set.
         /// </summary>
-        internal const string GetResourceByIdParameterSet = "GetByResourceId";
+        internal const string GetResourceByIdParameterSet = "Get a single resource by its Id.";
 
         /// <summary>
         /// The list resources by name and resource group set.
         /// </summary>
-        internal const string GetResourceByNameGroupParameterSet = "GetByNameAndGroup";
+        internal const string GetResourceByNameGroupParameterSet = "Get resource by name and group";
 
         /// <summary>
         /// The list resources by name, type and resource group set.
         /// </summary>
-        internal const string GetResourceByNameGroupTypeParameterSet = "GetByNameGroupAndType";
+        internal const string GetResourceByNameGroupTypeParameterSet = "Get resource by name, group and type";
 
         /// <summary>
         /// The list resources set.
         /// </summary>
-        internal const string ListResourceCollection = "GetResourceCollection";
+        internal const string ListResourceCollection = "Get resource collection";
 
         /// <summary>
         /// Caches the current subscription ids to get all subscription ids in the pipeline.

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceBus.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -15,21 +14,19 @@ Creates a new authorization rule for the specified Service Bus given Namespace o
 ### NamespaceAuthorizationRuleSet (Default)
 ```
 New-AzureRmServiceBusAuthorizationRule [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
- -Rights <String[]> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ -Rights <String[]> [-WhatIf] [-Confirm]
 ```
 
 ### QueueAuthorizationRuleSet
 ```
-New-AzureRmServiceBusAuthorizationRule [-ResourceGroupName] <String> [-Namespace] <String> [-Queue] <String>
- [-Name] <String> -Rights <String[]> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+New-AzureRmServiceBusAuthorizationRule [-ResourceGroupName] <String> [[-Namespace] <String>] [-Queue] <String>
+ [-Name] <String> -Rights <String[]> [-WhatIf] [-Confirm]
 ```
 
 ### TopicAuthorizationRuleSet
 ```
-New-AzureRmServiceBusAuthorizationRule [-ResourceGroupName] <String> [-Namespace] <String> [-Topic] <String>
- [-Name] <String> -Rights <String[]> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+New-AzureRmServiceBusAuthorizationRule [-ResourceGroupName] <String> [[-Namespace] <String>] [-Topic] <String>
+ [-Name] <String> -Rights <String[]> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -60,13 +57,13 @@ Creates `AuthoRule1` with **Listen** and **Send** rights for the topic `SBTopic`
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: IAzureContextContainer
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
+Aliases: cf
 
 Required: False
 Position: Named
@@ -95,10 +92,22 @@ Namespace Name.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: NamespaceAuthorizationRuleSet
 Aliases: NamespaceName
 
 Required: True
+Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+```yaml
+Type: String
+Parameter Sets: QueueAuthorizationRuleSet, TopicAuthorizationRuleSet
+Aliases: NamespaceName
+
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -167,21 +176,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -198,17 +192,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ### System.String
 System.String[]
 
+
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.ServiceBus.Models.SharedAccessAuthorizationRuleAttributes
+
 
 ## NOTES
 

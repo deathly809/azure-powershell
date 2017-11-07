@@ -27,17 +27,17 @@ namespace Microsoft.Azure.Commands.ResourceManager.Cmdlets.Implementation
         /// <summary>
         /// The subscription level parameter set.
         /// </summary>
-        internal const string SubscriptionLevelResoruceParameterSet = "BySubscriptionLevel";
+        internal const string SubscriptionLevelResoruceParameterSet = "Resource that resides at the subscription level.";
 
         /// <summary>
         /// The tenant level parameter set.
         /// </summary>
-        internal const string TenantLevelResoruceParameterSet = "ByTenantLevel";
+        internal const string TenantLevelResoruceParameterSet = "Resource that resides at the tenant level.";
 
         /// <summary>
         /// The tenant level parameter set.
         /// </summary>
-        internal const string ResourceIdParameterSet = "ByResourceId";
+        internal const string ResourceIdParameterSet = "The resource Id.";
 
         /// <summary>
         /// Gets or sets the resource Id parameter.

@@ -79,6 +79,8 @@ namespace Microsoft.Azure.Commands.RecoveryServices.SiteRecovery
         /// </summary>
         public virtual void ExecuteSiteRecoveryCmdlet()
         {
+            SiteRecoveryAutoMapperProfile.Initialize();
+
             // Do Nothing
         }
 

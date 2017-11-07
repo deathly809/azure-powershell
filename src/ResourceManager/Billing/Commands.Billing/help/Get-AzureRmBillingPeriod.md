@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Billing.dll-Help.xml
-Module Name: AzureRM.Billing
 online version: 
 schema: 2.0.0
 ---
@@ -14,13 +13,12 @@ Get billing periods of the subscription.
 
 ### List (Default)
 ```
-Get-AzureRmBillingPeriod [-MaxCount <Int32>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmBillingPeriod [-MaxCount <Int32>] [<CommonParameters>]
 ```
 
 ### Single
 ```
-Get-AzureRmBillingPeriod -Name <System.Collections.Generic.List`1[System.String]>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmBillingPeriod -Name <System.Collections.Generic.List`1[System.String]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,21 +48,6 @@ PS C:\> Get-AzureRmBillingPeriod -MaxCount 2
 Get at most 2 billing periods of the subscription.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -MaxCount
 Determine the maximum number of records to return.

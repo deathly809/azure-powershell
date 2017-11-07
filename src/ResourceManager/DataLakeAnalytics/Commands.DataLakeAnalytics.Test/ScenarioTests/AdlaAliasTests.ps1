@@ -42,10 +42,6 @@ function Test-DataLakeAnalyticsJobRelationships
 			Assert-False {$i -eq 60} "dataLakeAnalytics accounts not in succeeded state even after 30 min."
 		}
 
-		# Wait for 5 minutes for the server to restore the account cache
-		# Without this, the test will pass non-deterministically
-		[Microsoft.Rest.ClientRuntime.Azure.TestFramework.TestUtilities]::Wait(300000)
-
 		# submit a job
 		$guidForJob = [Microsoft.Rest.ClientRuntime.Azure.TestFramework.TestUtilities]::GenerateGuid("relationTest01")
 		
@@ -580,10 +576,6 @@ function Test-DataLakeAnalyticsJob
 			Assert-False {$i -eq 60} "dataLakeAnalytics accounts not in succeeded state even after 30 min."
 		}
 
-		# Wait for 5 minutes for the server to restore the account cache
-		# Without this, the test will pass non-deterministically
-		[Microsoft.Rest.ClientRuntime.Azure.TestFramework.TestUtilities]::Wait(300000)
-
 		# submit a job
 		$guidForJob = [Microsoft.Rest.ClientRuntime.Azure.TestFramework.TestUtilities]::GenerateGuid("jobTest02")
 		[Microsoft.Azure.Commands.DataLakeAnalytics.Models.DataLakeAnalyticsClient]::JobIdQueue.Enqueue($guidForJob)
@@ -603,12 +595,12 @@ function Test-DataLakeAnalyticsJob
 
 		Assert-NotNull {Get-AdlJob -AccountName $accountName}
 
-		$jobsWithDateOffset = Get-AdlJob -AccountName $accountName -SubmittedAfter $([DateTimeOffset]($nowTime).AddMinutes(-10))
+		$jobsWithDateOffset = Get-AdlJob -AccountName $accountName -SubmittedAfter $([DateTimeOffset]($nowTime).AddMinutes(-5))
 
-		Assert-True {$jobsWithDateOffset.Count -gt 0} "Failed to retrieve jobs submitted after ten miuntes ago"
+		Assert-True {$jobsWithDateOffset.Count -gt 0} "Failed to retrieve jobs submitted after five miuntes ago"
 		
-		# we add ten minutes to ensure that the timing is right, since we are using the account creation time, and not truly "now"
-		$jobsWithDateOffset = Get-AdlJob -AccountName $accountName -SubmittedBefore $([DateTimeOffset]($nowTime).AddMinutes(10))
+		# we add five minutes to ensure that the timing is right, since we are using the account creation time, and not truly "now"
+		$jobsWithDateOffset = Get-AdlJob -AccountName $accountName -SubmittedBefore $([DateTimeOffset]($nowTime).AddMinutes(5))
 
 		Assert-True {$jobsWithDateOffset.Count -gt 0} "Failed to retrieve jobs submitted before right now"
 
@@ -825,10 +817,6 @@ function Test-DataLakeAnalyticsCatalog
 			[Microsoft.Rest.ClientRuntime.Azure.TestFramework.TestUtilities]::Wait(30000)
 			Assert-False {$i -eq 60} "dataLakeAnalytics accounts not in succeeded state even after 30 min."
 		}
-
-		# Wait for 5 minutes for the server to restore the account cache
-		# Without this, the test will pass non-deterministically
-		[Microsoft.Rest.ClientRuntime.Azure.TestFramework.TestUtilities]::Wait(300000)
 	
 		# Run a job to create the catalog items (except secret and credential)
 		$scriptTemplate = @"

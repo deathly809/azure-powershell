@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServerManagement.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 4EE30890-B09B-4811-88AD-4BF4FD47E431
 online version: 
 schema: 2.0.0
@@ -15,13 +14,12 @@ Gets one or more Server Management nodes.
 
 ### ByNodeName
 ```
-Get-AzureRmServerManagementNode [[-ResourceGroupName] <String>] [[-NodeName] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmServerManagementNode [[-ResourceGroupName] <String>] [[-NodeName] <String>] [<CommonParameters>]
 ```
 
 ### ByNode
 ```
-Get-AzureRmServerManagementNode [-Node] <Node> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmServerManagementNode [-Node] <Node> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,21 +33,6 @@ The **Get-AzureRmServerManagementNode** cmdlet gets one or more Azure Server Man
 ```
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Node
 Specifies an existing node from which to get the *ResourceGroupName* and the *NodeName* parameters.
@@ -102,6 +85,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Node
+
 Parameter 'Node' accepts value of type 'Node' from the pipeline
 
 ## OUTPUTS

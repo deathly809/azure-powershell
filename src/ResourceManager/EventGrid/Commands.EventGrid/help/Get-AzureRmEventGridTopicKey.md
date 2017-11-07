@@ -14,20 +14,17 @@ Gets the shared access keys used to publish events to an Event Grid topic.
 
 ### TopicNameParameterSet (Default)
 ```
-Get-AzureRmEventGridTopicKey [-ResourceGroupName] <String> [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmEventGridTopicKey [-ResourceGroupName] <String> [-Name] <String> [<CommonParameters>]
 ```
 
 ### TopicInputObjectParameterSet
 ```
-Get-AzureRmEventGridTopicKey [-InputObject] <PSTopic> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmEventGridTopicKey [-InputObject] <PSTopic> [<CommonParameters>]
 ```
 
 ### ResourceIdEventSubscriptionParameterSet
 ```
-Get-AzureRmEventGridTopicKey [-ResourceId] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmEventGridTopicKey [-ResourceId] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,21 +47,6 @@ PS C:\> Get-AzureRmEventGridTopic -ResourceGroup MyResourceGroupName -Name Topic
 Gets the shared access keys of Event Grid topic \`Topic1\` in resource group \`MyResourceGroupName\`.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -InputObject
 EventGrid Topic object.

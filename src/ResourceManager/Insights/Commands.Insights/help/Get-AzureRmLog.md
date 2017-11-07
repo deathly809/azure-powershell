@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: 85492E00-3776-4F20-A444-9C28CC6154B7
 online version: 
 schema: 2.0.0
@@ -13,38 +12,34 @@ Gets a log of events.
 
 ## SYNTAX
 
-### GetByCorrelationId
+### Query on CorrelationId
 ```
 Get-AzureRmLog [-StartTime <DateTime>] [-EndTime <DateTime>] [-Status <String>] [-Caller <String>]
- [-DetailedOutput] [-CorrelationId] <String> [-MaxEvents <Int32>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-DetailedOutput] [-CorrelationId] <String> [-MaxEvents <Int32>] [<CommonParameters>]
 ```
 
-### GetByResourceId
+### Query on ResourceIdName
 ```
 Get-AzureRmLog [-StartTime <DateTime>] [-EndTime <DateTime>] [-Status <String>] [-Caller <String>]
- [-DetailedOutput] [-ResourceId] <String> [-MaxEvents <Int32>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-DetailedOutput] [-ResourceId] <String> [-MaxEvents <Int32>] [<CommonParameters>]
 ```
 
-### GetByResourceGroup
+### Query on ResourceGroupProvider
 ```
 Get-AzureRmLog [-StartTime <DateTime>] [-EndTime <DateTime>] [-Status <String>] [-Caller <String>]
- [-DetailedOutput] [-ResourceGroup] <String> [-MaxEvents <Int32>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-DetailedOutput] [-ResourceGroup] <String> [-MaxEvents <Int32>] [<CommonParameters>]
 ```
 
-### GetByResourceProvider
+### Query on ResourceProvider
 ```
 Get-AzureRmLog [-StartTime <DateTime>] [-EndTime <DateTime>] [-Status <String>] [-Caller <String>]
- [-DetailedOutput] [-ResourceProvider] <String> [-MaxEvents <Int32>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-DetailedOutput] [-ResourceProvider] <String> [-MaxEvents <Int32>] [<CommonParameters>]
 ```
 
-### GetBySubscription
+### Query at subscription level
 ```
 Get-AzureRmLog [-StartTime <DateTime>] [-EndTime <DateTime>] [-Status <String>] [-Caller <String>]
- [-DetailedOutput] [-MaxEvents <Int32>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-DetailedOutput] [-MaxEvents <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -219,28 +214,13 @@ This parameter is required.
 
 ```yaml
 Type: String
-Parameter Sets: GetByCorrelationId
+Parameter Sets: Query on CorrelationId
 Aliases: 
 
 Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -300,7 +280,7 @@ Specifies the name of the resource group.
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceGroup
+Parameter Sets: Query on ResourceGroupProvider
 Aliases: 
 
 Required: True
@@ -315,7 +295,7 @@ Specifies the resource ID.
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceId
+Parameter Sets: Query on ResourceIdName
 Aliases: 
 
 Required: True
@@ -330,7 +310,7 @@ Specifies a filter by resource provider.
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceProvider
+Parameter Sets: Query on ResourceProvider
 Aliases: 
 
 Required: True

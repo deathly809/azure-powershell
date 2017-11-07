@@ -14,10 +14,8 @@
 
 using Microsoft.Azure.Graph.RBAC.Version1_6.ActiveDirectory;
 using Microsoft.Azure.Graph.RBAC.Version1_6.Models;
-using Microsoft.WindowsAzure.Commands.Common;
 using System;
 using System.Management.Automation;
-using System.Security;
 
 namespace Microsoft.Azure.Commands.ActiveDirectory
 {
@@ -44,7 +42,8 @@ namespace Microsoft.Azure.Commands.ActiveDirectory
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true, ParameterSetName = ParameterSet.SPNWithPassword,
             HelpMessage = "The value for the password credential associated with the servicePrincipal that will be valid for one year by default.")]
         [ValidateNotNullOrEmpty]
-        public SecureString Password { get; set; }
+        [Obsolete("New-AzureRmADSpCredential: The parameter \"Password\" is being changed from a string to a SecureString in an upcoming breaking change release.")]
+        public string Password { get; set; }
 
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true, ParameterSetName = ParameterSet.SpObjectIdWithCertValue,
             HelpMessage = "The base64 encoded value for the AsymmetricX509Cert associated with the servicePrincipal that will be valid for one year by default.")]
@@ -75,26 +74,29 @@ namespace Microsoft.Azure.Commands.ActiveDirectory
                     ObjectId = ActiveDirectoryClient.GetObjectIdFromSPN(ServicePrincipalName);
                 }
 
-                if (Password != null && Password.Length > 0) 
+#pragma warning disable 0618
+                if (!string.IsNullOrEmpty(Password))
+#pragma warning restore 0618
                 {
-                    string decodedPassword = SecureStringExtensions.ConvertToString(Password);
                     // Create object for password credential
-                    var passwordCredential = new PasswordCredential() 
+                    var passwordCredential = new PasswordCredential()
                     {
                         EndDate = EndDate,
                         StartDate = StartDate,
                         KeyId = Guid.NewGuid().ToString(),
-                        Value = decodedPassword
+#pragma warning disable 0618
+                        Value = Password
+#pragma warning restore 0618
                     };
-                    if (ShouldProcess(target: ObjectId, action: string.Format("Adding a new password to service principal with objectId {0}", ObjectId))) 
+                    if (ShouldProcess(target: ObjectId, action: string.Format("Adding a new password to service principal with objectId {0}", ObjectId)))
                     {
                         WriteObject(ActiveDirectoryClient.CreateSpPasswordCredential(ObjectId, passwordCredential));
                     }
-                } 
-                else if (!string.IsNullOrEmpty(CertValue)) 
+                }
+                else if (!string.IsNullOrEmpty(CertValue))
                 {
                     // Create object for key credential
-                    var keyCredential = new KeyCredential() 
+                    var keyCredential = new KeyCredential()
                     {
                         EndDate = EndDate,
                         StartDate = StartDate,
@@ -104,12 +106,12 @@ namespace Microsoft.Azure.Commands.ActiveDirectory
                         Usage = "Verify"
                     };
 
-                    if (ShouldProcess(target: ObjectId, action: string.Format("Adding a new caertificate to service principal with objectId {0}", ObjectId))) 
+                    if (ShouldProcess(target: ObjectId, action: string.Format("Adding a new caertificate to service principal with objectId {0}", ObjectId)))
                     {
                         WriteObject(ActiveDirectoryClient.CreateSpKeyCredential(ObjectId, keyCredential));
                     }
                 }
-                else 
+                else
                 {
                     throw new InvalidOperationException("No valid keyCredential or passwordCredential to update!!");
                 }

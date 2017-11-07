@@ -14,8 +14,8 @@
 
 <#
 .SYNOPSIS
-Creates a linked service and then does a Get to compare the results.
-Delete sthe created linked service at the end.
+Create a linked service and then do a Get to compare the result are identical.
+Delete the created linked service after test finishes.
 #>
 function Test-LinkedService
 {
@@ -31,56 +31,27 @@ function Test-LinkedService
         Set-AzureRmDataFactoryV2 -ResourceGroupName $rgname -Name $dfname -Location $dflocation -Force
      
         $lsname = "foo"
-        $expected = Set-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DataFactoryName $dfname -Name $lsname -File .\Resources\linkedService.json -Force
-        $actual = Get-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DataFactoryName $dfname -Name $lsname
+   
+        $actual = Set-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DataFactoryName $dfname -Name $lsname -File .\Resources\linkedService.json -Force
+        $expected = Get-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DataFactoryName $dfname -Name $lsname
 
-        Verify-AdfSubResource $expected $actual $rgname $dfname $lsname
+        Assert-AreEqual $expected.ResourceGroupName $actual.ResourceGroupName
+        Assert-AreEqual $expected.DataFactoryName $actual.DataFactoryName
+        Assert-AreEqual $expected.Name $lsname
 
         Remove-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DataFactoryName $dfname -Name $lsname -Force
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }
 
 <#
 .SYNOPSIS
-Creates a dataset and the linked service which it depends on. Then does a Get with resource id parameter to compare the results.
-Deletes the created dataset with resource id parameter at the end.
-#>
-function Test-LinkedServiceWithResourceId
-{
-    $dfname = Get-DataFactoryName
-    $rgname = Get-ResourceGroupName
-    $rglocation = Get-ProviderLocation ResourceManagement
-    $dflocation = Get-ProviderLocation DataFactoryManagement
-        
-    New-AzureRmResourceGroup -Name $rgname -Location $rglocation -Force
-
-    try
-    {
-        $df = Set-AzureRmDataFactoryV2 -ResourceGroupName $rgname -Name $dfname -Location $dflocation -Force
-
-        $linkedServicename = "foo1"
-        $expected = Set-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DataFactoryName $dfname -File .\Resources\linkedService.json -Name $linkedServicename -Force
-        $actual = Get-AzureRmDataFactoryV2LinkedService -ResourceId $expected.Id
-
-        Verify-AdfSubResource $expected $actual $rgname $dfname $linkedServicename
-
-        Remove-AzureRmDataFactoryV2LinkedService -ResourceId $expected.Id -Force
-    }
-    finally
-    {
-        CleanUp $rgname $dfname
-    }
-}
-
-<#
-.SYNOPSIS
-Creates a linked service and then does a Get to compare the results.
-Deletes the created linked service at the end.
-Uses -DataFactory parameter if available in cmdlet.
+Create a linked service and then do a Get to compare the result are identical.
+Delete the created linked service after test finishes.
+Use -DataFactory parameter in all cmdlets.
 #>
 function Test-LinkedServiceWithDataFactoryParameter
 {
@@ -96,22 +67,25 @@ function Test-LinkedServiceWithDataFactoryParameter
         $df = Set-AzureRmDataFactoryV2 -ResourceGroupName $rgname -Name $dfname -Location $dflocation -Force
      
         $lsname = "foo"
-        $expected = Set-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DatafactoryName $dfname -Name $lsname -File .\Resources\linkedService.json -Force
-        $actual = Get-AzureRmDataFactoryV2LinkedService -DataFactory $df -Name $lsname
+   
+        $actual = Set-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DatafactoryName $dfname -Name $lsname -File .\Resources\linkedService.json -Force
+        $expected = Get-AzureRmDataFactoryV2LinkedService -DataFactory $df -Name $lsname
 
-        Verify-AdfSubResource $expected $actual $rgname $dfname $lsname
+        Assert-AreEqual $expected.ResourceGroupName $actual.ResourceGroupName
+        Assert-AreEqual $expected.DataFactoryName $actual.DataFactoryName
+        Assert-AreEqual $expected.Name $lsname
 
         Remove-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DatafactoryName $dfname -Name $lsname -Force
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }
 
 <#
 .SYNOPSIS
-Tests the piping support.
+Test piping support.
 #>
 function Test-LinkedServicePiping
 {
@@ -137,6 +111,6 @@ function Test-LinkedServicePiping
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }

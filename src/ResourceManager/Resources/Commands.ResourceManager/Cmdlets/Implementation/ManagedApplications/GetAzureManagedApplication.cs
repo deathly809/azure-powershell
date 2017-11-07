@@ -30,17 +30,17 @@ namespace Microsoft.Azure.Commands.ResourceManager.Cmdlets.Implementation
         /// <summary>
         /// The managed application Id parameter set.
         /// </summary>
-        internal const string ManagedApplicationIdParameterSet = "GetById";
+        internal const string ManagedApplicationIdParameterSet = "The managed application Id parameter set.";
 
         /// <summary>
         /// The managed application name parameter set.
         /// </summary>
-        internal const string ManagedApplicationNameParameterSet = "GetByNameAndResourceGroup";
+        internal const string ManagedApplicationNameParameterSet = "The managed application name parameter set.";
 
         /// <summary>
         /// The list all managed application parameter set.
         /// </summary>
-        internal const string ParameterlessSet = "GetBySubscription";
+        internal const string ParameterlessSet = "The list all managed applications parameter set.";
 
         /// <summary>
         /// Gets or sets the managed application name parameter.

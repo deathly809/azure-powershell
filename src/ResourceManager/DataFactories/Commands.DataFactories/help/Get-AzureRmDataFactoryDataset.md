@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.DataFactories.dll-Help.xml
-Module Name: AzureRM.DataFactories
 ms.assetid: BB18EEF3-570A-4667-AF0E-FCEEE17B4905
 online version: 
 schema: 2.0.0
@@ -16,13 +15,12 @@ Gets information about datasets in Azure Data Factory.
 ### ByFactoryName (Default)
 ```
 Get-AzureRmDataFactoryDataset [-DataFactoryName] <String> [[-Name] <String>] [-ResourceGroupName] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### ByFactoryObject
 ```
-Get-AzureRmDataFactoryDataset [-DataFactory] <PSDataFactory> [[-Name] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmDataFactoryDataset [-DataFactory] <PSDataFactory> [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -120,21 +118,6 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

@@ -15,27 +15,24 @@ Gets the details of an event subscription, or gets a list of all event subscript
 ### EventSubscriptionTopicNameParameterSet (Default)
 ```
 Get-AzureRmEventGridSubscription [[-EventSubscriptionName] <String>] [[-ResourceGroupName] <String>]
- [[-TopicName] <String>] [-IncludeFullEndpointUrl] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [[-TopicName] <String>] [-IncludeFullEndpointUrl] [<CommonParameters>]
 ```
 
 ### ResourceIdEventSubscriptionParameterSet
 ```
 Get-AzureRmEventGridSubscription [[-EventSubscriptionName] <String>] [-ResourceId] <String>
- [-IncludeFullEndpointUrl] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-IncludeFullEndpointUrl] [<CommonParameters>]
 ```
 
 ### EventSubscriptionTopicTypeNameParameterSet
 ```
 Get-AzureRmEventGridSubscription [[-ResourceGroupName] <String>] [[-TopicTypeName] <String>]
- [[-Location] <String>] [-IncludeFullEndpointUrl] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [[-Location] <String>] [-IncludeFullEndpointUrl] [<CommonParameters>]
 ```
 
 ### EventSubscriptionInputObjectSet
 ```
-Get-AzureRmEventGridSubscription [-InputObject] <PSTopic> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmEventGridSubscription [-InputObject] <PSTopic> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -123,21 +120,6 @@ PS C:\> Get-AzureRmEventGridSubscription -TopicTypeName "Microsoft.Resources.Res
 Gets the list of all event subscriptions created for the specific resource group.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -EventSubscriptionName
 The name of the event subscription

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceBus.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -13,13 +12,13 @@ Creates a Service Bus queue in the specified Service Bus namespace.
 ## SYNTAX
 
 ```
-New-AzureRmServiceBusQueue [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
- [-EnablePartitioning <Boolean>] [-LockDuration <String>] [-AutoDeleteOnIdle <String>]
+New-AzureRmServiceBusQueue [-ResourceGroup] <String> [-NamespaceName] <String> [-QueueName] <String>
+ -EnablePartitioning <Boolean> [-LockDuration <String>] [-AutoDeleteOnIdle <String>]
  [-DefaultMessageTimeToLive <String>] [-DuplicateDetectionHistoryTimeWindow <String>]
- [-DeadLetteringOnMessageExpiration <Boolean>] [-EnableExpress <Boolean>] [-MaxDeliveryCount <Int32>]
- [-MaxSizeInMegabytes <Int64>] [-MessageCount <Int64>] [-RequiresDuplicateDetection <Boolean>]
- [-RequiresSession <Boolean>] [-SizeInBytes <Int64>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-EnableBatchedOperations <Boolean>] [-DeadLetteringOnMessageExpiration <Boolean>] [-EnableExpress <Boolean>]
+ [-IsAnonymousAccessible <Boolean>] [-MaxDeliveryCount <Int32>] [-MaxSizeInMegabytes <Int64>]
+ [-MessageCount <Int64>] [-RequiresDuplicateDetection <Boolean>] [-RequiresSession <Boolean>]
+ [-SizeInBytes <Int64>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -82,21 +81,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DuplicateDetectionHistoryTimeWindow
 Specifies the duplicate detection history time window, a [TimeSpan](https://msdn.microsoft.com/library/system.timespan.aspx) valuethat defines the duration of the duplicate detection history. The default value is 10 minutes.
 
@@ -104,6 +88,22 @@ Specifies the duplicate detection history time window, a [TimeSpan](https://msdn
 Type: String
 Parameter Sets: (All)
 Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -EnableBatchedOperations
+Specifies whether server-side batched operations are enabled.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases: 
+Accepted values: TRUE, FALSE
 
 Required: False
 Position: Named
@@ -130,6 +130,22 @@ Accept wildcard characters: False
 
 ### -EnablePartitioning
 Specifies whether EnablePartitioning is enabled.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases: 
+Accepted values: TRUE, FALSE
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -IsAnonymousAccessible
+Specifies whether the message is anonymously accessible.
 
 ```yaml
 Type: Boolean
@@ -204,31 +220,31 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Name
-Queue Name.
+### -NamespaceName
+The Service Bus namespace name.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: QueueName
+Aliases: 
 
 Required: True
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Namespace
-Namespace Name.
+### -QueueName
+The Service Bus queue name.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: NamespaceName
+Aliases: 
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -266,13 +282,13 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -ResourceGroupName
-The name of the resource group
+### -ResourceGroup
+The name of the resource group.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: ResourceGroup
+Aliases: 
 
 Required: True
 Position: 0
@@ -348,15 +364,19 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### Microsoft.Azure.Commands.ServiceBus.Models.QueueAttributes
 Name                                : SB-Queue_exampl1
+Location                            : West US
 LockDuration                        : 
 AccessedAt                          : 
 AutoDeleteOnIdle                    : 10675199.02:48:05.4775807
+EntityAvailabilityStatus            : 
 CreatedAt                           : 1/20/2017 2:51:36 AM
 DefaultMessageTimeToLive            : 10675199.02:48:05.4775807
 DuplicateDetectionHistoryTimeWindow : 
+EnableBatchedOperations             : True
 DeadLetteringOnMessageExpiration    : False
 EnableExpress                       : False
 EnablePartitioning                  : True
+IsAnonymousAccessible               : False
 MaxDeliveryCount                    : 
 MaxSizeInMegabytes                  : 16384
 MessageCount                        : 
@@ -365,6 +385,7 @@ RequiresDuplicateDetection          : False
 RequiresSession                     : False
 SizeInBytes                         : 
 Status                              : Active
+SupportOrdering                     : False
 UpdatedAt                           : 1/20/2017 2:51:37 AM
 
 ## NOTES

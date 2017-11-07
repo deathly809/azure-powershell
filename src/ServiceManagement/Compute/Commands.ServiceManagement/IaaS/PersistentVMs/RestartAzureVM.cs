@@ -123,9 +123,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS
                 null,
                 CommandRuntime.ToString(),
                 () => this.ComputeClient.VirtualMachines.Redeploy(this.ServiceName, CurrentDeploymentNewSM.Name, roleName),
-                (s, response) => ContextFactory(response, s,
-                                    ServiceManagementProfile.Mapper.Map<OperationStatusResponse, ManagementOperationContext>,
-                                    ServiceManagementProfile.Mapper.Map));
+                (s, response) => ContextFactory<OperationStatusResponse, ManagementOperationContext>(response, s));
             }
             else if (this.InitiateMaintenance.IsPresent)
             { // Initiate Maintenance on VM
@@ -133,9 +131,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS
                 null,
                 CommandRuntime.ToString(),
                 () => this.ComputeClient.VirtualMachines.InitiateMaintenance(this.ServiceName, CurrentDeploymentNewSM.Name, roleName),
-                (s, response) => ContextFactory(response, s,
-                                    ServiceManagementProfile.Mapper.Map<OperationStatusResponse, ManagementOperationContext>,
-                                    ServiceManagementProfile.Mapper.Map));
+                (s, response) => ContextFactory<OperationStatusResponse, ManagementOperationContext>(response, s));
             }
             else
             { // Restart VM
@@ -143,9 +139,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS
                 null,
                 CommandRuntime.ToString(),
                 () => this.ComputeClient.VirtualMachines.Restart(this.ServiceName, CurrentDeploymentNewSM.Name, roleName),
-                (s, response) => ContextFactory(response, s,
-                                    ServiceManagementProfile.Mapper.Map<OperationStatusResponse, ManagementOperationContext>,
-                                    ServiceManagementProfile.Mapper.Map));
+                (s, response) => ContextFactory<OperationStatusResponse, ManagementOperationContext>(response, s));
             }
         }
     }

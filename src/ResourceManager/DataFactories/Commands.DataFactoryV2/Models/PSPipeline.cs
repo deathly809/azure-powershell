@@ -70,21 +70,5 @@ namespace Microsoft.Azure.Commands.DataFactoryV2.Models
                 this._pipeline.Parameters = value;
             }
         }
-
-        public override string Id
-        {
-            get
-            {
-                return this._pipeline.Id;
-            }
-        }
-
-        public override string ETag
-        {
-            get
-            {
-                return this._pipeline.Etag;
-            }
-        }
     }
 }

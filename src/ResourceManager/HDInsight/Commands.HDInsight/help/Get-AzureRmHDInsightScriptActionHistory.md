@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.HDInsight.dll-Help.xml
-Module Name: AzureRM.HDInsight
 ms.assetid: CE690DB0-0CD4-4841-B219-C208173D4730
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Gets the script action history for a cluster and lists it in reverse chronologic
 
 ```
 Get-AzureRmHDInsightScriptActionHistory [-ClusterName] <String> [[-ScriptExecutionId] <Int64>]
- [-ResourceGroupName <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-ResourceGroupName <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,21 +41,6 @@ Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -49,6 +49,10 @@ namespace Microsoft.Azure.Commands.ServiceBus.Models
                 Name = evResource.Name;
                 if(evResource.Id != null)
                 Id = evResource.Id;
+#pragma warning disable 612, 618
+                Status = Microsoft.Azure.Commands.ServiceBus.Models.NamespaceState.Active;
+                Enabled = true;
+#pragma warning restore 612, 618
                 ResourceGroup = Regex.Split(evResource.Id, @"/")[4];
             }
         }
@@ -95,7 +99,23 @@ namespace Microsoft.Azure.Commands.ServiceBus.Models
         /// <summary>
         /// Endpoint you can use to perform ServiceBus operations.
         /// </summary>
-        public string ServiceBusEndpoint { get; set; }      
-        
+        public string ServiceBusEndpoint { get; set; }
+
+        /// <summary>
+        /// Specifies whether this instance is enabled.
+        /// </summary>
+        [ObsoleteAttribute("'Enabled' property is mark as obsolete and will be removed in upcoming breaking changes build", false)]
+        public bool? Enabled { get; set; }
+
+        /// <summary>
+        /// State of the namespace. Possible values include: 'Unknown',
+        /// 'Creating', 'Created', 'Activating', 'Enabling', 'Active',
+        /// 'Disabling', 'Disabled', 'SoftDeleting', 'SoftDeleted',
+        /// 'Removing', 'Removed', 'Failed'
+        /// </summary>
+        [ObsoleteAttribute("'Status' property is mark as obsolete and will be removed in upcoming breaking changes build", false)]
+        public Models.NamespaceState? Status { get; set; }
+
+
     }
 }

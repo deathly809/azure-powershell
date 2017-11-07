@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.RecoveryServices.SiteRecovery.dll-Help.xml
-Module Name: AzureRM.RecoveryServices.SiteRecovery
 online version: 
 schema: 2.0.0
 ---
@@ -14,14 +13,12 @@ Gets information about Site Recovery network mappings for the current vault.
 
 ### ByObject (Default)
 ```
-Get-AzureRmRecoveryServicesAsrNetworkMapping -Network <ASRNetwork> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRecoveryServicesAsrNetworkMapping -Network <ASRNetwork> [<CommonParameters>]
 ```
 
 ### ByObjectWithName
 ```
-Get-AzureRmRecoveryServicesAsrNetworkMapping -Name <String> -Network <ASRNetwork>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmRecoveryServicesAsrNetworkMapping -Name <String> -Network <ASRNetwork> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,21 +34,6 @@ PS C:\> $Networkmappings = Get-AzureRmRecoveryServicesAsrNetworkMapping -Network
 Gets all networks mappings for the passed Network.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 The name of the ASR network mapping object to get.

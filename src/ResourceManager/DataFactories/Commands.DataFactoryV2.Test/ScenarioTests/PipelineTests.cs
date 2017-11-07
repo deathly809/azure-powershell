@@ -31,11 +31,5 @@ namespace Microsoft.Azure.Commands.DataFactoryV2.Test
             RunPowerShellTest("Test-Pipeline");
         }
 
-        [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestPipelineWithResourceIdV2()
-        {
-            RunPowerShellTest("Test-PipelineWithResourceId");
-        }
     }
 }

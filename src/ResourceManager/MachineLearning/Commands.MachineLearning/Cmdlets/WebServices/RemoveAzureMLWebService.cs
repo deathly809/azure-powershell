@@ -28,8 +28,10 @@ namespace Microsoft.Azure.Commands.MachineLearning
     [OutputType(typeof(void))]
     public class RemoveAzureMLWebService : WebServicesCmdletBase
     {
-        protected const string RemoveByNameGroupParameterSet = "RemoveByNameAndResourceGroup";
-        protected const string RemoveByObjectParameterSet = "RemoveByObject";
+        protected const string RemoveByNameGroupParameterSet = 
+            "Remove an Azure ML web service resouce by name and resource group.";
+        protected const string RemoveByObjectParameterSet = 
+            "Remove an Azure ML web service specified as an object.";
 
         [Parameter(
             ParameterSetName = RemoveAzureMLWebService.RemoveByNameGroupParameterSet, 

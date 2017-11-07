@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Websites.dll-Help.xml
-Module Name: AzureRM.Websites
 ms.assetid: B2FDB54F-0318-4037-BC1D-6113E77DDE7E
 online version: 
 schema: 2.0.0
@@ -15,15 +14,14 @@ Gets an Azure Web App slot publishing profile.
 
 ### S1
 ```
-Get-AzureRmWebAppSlotPublishingProfile [[-OutputFile] <String>] [[-Format] <String>]
- [-ResourceGroupName] <String> [-Name] <String> [-Slot] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmWebAppSlotPublishingProfile [-OutputFile] <String> [[-Format] <String>]
+ [-ResourceGroupName] <String> [-Name] <String> [-Slot] <String> [<CommonParameters>]
 ```
 
 ### S2
 ```
-Get-AzureRmWebAppSlotPublishingProfile [[-OutputFile] <String>] [[-Format] <String>] [-WebApp] <Site>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmWebAppSlotPublishingProfile [-OutputFile] <String> [[-Format] <String>] [-WebApp] <Site>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,21 +38,6 @@ This command gets the publishing profile in Ftp format for slot Slot001 pertaini
     and stores it in the specified output file.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Format
 Format
@@ -95,7 +78,7 @@ Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: False
+Required: True
 Position: 3
 Default value: None
 Accept pipeline input: False
@@ -153,6 +136,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Site
+
 Parameter 'WebApp' accepts value of type 'Site' from the pipeline
 
 ## OUTPUTS

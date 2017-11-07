@@ -14,8 +14,8 @@
 
 <#
 .SYNOPSIS
-Creates a trigger and then does a Get to compare the results.
-Deletes the created trigger at the end.
+Create a trigger and then do a Get to compare the result are identical.
+Delete the created trigger after test finishes.
 #>
 function Test-Trigger
 {
@@ -31,26 +31,30 @@ function Test-Trigger
         Set-AzureRmDataFactoryV2 -ResourceGroupName $rgname -Name $dfname -Location $dflocation -Force
      
         $triggername = "foo"
-        $expected = Set-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -File .\Resources\scheduletrigger.json -Force
-        $actual = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
+   
+        $actual = Set-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -File .\Resources\scheduletrigger.json -Force
+        $expected = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
 
-        Verify-Trigger $expected $actual $rgname $dfname $triggername
+        Assert-AreEqual $expected.ResourceGroupName $actual.ResourceGroupName
+        Assert-AreEqual $expected.DataFactoryName $actual.DataFactoryName
+        Assert-AreEqual $expected.Name $triggername
+        Assert-AreEqual $expected.RuntimeState $actual.RuntimeState
 
         Remove-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -Force
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }
 
 <#
 .SYNOPSIS
-Creates a trigger and then does a Get to compare the results.
-Starts and Stops trigger.
-Then deletes the created trigger at the end.
+Create a trigger and then do a Get to compare the result are identical.
+Start and Stop trigger
+Delete the created trigger after test finishes.
 #>
-function Test-StartTriggerThrowsWithoutPipeline
+function Test-StartStopTrigger
 {
     $dfname = Get-DataFactoryName
     $rgname = Get-ResourceGroupName
@@ -64,26 +68,38 @@ function Test-StartTriggerThrowsWithoutPipeline
         Set-AzureRmDataFactoryV2 -ResourceGroupName $rgname -Name $dfname -Location $dflocation -Force
      
         $triggername = "foo"
-        $expected = Set-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -File .\Resources\scheduletrigger.json -Force
-        $actual = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
+   
+        $actual = Set-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -File .\Resources\scheduletrigger.json -Force
+        $expected = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
 
-        Verify-Trigger $expected $actual $rgname $dfname $triggername
+        Assert-AreEqual $expected.ResourceGroupName $actual.ResourceGroupName
+        Assert-AreEqual $expected.DataFactoryName $actual.DataFactoryName
+        Assert-AreEqual $expected.Name $triggername
+        Assert-AreEqual $expected.RuntimeState $actual.RuntimeState
 
-        Assert-ThrowsContains {Start-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -Force} "BadRequest"
+        Start-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -Force
+        $started = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
         
+        Assert-AreEqual $started.RuntimeState 'Started'
+        
+        Stop-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -Force
+        $stopped = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
+        
+        Assert-AreEqual $stopped.RuntimeState 'Stopped'
+
         Remove-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -Force
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
 }
 
 <#
 .SYNOPSIS
-Creates a trigger and then does a Get to compare the results.
-Starts and Stops trigger and checks that there is at least one Trigger Run
-Deletes the created trigger at the end.
+Create a trigger and then do a Get to compare the result are identical.
+Start and Stop trigger and check Trigger Run
+Delete the created trigger after test finishes.
 #>
 function Test-TriggerRun
 {
@@ -98,6 +114,8 @@ function Test-TriggerRun
     {
         Set-AzureRmDataFactoryV2 -ResourceGroupName $rgname -Name $dfname -Location $dflocation -Force
      
+        $triggername = "foo"
+   
         $lsName = "foo1"
         Set-AzureRmDataFactoryV2LinkedService -ResourceGroupName $rgname -DataFactoryName $dfname -File .\Resources\linkedService.json -Name $lsName -Force
 
@@ -108,11 +126,13 @@ function Test-TriggerRun
         $pipelineName = "samplePipeline"   
         Set-AzureRmDataFactoryV2Pipeline -ResourceGroupName $rgname -Name $pipelineName -DataFactoryName $dfname -File ".\Resources\pipeline.json" -Force
 
-        $triggername = "foo"
-        $expected = Set-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -File .\Resources\scheduleTriggerWithPipeline.json -Force
-        $actual = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
+        $actual = Set-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -File .\Resources\scheduleTriggerWithPipeline.json -Force
+        $expected = Get-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername
 
-        Verify-Trigger $expected $actual $rgname $dfname $triggername
+        Assert-AreEqual $expected.ResourceGroupName $actual.ResourceGroupName
+        Assert-AreEqual $expected.DataFactoryName $actual.DataFactoryName
+        Assert-AreEqual $expected.Name $actual.Name
+        Assert-AreEqual $expected.RuntimeState $actual.RuntimeState
         
         $startDate = [DateTime]::Parse("09/10/2017")
         Start-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -Force
@@ -141,49 +161,6 @@ function Test-TriggerRun
     }
     finally
     {
-        CleanUp $rgname $dfname
+        Clean-DataFactory $rgname $dfname
     }
-}
-
-<#
-.SYNOPSIS
-Creates a trigger and then does a Get with resource id to compare the results.
-Deletes the created dataset with resource id at the end.
-#>
-function Test-TriggerWithResourceId
-{
-    $dfname = Get-DataFactoryName
-    $rgname = Get-ResourceGroupName
-    $rglocation = Get-ProviderLocation ResourceManagement
-    $dflocation = Get-ProviderLocation DataFactoryManagement
-        
-    New-AzureRmResourceGroup -Name $rgname -Location $rglocation -Force
-
-    try
-    {
-        $df = Set-AzureRmDataFactoryV2 -ResourceGroupName $rgname -Name $dfname -Location $dflocation -Force
-     
-        $triggername = "foo"
-        $expected = Set-AzureRmDataFactoryV2Trigger -ResourceGroupName $rgname -DataFactoryName $dfname -Name $triggername -File .\Resources\scheduletrigger.json -Force
-        $actual = Get-AzureRmDataFactoryV2Trigger -ResourceId $expected.Id
-
-        Verify-Trigger $expected $actual $rgname $dfname $triggername
-
-        Remove-AzureRmDataFactoryV2Trigger -ResourceId $expected.Id -Force
-    }
-    finally
-    {
-        CleanUp $rgname $dfname
-    }
-}
-
-
-<#
-.SYNOPSIS
-Verifies the properties of two PSTrigger objects
-#>
-function Verify-Trigger ($expected, $actual, $rgname, $dfname, $name)
-{
-    Verify-AdfSubResource $expected $actual $rgname $dfname $triggername
-    Assert-AreEqual $expected.RuntimeState $actual.RuntimeState
 }

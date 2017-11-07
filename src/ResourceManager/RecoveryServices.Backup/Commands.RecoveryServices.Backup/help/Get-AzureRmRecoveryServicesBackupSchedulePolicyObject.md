@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.RecoveryServices.Backup.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: E247C6DF-B53D-487E-AAA2-551FCBFD77E7
 online version: 
 schema: 2.0.0
@@ -15,8 +14,7 @@ Gets a base schedule policy object.
 
 ```
 Get-AzureRmRecoveryServicesBackupSchedulePolicyObject [-WorkloadType] <WorkloadType>
- [[-BackupManagementType] <BackupManagementType>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [[-BackupManagementType] <BackupManagementType>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -79,21 +77,6 @@ Accepted values: AzureVM, MARS, SCDPM, AzureBackupServer, AzureSQL
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

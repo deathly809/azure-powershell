@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Cmdlets.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 36399302-3EA5-45A3-A042-536CC7EC2E6D
 online version: 
 schema: 2.0.0
@@ -13,18 +12,18 @@ Removes a policy assignment.
 
 ## SYNTAX
 
-### RemoveByPolicyAssignmentName (Default)
+### The policy assignment name parameter set. (Default)
 ```
 Remove-AzureRmPolicyAssignment -Name <String> -Scope <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
-### RemoveByPolicyAssignmentId
+### The policy assignment Id parameter set.
 ```
 Remove-AzureRmPolicyAssignment -Id <String> [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -76,27 +75,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Id
 Specifies the fully qualified resource ID for the policy assignment that this cmdlet removes.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByPolicyAssignmentId
+Parameter Sets: The policy assignment Id parameter set.
 Aliases: ResourceId
 
 Required: True
@@ -150,7 +134,7 @@ Specifies the name of the policy assignment that this cmdlet removes.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByPolicyAssignmentName
+Parameter Sets: The policy assignment name parameter set.
 Aliases: 
 
 Required: True
@@ -180,7 +164,7 @@ Specifies the scope at which the policy is applied.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByPolicyAssignmentName
+Parameter Sets: The policy assignment name parameter set.
 Aliases: 
 
 Required: True

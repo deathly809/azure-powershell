@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Relay.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -14,15 +13,12 @@ Updates the description of a HybridConnection in the specified Relay namespace.
 
 ### HybridConnectionInputObjectSet
 ```
-Set-AzureRmRelayHybridConnection [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
- [-InputObject <HybridConnectionAttibutes>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Set-AzureRmRelayHybridConnection -ResourceGroupName <String> -Namespace <String> -Name <String> [-InputObject <HybridConnectionAttibutes>] [-WhatIf] [-Confirm]
 ```
 
 ### HybridConnectionPropertiesSet
 ```
-Set-AzureRmRelayHybridConnection [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
- [-UserMetadata <String>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-AzureRmRelayHybridConnection -ResourceGroupName <String> -Namespace <String> -Name <String> [-UserMetadata <String>] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -48,76 +44,16 @@ This example updates the UserMetadata property with new value.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
+### -RequiresClientAuthorization
+true if client authorization is needed for this relay; otherwise, false
 
 ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -InputObject
-HybridConnections object.
-
-```yaml
-Type: HybridConnectionAttibutes
-Parameter Sets: HybridConnectionInputObjectSet
+Type: Boolean
+Parameter Sets: HybridConnectionPropertiesSet
 Aliases: 
 
 Required: False
 Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Name
-HybridConnections Name.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Namespace
-Namespace Name.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -ResourceGroupName
-Resource Group Name.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: 
-
-Required: True
-Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -170,8 +106,65 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+### -InputObject
+HybridConnections object.
+
+```yaml
+Type: HybridConnectionAttibutes
+Parameter Sets: HybridConnectionInputObjectSet
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Name
+HybridConnections Name.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Namespace
+Namespace Name.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ResourceGroupName
+Resource Group Name.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
 
 ## INPUTS
 
@@ -215,7 +208,6 @@ Id                          : /subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb
                               n1
 Name                        : TestHybirdConnection1
 Type                        : Microsoft.Relay/HybridConnections
-
 ## NOTES
 
 ## RELATED LINKS

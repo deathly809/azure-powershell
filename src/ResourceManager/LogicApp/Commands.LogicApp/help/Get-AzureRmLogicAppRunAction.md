@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.LogicApp.dll-Help.xml
-Module Name: AzureRM.LogicApp
 ms.assetid: 2EA28B90-4BAE-45DF-BD2E-60C74F53FB7B
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Gets an action from a logic app run.
 
 ```
 Get-AzureRmLogicAppRunAction -ResourceGroupName <String> -Name <String> -RunName <String>
- [-ActionName <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-ActionName <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -74,21 +73,6 @@ This cmdlet gets the action that this parameter specifies.
 Type: String
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.OperationalInsights.dll-Help.xml
-Module Name: AzureRM.OperationalInsights
 ms.assetid: 6A834F26-C3D1-46DA-A4A6-1BB5B69291D0
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Returns the schema associated with a workspace.
 
 ```
 Get-AzureRmOperationalInsightsSchema [-ResourceGroupName] <String> [-WorkspaceName] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +30,6 @@ PS C:\>Get-AzureRmOperationalInsightsSchema -ResourceGroupName "ContosoResourceG
 This command gets the schemas associated with a workspace.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -ResourceGroupName
 Specifies the name of an Azure resource group that contains a workspace.

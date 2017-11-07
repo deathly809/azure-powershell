@@ -30,37 +30,37 @@ namespace Microsoft.Azure.Commands.ResourceManager.Cmdlets.Implementation
         /// <summary> 
         /// The Id parameter set. 
         /// </summary> 
-        internal const string LockIdParameterSet = "ByLockId";
+        internal const string LockIdParameterSet = "A lock, by Id.";
 
         /// <summary>
         /// The resource group level resource lock.
         /// </summary>
-        internal const string ScopeLevelLock = "BySpecifiedScope";
+        internal const string ScopeLevelLock = "A lock at the specified scope.";
 
         /// <summary>
         /// The resource group level resource lock.
         /// </summary>
-        internal const string ResourceGroupResourceLevelLock = "ByResourceGroupLevel";
+        internal const string ResourceGroupResourceLevelLock = "A lock at the resource group resource scope.";
 
         /// <summary>
         /// The subscription level resource lock.
         /// </summary>
-        internal const string SubscriptionResourceLevelLock = "BySubscriptionLevel";
+        internal const string SubscriptionResourceLevelLock = "A lock at the subscription resource scope.";
 
         /// <summary>
         /// The tenant level resource lock patameter set.
         /// </summary>
-        internal const string TenantResourceLevelLock = "ByTenantLevel";
+        internal const string TenantResourceLevelLock = "A lock at the tenant resource scope.";
 
         /// <summary>
         /// The resource group lock parametere set.
         /// </summary>
-        internal const string ResourceGroupLevelLock = "ByResourceGroup";
+        internal const string ResourceGroupLevelLock = "A lock at the resource group scope.";
 
         /// <summary>
         /// The subscription lock parameter set.
         /// </summary>
-        internal const string SubscriptionLevelLock = "BySubscription";
+        internal const string SubscriptionLevelLock = "A lock at the subscription scope.";
 
         /// <summary>
         /// Gets or sets the scope.

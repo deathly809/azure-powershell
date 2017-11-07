@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.RedisCache.dll-Help.xml
-Module Name: AzureRM.RedisCache
 ms.assetid: 8EF45FCE-5475-4A18-BFB0-C016E239612E
 online version: 
 schema: 2.0.0
@@ -13,21 +12,19 @@ Gets a Redis Cache.
 
 ## SYNTAX
 
-### GetAllInSubscription (Default)
+### All In Subscription (Default)
 ```
-Get-AzureRmRedisCache [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetByResourceGroup
-```
-Get-AzureRmRedisCache -ResourceGroupName <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRedisCache [<CommonParameters>]
 ```
 
-### GetByRedisCache
+### All In Resource Group
 ```
-Get-AzureRmRedisCache -ResourceGroupName <String> -Name <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRedisCache -ResourceGroupName <String> [<CommonParameters>]
+```
+
+### Specific Redis Cache
+```
+Get-AzureRmRedisCache -ResourceGroupName <String> -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -158,28 +155,13 @@ This command gets every Redis Cache in the current subscription.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 Specifies the name of the Redis Cache to get.
 Use with the *ResourceGroupName* parameter.
 
 ```yaml
 Type: String
-Parameter Sets: GetByRedisCache
+Parameter Sets: Specific Redis Cache
 Aliases: 
 
 Required: True
@@ -196,7 +178,7 @@ If you specify only the *ResourceGroupName* parameter, this operation gets every
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceGroup, GetByRedisCache
+Parameter Sets: All In Resource Group, Specific Redis Cache
 Aliases: 
 
 Required: True

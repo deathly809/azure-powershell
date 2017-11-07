@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Sql.dll-Help.xml
-Module Name: AzureRM.Sql
 ms.assetid: 8C5D29AD-0B15-4CD4-8637-86ABD19F41C8
 online version: 
 schema: 2.0.0
@@ -16,14 +15,12 @@ Gets SQL Database capabilities for the current subscription.
 ### FilterResults (Default)
 ```
 Get-AzureRmSqlCapability [-LocationName] <String> [-ServerVersionName <String>] [-EditionName <String>]
- [-ServiceObjectiveName <String>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-ServiceObjectiveName <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### DefaultResults
 ```
-Get-AzureRmSqlCapability [-LocationName] <String> [-Defaults] [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Get-AzureRmSqlCapability [-LocationName] <String> [-Defaults] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,21 +61,6 @@ ExpandedDetails : Version: 12.0 (Available) -> Edition: Standard (Default) -> Se
 This command gets default capabilities for SQL Databases for the specified service objective on the current subscription.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Defaults
 Indicates that this cmdlet gets only defaults.

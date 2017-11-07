@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.AzureBackup.dll-Help.xml
-Module Name: AzureRM.Backup
 ms.assetid: 6E886340-864C-4FF6-8FA3-669D637770F3
 online version: 
 schema: 2.0.0
@@ -14,8 +13,8 @@ Disables protection for a Backup protected item.
 ## SYNTAX
 
 ```
-Disable-AzureRmBackupProtection [-RemoveRecoveryPoints] [-Force] [-Item] <AzureRMBackupItem>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Disable-AzureRmBackupProtection [-RemoveRecoveryPoints] [-Force] [-Item] <AzureRMBackupItem> [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +30,6 @@ This cmdlet can delete existing recovery points for the backup item.
 ```
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Forces the command to run without asking for user confirmation.

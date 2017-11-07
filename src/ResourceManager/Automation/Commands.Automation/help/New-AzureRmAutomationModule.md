@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Automation.dll-Help.xml
-Module Name: AzureRM.Automation
 ms.assetid: 2DC97415-D59A-428E-8FFE-56B17B320DAF
 online version: 
 schema: 2.0.0
@@ -14,8 +13,8 @@ Imports a module into Automation.
 ## SYNTAX
 
 ```
-New-AzureRmAutomationModule [-Name] <String> [-ContentLinkUri] <Uri> [-ResourceGroupName] <String>
- [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+New-AzureRmAutomationModule [-Name] <String> -ContentLinkUri <Uri> [-ResourceGroupName] <String>
+ [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,32 +65,15 @@ Accept wildcard characters: False
 ```
 
 ### -ContentLinkUri
-The url to a module zip package
-
-```yaml
+The url to a module zip package.```yaml
 Type: Uri
 Parameter Sets: (All)
 Aliases: ContentLink
 
 Required: True
-Position: 3
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 

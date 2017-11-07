@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Batch.dll-Help.xml
-Module Name: AzureRM.Batch
 ms.assetid: A0D620DA-B5A3-4F8F-BD43-A58630C95432
 online version: 
 schema: 2.0.0
@@ -15,8 +14,7 @@ Modifies properties of an account on a Batch compute node.
 
 ```
 Set-AzureBatchComputeNodeUser [-PoolId] <String> [-ComputeNodeId] <String> [-Name] <String>
- [-Password] <String> [-ExpiryTime <DateTime>] -BatchContext <BatchAccountContext>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-Password] <String> [-ExpiryTime <DateTime>] -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,21 +58,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -146,6 +129,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### BatchAccountContext
+
 Parameter 'BatchContext' accepts value of type 'BatchAccountContext' from the pipeline
 
 ## OUTPUTS

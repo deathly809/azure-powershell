@@ -255,9 +255,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
                         null,
                         operationDescription,
                         () => this.ComputeClient.ServiceCertificates.Create(this.ServiceName, parameters),
-                        (s, r) => ContextFactory(r, s,
-                                    ServiceManagementProfile.Mapper.Map<OperationStatusResponse, ManagementOperationContext>,
-                                    ServiceManagementProfile.Mapper.Map));
+                        (s, r) => ContextFactory<OperationStatusResponse, ManagementOperationContext>(r, s));
 
                 }
 
@@ -275,9 +273,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
                         null,
                         operationDescription,
                         () => this.ComputeClient.ServiceCertificates.Create(this.ServiceName, current.CertificateFile),
-                        (s, r) => ContextFactory(r, s,
-                                    ServiceManagementProfile.Mapper.Map<OperationStatusResponse, ManagementOperationContext>,
-                                    ServiceManagementProfile.Mapper.Map));
+                        (s, r) => ContextFactory<OperationStatusResponse, ManagementOperationContext>(r, s));
                 }
             }
 
@@ -440,13 +436,13 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
             var result = new Management.Compute.Models.Role
             {
                 AvailabilitySetName = persistentVM.AvailabilitySetName,
-                OSVirtualHardDisk = isVMImage ? null : ServiceManagementProfile.Mapper.Map(persistentVM.OSVirtualHardDisk, new Management.Compute.Models.OSVirtualHardDisk()),
+                OSVirtualHardDisk = isVMImage ? null : Mapper.Map(persistentVM.OSVirtualHardDisk, new Management.Compute.Models.OSVirtualHardDisk()),
                 RoleName = persistentVM.RoleName,
                 RoleSize = persistentVM.RoleSize,
                 RoleType = persistentVM.RoleType,
                 Label = persistentVM.Label,
                 ProvisionGuestAgent = persistentVM.ProvisionGuestAgent,
-                ResourceExtensionReferences = persistentVM.ProvisionGuestAgent != null && persistentVM.ProvisionGuestAgent.Value ? ServiceManagementProfile.Mapper.Map<List<ResourceExtensionReference>>(persistentVM.ResourceExtensionReferences) : null,
+                ResourceExtensionReferences = persistentVM.ProvisionGuestAgent != null && persistentVM.ProvisionGuestAgent.Value ? Mapper.Map<List<ResourceExtensionReference>>(persistentVM.ResourceExtensionReferences) : null,
                 VMImageName = isVMImage ? persistentVM.OSVirtualHardDisk.SourceImageName : null,
                 MediaLocation = isVMImage ? persistentVM.OSVirtualHardDisk.MediaLink : null,
                 LicenseType = persistentVM.LicenseType
@@ -466,7 +462,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.PersistentVMs
             {
                 persistentVM.DataVirtualHardDisks.ForEach(c =>
                 {
-                    var dataDisk = ServiceManagementProfile.Mapper.Map(c, new Microsoft.WindowsAzure.Management.Compute.Models.DataVirtualHardDisk());
+                    var dataDisk = Mapper.Map(c, new Microsoft.WindowsAzure.Management.Compute.Models.DataVirtualHardDisk());
                     dataDisk.LogicalUnitNumber = dataDisk.LogicalUnitNumber;
                     result.DataVirtualHardDisks.Add(dataDisk);
                 });

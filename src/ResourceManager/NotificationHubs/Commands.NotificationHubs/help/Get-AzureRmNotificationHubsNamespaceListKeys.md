@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.NotificationHubs.dll-Help.xml
-Module Name: AzureRM.NotificationHubs
 ms.assetid: F769A8AB-E025-49EE-AEA4-0D27EAEE341F
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Gets the primary and secondary connection strings associated with a notification
 
 ```
 Get-AzureRmNotificationHubsNamespaceListKeys [-ResourceGroup] <String> [-Namespace] <String>
- [-AuthorizationRule] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-AuthorizationRule] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,21 +48,6 @@ Required: True
 Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

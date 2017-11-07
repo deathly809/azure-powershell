@@ -151,9 +151,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.DiskRepository
                     null,
                     this.CommandRuntime.ToString(),
                     () => this.ComputeClient.VirtualMachineOSImages.Create(parameters),
-                    (s, response) => this.ContextFactory(response, s,
-                                            ServiceManagementProfile.Mapper.Map<VirtualMachineOSImageCreateResponse, OSImageContext>,
-                                            ServiceManagementProfile.Mapper.Map));
+                    (s, response) => this.ContextFactory<VirtualMachineOSImageCreateResponse, OSImageContext>(response, s));
             }
         }
     }

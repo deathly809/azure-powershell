@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: EAFB9C98-000C-4EAC-A32D-6B0F1939AA2F
 online version: 
 schema: 2.0.0
@@ -13,17 +12,9 @@ Gets the metric values of a resource.
 
 ## SYNTAX
 
-### GetWithDefaultParameters
 ```
-Get-AzureRmMetric [-ResourceId] <String> [-MetricNames <String[]>] [-DetailedOutput]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetWithFullParameters
-```
-Get-AzureRmMetric [-ResourceId] <String> [[-TimeGrain] <TimeSpan>] [-AggregationType <AggregationType>]
- [-StartTime <DateTime>] [-EndTime <DateTime>] -MetricNames <String[]> [-DetailedOutput]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmMetric [-ResourceId] <String> [-TimeGrain] <TimeSpan> [-StartTime <DateTime>] [-EndTime <DateTime>]
+ [-MetricNames <String[]>] [-DetailedOutput] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -161,36 +152,6 @@ This command gets detailed output for the Requests metric.
 
 ## PARAMETERS
 
-### -AggregationType
-The aggregation type of the query
-
-```yaml
-Type: AggregationType
-Parameter Sets: GetWithFullParameters
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DetailedOutput
 Indicates that this cmdlet displays detailed output.
 By default, output is summarized.
@@ -213,7 +174,7 @@ The default is the current time.
 
 ```yaml
 Type: DateTime
-Parameter Sets: GetWithFullParameters
+Parameter Sets: (All)
 Aliases: 
 
 Required: False
@@ -228,22 +189,10 @@ Specifies an array of names of metrics.
 
 ```yaml
 Type: String[]
-Parameter Sets: GetWithDefaultParameters
+Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String[]
-Parameter Sets: GetWithFullParameters
-Aliases: 
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -271,7 +220,7 @@ The default is the current local time minus one hour.
 
 ```yaml
 Type: DateTime
-Parameter Sets: GetWithFullParameters
+Parameter Sets: (All)
 Aliases: 
 
 Required: False
@@ -286,10 +235,10 @@ Specifies the time grain of the metric as a **TimeSpan** object in the format hh
 
 ```yaml
 Type: TimeSpan
-Parameter Sets: GetWithFullParameters
+Parameter Sets: (All)
 Aliases: 
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.KeyVault.dll-Help.xml
-Module Name: AzureRM.KeyVault
 ms.assetid: 4C40DAC9-5C0B-4AFD-9BDB-D407E0B9F701
 online version: http://go.microsoft.com/fwlink/?LinkId=690160
 schema: 2.0.0
@@ -16,8 +15,7 @@ Creates a key vault.
 ```
 New-AzureRmKeyVault [-VaultName] <String> [-ResourceGroupName] <String> [-Location] <String>
  [-EnabledForDeployment] [-EnabledForTemplateDeployment] [-EnabledForDiskEncryption] [-EnableSoftDelete]
- [-Sku <SkuName>] [-Tag <Hashtable>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-Sku <SkuName>] [-Tag <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,21 +48,6 @@ This command creates a key vault, just like the previous example. However, it sp
 Premium for the *SKU* parameter to create a Premium key vault.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -EnabledForDeployment
 Enables the Microsoft.Compute resource provider to retrieve secrets from this key vault when this
@@ -113,9 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -EnableSoftDelete
-Specifies that the soft-delete functionality is enabled for this key vault. When soft-delete is enabled, for a grace period, you can recover this key vault and its contents after it is deleted.
-
-For more information about this functionality, see [Azure Key Vault soft-delete overview](https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete). For how-to instructions, see [How to use Key Vault soft-delete with PowerShell](https://docs.microsoft.com/azure/key-vault/key-vault-soft-delete-powershell).
+If specified, 'soft delete' functionality is enabled for this key vault.
 
 ```yaml
 Type: SwitchParameter
@@ -130,7 +111,9 @@ Accept wildcard characters: False
 ```
 
 ### -Location
-Specifies the Azure region in which to create the key vault. Use the command [Get-AzureLocation](https://docs.microsoft.com/powershell/module/Azure/Get-AzureLocation) to see your choices.
+Specifies the Azure region in which to create the key vault. Use the command Get-AzureLocation
+(https://msdn.microsoft.com/ library/azure/mt589064.aspx) to see your choices. For more
+information, type `Get-Help Get-AzureLocation`.
 
 ```yaml
 Type: String
@@ -138,7 +121,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -153,14 +136,15 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -Sku
-Specifies the SKU of the key vault instance. For information about which features are available for each SKU, see the Azure Key Vault Pricing website (https://go.microsoft.com/fwlink/?linkid=512521).
+Specifies the SKU of the key vault instance. For information about which features are available for
+each SKU, see the Azure Key Vault Pricing website (http://go.microsoft.com/fwlink/?linkid=512521).
 
 ```yaml
 Type: SkuName
@@ -203,7 +187,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False

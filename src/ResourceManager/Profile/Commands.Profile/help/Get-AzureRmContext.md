@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Profile.dll-Help.xml
-Module Name: AzureRM.Profile
 online version: 
 schema: 2.0.0
 ---
@@ -44,6 +43,7 @@ CurrentStorageAccount :
 ```
 
 In this example we are logging into our account with an Azure subscription using Add-AzureRmAccount, and then we are getting the context of the current session by calling Get-AzureRmContext.
+
 
 ### Example 2: Listing all available contexts
 ```
@@ -107,7 +107,6 @@ The name of the context
 Type: String
 Parameter Sets: GetSingleContext
 Aliases: 
-Accepted values: Default
 
 Required: False
 Position: 0

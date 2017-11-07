@@ -16,11 +16,7 @@ namespace Microsoft.Azure.Commands.DataFactoryV2.Models
 {
     public abstract class AdfSubResource
     {
-        public abstract string Id { get; }
-
-        public abstract string ETag { get; }
-
-        public abstract string Name { get; }
+        public abstract string Name { get;}
 
         public string ResourceGroupName { get; protected set; }
 

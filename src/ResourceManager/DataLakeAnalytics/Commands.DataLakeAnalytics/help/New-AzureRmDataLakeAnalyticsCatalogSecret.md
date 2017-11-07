@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.DataLakeAnalytics.dll-Help.xml
-Module Name: AzureRM.DataLakeAnalytics
 ms.assetid: C0BE6C8D-37F5-445F-AE15-2CD4F8D8E031
 online version: 
 schema: 2.0.0
@@ -13,16 +12,16 @@ Creates a Data Lake Analytics catalog secret.
 
 ## SYNTAX
 
-### CreateByFullURI
+### Specify full URI
 ```
 New-AzureRmDataLakeAnalyticsCatalogSecret [-Account] <String> [-DatabaseName] <String> [-Secret] <PSCredential>
- [-DatabaseHost] <String> [-Port] <Int32> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-DatabaseHost] <String> [-Port] <Int32> [<CommonParameters>]
 ```
 
-### CreateByHostNameAndPort
+### Specify host name and port
 ```
 New-AzureRmDataLakeAnalyticsCatalogSecret [-Account] <String> [-DatabaseName] <String> [-Secret] <PSCredential>
- [-Uri] <Uri> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-Uri] <Uri> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,7 +58,7 @@ Specifies the host name for the database the secret is associated with in the fo
 
 ```yaml
 Type: String
-Parameter Sets: CreateByFullURI
+Parameter Sets: Specify full URI
 Aliases: Host
 
 Required: True
@@ -84,27 +83,12 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Port
 Specifies the port number of the secret.
 
 ```yaml
 Type: Int32
-Parameter Sets: CreateByFullURI
+Parameter Sets: Specify full URI
 Aliases: 
 
 Required: True
@@ -134,7 +118,7 @@ Specifies the Uniform Resource Identifier (URI) of the secret.
 
 ```yaml
 Type: Uri
-Parameter Sets: CreateByHostNameAndPort
+Parameter Sets: Specify host name and port
 Aliases: 
 
 Required: True

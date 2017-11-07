@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Sql.dll-Help.xml
-Module Name: AzureRM.Sql
 ms.assetid: B5C909D7-6087-463A-83BF-99DD196B9862
 online version: 
 schema: 2.0.0
@@ -9,18 +8,17 @@ schema: 2.0.0
 # Get-AzureRmSqlDatabaseActivity
 
 ## SYNOPSIS
-Gets the status of database operations.
+Gets the status of moving elastic databases.
 
 ## SYNTAX
 
 ```
-Get-AzureRmSqlDatabaseActivity [-ServerName] <String> [-ElasticPoolName <String>] -DatabaseName <String>
- [-OperationId <Guid>] [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Get-AzureRmSqlDatabaseActivity [-ServerName] <String> -ElasticPoolName <String> -DatabaseName <String>
+ [-OperationId <Guid>] [-ResourceGroupName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The **Get-AzureRmSqlDatabaseActivity** cmdlet gets the status of database operations in Azure SQL Database.
+The **Get-AzureRmSqlDatabaseActivity** cmdlet gets the status of elastic databases moving into or out of an elastic database pool in Azure SQL Database.
 
 ## EXAMPLES
 
@@ -30,13 +28,6 @@ PS C:\>Get-AzureRmSqlDatabaseActivity -ResourceGroupName "ResourceGroup01" -Serv
 ```
 
 This command returns the operation status of all SQL Database instances in an elastic pool named ElasticPool01.
-
-### Example 2: Get status for all SQL Database operations
-```
-PS C:\>Get-AzureRmSqlDatabaseActivity -ResourceGroupName "ResourceGroup01" -ServerName "Server01" -DatabaseName "Database01"
-```
-
-This command returns the status of all SQL Database operations in a database.
 
 ## PARAMETERS
 
@@ -55,21 +46,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ElasticPoolName
 Specifies the name of the elastic database pool for which this cmdlet gets status.
 
@@ -78,7 +54,7 @@ Type: String
 Parameter Sets: (All)
 Aliases: 
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -116,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -ServerName
-Specifies the name of the Microsoft SQL Server that hosts the database.
+Specifies the name of the Microsoft SQL Server that hosts the elastic database pool.
 
 ```yaml
 Type: String

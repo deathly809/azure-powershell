@@ -23,8 +23,8 @@ namespace Microsoft.Azure.Commands.ApiManagement.Commands
     [Cmdlet(VerbsData.Update, "AzureRmApiManagementDeployment", DefaultParameterSetName = DefaultParameterSetName), OutputType(typeof(PsApiManagement))]
     public class UpdateAzureApiManagementDeployment : AzureApiManagementCmdletBase
     {
-        internal const string FromPsApiManagementInstanceSetName = "UpdateFromPsApiManagementInstance";
-        internal const string DefaultParameterSetName = "UpdateSpecificService";
+        internal const string FromPsApiManagementInstanceSetName = "Update from PsApiManagement instance";
+        internal const string DefaultParameterSetName = "Specific API Management service";
 
         [Parameter(
             ParameterSetName = FromPsApiManagementInstanceSetName,

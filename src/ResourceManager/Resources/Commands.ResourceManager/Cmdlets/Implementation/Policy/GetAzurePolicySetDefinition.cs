@@ -30,17 +30,17 @@ namespace Microsoft.Azure.Commands.ResourceManager.Cmdlets.Implementation
         /// <summary>
         /// The policy Id parameter set.
         /// </summary>
-        internal const string PolicySetDefinitionIdParameterSet = "GetById";
+        internal const string PolicySetDefinitionIdParameterSet = "The policy set definition Id parameter set.";
 
         /// <summary>
         /// The policy name parameter set.
         /// </summary>
-        internal const string PolicySetDefinitionNameParameterSet = "GetByNameAndResourceGroup";
+        internal const string PolicySetDefinitionNameParameterSet = "The policy set definition name parameter set.";
 
         /// <summary>
         /// The list all policy parameter set.
         /// </summary>
-        internal const string ParameterlessSet = "GetBySubscription";
+        internal const string ParameterlessSet = "The list all policy set definitions parameter set.";
 
         /// <summary>
         /// Gets or sets the policy set definition name parameter.

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.NotificationHubs.dll-Help.xml
-Module Name: AzureRM.NotificationHubs
 ms.assetid: F7BBEF57-0DC2-4EFF-9AA2-119B3BD19AE6
 online version: 
 schema: 2.0.0
@@ -16,14 +15,13 @@ Sets property values for a notification hub.
 ### InputFileParameterSet
 ```
 Set-AzureRmNotificationHub [-ResourceGroup] <String> [-Namespace] <String> [-InputFile] <String> [-Force]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### NotificationHubParameterSet
 ```
 Set-AzureRmNotificationHub [-ResourceGroup] <String> [-Namespace] <String>
- [-NotificationHubObj] <NotificationHubAttributes> [-Force] [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-NotificationHubObj] <NotificationHubAttributes> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,21 +54,6 @@ The property values, as well as the name of the hub to be modified, are not spec
 Instead, that information is contained in the input file C:\Configuration\Hubs.json.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Do not ask for confirmation.

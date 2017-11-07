@@ -12,21 +12,20 @@ Creates a new operationalization cluster.
 
 ## SYNTAX
 
-### CreateWithInputObject
+### Create a new operationalization cluster from an OperationalizationCluster instance definition.
 ```
 New-AzureRmMlOpCluster -ResourceGroupName <String> -Name <String> -InputObject <PSOperationalizationCluster>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm]
 ```
 
-### CreateWithParameters
+### Create a new operationalization cluster from cmdlet input parameters.
 ```
 New-AzureRmMlOpCluster -ResourceGroupName <String> -Name <String> -Location <String> -ClusterType <String>
- [-OrchestratorType <String>] [-ClientId <String>] [-Secret <String>] [-Description <String>]
- [-MasterCount <Int32>] [-AgentCount <Int32>] [-AgentVmSize <String>]
+ [-OrchestratorType <String>] [-ServicePrincipalName <String>] [-ServicePrincipalSecret <String>]
+ [-Description <String>] [-MasterCount <Int32>] [-AgentCount <Int32>] [-AgentVmSize <String>]
  [-GlobalServiceConfigurationETag <String>] [-SslStatus <String>] [-SslCertificate <String>] [-SslKey <String>]
  [-SslCName <String>] [-StorageAccount <String>] [-AzureContainerRegistry <String>]
- [-DefaultProfile <IAzureContextContainer>] [-GlobalServiceConfigurationAdditionalProperties <Hashtable>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-GlobalServiceConfigurationAdditionalProperties <Hashtable>] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -55,7 +54,7 @@ The number of agent nodes in the ACS cluster.
 
 ```yaml
 Type: Int32
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -70,7 +69,7 @@ The number of agent nodes in the ACS cluster.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -85,97 +84,7 @@ The URI to the azure container registry to use instead of creating one.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ClientId
-The ACS cluster's orchestrator service principal id.
-
-```yaml
-Type: String
-Parameter Sets: CreateWithParameters
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ClusterType
-The operationalization cluster type.
-
-```yaml
-Type: String
-Parameter Sets: CreateWithParameters
-Aliases: 
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Description
-The number of master nodes in the ACS cluster.
-
-```yaml
-Type: String
-Parameter Sets: CreateWithParameters
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -GlobalServiceConfigurationAdditionalProperties
-Additional properties for the global service configuration.
-
-```yaml
-Type: Hashtable
-Parameter Sets: CreateWithParameters
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -GlobalServiceConfigurationETag
-The configuration ETag for updates.
-
-```yaml
-Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -190,10 +99,85 @@ The operationalization cluster properties.
 
 ```yaml
 Type: PSOperationalizationCluster
-Parameter Sets: CreateWithInputObject
+Parameter Sets: Create a new operationalization cluster from an OperationalizationCluster instance definition.
 Aliases: Cluster
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ClusterType
+The operationalization cluster type.
+
+```yaml
+Type: String
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Description
+The number of master nodes in the ACS cluster.
+
+```yaml
+Type: String
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -GlobalServiceConfigurationAdditionalProperties
+Additional properties for the global service configuration.
+
+```yaml
+Type: Hashtable
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -GlobalServiceConfigurationETag
+The configuration ETag for updates.
+
+```yaml
+Type: String
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
+Aliases: 
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -205,7 +189,7 @@ The operationalization cluster's location.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: True
@@ -220,7 +204,7 @@ The number of master nodes in the ACS cluster.
 
 ```yaml
 Type: Int32
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -250,7 +234,7 @@ The ACS cluster's orchestrator type.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -275,12 +259,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Secret
-The ACS cluster's orchestrator service principal secret.
+### -ClientId
+The ACS cluster's orchestrator service principal id.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -290,12 +274,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SslCertificate
-The SSL certificate data in PEM format encoded as base64 string.
+### -Secret
+The ACS cluster's orchestrator service principal secret.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -310,7 +294,22 @@ The CName for the SSL certificate.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SslCertificate
+The SSL certificate data in PEM format encoded as base64 string.
+
+```yaml
+Type: String
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -325,7 +324,7 @@ The SSL key data in PEM format encoded as base64 string.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -341,7 +340,7 @@ Possible values are 'Enabled' and 'Disabled'.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
 
 Required: False
@@ -356,23 +355,8 @@ The URI to the storage account to use instead of creating one.
 
 ```yaml
 Type: String
-Parameter Sets: CreateWithParameters
+Parameter Sets: Create a new operationalization cluster from cmdlet input parameters.
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
 
 Required: False
 Position: Named
@@ -397,16 +381,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ### None
 
+
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.MachineLearningCompute.Models.PSOperationalizationCluster
+
 
 ## NOTES
 

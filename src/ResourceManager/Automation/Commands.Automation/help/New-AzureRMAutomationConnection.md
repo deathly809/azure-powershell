@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Automation.dll-Help.xml
-Module Name: AzureRM.Automation
 ms.assetid: 95103160-8101-4C43-8DAA-0BD75DFF3150
 online version: 
 schema: 2.0.0
@@ -16,7 +15,7 @@ Creates an Automation connection.
 ```
 New-AzureRmAutomationConnection [-Name] <String> [-ConnectionTypeName] <String>
  [-ConnectionFieldValues] <IDictionary> [-Description <String>] [-ResourceGroupName] <String>
- [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,21 +80,6 @@ Required: True
 Position: 3
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

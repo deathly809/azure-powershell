@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Cmdlets.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: C2C608E5-3351-4D01-8533-9668B2E9F1D1
 online version: 
 schema: 2.0.0
@@ -13,59 +12,58 @@ Gets resources.
 
 ## SYNTAX
 
-### GetAllResources (Default)
+### The list all resources parameter set. (Default)
 ```
 Get-AzureRmResource [-ExpandProperties] [-ODataQuery <String>] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetByResourceId
-```
-Get-AzureRmResource -ResourceId <String> [-ExpandProperties] [-ODataQuery <String>] [-ApiVersion <String>]
- [-Pre] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetByTenantLevel
-```
-Get-AzureRmResource -ResourceName <String> -ResourceType <String> [-ExtensionResourceName <String>]
- [-ExtensionResourceType <String>] [-ExpandProperties] [-IsCollection] [-ODataQuery <String>] [-TenantLevel]
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetBySpecifiedScopeAtTenantLevel
-```
-Get-AzureRmResource [-ResourceName <String>] [-ResourceType <String>] [-ExtensionResourceName <String>]
- [-ExtensionResourceType <String>] [-ExpandProperties] [-IsCollection] [-Top <Int32>] [-ODataQuery <String>]
- [-TenantLevel] [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetByNameAndGroup
-```
-Get-AzureRmResource [-ResourceName <String>] [-ExtensionResourceName <String>]
- [-ExtensionResourceType <String>] [-ExpandProperties] [-IsCollection] [-ODataQuery <String>]
- [-ResourceGroupName <String>] [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>]
  [<CommonParameters>]
 ```
 
-### GetByResourceNameAndType
+### Get a single resource by its Id.
+```
+Get-AzureRmResource -ResourceId <String> [-ExpandProperties] [-ODataQuery <String>] [-ApiVersion <String>]
+ [-Pre] [<CommonParameters>]
+```
+
+### Get a single resource at the tenant level.
+```
+Get-AzureRmResource -ResourceName <String> -ResourceType <String> [-ExtensionResourceName <String>]
+ [-ExtensionResourceType <String>] [-ExpandProperties] [-IsCollection] [-ODataQuery <String>] [-TenantLevel]
+ [-ApiVersion <String>] [-Pre] [<CommonParameters>]
+```
+
+### Lists the resources based on the specified scope at the tenant level.
+```
+Get-AzureRmResource [-ResourceName <String>] [-ResourceType <String>] [-ExtensionResourceName <String>]
+ [-ExtensionResourceType <String>] [-ExpandProperties] [-IsCollection] [-Top <Int32>] [-ODataQuery <String>]
+ [-TenantLevel] [-ApiVersion <String>] [-Pre] [<CommonParameters>]
+```
+
+### Get resource by name and group
+```
+Get-AzureRmResource [-ResourceName <String>] [-ExtensionResourceName <String>]
+ [-ExtensionResourceType <String>] [-ExpandProperties] [-IsCollection] [-ODataQuery <String>]
+ [-ResourceGroupName <String>] [-ApiVersion <String>] [-Pre] [<CommonParameters>]
+```
+
+### Get a resource by name and type.
 ```
 Get-AzureRmResource [-ResourceName <String>] [-ResourceType <String>] [-ExtensionResourceName <String>]
  [-ExtensionResourceType <String>] [-ExpandProperties] [-IsCollection] [-ODataQuery <String>]
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [<CommonParameters>]
 ```
 
-### GetByNameGroupAndType
+### Get resource by name, group and type
 ```
 Get-AzureRmResource -ResourceName <String> -ResourceType <String> [-ExtensionResourceName <String>]
  [-ExtensionResourceType <String>] [-ExpandProperties] [-ODataQuery <String>] -ResourceGroupName <String>
- [-ApiVersion <String>] [-Pre] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-ApiVersion <String>] [-Pre] [<CommonParameters>]
 ```
 
-### GetResourceCollection
+### Get resource collection
 ```
 Get-AzureRmResource [-ResourceType <String>] [-ExtensionResourceType <String>] [-ExpandProperties]
  [-IsCollection] [-ODataQuery <String>] [-ResourceGroupName <String>] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -73,27 +71,12 @@ The **Get-AzureRmResource** cmdlet gets Azure resources.
 
 ## EXAMPLES
 
-### Example 1: Get all the resources of a particular type
+### Example 1: Get a resource
 ```
-PS C:\>Get-AzureRmResource -ResourceGroupName ResourceGroup11 -ResourceType microsoft.web/sites
-```
-
-This command gets a resource of the type microsoft.web/sites under ResourceGroup11.
-
-### Example 2: Get a resource by name
-```
-PS C:\>Get-AzureRmResource -ResourceGroupName ResourceGroup11 -ResourceName ContosoWebsite
+PS C:\>Get-AzureRmResource -ResourceType "microsoft.web/sites" -ResourceGroupName "ResourceGroup11" -ResourceName "ContosoWebsite"
 ```
 
-This command gets a resource  named ContosoWebsite under ResourceGroup11.
-
-### Example 3: Show all the status of storage accounts in a Resource Group
-```
-PS C:\>Get-AzureRmResource -ResourceGroupName ResourceGroup11 -ResourceType Microsoft.ClassicStorage/storageAccounts -ExpandProperties |
-   Select * -Expand Properties |
-   Sort Name |
-   Format-Table Name,Status*
-```
+This command gets a resource of the type microsoft.web/sites, named ContosoWebsite under ResourceGroup11.
 
 ## PARAMETERS
 
@@ -102,21 +85,6 @@ PS C:\>Get-AzureRmResource -ResourceGroupName ResourceGroup11 -ResourceType Micr
 Type: String
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -141,7 +109,7 @@ Accept wildcard characters: False
 ### -ExtensionResourceName
 ```yaml
 Type: String
-Parameter Sets: GetByTenantLevel, GetBySpecifiedScopeAtTenantLevel, GetByNameAndGroup, GetByResourceNameAndType, GetByNameGroupAndType
+Parameter Sets: Get a single resource at the tenant level., Lists the resources based on the specified scope at the tenant level., Get resource by name and group, Get a resource by name and type., Get resource by name, group and type
 Aliases: 
 
 Required: False
@@ -154,7 +122,7 @@ Accept wildcard characters: False
 ### -ExtensionResourceType
 ```yaml
 Type: String
-Parameter Sets: GetByTenantLevel, GetBySpecifiedScopeAtTenantLevel, GetByNameAndGroup, GetByResourceNameAndType, GetByNameGroupAndType
+Parameter Sets: Get a single resource at the tenant level., Lists the resources based on the specified scope at the tenant level., Get resource by name and group, Get a resource by name and type., Get resource by name, group and type
 Aliases: 
 
 Required: False
@@ -166,7 +134,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GetResourceCollection
+Parameter Sets: Get resource collection
 Aliases: 
 
 Required: False
@@ -179,7 +147,7 @@ Accept wildcard characters: False
 ### -IsCollection
 ```yaml
 Type: SwitchParameter
-Parameter Sets: GetByTenantLevel, GetBySpecifiedScopeAtTenantLevel, GetByNameAndGroup, GetByResourceNameAndType, GetResourceCollection
+Parameter Sets: Get a single resource at the tenant level., Lists the resources based on the specified scope at the tenant level., Get resource by name and group, Get a resource by name and type., Get resource collection
 Aliases: 
 
 Required: False
@@ -218,7 +186,7 @@ Accept wildcard characters: False
 ### -ResourceGroupName
 ```yaml
 Type: String
-Parameter Sets: GetByNameAndGroup
+Parameter Sets: Get resource by name and group
 Aliases: 
 
 Required: False
@@ -230,7 +198,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GetByNameGroupAndType
+Parameter Sets: Get resource by name, group and type
 Aliases: 
 
 Required: True
@@ -242,7 +210,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GetResourceCollection
+Parameter Sets: Get resource collection
 Aliases: 
 
 Required: False
@@ -261,7 +229,7 @@ This cmdlet gets the resource that has this ID.
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceId
+Parameter Sets: Get a single resource by its Id.
 Aliases: Id
 
 Required: True
@@ -274,7 +242,7 @@ Accept wildcard characters: False
 ### -ResourceName
 ```yaml
 Type: String
-Parameter Sets: GetByTenantLevel, GetByNameGroupAndType
+Parameter Sets: Get a single resource at the tenant level., Get resource by name, group and type
 Aliases: Name
 
 Required: True
@@ -286,7 +254,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GetBySpecifiedScopeAtTenantLevel, GetByNameAndGroup, GetByResourceNameAndType
+Parameter Sets: Lists the resources based on the specified scope at the tenant level., Get resource by name and group, Get a resource by name and type.
 Aliases: Name
 
 Required: False
@@ -299,7 +267,7 @@ Accept wildcard characters: False
 ### -ResourceType
 ```yaml
 Type: String
-Parameter Sets: GetByTenantLevel, GetByNameGroupAndType
+Parameter Sets: Get a single resource at the tenant level., Get resource by name, group and type
 Aliases: 
 
 Required: True
@@ -311,7 +279,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GetBySpecifiedScopeAtTenantLevel, GetByResourceNameAndType
+Parameter Sets: Lists the resources based on the specified scope at the tenant level., Get a resource by name and type.
 Aliases: 
 
 Required: False
@@ -323,7 +291,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: GetResourceCollection
+Parameter Sets: Get resource collection
 Aliases: 
 
 Required: False
@@ -338,7 +306,7 @@ Indicates that this cmdlet operates at the tenant level.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: GetByTenantLevel, GetBySpecifiedScopeAtTenantLevel
+Parameter Sets: Get a single resource at the tenant level., Lists the resources based on the specified scope at the tenant level.
 Aliases: 
 
 Required: True
@@ -351,7 +319,7 @@ Accept wildcard characters: False
 ### -Top
 ```yaml
 Type: Int32
-Parameter Sets: GetBySpecifiedScopeAtTenantLevel
+Parameter Sets: Lists the resources based on the specified scope at the tenant level.
 Aliases: 
 
 Required: False

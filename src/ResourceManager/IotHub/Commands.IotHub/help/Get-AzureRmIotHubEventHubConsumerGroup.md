@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.IotHub.dll-Help.xml
-Module Name: AzureRM.IotHub
 online version: 
 schema: 2.0.0
 ---
@@ -14,7 +13,7 @@ Gets all the eventhub consumergroups.
 
 ```
 Get-AzureRmIotHubEventHubConsumerGroup [-ResourceGroupName] <String> [-Name] <String>
- [-EventHubEndpointName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-EventHubEndpointName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,21 +37,6 @@ Gets all the eventhub consumergroups for the operationsMonitoringEvents eventhub
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -EventHubEndpointName
 Name of the Event Hub endpoint.
 Possible values events, operationsMonitoringEvents
@@ -61,7 +45,6 @@ Possible values events, operationsMonitoringEvents
 Type: String
 Parameter Sets: (All)
 Aliases: 
-Accepted values: events, operationsMonitoringEvents
 
 Required: True
 Position: 2

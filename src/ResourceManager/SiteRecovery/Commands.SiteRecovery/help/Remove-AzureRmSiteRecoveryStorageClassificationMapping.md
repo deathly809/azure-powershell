@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 441478B4-1453-4A11-AD52-53ADB85E194F
 online version: 
 schema: 2.0.0
@@ -15,8 +14,7 @@ Removes a storage classification mapping from Site Recovery.
 
 ```
 Remove-AzureRmSiteRecoveryStorageClassificationMapping
- -StorageClassificationMapping <ASRStorageClassificationMapping> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ -StorageClassificationMapping <ASRStorageClassificationMapping> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,21 +23,6 @@ The **Remove-AzureRmSiteRecoveryStorageClassificationMapping** cmdlet removes a 
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -StorageClassificationMapping
 Specifies a storage classification mapping that this cmdlet removes.
@@ -62,6 +45,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRStorageClassificationMapping
+
 Parameter 'StorageClassificationMapping' accepts value of type 'ASRStorageClassificationMapping' from the pipeline
 
 ## OUTPUTS

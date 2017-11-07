@@ -28,9 +28,11 @@ namespace Microsoft.Azure.Commands.MachineLearningCompute.Cmdlets
     [OutputType(typeof(PSOperationalizationCluster))]
     public class NewAzureRmMlOpCluster : MachineLearningComputeCmdletBase
     {
-        protected const string CreateFromObjectParameterSet = "CreateWithInputObject";
+        protected const string CreateFromObjectParameterSet =
+            "Create a new operationalization cluster from an OperationalizationCluster instance definition.";
 
-        protected const string CreateFromCmdletParametersParameterSet = "CreateWithParameters";
+        protected const string CreateFromCmdletParametersParameterSet =
+            "Create a new operationalization cluster from cmdlet input parameters.";
 
         [Parameter(Mandatory = true, 
             HelpMessage = ResourceGroupParameterHelpMessage)]

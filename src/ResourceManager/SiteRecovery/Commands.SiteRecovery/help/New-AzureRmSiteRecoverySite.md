@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: D0336AB5-019F-4EFD-88D2-63E12BA1ED95
 online version: 
 schema: 2.0.0
@@ -14,7 +13,7 @@ Creates a Site Recovery site.
 ## SYNTAX
 
 ```
-New-AzureRmSiteRecoverySite -Name <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+New-AzureRmSiteRecoverySite -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,21 +22,6 @@ The **New-AzureRmSiteRecoverySite** cmdlet creates an Azure Site Recovery site i
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the site.

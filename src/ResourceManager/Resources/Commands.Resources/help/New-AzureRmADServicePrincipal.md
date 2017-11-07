@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Resources.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: D602F910-B26F-473D-B5B6-C7BDFB0A14CB
 online version: 
 schema: 2.0.0
@@ -15,62 +14,60 @@ Creates a new azure active directory service principal.
 
 ### ApplicationWithoutCredentialParameterSet (Default)
 ```
-New-AzureRmADServicePrincipal -ApplicationId <Guid> [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+New-AzureRmADServicePrincipal -ApplicationId <Guid> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ApplicationWithPasswordPlainParameterSet
 ```
 New-AzureRmADServicePrincipal -ApplicationId <Guid> -Password <String> [-StartDate <DateTime>]
- [-EndDate <DateTime>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-EndDate <DateTime>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ApplicationWithPasswordCredentialParameterSet
 ```
-New-AzureRmADServicePrincipal -ApplicationId <Guid> -PasswordCredentials <PSADPasswordCredential[]>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-AzureRmADServicePrincipal -ApplicationId <Guid> -PasswordCredentials <PSADPasswordCredential[]> [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ### ApplicationWithKeyPlainParameterSet
 ```
 New-AzureRmADServicePrincipal -ApplicationId <Guid> -CertValue <String> [-StartDate <DateTime>]
- [-EndDate <DateTime>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-EndDate <DateTime>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### ApplicationWithKeyCredentialParameterSet
 ```
-New-AzureRmADServicePrincipal -ApplicationId <Guid> -KeyCredentials <PSADKeyCredential[]>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-AzureRmADServicePrincipal -ApplicationId <Guid> -KeyCredentials <PSADKeyCredential[]> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ### DisplayNameWithoutCredentialParameterSet
 ```
-New-AzureRmADServicePrincipal -DisplayName <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+New-AzureRmADServicePrincipal -DisplayName <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### DisplayNameWithPasswordPlainParameterSet
 ```
 New-AzureRmADServicePrincipal -DisplayName <String> -Password <String> [-StartDate <DateTime>]
- [-EndDate <DateTime>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-EndDate <DateTime>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### DisplayNameWithPasswordCredentialParameterSet
 ```
-New-AzureRmADServicePrincipal -DisplayName <String> -PasswordCredentials <PSADPasswordCredential[]>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-AzureRmADServicePrincipal -DisplayName <String> -PasswordCredentials <PSADPasswordCredential[]> [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ### DisplayNameWithKeyPlainParameterSet
 ```
 New-AzureRmADServicePrincipal -DisplayName <String> -CertValue <String> [-StartDate <DateTime>]
- [-EndDate <DateTime>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-EndDate <DateTime>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### DisplayNameWithKeyCredentialParameterSet
 ```
-New-AzureRmADServicePrincipal -DisplayName <String> -KeyCredentials <PSADKeyCredential[]>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-AzureRmADServicePrincipal -DisplayName <String> -KeyCredentials <PSADKeyCredential[]> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -136,21 +133,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

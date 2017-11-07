@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
-Module Name: AzureRM.MachineLearning
 online version: 
 schema: 2.0.0
 ---
@@ -14,8 +13,7 @@ Updates properties of an existing commitment plan resource.
 
 ```
 Update-AzureRmMlCommitmentPlan -ResourceGroupName <String> -Name <String> -SkuName <String> -SkuTier <String>
- [-SkuCapacity <Int32>] [-Tags <Hashtable>] [-Force] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-SkuCapacity <Int32>] [-Tags <Hashtable>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,21 +31,6 @@ Update-AzureRmMlCommitmentPlan -ResourceGroupName "MyResourceGroup" -Name "MyCom
 ```
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Do not ask for confirmation.

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Profile.dll-Help.xml
-Module Name: AzureRM.Profile
 online version: 
 schema: 2.0.0
 ---
@@ -12,13 +11,13 @@ Select a subscription and account to target in Azure PowerShell cmdlets
 
 ## SYNTAX
 
-### SelectByInputObject (Default)
+### Input Object (Default)
 ```
 Select-AzureRmContext -InputObject <PSAzureContext> [-Scope <ContextModificationScope>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### SelectByName
+### Context Name
 ```
 Select-AzureRmContext [-Scope <ContextModificationScope>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
  [-Confirm] [-Name] <String> [<CommonParameters>]
@@ -59,7 +58,7 @@ A context object, normally passed through the pipeline.
 
 ```yaml
 Type: PSAzureContext
-Parameter Sets: SelectByInputObject
+Parameter Sets: Input Object
 Aliases: 
 
 Required: True
@@ -74,7 +73,7 @@ The name of the context
 
 ```yaml
 Type: String
-Parameter Sets: SelectByName
+Parameter Sets: Context Name
 Aliases: 
 
 Required: True

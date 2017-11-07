@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.EventHub.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -15,16 +14,14 @@ Creates an Event Hubs namespace.
 ### NamespaceParameterSet (Default)
 ```
 New-AzureRmEventHubNamespace [-ResourceGroupName] <String> [-Name] <String> [-Location] <String>
- [[-SkuName] <String>] [[-SkuCapacity] <Int32>] [[-Tag] <Hashtable>] [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [[-SkuName] <String>] [[-SkuCapacity] <Int32>] [[-Tag] <Hashtable>] [-EnableAutoInflate]
+ [[-MaximumThroughputUnits] <Int32>] [-WhatIf] [-Confirm]
 ```
 
 ### AutoInflateParameterSet
 ```
-New-AzureRmEventHubNamespace [-ResourceGroupName] <String> [-Name] <String> [-Location] <String>
- [[-SkuName] <String>] [[-SkuCapacity] <Int32>] [[-Tag] <Hashtable>] [-EnableAutoInflate]
- [[-MaximumThroughputUnits] <Int32>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+New-AzureRmEventHubNamespace [-ResourceGroupName] <String> [-EnableAutoInflate]
+ [-MaximumThroughputUnits] <Int32> [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
@@ -34,7 +31,7 @@ The New-AzureRmEventHubNamespace cmdlet creates a new namespace of type Event Hu
 
 ### Example 1
 ```
-PS C:\> New-AzureRmEventHubNamespace -ResourceGroupName MyResourceGroupName -NamespaceName MyNamespaceName -Location MyLocation
+PS C:\> New-AzureRmEventHubNamespace -ResourceGroupName MyResourceGroupName -NamespaceName MyNamespaceName -Location MyLocation 
 ```
 
 Creates an Event Hubs namespace \`MyNamespaceName\` in the specified geographic location \`MyLocation\`, in resource group \`MyResourceGroupName\`.
@@ -48,36 +45,6 @@ Creates an Event Hubs namespace \`MyNamespaceName\` in the specified geographic 
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -EnableAutoInflate
-Indicates whether AutoInflate is enabled
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: AutoInflateParameterSet
-Aliases: 
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Location
 Event Hubs namespace geo-location.
 
@@ -88,36 +55,6 @@ Aliases:
 
 Required: True
 Position: 2
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -MaximumThroughputUnits
-Upper limit of throughput units when AutoInflate is enabled, vaule should be within 0 to 20 throughput units.
-
-```yaml
-Type: Int32
-Parameter Sets: AutoInflateParameterSet
-Aliases: 
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -Name
-EventHub Namespace Name.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: NamespaceName
-
-Required: True
-Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -147,7 +84,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: 4
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -163,7 +100,7 @@ Aliases:
 Accepted values: Basic, Standard, Premium
 
 Required: False
-Position: 3
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -178,7 +115,7 @@ Parameter Sets: (All)
 Aliases: 
 
 Required: False
-Position: 5
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -215,8 +152,50 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+### -EnableAutoInflate
+Indicates whether AutoInflate is enabled
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: NamespaceParameterSet
+Aliases: 
+
+Required: False
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MaximumThroughputUnits
+Upper limit of throughput units when AutoInflate is enabled, vaule should be within 0 to 20 throughput units.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Name
+EventHub Namespace Name.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: NamespaceName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
 
 ## INPUTS
 

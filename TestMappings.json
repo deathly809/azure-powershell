@@ -2,6 +2,7 @@
   ".github": [],
   "documentation": [],
   "setup": [],
+  "src/StackAdmin": [],
   "src/ResourceManager/AnalysisServices/": [],
   "src/ResourceManager/ApiManagement/": [
     ".\\src\\ResourceManager\\ApiManagement\\Commands.ApiManagement.Test\\bin\\Debug\\Microsoft.Azure.Commands.ApiManagement.Test.dll"
@@ -173,8 +174,5 @@
   ],
   "src/ResourceManager/MarketplaceOrdering/Commands.MarketplaceOrdering.Test/": [
     ".\\src\\ResourceManager\\MarketplaceOrdering\\Commands.MarketplaceOrdering.Test\\bin\\Debug\\Microsoft.Azure.Commands.MarketplaceOrdering.Test.dll"
-  ],
- "src/ResourceManager/ApplicationInsights/": [
-    ".\\src\\ResourceManager\\ApplicationInsights\\Commands.ApplicationInsights.Test\\bin\\Debug\\Microsoft.Azure.Commands.ApplicationInsights.Test.dll"
-  ]  
+  ]
 }

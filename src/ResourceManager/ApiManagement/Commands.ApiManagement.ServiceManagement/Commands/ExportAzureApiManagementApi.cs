@@ -27,8 +27,8 @@ namespace Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Commands
     [OutputType(typeof(string))]
     public class ExportAzureApiManagementApi : AzureApiManagementCmdletBase
     {
-        private const string ExportContentToPipeline = "ExportToPipeline";
-        private const string ExportToFile = "ExportToFile";
+        private const string ExportContentToPipeline = "Export to pipeline";
+        private const string ExportToFile = "Export to File";
 
         [Parameter(
             ValueFromPipelineByPropertyName = true,

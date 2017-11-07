@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.dll-Help.xml
-Module Name: AzureRM.ApiManagement
 ms.assetid: B64E9C13-97A6-4E8B-92DB-EFAF8A48C5B8
 online version: 
 schema: 2.0.0
@@ -13,22 +12,19 @@ Gets a list or a particular product.
 
 ## SYNTAX
 
-### GetAllProducts (Default)
+### Get all producst (Default)
 ```
-Get-AzureRmApiManagementProduct -Context <PsApiManagementContext> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
-```
-
-### GetByProductId
-```
-Get-AzureRmApiManagementProduct -Context <PsApiManagementContext> -ProductId <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementProduct -Context <PsApiManagementContext> [<CommonParameters>]
 ```
 
-### GetByTitle
+### Get by Id
 ```
-Get-AzureRmApiManagementProduct -Context <PsApiManagementContext> [-Title <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementProduct -Context <PsApiManagementContext> -ProductId <String> [<CommonParameters>]
+```
+
+### Get by Title
+```
+Get-AzureRmApiManagementProduct -Context <PsApiManagementContext> [-Title <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,16 +34,14 @@ The **Get-AzureRmApiManagementProduct** cmdlet gets a list or a particular produ
 
 ### Example 1: Get all products
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementProduct -Context $apimContext
+PS C:\>Get-AzureRmApiManagementProduct -Context $APImContext
 ```
 
 This command get all API Management products.
 
 ### Example 2: Get a product by ID
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementProduct -Context $apimContext -ProductId "0123456789"
+PS C:\>Get-AzureRmApiManagementProduct -Context $APImContext -ProductId "0123456789"
 ```
 
 This command get an API Management product by ID.
@@ -69,27 +63,12 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ProductId
 Specifies the identifier of the product to search for.
 
 ```yaml
 Type: String
-Parameter Sets: GetByProductId
+Parameter Sets: Get by Id
 Aliases: 
 
 Required: True
@@ -105,7 +84,7 @@ If specified, the cmdlet attempts to get the product by title.
 
 ```yaml
 Type: String
-Parameter Sets: GetByTitle
+Parameter Sets: Get by Title
 Aliases: 
 
 Required: False
@@ -122,11 +101,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementProduct
-The details of the Product in API Management service.
-
 ### IList<Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementProduct>
-The list of Product in API Management service.
 
 ## NOTES
 

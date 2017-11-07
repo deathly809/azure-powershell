@@ -30,8 +30,7 @@ New-AzureRmHDInsightCluster [-Location] <String> [-ResourceGroupName] <String> [
  [-VirtualNetworkId <String>] [-SubnetName <String>] [-OSType <OSType>] [-ClusterTier <Tier>]
  [-SshCredential <PSCredential>] [-SshPublicKey <String>] [-RdpCredential <PSCredential>]
  [-RdpAccessExpiry <DateTime>] [-ObjectId <Guid>] [-CertificatePassword <String>] [-AadTenantId <Guid>]
- [-SecurityProfile <AzureHDInsightSecurityProfile>] [-DisksPerWorkerNode <Int32>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-SecurityProfile <AzureHDInsightSecurityProfile>] [-DisksPerWorkerNode <Int32>] [<CommonParameters>]
 ```
 
 ### CertificateFilePath
@@ -52,7 +51,7 @@ New-AzureRmHDInsightCluster [-Location] <String> [-ResourceGroupName] <String> [
  [-SshCredential <PSCredential>] [-SshPublicKey <String>] [-RdpCredential <PSCredential>]
  [-RdpAccessExpiry <DateTime>] [-ObjectId <Guid>] [-CertificateFilePath <String>]
  [-CertificatePassword <String>] [-AadTenantId <Guid>] [-SecurityProfile <AzureHDInsightSecurityProfile>]
- [-DisksPerWorkerNode <Int32>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-DisksPerWorkerNode <Int32>] [<CommonParameters>]
 ```
 
 ### CertificateFileContents
@@ -73,7 +72,7 @@ New-AzureRmHDInsightCluster [-Location] <String> [-ResourceGroupName] <String> [
  [-SshCredential <PSCredential>] [-SshPublicKey <String>] [-RdpCredential <PSCredential>]
  [-RdpAccessExpiry <DateTime>] [-ObjectId <Guid>] [-CertificateFileContents <Byte[]>]
  [-CertificatePassword <String>] [-AadTenantId <Guid>] [-SecurityProfile <AzureHDInsightSecurityProfile>]
- [-DisksPerWorkerNode <Int32>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-DisksPerWorkerNode <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,8 +82,6 @@ The New-AzureHDInsightCluster creates an Azure HDInsight cluster by using the sp
 
 ### --------------------------  Example 1: Create an Azure HDInsight cluster  --------------------------
 @{paragraph=PS C:\\\>}
-
-
 
 
 
@@ -307,21 +304,6 @@ You can alternatively use the Add-AzureRmHDInsightConfigValues cmdlet.
 Type: System.Collections.Generic.Dictionary`2[System.String,System.Collections.Generic.Dictionary`2[System.String,System.String]]
 Parameter Sets: (All)
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named

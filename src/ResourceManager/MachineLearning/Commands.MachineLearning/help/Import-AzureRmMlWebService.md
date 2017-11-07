@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
-Module Name: AzureRM.MachineLearning
 online version: 
 schema: 2.0.0
 ---
@@ -12,14 +11,14 @@ Imports a JSON object into a web service definition.
 
 ## SYNTAX
 
-### ImportFromJSONFile
+### Import from JSON file.
 ```
-Import-AzureRmMlWebService -InputFile <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Import-AzureRmMlWebService -InputFile <String> [<CommonParameters>]
 ```
 
-### ImportFromJSONString.
+### Import from JSON string.
 ```
-Import-AzureRmMlWebService -JsonString <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Import-AzureRmMlWebService -JsonString <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,33 +39,19 @@ Import-AzureRmMlWebService -JsonString $jsonDefinition
 @{paragraph=PS C:\\\>}
 
 
+
 ```
 Import-AzureRmMlWebService -InputFile "C:\mlservice.json"
 ```
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -InputFile
 The path to the file containing the web service definition to import.
 
 ```yaml
 Type: String
-Parameter Sets: ImportFromJSONFile
+Parameter Sets: Import from JSON file.
 Aliases: 
 
 Required: True
@@ -81,7 +66,7 @@ The JSON formatted string containing the web service definition to import.
 
 ```yaml
 Type: String
-Parameter Sets: ImportFromJSONString.
+Parameter Sets: Import from JSON string.
 Aliases: 
 
 Required: True

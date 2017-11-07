@@ -27,9 +27,11 @@ namespace Microsoft.Azure.Commands.MachineLearningCompute.Cmdlets
     [OutputType(typeof(PSOperationalizationCluster), typeof(List<PSOperationalizationCluster>))]
     public class GetAzureRmMlOpCluster : MachineLearningComputeCmdletBase
     {
-        protected const string GetByNameParameterSet = "GetByName";
+        protected const string GetByNameParameterSet =
+            "Get an operationalization cluster by its name.";
 
-        protected const string GetByResourceGroupOrSubscriptionParametersParameterSet = "GetByResourceGroup";
+        protected const string GetByResourceGroupOrSubscriptionParametersParameterSet =
+            "Get operationalization clusters by resource group or subscription.";
 
         [Parameter(ParameterSetName = GetByNameParameterSet,
             Mandatory = true, 

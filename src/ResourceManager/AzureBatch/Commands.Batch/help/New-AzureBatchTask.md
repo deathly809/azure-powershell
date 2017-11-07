@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Batch.dll-Help.xml
-Module Name: AzureRM.Batch
 ms.assetid: 2B4BFDDA-9721-42E6-84E1-A209CB782954
 online version: 
 schema: 2.0.0
@@ -20,19 +19,19 @@ New-AzureBatchTask -JobId <String> -Id <String> [-DisplayName <String>] [-Comman
  [-AffinityInformation <PSAffinityInformation>] [-Constraints <PSTaskConstraints>]
  [-MultiInstanceSettings <PSMultiInstanceSettings>] [-DependsOn <TaskDependencies>]
  [-ApplicationPackageReferences <PSApplicationPackageReference[]>] [-ExitConditions <PSExitConditions>]
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ### JobId_Bulk
 ```
 New-AzureBatchTask -JobId <String> [-Tasks <PSCloudTask[]>] -BatchContext <BatchAccountContext>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### JobObject_Bulk
 ```
 New-AzureBatchTask [-Job <PSCloudJob>] [-Tasks <PSCloudTask[]>] -BatchContext <BatchAccountContext>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### JobObject_Single
@@ -42,7 +41,7 @@ New-AzureBatchTask [-Job <PSCloudJob>] -Id <String> [-DisplayName <String>] [-Co
  [-AffinityInformation <PSAffinityInformation>] [-Constraints <PSTaskConstraints>]
  [-MultiInstanceSettings <PSMultiInstanceSettings>] [-DependsOn <TaskDependencies>]
  [-ApplicationPackageReferences <PSApplicationPackageReference[]>] [-ExitConditions <PSExitConditions>]
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -172,21 +171,6 @@ Specifies the execution constraints that apply to this task.
 Type: PSTaskConstraints
 Parameter Sets: JobId_Single, JobObject_Single
 Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -371,9 +355,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### BatchAccountContext
+
 Parameter 'BatchContext' accepts value of type 'BatchAccountContext' from the pipeline
 
 ### PSCloudJob
+
 Parameter 'Job' accepts value of type 'PSCloudJob' from the pipeline
 
 ## OUTPUTS

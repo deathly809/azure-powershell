@@ -1,7 +1,6 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceBus.dll-Help.xml
-Module Name: AzureRM
-online version: 
+online version:
 schema: 2.0.0
 ---
 
@@ -13,9 +12,8 @@ Updates the description of an existing Service Bus namespace.
 ## SYNTAX
 
 ```
-Set-AzureRmServiceBusNamespace [-ResourceGroupName] <String> [-Location] <String> [-Name] <String>
- [-SkuName <String>] [-SkuCapacity <Int32>] [-Tag <Hashtable>] [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-AzureRmServiceBusNamespace [-ResourceGroupName] <String> [-Location] <String> [-NamespaceName] <String>
+ [-SkuName <String>] [-SkuCapacity <Int32>] [-Tag <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,29 +30,16 @@ Id                 : /subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourc
 Location           : West US
 Sku                : Name : Standard , Capacity : 10 , Tier : Standard
 ProvisioningState  : Succeeded
+Status             :
 CreatedAt          :
 UpdatedAt          :
 ServiceBusEndpoint :
+Enabled            : False
 ```
 
 Updates the Service Bus namespace with a new description.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Location
 The Service Bus namespace location.
@@ -62,7 +47,7 @@ The Service Bus namespace location.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -71,13 +56,13 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Name
-ServiceBus Namespace Name.
+### -NamespaceName
+The Service Bus namespace name.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: NamespaceName
+Aliases:
 
 Required: True
 Position: 2
@@ -92,7 +77,7 @@ The resource group name.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: ResourceGroup
+Aliases:
 
 Required: True
 Position: 0
@@ -107,7 +92,7 @@ Namespace Sku Capacity.
 ```yaml
 Type: Int32
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -122,7 +107,7 @@ The namespace SKU name.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 Accepted values: Basic, Standard, Premium
 
 Required: False
@@ -140,7 +125,7 @@ Key-value pairs in the form of a hash table. For example:
 ```yaml
 Type: Hashtable
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -206,6 +191,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-
 ## RELATED LINKS
-

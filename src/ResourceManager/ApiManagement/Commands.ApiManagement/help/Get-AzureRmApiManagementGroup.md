@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ApiManagement.ServiceManagement.dll-Help.xml
-Module Name: AzureRM.ApiManagement
 ms.assetid: EEB52CCA-F5D6-4ACB-A6C9-D07C510A5878
 online version: 
 schema: 2.0.0
@@ -13,28 +12,27 @@ Gets all or specific API management groups.
 
 ## SYNTAX
 
-### GetAllGroups (Default)
+### Get all groups (Default)
 ```
-Get-AzureRmApiManagementGroup -Context <PsApiManagementContext> [-Name <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementGroup -Context <PsApiManagementContext> [-Name <String>] [<CommonParameters>]
 ```
 
-### GetByGroupId
+### Get by group ID
 ```
 Get-AzureRmApiManagementGroup -Context <PsApiManagementContext> [-GroupId <String>] [-Name <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
-### GetByUserId
+### Find groups by user
 ```
 Get-AzureRmApiManagementGroup -Context <PsApiManagementContext> [-Name <String>] [-UserId <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
-### GetByProductId
+### Find groups by product
 ```
 Get-AzureRmApiManagementGroup -Context <PsApiManagementContext> [-Name <String>] [-ProductId <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,32 +42,28 @@ The **Get-AzureRmApiManagementGroup** cmdlet gets all or specific API management
 
 ### Example 1: Get all groups
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementGroup -Context $apimContext
+PS C:\>Get-AzureRmApiManagementGroup -Context $APImContext
 ```
 
 This command gets all groups.
 
 ### Example 2: Get a group by ID
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementGroup -Context $apimContext -GroupId "0123456789"
+PS C:\>Get-AzureRmApiManagementGroup -Context $APImContext -GroupId "0123456789"
 ```
 
 This command gets  the group ID named 0123456789.
 
 ### Example 3: Get a group by name
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementGroup -Context $apimContext -Name "Group0002"
+PS C:\>Get-AzureRmApiManagementGroup -Context $APImContext -Name "Group0002"
 ```
 
 This command gets the group named Group0002.
 
 ### Example 4: Get all user groups
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementGroup -Context $apimContext -UserId "0123456789"
+PS C:\>Get-AzureRmApiManagementGroup -Context $APImContext -UserId "0123456789"
 ```
 
 This command gets all user groups with the user ID named 0123456789.
@@ -91,28 +85,13 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -GroupId
 Specifies the group ID.
 If specified, the cmdlet attempts to find the group by the identifier.
 
 ```yaml
 Type: String
-Parameter Sets: GetByGroupId
+Parameter Sets: Get by group ID
 Aliases: 
 
 Required: False
@@ -144,7 +123,7 @@ This parameter is optional.
 
 ```yaml
 Type: String
-Parameter Sets: GetByProductId
+Parameter Sets: Find groups by product
 Aliases: 
 
 Required: False
@@ -160,7 +139,7 @@ If specified the cmdlet will return all groups the product assigned to.
 
 ```yaml
 Type: String
-Parameter Sets: GetByUserId
+Parameter Sets: Find groups by user
 Aliases: 
 
 Required: False
@@ -177,11 +156,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementGroup
-The details of the Group configured in API Management service.
-
 ### IList<Microsoft.Azure.Commands.ApiManagement.ServiceManagement.Models.PsApiManagementGroup>
-The list of Groups configured in API Management service.
 
 ## NOTES
 

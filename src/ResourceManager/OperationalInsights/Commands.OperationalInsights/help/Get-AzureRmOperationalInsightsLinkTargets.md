@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.OperationalInsights.dll-Help.xml
-Module Name: AzureRM.OperationalInsights
 ms.assetid: 35C6E85B-E5E1-44E8-86E8-F18E197F69DC
 online version: 
 schema: 2.0.0
@@ -14,7 +13,7 @@ Gets accounts that are not associated with a subscription.
 ## SYNTAX
 
 ```
-Get-AzureRmOperationalInsightsLinkTargets [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmOperationalInsightsLinkTargets [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +30,6 @@ PS C:\>Get-AzureRmOperationalInsightsLinkTargets
 This command gets unlinked accounts that are owned by the caller's ID.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).

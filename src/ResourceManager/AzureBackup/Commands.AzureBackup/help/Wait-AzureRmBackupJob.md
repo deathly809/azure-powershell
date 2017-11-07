@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.AzureBackup.dll-Help.xml
-Module Name: AzureRM.Backup
 ms.assetid: C5126E20-0A93-4ACE-8297-F1E8E17BEF53
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Waits for a Backup job to finish.
 ## SYNTAX
 
 ```
-Wait-AzureRmBackupJob -Job <Object> [-TimeOut <Int64>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Wait-AzureRmBackupJob -Job <Object> [-TimeOut <Int64>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,21 +31,6 @@ A script that includes this cmdlet can be simpler than one that polls the Backup
 ```
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Job
 Specifies a job that this cmdlet cancels.

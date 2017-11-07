@@ -199,7 +199,7 @@ namespace Microsoft.WindowsAzure.Commands.Storage.Common
 
             if (null != file)
             {
-                return file.SnapshotQualifiedUri.AbsoluteUri;
+                return file.Uri.AbsoluteUri;
             }
 
             return instance.ToString();

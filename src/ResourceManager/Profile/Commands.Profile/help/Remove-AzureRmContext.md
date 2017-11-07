@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Profile.dll-Help.xml
-Module Name: AzureRM.Profile
 online version: 
 schema: 2.0.0
 ---
@@ -12,13 +11,13 @@ Remove a context from the set of available contexts
 
 ## SYNTAX
 
-### RemoveByInputObject (Default)
+### Input Object (Default)
 ```
 Remove-AzureRmContext -InputObject <PSAzureContext> [-Force] [-PassThru] [-Scope <ContextModificationScope>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
-### RemoveByName
+### Named Context
 ```
 Remove-AzureRmContext [-Force] [-PassThru] [-Scope <ContextModificationScope>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [-Name] <String> [<CommonParameters>]
@@ -73,7 +72,7 @@ A context object, normally passed through the pipeline.
 
 ```yaml
 Type: PSAzureContext
-Parameter Sets: RemoveByInputObject
+Parameter Sets: Input Object
 Aliases: 
 
 Required: True
@@ -88,7 +87,7 @@ The name of the context
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByName
+Parameter Sets: Named Context
 Aliases: 
 
 Required: True

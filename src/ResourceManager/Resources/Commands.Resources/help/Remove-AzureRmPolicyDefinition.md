@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Cmdlets.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: DEC01722-EB1A-45CE-BD30-9DB861718573
 online version: 
 schema: 2.0.0
@@ -13,18 +12,18 @@ Removes a policy definition.
 
 ## SYNTAX
 
-### RemoveByPolicyDefinitionName (Default)
+### The policy definition name parameter set. (Default)
 ```
 Remove-AzureRmPolicyDefinition -Name <String> [-Force] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
-### RemoveByPolicyDefinitionId
+### The policy definition Id parameter set.
 ```
 Remove-AzureRmPolicyDefinition -Id <String> [-Force] [-ApiVersion <String>] [-Pre]
- [-DefaultProfile <IAzureContextContainer>] [-InformationAction <ActionPreference>]
- [-InformationVariable <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-InformationAction <ActionPreference>] [-InformationVariable <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,21 +67,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Force
 Forces the command to run without asking for user confirmation.
 
@@ -103,7 +87,7 @@ Specifies the fully qualified resource ID for the policy definition that this cm
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByPolicyDefinitionId
+Parameter Sets: The policy definition Id parameter set.
 Aliases: ResourceId
 
 Required: True
@@ -157,7 +141,7 @@ Specifies the name of the policy definition that this cmdlet removes.
 
 ```yaml
 Type: String
-Parameter Sets: RemoveByPolicyDefinitionName
+Parameter Sets: The policy definition name parameter set.
 Aliases: 
 
 Required: True

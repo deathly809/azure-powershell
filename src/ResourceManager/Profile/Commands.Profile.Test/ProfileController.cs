@@ -14,7 +14,6 @@
 
 using Microsoft.Azure.Commands.Common.Authentication;
 using Microsoft.Azure.Internal.Subscriptions;
-using Microsoft.Azure.Management.ResourceManager;
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.Azure.Test.HttpRecorder;
 using Microsoft.Rest.ClientRuntime.Azure.TestFramework;
@@ -38,11 +37,7 @@ namespace Microsoft.Azure.Commands.Resources.Test.ScenarioTests
         private const string SubscriptionIdKey = "SubscriptionId";
 
 
-        public Internal.Subscriptions.SubscriptionClient SubscriptionClient { get; private set; }
-
-        public ResourceManagementClient ResourceManagementClient { get; private set; }
-
-        public Management.Internal.Resources.ResourceManagementClient NewResourceManagementClient { get; private set; }
+        public SubscriptionClient SubscriptionClient { get; private set; }
 
         public string UserDomain { get; private set; }
 
@@ -138,25 +133,13 @@ namespace Microsoft.Azure.Commands.Resources.Test.ScenarioTests
         private void SetupManagementClients(MockContext context)
         {
             SubscriptionClient = GetSubscriptionClient(context);
-            ResourceManagementClient = GetResourceManagementClient(context);
-            NewResourceManagementClient = GetNewResourceManagementClient(context);
 
-            helper.SetupManagementClients(SubscriptionClient, ResourceManagementClient, NewResourceManagementClient);
+            helper.SetupManagementClients(SubscriptionClient);
         }
 
-        private Internal.Subscriptions.SubscriptionClient GetSubscriptionClient(MockContext context)
+        private SubscriptionClient GetSubscriptionClient(MockContext context)
         {
-            return context.GetServiceClient<Internal.Subscriptions.SubscriptionClient>(TestEnvironmentFactory.GetTestEnvironment());
-        }
-
-        private ResourceManagementClient GetResourceManagementClient(MockContext context)
-        {
-            return context.GetServiceClient<ResourceManagementClient>(TestEnvironmentFactory.GetTestEnvironment());
-        }
-
-        private Management.Internal.Resources.ResourceManagementClient GetNewResourceManagementClient(MockContext context)
-        {
-            return context.GetServiceClient<Management.Internal.Resources.ResourceManagementClient>(TestEnvironmentFactory.GetTestEnvironment());
+            return context.GetServiceClient<SubscriptionClient>(TestEnvironmentFactory.GetTestEnvironment());
         }
     }
 }

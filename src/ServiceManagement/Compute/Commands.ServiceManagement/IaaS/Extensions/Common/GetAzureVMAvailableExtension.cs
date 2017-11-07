@@ -123,9 +123,7 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.Extensions
                     }
                 },
                 (op, response) => response.Where(typePred).Where(publisherPred).Where(versionPred).Select(
-                     extension => ContextFactory(extension, op,
-                                    ServiceManagementProfile.Mapper.Map<VirtualMachineExtensionListResponse.ResourceExtension, VirtualMachineExtensionImageContext>,
-                                    ServiceManagementProfile.Mapper.Map)));
+                     extension => ContextFactory<VirtualMachineExtensionListResponse.ResourceExtension, VirtualMachineExtensionImageContext>(extension, op)));
         }
 
         protected override void OnProcessRecord()

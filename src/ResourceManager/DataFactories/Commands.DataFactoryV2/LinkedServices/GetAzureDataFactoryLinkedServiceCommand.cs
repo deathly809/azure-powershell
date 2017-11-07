@@ -22,7 +22,7 @@ using Microsoft.Azure.Commands.DataFactoryV2.Models;
 namespace Microsoft.Azure.Commands.DataFactoryV2
 {
     [Cmdlet(VerbsCommon.Get, Constants.LinkedService, DefaultParameterSetName = ParameterSetNames.ByFactoryName), OutputType(typeof(List<PSLinkedService>), typeof(PSLinkedService))]
-    public class GetAzureDataFactoryLinkedServiceCommand : DataFactoryContextBaseGetCmdlet
+    public class GetAzureDataFactoryLinkedServiceCommand : DataFactoryContextBaseCmdlet
     {
         [Parameter(ParameterSetName = ParameterSetNames.ByFactoryName, Position = 2, Mandatory = false, ValueFromPipelineByPropertyName = true,
             HelpMessage = Constants.HelpLinkedServiceName)]
@@ -30,13 +30,16 @@ namespace Microsoft.Azure.Commands.DataFactoryV2
             HelpMessage = Constants.HelpLinkedServiceName)]
         [Alias(Constants.LinkedServiceName)]
         [ValidateNotNullOrEmpty]
-        public override string Name { get; set; }
+        public string Name { get; set; }
 
         [EnvironmentPermission(SecurityAction.Demand, Unrestricted = true)]
         public override void ExecuteCmdlet()
         {
-            ByResourceId();
-            ByFactoryObject();
+            if (ParameterSetName.Equals(ParameterSetNames.ByFactoryObject, StringComparison.OrdinalIgnoreCase))
+            {
+                DataFactoryName = DataFactory.DataFactoryName;
+                ResourceGroupName = DataFactory.ResourceGroupName;
+            }
 
             AdfEntityFilterOptions filterOptions = new AdfEntityFilterOptions()
             {

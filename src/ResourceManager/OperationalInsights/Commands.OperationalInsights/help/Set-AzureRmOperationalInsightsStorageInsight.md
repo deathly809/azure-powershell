@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.OperationalInsights.dll-Help.xml
-Module Name: AzureRM.OperationalInsights
 ms.assetid: 010328F9-C878-4F16-AFD7-2135465A1968
 online version: 
 schema: 2.0.0
@@ -17,14 +16,13 @@ Updates a Storage Insight.
 ```
 Set-AzureRmOperationalInsightsStorageInsight [-ResourceGroupName] <String> [-WorkspaceName] <String>
  [-Name] <String> [[-StorageAccountKey] <String>] [[-Tables] <String[]>] [[-Containers] <String[]>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### ByWorkspaceObject
 ```
 Set-AzureRmOperationalInsightsStorageInsight [-Workspace] <PSWorkspace> [-Name] <String>
- [[-StorageAccountKey] <String>] [[-Tables] <String[]>] [[-Containers] <String[]>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [[-StorageAccountKey] <String>] [[-Tables] <String[]>] [[-Containers] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,21 +62,6 @@ Required: False
 Position: 6
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -178,6 +161,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PSWorkspace
+
 Parameter 'Workspace' accepts value of type 'PSWorkspace' from the pipeline
 
 ## OUTPUTS

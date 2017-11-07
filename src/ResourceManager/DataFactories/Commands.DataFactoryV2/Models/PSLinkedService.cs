@@ -57,21 +57,5 @@ namespace Microsoft.Azure.Commands.DataFactoryV2.Models
                 linkedService.Properties = value;
             }
         }
-
-        public override string Id
-        {
-            get
-            {
-                return this.linkedService.Id;
-            }
-        }
-
-        public override string ETag
-        {
-            get
-            {
-                return this.linkedService.Etag;
-            }
-        }
     }
 }

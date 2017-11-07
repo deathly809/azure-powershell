@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Scheduler.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: DC151161-72C0-40F7-B2F0-45FA01142AE1
 online version: 
 schema: 2.0.0
@@ -15,7 +14,7 @@ Gets Scheduler jobs.
 
 ```
 Get-AzureRmSchedulerJob -ResourceGroupName <String> -JobCollectionName <String> [-JobName <String>]
- [-JobState <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-JobState <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,21 +28,6 @@ The **Get-AzureRmSchedulerJob** cmdlet gets Azure Scheduler jobs.
 ```
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -JobCollectionName
 Specifies the name of a job collection that contains jobs to get.

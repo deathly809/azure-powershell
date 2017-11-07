@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
-Module Name: AzureRM.MachineLearning
 online version: 
 schema: 2.0.0
 ---
@@ -12,16 +11,14 @@ Retrieves the web service's keys.
 
 ## SYNTAX
 
-### GetByNameAndResourceGroup
+### Get an Azure ML web service's access keys given its name and resource group.
 ```
-Get-AzureRmMlWebServiceKeys -ResourceGroupName <String> -Name <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmMlWebServiceKeys -ResourceGroupName <String> -Name <String> [<CommonParameters>]
 ```
 
-### GetByInstance
+### Get the access kesy for the given web service instance.
 ```
-Get-AzureRmMlWebServiceKeys -MlWebService <WebService> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmMlWebServiceKeys -MlWebService <WebService> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,27 +48,12 @@ $mlService is an object of type Microsoft.Azure.Management.MachineLearning.WebSe
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -MlWebService
 The name of the web service for which the access keys are retrieved.
 
 ```yaml
 Type: WebService
-Parameter Sets: GetByInstance
+Parameter Sets: Get the access kesy for the given web service instance.
 Aliases: 
 
 Required: True
@@ -86,7 +68,7 @@ The name of the web service for which the access keys are retrieved.
 
 ```yaml
 Type: String
-Parameter Sets: GetByNameAndResourceGroup
+Parameter Sets: Get an Azure ML web service's access keys given its name and resource group.
 Aliases: 
 
 Required: True
@@ -101,7 +83,7 @@ The resource group for the web service.
 
 ```yaml
 Type: String
-Parameter Sets: GetByNameAndResourceGroup
+Parameter Sets: Get an Azure ML web service's access keys given its name and resource group.
 Aliases: 
 
 Required: True
@@ -117,6 +99,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### WebService
+
 Parameter 'MlWebService' accepts value of type 'WebService' from the pipeline
 
 ## OUTPUTS

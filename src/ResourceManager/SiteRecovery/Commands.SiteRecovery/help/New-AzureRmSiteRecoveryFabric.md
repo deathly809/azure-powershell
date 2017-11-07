@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: B087194B-DA3F-4E45-BD2D-788F9E6F03EA
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Creates an Azure Site Recovery Fabric.
 ## SYNTAX
 
 ```
-New-AzureRmSiteRecoveryFabric -Name <String> [-Type <String>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+New-AzureRmSiteRecoveryFabric -Name <String> [-Type <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,21 +22,6 @@ The **New-AzureRmSiteRecoveryFabric** cmdlet creates an Azure Site Recovery Fabr
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the Azure Site Recovery Fabric

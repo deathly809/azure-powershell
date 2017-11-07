@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Resources.dll-Help.xml
-Module Name: AzureRM.Resources
 ms.assetid: 66AC5120-80B1-46F2-AA51-132BF361602E
 online version: 
 schema: 2.0.0
@@ -15,29 +14,27 @@ Lists existing azure active directory applications.
 
 ### EmptyParameterSet (Default)
 ```
-Get-AzureRmADApplication [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmADApplication [<CommonParameters>]
 ```
 
 ### ApplicationObjectIdParameterSet
 ```
-Get-AzureRmADApplication -ObjectId <Guid> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmADApplication -ObjectId <Guid> [<CommonParameters>]
 ```
 
 ### ApplicationIdParameterSet
 ```
-Get-AzureRmADApplication -ApplicationId <Guid> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmADApplication -ApplicationId <Guid> [<CommonParameters>]
 ```
 
 ### ApplicationDisplayNameParameterSet
 ```
-Get-AzureRmADApplication -DisplayNameStartWith <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmADApplication -DisplayNameStartWith <String> [<CommonParameters>]
 ```
 
 ### ApplicationIdentifierUriParameterSet
 ```
-Get-AzureRmADApplication -IdentifierUri <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmADApplication -IdentifierUri <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,21 +72,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

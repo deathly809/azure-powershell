@@ -17,7 +17,7 @@ New-AzureRmApiManagement -ResourceGroupName <String> -Name <String> -Location <S
  -AdminEmail <String> [-Sku <PsApiManagementSku>] [-Capacity <Int32>] [-VpnType <PsApiManagementVpnType>]
  [-VirtualNetwork <PsApiManagementVirtualNetwork>]
  [-Tags <System.Collections.Generic.Dictionary`2[System.String,System.String]>]
- [-AdditionalRegions <PsApiManagementRegion[]>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-AdditionalRegions <PsApiManagementRegion[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -106,26 +106,27 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Location
-Specifies the location to create the Api Management service.
+Specifies the location in which this cmdlet creates an API Management deployment.
+To obtain valid locations, use the Get-AzureLocation cmdlets.
 
-To obtain valid locations, use the cmdlet
-Get-AzureRmResourceProvider -ProviderNamespace "Microsoft.ApiManagement" | where {$_.ResourceTypes[0].ResourceTypeName -eq "service"} | Select-Object Locations
+Valid values are: 
+
+- North Central US
+- South Central US
+- Central US
+- West Europe
+- North Europe
+- West US
+- East US
+- East US 2
+- Japan East
+- Japan West
+- Brazil South
+- Southeast Asia
+- East Asia
+- Australia East
+- Australia Southeast
 
 ```yaml
 Type: String

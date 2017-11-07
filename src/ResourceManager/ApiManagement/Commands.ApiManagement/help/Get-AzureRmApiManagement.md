@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ApiManagement.dll-Help.xml
-Module Name: AzureRM.ApiManagement
 ms.assetid: DBA7AD5F-CC13-417A-B753-F998942530BB
 online version: 
 schema: 2.0.0
@@ -13,21 +12,19 @@ Gets a list or a particular API Management Service description.
 
 ## SYNTAX
 
-### GetBySubscription (Default)
+### All In Subscription (Default)
 ```
-Get-AzureRmApiManagement [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### GetByResourceGroup
-```
-Get-AzureRmApiManagement -ResourceGroupName <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmApiManagement [<CommonParameters>]
 ```
 
-### GetByResource
+### All In Resource Group
 ```
-Get-AzureRmApiManagement -ResourceGroupName <String> -Name <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmApiManagement -ResourceGroupName <String> [<CommonParameters>]
+```
+
+### Specific API Management Service
+```
+Get-AzureRmApiManagement -ResourceGroupName <String> -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,27 +48,12 @@ This command gets all API Management service by name.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 Specifies the name of API Management service.
 
 ```yaml
 Type: String
-Parameter Sets: GetByResource
+Parameter Sets: Specific API Management Service
 Aliases: 
 
 Required: True
@@ -86,7 +68,7 @@ Specifies the name of the resource group under in which this cmdlet gets the API
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceGroup, GetByResource
+Parameter Sets: All In Resource Group, Specific API Management Service
 Aliases: 
 
 Required: True

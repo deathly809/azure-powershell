@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 3F62A993-18BF-4189-A7C0-BB877F550AA5
 online version: 
 schema: 2.0.0
@@ -15,31 +14,27 @@ Gets storage classifications in Site Recovery.
 
 ### Default (Default)
 ```
-Get-AzureRmSiteRecoveryStorageClassification [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryStorageClassification [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Get-AzureRmSiteRecoveryStorageClassification -Name <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmSiteRecoveryStorageClassification -Name <String> [<CommonParameters>]
 ```
 
 ### ByFriendlyName
 ```
-Get-AzureRmSiteRecoveryStorageClassification -FriendlyName <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmSiteRecoveryStorageClassification -FriendlyName <String> [<CommonParameters>]
 ```
 
 ### ByFabricObject
 ```
-Get-AzureRmSiteRecoveryStorageClassification -Fabric <ASRFabric> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmSiteRecoveryStorageClassification -Fabric <ASRFabric> [<CommonParameters>]
 ```
 
 ### ByServerObject
 ```
-Get-AzureRmSiteRecoveryStorageClassification -Server <ASRServer> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmSiteRecoveryStorageClassification -Server <ASRServer> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,21 +43,6 @@ The **Get-AzureRmSiteRecoveryStorageClassification** cmdlet gets storage classif
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fabric
 ```yaml
@@ -126,9 +106,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRFabric
+
 Parameter 'Fabric' accepts value of type 'ASRFabric' from the pipeline
 
 ### ASRServer
+
 Parameter 'Server' accepts value of type 'ASRServer' from the pipeline
 
 ## OUTPUTS

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.OperationalInsights.dll-Help.xml
-Module Name: AzureRM.OperationalInsights
 ms.assetid: 29ABCC1B-8590-4243-A629-709F207927B4
 online version: 
 schema: 2.0.0
@@ -16,13 +15,12 @@ Gets information about a Storage Insight.
 ### ByWorkspaceName (Default)
 ```
 Get-AzureRmOperationalInsightsStorageInsight [-ResourceGroupName] <String> [-WorkspaceName] <String>
- [[-Name] <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [[-Name] <String>] [<CommonParameters>]
 ```
 
 ### ByWorkspaceObject
 ```
-Get-AzureRmOperationalInsightsStorageInsight [-Workspace] <PSWorkspace> [[-Name] <String>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmOperationalInsightsStorageInsight [-Workspace] <PSWorkspace> [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,21 +48,6 @@ The first command uses the **Get-AzureRmOperationalInsightsWorkspace** cmdlet to
 The second command gets the storage insight named MyStorageInsight for the workspace in $Workspace.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the Storage Insight name.
@@ -132,6 +115,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### PSWorkspace
+
 Parameter 'Workspace' accepts value of type 'PSWorkspace' from the pipeline
 
 ## OUTPUTS

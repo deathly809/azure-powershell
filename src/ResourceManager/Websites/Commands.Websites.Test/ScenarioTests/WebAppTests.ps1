@@ -732,13 +732,6 @@ function Test-WebAppPublishingProfile
 
 		# Assert
 		Assert-True { $fileZillaProfile.Name -eq $appName }
-
-		# Get web app publishing profile without OutputFile
-		[xml]$profile = Get-AzureRmWebAppPublishingProfile -ResourceGroupName $rgname -Name $appName
-
-		# Assert
-		Assert-NotNull $profile
-
 	}
 	finally
 	{

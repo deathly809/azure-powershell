@@ -12,21 +12,19 @@ Gets the access keys associated with an operationalization cluster.
 
 ## SYNTAX
 
-### GetByNameAndResourceGroup
+### Get operationalization cluster's keys from cmdlet input parameters.
 ```
-Get-AzureRmMlOpClusterKey -ResourceGroupName <String> -Name <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
-```
-
-### GetByInputObject
-```
-Get-AzureRmMlOpClusterKey -InputObject <PSOperationalizationCluster> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmMlOpClusterKey -ResourceGroupName <String> -Name <String>
 ```
 
-### GetByResourceId
+### Get operationalization cluster's keys from an OperationalizationCluster instance definition.
 ```
-Get-AzureRmMlOpClusterKey -ResourceId <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmMlOpClusterKey -Cluster <PSOperationalizationCluster>
+```
+
+### Get operationalization cluster's keys from an Azure resource id.
+```
+Get-AzureRmMlOpClusterKey -ResourceId <String>
 ```
 
 ## DESCRIPTION
@@ -43,27 +41,12 @@ Returns the secret keys for the services associated with the operationalization 
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -InputObject
 The operationalization cluster object.
 
 ```yaml
 Type: PSOperationalizationCluster
-Parameter Sets: GetByInputObject
+Parameter Sets: Get operationalization cluster's keys from an OperationalizationCluster instance definition.
 Aliases: Cluster
 
 Required: True
@@ -78,7 +61,7 @@ The name of the operationalization cluster.
 
 ```yaml
 Type: String
-Parameter Sets: GetByNameAndResourceGroup
+Parameter Sets: Get operationalization cluster's keys from cmdlet input parameters.
 Aliases: 
 
 Required: True
@@ -93,7 +76,7 @@ The name of the resource group for the operationalization cluster.
 
 ```yaml
 Type: String
-Parameter Sets: GetByNameAndResourceGroup
+Parameter Sets: Get operationalization cluster's keys from cmdlet input parameters.
 Aliases: 
 
 Required: True
@@ -108,7 +91,7 @@ The Azure resource id for the operationalization cluster.
 
 ```yaml
 Type: String
-Parameter Sets: GetByResourceId
+Parameter Sets: Get operationalization cluster's keys from an Azure resouce id.
 Aliases: 
 
 Required: True
@@ -118,17 +101,16 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ### Microsoft.Azure.Commands.MachineLearningCompute.Models.PSOperationalizationCluster
 System.String
 
+
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.MachineLearningCompute.Models.PSOperationalizationClusterCredentials
+
 
 ## NOTES
 

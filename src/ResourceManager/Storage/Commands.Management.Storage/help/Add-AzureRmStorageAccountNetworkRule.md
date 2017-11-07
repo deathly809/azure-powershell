@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Management.Storage.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -15,28 +14,25 @@ schema: 2.0.0
 ### NetWorkRuleString (Default)
 ```
 Add-AzureRmStorageAccountNetworkRule [-ResourceGroupName] <String> [-Name] <String>
- -VirtualNetworkResourceId <String[]> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -VirtualNetworkResourceId <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### IpRuleObject
 ```
 Add-AzureRmStorageAccountNetworkRule [-ResourceGroupName] <String> [-Name] <String> -IPRule <PSIpRule[]>
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### NetworkRuleObject
 ```
 Add-AzureRmStorageAccountNetworkRule [-ResourceGroupName] <String> [-Name] <String>
- -VirtualNetworkRule <PSVirtualNetworkRule[]> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -VirtualNetworkRule <PSVirtualNetworkRule[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### IpRuleString
 ```
 Add-AzureRmStorageAccountNetworkRule [-ResourceGroupName] <String> [-Name] <String>
- -IPAddressOrRange <String[]> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -IPAddressOrRange <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,21 +71,6 @@ PS C:\>Add-AzureRMStorageAccountNetworkRule -ResourceGroupName "myResourceGroup"
 This command add several IpRule with IpRule objects, input with JSON.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -IPAddressOrRange
 The Array of IpAddressOrRange, add IpRules with the input IpAddressOrRange and default Action Allow to NetworkRule Property.

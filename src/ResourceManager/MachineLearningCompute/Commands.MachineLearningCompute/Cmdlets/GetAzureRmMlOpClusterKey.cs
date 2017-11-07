@@ -25,11 +25,14 @@ namespace Microsoft.Azure.Commands.MachineLearningCompute.Cmdlets
     [OutputType(typeof(PSOperationalizationClusterCredentials))]
     public class GetAzureRmMlOpClusterKey : MachineLearningComputeCmdletBase
     {
-        protected const string CmdletParametersParameterSet = "GetByNameAndResourceGroup";
+        protected const string CmdletParametersParameterSet =
+            "Get operationalization cluster's keys from cmdlet input parameters.";
 
-        protected const string ObjectParameterSet = "GetByInputObject";
+        protected const string ObjectParameterSet =
+            "Get operationalization cluster's keys from an OperationalizationCluster instance definition.";
 
-        protected const string ResourceIdParameterSet = "GetByResourceId";
+        protected const string ResourceIdParameterSet =
+            "Get operationalization cluster's keys from an Azure resource id.";
 
         [Parameter(ParameterSetName = CmdletParametersParameterSet,
             Mandatory = true,

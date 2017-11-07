@@ -14,8 +14,8 @@ Sets user details.
 
 ```
 Set-AzureRmApiManagementUser -Context <PsApiManagementContext> -UserId <String> [-FirstName <String>]
- [-LastName <String>] [-Email <String>] [-Password <SecureString>] [-State <PsApiManagementUserState>]
- [-Note <String>] [-PassThru] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-LastName <String>] [-Email <String>] [-Password <String>] [-State <PsApiManagementUserState>]
+ [-Note <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,9 +25,7 @@ The **Set-AzureRmApiManagementUser** cmdlet sets user details.
 
 ### Example 1: Change a user's password, email address and state
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>$securePassword = ConvertTo-SecureString "qwerty" -AsPlainText -Force
-PS C:\>Set-AzureRmApiManagementUser -Context $apimContext -UserId "0123456789" -Email "patti.fuller@contoso.com" -Password $securePassword -State "Blocked"
+PS C:\>Set-AzureRmApiManagementUser -Context $apimContext -UserId "0123456789" -Email "patti.fuller@contoso.com" -Password "asdfgh" -State "Blocked"
 ```
 
 This command sets a new user password and email address and blocks the user.
@@ -47,21 +45,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -150,7 +133,7 @@ Specifies the user password.
 This parameter is optional.
 
 ```yaml
-Type: SecureString
+Type: String
 Parameter Sets: (All)
 Aliases: 
 

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.IotHub.dll-Help.xml
-Module Name: AzureRM.IotHub
 online version: 
 schema: 2.0.0
 ---
@@ -13,8 +12,7 @@ Gets the RegistryStatistics for an IotHub.
 ## SYNTAX
 
 ```
-Get-AzureRmIotHubRegistryStatistic [-ResourceGroupName] <String> [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmIotHubRegistryStatistic [-ResourceGroupName] <String> [-Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +29,6 @@ PS C:\> Get-AzureRmIotHubRegistryStatistic -ResourceGroupName "myresourcegroup" 
 Gets the RegistryStatictics for the IotHub named "myiothub"
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Name of the IoT hub. 

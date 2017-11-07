@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ResourceManager.Automation.dll-Help.xml
-Module Name: AzureRM.Automation
 ms.assetid: F344D8D1-5593-4C09-A1CA-37579D2A3A61
 online version: 
 schema: 2.0.0
@@ -16,14 +15,13 @@ Modifies an Automation variable.
 ### UpdateVariableValue
 ```
 Set-AzureRmAutomationVariable [-Name] <String> -Encrypted <Boolean> -Value <Object>
- [-ResourceGroupName] <String> [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+ [-ResourceGroupName] <String> [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ### UpdateVariableDescription
 ```
 Set-AzureRmAutomationVariable [-Name] <String> -Description <String> [-ResourceGroupName] <String>
- [-AutomationAccountName] <String> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-AutomationAccountName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,21 +53,6 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

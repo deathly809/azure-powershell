@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.AnalysisServices.dll-Help.xml
-Module Name: AzureRM.AnalysisServices
 online version: 
 schema: 2.0.0
 ---
@@ -13,8 +12,8 @@ Suspends an instance of Analysis Services server
 ## SYNTAX
 
 ```
-Suspend-AzureRmAnalysisServicesServer [[-ResourceGroupName] <String>] [-Name] <String> [-PassThru]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Suspend-AzureRmAnalysisServicesServer [[-ResourceGroupName] <String>] [-Name] <String> [-PassThru] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +29,6 @@ PS C:\> Suspend-AzureRmAnalysisServicesServer -Name "testserver" -ResourceGroupN
 This command will suspend an active server named testserver in the resourcegroup testgroup
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Name of the Analysis Services server

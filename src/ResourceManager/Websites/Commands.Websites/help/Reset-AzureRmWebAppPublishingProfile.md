@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Websites.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 84C861B2-DCB3-47F0-8589-BB3172C6E1EC
 online version: 
 schema: 2.0.0
@@ -14,14 +13,12 @@ schema: 2.0.0
 
 ### S1
 ```
-Reset-AzureRmWebAppPublishingProfile [-ResourceGroupName] <String> [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Reset-AzureRmWebAppPublishingProfile [-ResourceGroupName] <String> [-Name] <String> [<CommonParameters>]
 ```
 
 ### S2
 ```
-Reset-AzureRmWebAppPublishingProfile [-WebApp] <Site> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Reset-AzureRmWebAppPublishingProfile [-WebApp] <Site> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,21 +34,6 @@ PS C:\> Reset-AzureRmWebAppSlotPublishingProfile -ResourceGroupName "Default-Web
 This command resets the publishing profile for the Web App ContosoWebApp associated with the resource group Default-Web-WestUS.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 WebApp Name
@@ -104,6 +86,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Site
+
 Parameter 'WebApp' accepts value of type 'Site' from the pipeline
 
 ## OUTPUTS

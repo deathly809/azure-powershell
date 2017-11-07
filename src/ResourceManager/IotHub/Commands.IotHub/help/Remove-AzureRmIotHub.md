@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.IotHub.dll-Help.xml
-Module Name: AzureRM.IotHub
 online version: 
 schema: 2.0.0
 ---
@@ -13,8 +12,7 @@ Deletes an IotHub.
 ## SYNTAX
 
 ```
-Remove-AzureRmIotHub [-ResourceGroupName] <String> [-Name] <String> [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-AzureRmIotHub [-ResourceGroupName] <String> [-Name] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,21 +28,6 @@ PS C:\> Remove-AzureRmIotHub -ResourceGroupName "myresourcegroup" -Name "myiothu
 Removes an IotHub named "myiothub"
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Name of the IotHub

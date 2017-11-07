@@ -32,15 +32,10 @@ namespace Microsoft.WindowsAzure.Commands.ServiceManagement.Network.NetworkSecur
         public NetworkSecurityGroupWithRules(NetworkSecurityGroupGetResponse networkSecurityGroupAsGetResponse)
             : base(networkSecurityGroupAsGetResponse)
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Microsoft.WindowsAzure.Management.Network.Models.NetworkSecurityRule, NetworkSecurityRule>();
-            });
-
-            IMapper mapper = config.CreateMapper();
+            Mapper.CreateMap<Microsoft.WindowsAzure.Management.Network.Models.NetworkSecurityRule, NetworkSecurityRule>();
             if (networkSecurityGroupAsGetResponse.Rules != null)
             {
-                rules.AddRange(networkSecurityGroupAsGetResponse.Rules.Select(mapper.Map<NetworkSecurityRule>));
+                rules.AddRange(networkSecurityGroupAsGetResponse.Rules.Select(Mapper.Map<NetworkSecurityRule>));
             }
         }
     }

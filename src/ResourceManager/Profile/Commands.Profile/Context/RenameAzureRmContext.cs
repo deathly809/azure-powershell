@@ -26,7 +26,7 @@ namespace Microsoft.Azure.Commands.Profile.Context
     [OutputType(typeof(PSAzureContext))]
     public class RenameAzureRmContext : AzureContextModificationCmdlet, IDynamicParameters
     {
-        const string SourceParameterName = "SourceName", TargetParameterName = "TargetName", InputObjectParameterSet = "RenameByInputObject", NameParameterSet = "RenameByName";
+        const string SourceParameterName = "SourceName", TargetParameterName = "TargetName", InputObjectParameterSet = "Input Object", NameParameterSet = "Context Name";
         [Parameter(Mandatory = true, ParameterSetName = InputObjectParameterSet, ValueFromPipeline = true, HelpMessage = "A context object, normally passed through the pipeline.")]
         [ValidateNotNullOrEmpty]
         public PSAzureContext InputObject { get; set; }

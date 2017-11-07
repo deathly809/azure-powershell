@@ -1,7 +1,6 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceBus.dll-Help.xml
-Module Name: AzureRM
-online version: 
+online version:
 schema: 2.0.0
 ---
 
@@ -13,9 +12,8 @@ Creates a new Service Bus namespace.
 ## SYNTAX
 
 ```
-New-AzureRmServiceBusNamespace [-ResourceGroupName] <String> [-Location] <String> [-Name] <String>
- [-SkuName <String>] [-Tag <Hashtable>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+New-AzureRmServiceBusNamespace [-ResourceGroupName] <String> [-Location] <String> [-NamespaceName] <String>
+ [-SkuName <String>] [-Tag <Hashtable>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,29 +30,16 @@ Id                 : /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourc
 Location           : West US
 Sku                : Name : Standard , Capacity : 1 , Tier : Standard
 ProvisioningState  : Succeeded
+Status             : Active
 CreatedAt          : 1/20/2017 2:07:33 AM
 UpdatedAt          : 1/20/2017 2:07:56 AM
 ServiceBusEndpoint : https://SB-Example1.servicebus.windows.net:443/
+Enabled            : True
 ```
 
 Creates a new Service Bus namespace within the specified resource group.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Location
 The Service Bus namespace location.
@@ -62,7 +47,7 @@ The Service Bus namespace location.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -71,13 +56,13 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Name
-ServiceBus Namespace Name.
+### -NamespaceName
+The Service Bus namespace name.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: NamespaceName
+Aliases:
 
 Required: True
 Position: 2
@@ -92,7 +77,7 @@ The resource group name.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: ResourceGroup
+Aliases:
 
 Required: True
 Position: 0
@@ -107,7 +92,7 @@ The Service Bus namespace SKU name.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 Accepted values: Basic, Standard, Premium
 
 Required: False
@@ -125,7 +110,7 @@ Key-value pairs in the form of a hash table set as tags on the server. For examp
 ```yaml
 Type: Hashtable
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -191,4 +176,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

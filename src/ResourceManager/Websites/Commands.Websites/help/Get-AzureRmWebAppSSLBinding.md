@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Websites.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: EE3D2BA0-32E7-4A37-BCAF-F0E8FAAC43CE
 online version: 
 schema: 2.0.0
@@ -16,13 +15,12 @@ Gets an Azure Web App certificate SSL binding.
 ### S1
 ```
 Get-AzureRmWebAppSSLBinding [[-Name] <String>] [-ResourceGroupName] <String> [-WebAppName] <String>
- [[-Slot] <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [[-Slot] <String>] [<CommonParameters>]
 ```
 
 ### S2
 ```
-Get-AzureRmWebAppSSLBinding [[-Name] <String>] [-WebApp] <Site> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmWebAppSSLBinding [[-Name] <String>] [-WebApp] <Site> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,21 +50,6 @@ That object reference is stored in a variable named $WebApp.
 This variable, and the **Get-AzureRmWebAppSSLBinding** cmdlet, are then used by the second command to get the SSL bindings.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of the SSL binding.
@@ -155,6 +138,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Site
+
 Parameter 'WebApp' accepts value of type 'Site' from the pipeline
 
 ## OUTPUTS

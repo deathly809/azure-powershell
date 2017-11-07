@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.RecoveryServices.SiteRecovery.dll-Help.xml
-Module Name: AzureRM.RecoveryServices.SiteRecovery
 online version: 
 schema: 2.0.0
 ---
@@ -15,18 +14,17 @@ Gets the details of the specified ASR job or the list of recent ASR jobs in the 
 ### ByParam (Default)
 ```
 Get-AzureRmRecoveryServicesAsrJob [-StartTime <DateTime>] [-EndTime <DateTime>] [-TargetObjectId <String>]
- [-State <String>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+ [-State <String>] [<CommonParameters>]
 ```
 
 ### ByName
 ```
-Get-AzureRmRecoveryServicesAsrJob -Name <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmRecoveryServicesAsrJob -Name <String> [<CommonParameters>]
 ```
 
 ### ByObject
 ```
-Get-AzureRmRecoveryServicesAsrJob -Job <ASRJob> [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmRecoveryServicesAsrJob -Job <ASRJob> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,21 +41,6 @@ PS C:\> $jobs = Get-AzureRmRecoveryServicesAsrJob -TargetObjectId $ASRObjectId
 Returns all the jobs on a particular ASR object(reference the ASR object such as replicated item or recovery plan by its ID.) 
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -EndTime
 Specifies the end time for the jobs.

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.ServiceBus.dll-Help.xml
-Module Name: AzureRM
 online version: 
 schema: 2.0.0
 ---
@@ -15,19 +14,18 @@ Gets the primary and secondary connection strings for the given Namespace or Que
 ### NamespaceAuthorizationRuleSet (Default)
 ```
 Get-AzureRmServiceBusKey [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
 ### QueueAuthorizationRuleSet
 ```
-Get-AzureRmServiceBusKey [-ResourceGroupName] <String> [-Namespace] <String> [-Queue] <String> [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmServiceBusKey [-ResourceGroupName] <String> [[-Namespace] <String>] [-Queue] <String>
+ [-Name] <String>
 ```
 
 ### TopicAuthorizationRuleSet
 ```
-Get-AzureRmServiceBusKey [-ResourceGroupName] <String> [-Namespace] <String> [-Topic] <String> [-Name] <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmServiceBusKey [-ResourceGroupName] <String> [[-Namespace] <String>] [-Topic] <String>
+ [-Name] <String>
 ```
 
 ## DESCRIPTION
@@ -58,21 +56,6 @@ Primary and secondary connection string to the specified topic.
 
 ## PARAMETERS
 
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 AuthorizationRule Name.
 
@@ -93,10 +76,22 @@ Namespace Name.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: NamespaceAuthorizationRuleSet
 Aliases: NamespaceName
 
 Required: True
+Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+```yaml
+Type: String
+Parameter Sets: QueueAuthorizationRuleSet, TopicAuthorizationRuleSet
+Aliases: NamespaceName
+
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -148,16 +143,15 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ### System.String
 
+
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.ServiceBus.Models.ListKeysAttributes
+
 
 ## NOTES
 

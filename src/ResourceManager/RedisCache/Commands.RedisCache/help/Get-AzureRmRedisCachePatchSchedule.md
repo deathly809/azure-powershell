@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.RedisCache.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: DA180A4A-88B6-4359-94E0-CF72F66D1FE4
 online version: 
 schema: 2.0.0
@@ -14,8 +13,7 @@ Gets a patch schedule.
 ## SYNTAX
 
 ```
-Get-AzureRmRedisCachePatchSchedule -ResourceGroupName <String> -Name <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmRedisCachePatchSchedule -ResourceGroupName <String> -Name <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,21 +29,6 @@ PS C:\>Get-AzureRmRedisCachePatchSchedule -ResourceGroupName "ResourceGroup13" -
 This command gets the patch schedule from the cache named RedisCache06.
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Name
 Specifies the name of a cache.

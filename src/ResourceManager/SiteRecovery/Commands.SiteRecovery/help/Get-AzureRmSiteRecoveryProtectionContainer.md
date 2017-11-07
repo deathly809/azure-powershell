@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.SiteRecovery.dll-Help.xml
-Module Name: AzureRM
 ms.assetid: 77F1556C-323D-49CA-BD6C-75B2D4E0F894
 online version: 
 schema: 2.0.0
@@ -15,37 +14,32 @@ Gets protection containers for the current Site Recovery vault.
 
 ### Default (Default)
 ```
-Get-AzureRmSiteRecoveryProtectionContainer [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryProtectionContainer [<CommonParameters>]
 ```
 
 ### ByObjectWithName
 ```
-Get-AzureRmSiteRecoveryProtectionContainer -Name <String> -Fabric <ASRFabric>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryProtectionContainer -Name <String> -Fabric <ASRFabric> [<CommonParameters>]
 ```
 
 ### ByObjectWithNameLegacy
 ```
-Get-AzureRmSiteRecoveryProtectionContainer -Name <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmSiteRecoveryProtectionContainer -Name <String> [<CommonParameters>]
 ```
 
 ### ByObjectWithFriendlyName
 ```
-Get-AzureRmSiteRecoveryProtectionContainer -FriendlyName <String> -Fabric <ASRFabric>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmSiteRecoveryProtectionContainer -FriendlyName <String> -Fabric <ASRFabric> [<CommonParameters>]
 ```
 
 ### ByObjectWithFriendlyNameLegacy
 ```
-Get-AzureRmSiteRecoveryProtectionContainer -FriendlyName <String> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmSiteRecoveryProtectionContainer -FriendlyName <String> [<CommonParameters>]
 ```
 
 ### ByFabricObject
 ```
-Get-AzureRmSiteRecoveryProtectionContainer -Fabric <ASRFabric> [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
+Get-AzureRmSiteRecoveryProtectionContainer -Fabric <ASRFabric> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,21 +50,6 @@ Protection policies define replication settings for protected items and can be a
 ## EXAMPLES
 
 ## PARAMETERS
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fabric
 ```yaml
@@ -121,6 +100,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### ASRFabric
+
 Parameter 'Fabric' accepts value of type 'ASRFabric' from the pipeline
 
 ## OUTPUTS

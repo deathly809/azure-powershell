@@ -44,9 +44,11 @@
     $isAad = $PSCmdlet.ParameterSetName -eq "AadEnvironment"
     $azStackPowershellGuid = "1950a258-227b-4e31-a9cf-717495945fc2"
 	$DebugPreference="Continue"
-    #$adminSubscription = Get-AzureRmSubscription -SubscriptionName "Default Provider Subscription" 
-    #$adminSubscriptionId = $adminSubscription.SubscriptionId
-    #Set-AzureRmContext -SubscriptionId $adminSubscriptionId
+	Write-Debug "Before Get-AzureRMSubscription"
+    $adminSubscription = Get-AzureRmSubscription -SubscriptionName "Default Provider Subscription" 
+	Write-Debug "After Get-AzureRMSubscription"
+    $adminSubscriptionId = $adminSubscription.SubscriptionId
+    Set-AzureRmContext -SubscriptionId $adminSubscriptionId
     $location =  "local"
 
     $global:AzureStackConfig = [PSCustomObject]@{
@@ -54,7 +56,7 @@
                     ApiVersion = "2015-11-01"
                     ArmLocation = $location
                     Token = $token
-                    SubscriptionId = "1950a258-227b-4e31-a9cf-717495945fc2"
+                    SubscriptionId = $adminSubscriptionId
                     AdminUri = $ArmEndpoint
                     IsAad = $isAad
                     AadTenantId = $AadTenantId
@@ -144,7 +146,7 @@ function Set-AzureStackWithAadEnvironment
     $environment = Get-AzureRmEnvironment -Name $AzureStackMachineName
     #Login-AzureRmAccount -Environment $environment -Credential $Credential
 
-    #Get-AzureRmSubscription -SubscriptionName "Default Provider Subscription" | Set-AzureRmContext
+    Get-AzureRmSubscription -SubscriptionName "Default Provider Subscription" | Set-AzureRmContext
 }
 
 function Get-DefaultLocation

@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Profile.dll-Help.xml
-Module Name: AzureRM.Profile
 online version: 
 schema: 2.0.0
 ---
@@ -12,13 +11,13 @@ Rename an Azure context.  By default contexts are named by user account and subs
 
 ## SYNTAX
 
-### RenameByInputObject (Default)
+### Input Object (Default)
 ```
 Rename-AzureRmContext -InputObject <PSAzureContext> [-Force] [-PassThru] [-Scope <ContextModificationScope>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [-TargetName] <String> [<CommonParameters>]
 ```
 
-### RenameByName
+### Context Name
 ```
 Rename-AzureRmContext [-Force] [-PassThru] [-Scope <ContextModificationScope>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [-SourceName] <String> [-TargetName] <String>
@@ -83,7 +82,7 @@ A context object, normally passed through the pipeline.
 
 ```yaml
 Type: PSAzureContext
-Parameter Sets: RenameByInputObject
+Parameter Sets: Input Object
 Aliases: 
 
 Required: True
@@ -129,7 +128,7 @@ The name of the context
 
 ```yaml
 Type: String
-Parameter Sets: RenameByName
+Parameter Sets: Context Name
 Aliases: 
 
 Required: True

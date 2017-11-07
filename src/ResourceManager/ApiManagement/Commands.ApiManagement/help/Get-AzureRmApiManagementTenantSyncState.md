@@ -13,8 +13,7 @@ Gets the status of the most recent synchronization between the configuration dat
 ## SYNTAX
 
 ```
-Get-AzureRmApiManagementTenantSyncState -Context <PsApiManagementContext>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+Get-AzureRmApiManagementTenantSyncState -Context <PsApiManagementContext> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,8 +23,7 @@ The **Get-AzureRmApiManagementTenantSyncState** cmdlet gets the status of the mo
 
 ### Example 1: Get the status of the most recent synchronization
 ```
-PS C:\>$apimContext = New-AzureRmApiManagementContext -ResourceGroupName "Api-Default-WestUS" -ServiceName "contoso"
-PS C:\>Get-AzureRmApiManagementTenantSyncState -Context $apimContext 
+PS C:\>Get-AzureRmApiManagementTenantSyncState -Context $ApimContext
 ```
 
 This command gets the status of the most recent synchronization between the configuration database and the Git repository.
@@ -44,21 +42,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
- 
- ```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

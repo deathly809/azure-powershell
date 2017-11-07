@@ -20,7 +20,7 @@ using System.Xml;
 namespace Microsoft.Azure.Commands.ServiceBus.Commands.Subscription
 {
     /// <summary>
-    /// 'New-AzureRmServiceBusSubscription' Cmdlet creates a new Subscription
+    /// 'New-AzureRmServiceBusSubscription' Cmdlet creates a new EventHub
     /// </summary>
     [Cmdlet(VerbsCommon.New, ServicebusSubscriptionVerb, SupportsShouldProcess = true), OutputType(typeof(SubscriptionAttributes))]
     public class NewAzureRmServiceBusSubscription : AzureServiceBusCmdletBase
@@ -71,6 +71,14 @@ namespace Microsoft.Azure.Commands.ServiceBus.Commands.Subscription
 
         [Parameter(Mandatory = false,
             ValueFromPipelineByPropertyName = true,
+            HelpMessage = "DeadLetteringOnFilterEvaluationExceptions - Value that indicates if a subscription has dead letter support when a message expires.")]
+        [ValidateSet("TRUE", "FALSE",
+            IgnoreCase = true)]
+        [ValidateNotNullOrEmpty]
+        public bool? DeadLetteringOnFilterEvaluationExceptions { get; set; }
+
+        [Parameter(Mandatory = false,
+            ValueFromPipelineByPropertyName = true,
             HelpMessage = "Dead Lettering On Message Expiration")]
         [ValidateSet("TRUE", "FALSE",
             IgnoreCase = true)]
@@ -83,7 +91,15 @@ namespace Microsoft.Azure.Commands.ServiceBus.Commands.Subscription
         [ValidateSet("TRUE", "FALSE",
             IgnoreCase = true)]
         [ValidateNotNullOrEmpty]
-        public bool? EnableBatchedOperations { get; set; }
+        public bool? EnableBatchedOperations { get; set; }        
+
+        [Parameter(Mandatory = false,
+            ValueFromPipelineByPropertyName = true,
+            HelpMessage = "IsReadOnly - Value that indicates whether the entity description is read-only.")]
+        [ValidateSet("TRUE", "FALSE",
+            IgnoreCase = true)]
+        [ValidateNotNullOrEmpty]
+        public bool? IsReadOnly { get; set; }
 
         [Parameter(Mandatory = false,
             ValueFromPipelineByPropertyName = true,
@@ -136,7 +152,15 @@ namespace Microsoft.Azure.Commands.ServiceBus.Commands.Subscription
 
             if (RequiresSession != null)
                 subAttributes.RequiresSession = RequiresSession;
-            
+
+#pragma warning disable 612, 618
+            if (IsReadOnly != null)
+                subAttributes.IsReadOnly = IsReadOnly;
+            if (DeadLetteringOnFilterEvaluationExceptions != null)
+                subAttributes.DeadLetteringOnFilterEvaluationExceptions = DeadLetteringOnFilterEvaluationExceptions;
+            subAttributes.Location = getNamespaceLoc.Location;
+#pragma warning restore 612, 618
+
             if (ShouldProcess(target: Name, action: string.Format(Resources.CreateSubscription, Name, Topic,Namespace)))
             {
                 WriteObject(Client.CreateUpdateSubscription(ResourceGroupName, Namespace, Topic, Name, subAttributes));

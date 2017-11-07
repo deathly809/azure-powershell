@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Batch.dll-Help.xml
-Module Name: AzureRM.Batch
 ms.assetid: 0BB79553-26DA-413C-8086-740DB6B31A85
 online version: 
 schema: 2.0.0
@@ -17,16 +16,14 @@ Removes compute nodes from a pool.
 ```
 Remove-AzureBatchComputeNode [-PoolId] <String> [-Ids] <String[]>
  [-DeallocationOption <ComputeNodeDeallocationOption>] [-ResizeTimeout <TimeSpan>] [-Force]
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### InputObject
 ```
 Remove-AzureBatchComputeNode [[-ComputeNode] <PSComputeNode>]
  [-DeallocationOption <ComputeNodeDeallocationOption>] [-ResizeTimeout <TimeSpan>] [-Force]
- -BatchContext <BatchAccountContext> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ -BatchContext <BatchAccountContext> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,21 +101,6 @@ Type: ComputeNodeDeallocationOption
 Parameter Sets: (All)
 Aliases: 
 Accepted values: Requeue, Terminate, TaskCompletion, RetainedData
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
-Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
 
 Required: False
 Position: Named
@@ -226,9 +208,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### BatchAccountContext
+
 Parameter 'BatchContext' accepts value of type 'BatchAccountContext' from the pipeline
 
 ### PSComputeNode
+
 Parameter 'ComputeNode' accepts value of type 'PSComputeNode' from the pipeline
 
 ## OUTPUTS

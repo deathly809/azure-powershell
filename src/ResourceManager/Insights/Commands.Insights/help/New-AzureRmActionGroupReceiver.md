@@ -1,6 +1,5 @@
 ---
 external help file: Microsoft.Azure.Commands.Insights.dll-Help.xml
-Module Name: AzureRM.Insights
 ms.assetid: 9830CD16-D797-47EB-BEF5-6CFE3454BCAA
 online version: 
 schema: 2.0.0
@@ -13,22 +12,8 @@ Creates an new action group receiver.
 
 ## SYNTAX
 
-### NewEmailReceiver (Default)
 ```
-New-AzureRmActionGroupReceiver -Name <String> [-EmailReceiver] -EmailAddress <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### NewSmsReceiver
-```
-New-AzureRmActionGroupReceiver -Name <String> [-SmsReceiver] [-CountryCode <String>] -PhoneNumber <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### NewWebhookReceiver
-```
-New-AzureRmActionGroupReceiver -Name <String> [-WebhookReceiver] -ServiceUri <String>
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
+New-AzureRmActionGroupReceiver -Name <String> [-EmailReceiver] [-EmailAddress <String>] [-SmsReceiver] [-CountryCode <String>] [-PhoneNumber <String>] [-WebhookReceiver] [-ServiceUri <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,42 +44,12 @@ This command creates a new webhook receiver in memory.
 
 ## PARAMETERS
 
-### -CountryCode
-Specifies the country code for the SMS receiver.
+### -Name
+Specifies the name for the receiver.
 
 ```yaml
 Type: String
-Parameter Sets: NewSmsReceiver
-Aliases: 
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure
-
-```yaml
-Type: IAzureContextContainer
 Parameter Sets: (All)
-Aliases: AzureRmContext, AzureCredential
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -EmailAddress
-Specifies the address for the Email receiver.
-
-```yaml
-Type: String
-Parameter Sets: NewEmailReceiver
 Aliases: 
 
 Required: True
@@ -109,7 +64,7 @@ Specifies to create an Email receiver
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: NewEmailReceiver
+Parameter Sets: (All)
 Aliases: 
 
 Required: False
@@ -119,8 +74,38 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Name
-Specifies the name for the receiver.
+### -EmailAddress
+Specifies the address for the Email receiver.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -SmsReceiver
+Specifies to create a SMS receiver
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -CountryCode
+Specifies the country code for the SMS receiver.
 
 ```yaml
 Type: String
@@ -139,40 +124,10 @@ Specifies the phone number for the SMS receiver.
 
 ```yaml
 Type: String
-Parameter Sets: NewSmsReceiver
+Parameter Sets: (All)
 Aliases: 
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -ServiceUri
-Specifies the URI for the webhook receiver.
-
-```yaml
-Type: String
-Parameter Sets: NewWebhookReceiver
-Aliases: 
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -SmsReceiver
-Specifies to create a SMS receiver
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: NewSmsReceiver
-Aliases: 
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
@@ -184,10 +139,25 @@ Specifies to create a webhook receiver
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: NewWebhookReceiver
+Parameter Sets: (All)
 Aliases: 
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ServiceUri
+Specifies the URI for the webhook receiver.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
