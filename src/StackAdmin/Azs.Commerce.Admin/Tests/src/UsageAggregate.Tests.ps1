@@ -97,7 +97,7 @@ InModuleScope Azs.Commerce.Admin {
 			[DateTime]$start = "2017-09-06T00:00:00Z"
 			[DateTime]$end = "2017-09-07T00:00:00Z"
 
-			$usageAggregates = Get-AzsSubscriberUsageAggregate -ReportedStartTime $start -ReportedEndTime $end
+			$usageAggregates = Get-AzsSubscriberUsage -ReportedStartTime $start -ReportedEndTime $end -AggregationGranularity Hourly
 			$usageAggregates  | Should Not Be $null
 			foreach($usageAggregate in $usageAggregates) {
 				ValidateSubscriberUsageAggregate -SubscriberUsageAggregate $usageAggregate

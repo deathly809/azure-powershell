@@ -11,6 +11,6 @@ Locale: en-US
 Allows AzureStack administrators to view aggregate subscription usage.
 
 ## Azs.Commerce.Admin Cmdlets
-### [Get-AzsSubscriberUsageAggregate](Get-AzsSubscriberUsageAggregate.md)
+### [Get-AzsSubscriberUsage](Get-AzsSubscriberUsage.md)
 Gets a collection of SubscriberUsageAggregate, which are UsageAggregates from direct tenants.
 

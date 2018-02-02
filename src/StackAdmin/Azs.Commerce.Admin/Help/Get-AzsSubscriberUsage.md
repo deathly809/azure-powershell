@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-AzsSubscriberUsageAggregate
+# Get-AzsSubscriberUsage
 
 ## SYNOPSIS
 Gets a collection of SubscriberUsageAggregate, which are UsageAggregates from direct tenants.
@@ -13,7 +13,7 @@ Gets a collection of SubscriberUsageAggregate, which are UsageAggregates from di
 ## SYNTAX
 
 ```
-Get-AzsSubscriberUsageAggregate [-SubscriberId <String>] -ReportedStartTime <DateTime>
+Get-AzsSubscriberUsage [-SubscriberId <String>] -ReportedStartTime <DateTime>
  [-AggregationGranularity <String>] -ReportedEndTime <DateTime> [-ContinuationToken <String>]
  [<CommonParameters>]
 ```
@@ -25,7 +25,7 @@ Gets a collection of SubscriberUsageAggregate, which are UsageAggregates from di
 
 ### Example 1
 ```
-Get-AzsSubscriberUsageAggregate -ReportedStartTime "2017-09-06T00:00:00Z" -ReportedEndTime "2017-09-07T00:00:00Z"
+Get-AzsSubscriberUsage -ReportedStartTime "2017-09-06T00:00:00Z" -ReportedEndTime "2017-09-07T00:00:00Z"
 
 
 UsageStartTime       Type                              InstanceData
