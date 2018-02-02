@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License. See License.txt in the project root for license information.
+-->
+
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>Microsoft.AzureStack.Management.Commerce.Admin.Models.UsageAggregate</Name>
+            <ViewSelectedBy>
+                <TypeName>Microsoft.AzureStack.Management.Commerce.Admin.Models.UsageAggregate</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>11</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader/>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>UsageStartTime</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Id</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Type</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Tags</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>InstanceData</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>MeterId</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Name</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>UsageEndTime</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Location</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Quantity</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>SubscriptionId</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>
