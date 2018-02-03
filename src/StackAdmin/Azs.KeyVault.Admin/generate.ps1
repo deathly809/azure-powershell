@@ -1,9 +1,22 @@
 
 $rpName = "keyvault"
-$location = pwd
-$moduleName = "KeyVault"
-$namespace = "Microsoft.AzureStack.Management.KeyVault.Admin"
-$clientName = "KeyVaultAdminClient"
-$client = "$namespace.$clientName"
-$dll = "$namespace.dll"
-. ..\..\..\tools\GeneratePSSwagger.ps1 -RPName $rpName -Location $location -Name $moduleName -Admin -AzureStack -PSSwaggerLocation E:\github\PSswagger -Repo deathly809 -Branch azs.keyvault.admin -ClientName $client -DLLName $dll 
+$name = "KeyVault"
+$location = Get-Location
+$psswagger = "E:\github\PSswagger"
+$module = "Module"
+$namespace = "Microsoft.AzureStack.Management.$Name.Admin"
+$assembly = "$namespace.dll"
+$client = "$namespace.$($name)AdminClient"
+
+. ..\..\..\tools\GeneratePSSwagger.ps1 `
+    -RPName $rpName `
+    -Location $location `
+    -Admin `
+    -ModuleDirectory $module `
+    -AzureStack `
+    -PSSwaggerLocation $psswagger `
+    -GithubAccount deathly809 `
+    -GithubBranch azs.$rpname.admin `
+    -PredefinedAssemblies $assembly `
+    -Name $name `
+    -ClientTypeName $client
