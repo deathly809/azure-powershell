@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8531411A-0137-4E27-9C5E-49E07C245048}"
 	ProjectSection(SolutionItems) = preProject
@@ -66,6 +66,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.AzureStackAdmin", "StackAdmin\AzureStackAdmin\Commands.AzureStackAdmin\Commands.AzureStackAdmin.csproj", "{0B02390C-8AA9-4D99-8AA8-2A9D2D39682F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.AzureStackStorage", "StackAdmin\AzureStackStorage\Commands.AzureStackStorage\Commands.AzureStackStorage.csproj", "{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.InfrastructureInsights.Admin", "StackAdmin\Azs.InfrastructureInsights.Admin\Module\Azs.InfrastructureInsights.Admin.csproj", "{10627A66-4CDC-45A4-B199-955D30194A67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -413,6 +415,18 @@ Global
 		{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}.Release|x64.Build.0 = Release|Any CPU
 		{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}.Release|x86.ActiveCfg = Release|Any CPU
 		{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}.Release|x86.Build.0 = Release|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Debug|x64.Build.0 = Debug|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Debug|x86.Build.0 = Debug|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Release|x64.ActiveCfg = Release|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Release|x64.Build.0 = Release|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Release|x86.ActiveCfg = Release|Any CPU
+		{10627A66-4CDC-45A4-B199-955D30194A67}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -423,5 +437,8 @@ Global
 		{C2CF99A2-D35E-4AED-AFB9-C26960AF1D0D} = {95C16AED-FD57-42A0-86C3-2CF4300A4817}
 		{C1BDA476-A5CC-4394-914D-48B0EC31A710} = {95C16AED-FD57-42A0-86C3-2CF4300A4817}
 		{CFF09E81-1E31-444E-B4D4-A21E946C29E2} = {95C16AED-FD57-42A0-86C3-2CF4300A4817}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7710FF8B-8548-47B6-BE04-9FB91AA298DD}
 	EndGlobalSection
 EndGlobal
