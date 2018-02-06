@@ -1,7 +1,7 @@
 {
   "info": {
     "x-ps-code-generation-settings": {
-      "codeGenerator": "CSharp",
+      "codeGenerator": "AzureCSharp",
       "nameSpacePrefix": "Microsoft.PowerShell.",
       "noAssembly": false,
       "powerShellCorePath": "",
@@ -10,7 +10,7 @@
       "confirmBootstrap": false,
       "path": ".",
       "symbolPath": ".",
-      "serviceType": "",
+      "serviceType": "azure_stack",
       "customAuthCommand": "",
       "hostOverrideCommand": "",
       "noAuthChallenge": ""
