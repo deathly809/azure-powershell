@@ -2,7 +2,7 @@
   "info": {
     "x-ps-code-generation-settings": {
       "codeGenerator": "AzureCSharp",
-      "nameSpacePrefix": "Microsoft.PowerShell.",
+      "nameSpacePrefix": "Microsoft.AzureStack.Management.",
       "noAssembly": false,
       "powerShellCorePath": "",
       "includeCoreFxAssembly": false,
@@ -17,18 +17,18 @@
     },
     "x-ps-module-info": {
       "name": "ComputeAdminClient",
-      "moduleVersion": "0.1.0",
-      "guid": "80b5131e-0fd4-41e9-92ab-715790f57376",
+      "moduleVersion": "0.0.1",
+      "guid": "55753fea-4aca-4e29-a44e-53f004795e9f",
       "description": "Compute Admin Client",
-      "author": "Jeffrey Robinson",
-      "companyName": "Microsoft",
-      "CopyRight": "Microsoft",
+      "author": "",
+      "companyName": "",
+      "CopyRight": "",
       "licenseUri": "",
       "projectUri": "",
       "helpInfoUri": "",
       "iconUri": "",
       "releaseNotes": "",
-      "defaultCommandPrefix": "Azs",
+      "defaultCommandPrefix": "",
       "tags": [
         
       ]
@@ -39,7 +39,7 @@
       "delete": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Remove-ComputeQuota",
+            "name": "Delete-AzsComputeQuota",
             "description": "Delete an existing quota.",
             "defaultParameterSet": "Quotas_Delete",
             "generateCommand": true
@@ -52,7 +52,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-ComputeQuota",
+            "name": "Get-AzsComputeQuota",
             "description": "Get an existing Quota.",
             "defaultParameterSet": "Quotas_Get",
             "generateCommand": true
@@ -65,11 +65,16 @@
       "put": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "New-ComputeQuota",
-            "description": "Create a new Quota.",
-            "defaultParameterSet": "Quotas_Create",
-            "generateCommand": true,
-            "flatten": true
+            "name": "New-AzsComputeQuota",
+            "description": "Creates or Updates a Quota.",
+            "defaultParameterSet": "Quotas_CreateOrUpdate",
+            "generateCommand": true
+          },
+          {
+            "name": "Set-AzsComputeQuota",
+            "description": "Creates or Updates a Quota.",
+            "defaultParameterSet": "Quotas_CreateOrUpdate",
+            "generateCommand": true
           }
         ],
         "parameters": {
@@ -81,8 +86,8 @@
       "put": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "New-PlatformImage",
-            "description": "Create a new platform image.",
+            "name": "New-AzsComputePlatformImage",
+            "description": "Creates a new platform image.",
             "defaultParameterSet": "PlatformImages_Create",
             "generateCommand": true
           }
@@ -94,8 +99,8 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-PlatformImage",
-            "description": "Get a platform image by name.",
+            "name": "Get-AzsComputePlatformImage",
+            "description": "Returns the requested platform image.",
             "defaultParameterSet": "PlatformImages_List",
             "generateCommand": true
           }
@@ -107,7 +112,7 @@
       "delete": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Remove-PlatformImage",
+            "name": "Delete-AzsComputePlatformImage",
             "description": "Delete a platform image",
             "defaultParameterSet": "PlatformImages_Delete",
             "generateCommand": true
@@ -122,8 +127,8 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-PlatformImage",
-            "description": "Get a list of all platform images.",
+            "name": "Get-AzsComputePlatformImage",
+            "description": "Returns a list of all platform images.",
             "defaultParameterSet": "PlatformImages_List",
             "generateCommand": true
           }
@@ -137,7 +142,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-ComputeQuota",
+            "name": "Get-AzsComputeQuota",
             "description": "Get a list of existing quotas.",
             "defaultParameterSet": "Quotas_Get",
             "generateCommand": true
@@ -152,8 +157,8 @@
       "put": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "New-VMExtension",
-            "description": "Create a new platform image.",
+            "name": "New-AzsComputeVMExtension",
+            "description": "Create a Virtual Machine Extension Image.",
             "defaultParameterSet": "VMExtensions_Create",
             "generateCommand": true
           }
@@ -165,8 +170,8 @@
       "delete": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Remove-VMExtension",
-            "description": "Delete a platform image by name.",
+            "name": "Delete-AzsComputeVMExtension",
+            "description": "Deletes specified Virtual Machine Extension Image.",
             "defaultParameterSet": "VMExtensions_Delete",
             "generateCommand": true
           }
@@ -178,10 +183,25 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-VMExtension",
-            "description": "Get a platform image by name.",
+            "name": "Get-AzsComputeVMExtension",
+            "description": "Returns requested Virtual Machine Extension Image.",
             "defaultParameterSet": "VMExtensions_Get",
             "generateCommand": true
+          }
+        ],
+        "parameters": {
+          
+        }
+      }
+    },
+    "/providers/Microsoft.Compute.Admin/operations": {
+      "get": {
+        "x-ps-cmdlet-infos": [
+          {
+            "name": "Get-AzsComputeOperation",
+            "description": "Returns the list of supported REST operations.",
+            "defaultParameterSet": "Operations_List",
+            "generateCommand": false
           }
         ],
         "parameters": {
@@ -193,8 +213,8 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-VMExtension",
-            "description": "Get a list of all platform images.",
+            "name": "Get-AzsComputeVMExtension",
+            "description": "Returns a list of all Virtual Machine Extension Image.",
             "defaultParameterSet": "VMExtensions_Get",
             "generateCommand": true
           }
@@ -206,44 +226,6 @@
     }
   },
   "definitions": {
-    "ProvisioningState": {
-      "x-ps-cmdlet-infos": [
-        {
-          "name": "New-ProvisioningStateObject",
-          "description": "The provisioning state of the resource.",
-          "defaultParameterSet": "ProvisioningState",
-          "generateCommand": false,
-          "generateOutputFormat": false
-        }
-      ],
-      "properties": {
-        
-      }
-    },
-    "ImageDetails": {
-      "x-ps-cmdlet-infos": [
-        {
-          "name": "New-ImageDetailsObject",
-          "description": "Information about the disk image.",
-          "defaultParameterSet": "ImageDetails",
-          "generateCommand": true,
-          "generateOutputFormat": true
-        }
-      ],
-      "properties": {
-        "billingPartNumber": {
-          "x-ps-parameter-info": {
-            "name": "BillingPartNumber",
-            "description": "Something about billing?."
-          },
-          "x-ps-output-format-info": {
-            "include": true,
-            "position": 0,
-            "width": 10
-          }
-        }
-      }
-    },
     "DataDisk": {
       "x-ps-cmdlet-infos": [
         {
@@ -279,11 +261,70 @@
         }
       }
     },
+    "ImageDetails": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-ImageDetailsObject",
+          "description": "Information about the disk image.",
+          "defaultParameterSet": "ImageDetails",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "billingPartNumber": {
+          "x-ps-parameter-info": {
+            "name": "BillingPartNumber",
+            "description": "The part number is used to bill for software costs."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        }
+      }
+    },
+    "Operation": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OperationObject",
+          "description": "Describes the supported REST operation.",
+          "defaultParameterSet": "Operation",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "name": {
+          "x-ps-parameter-info": {
+            "name": "Name",
+            "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "display": {
+          "x-ps-parameter-info": {
+            "name": "Display",
+            "description": "Contains the localized display information for this particular operation or action."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
+      }
+    },
     "VMExtensionProperties": {
       "x-ps-cmdlet-infos": [
         {
           "name": "New-VMExtensionPropertiesObject",
-          "description": "Properties of a virtual machine extension.",
+          "description": "Properties of a Virtual Machine Extension Image.",
           "defaultParameterSet": "VMExtensionProperties",
           "generateCommand": true,
           "generateOutputFormat": true
@@ -304,7 +345,7 @@
         "sourceBlob": {
           "x-ps-parameter-info": {
             "name": "SourceBlob",
-            "description": "URI to azure blob."
+            "description": "URI to Azure or AzureStack blob."
           },
           "x-ps-output-format-info": {
             "include": false,
@@ -326,7 +367,7 @@
         "vmOsType": {
           "x-ps-parameter-info": {
             "name": "VmOsType",
-            "description": "Target virtaul machine operating system type necessary for deploying the extension handler"
+            "description": "Target virtual machine operating system type necessary for deploying the extension handler."
           },
           "x-ps-output-format-info": {
             "include": false,
@@ -337,7 +378,7 @@
         "vmScaleSetEnabled": {
           "x-ps-parameter-info": {
             "name": "VmScaleSetEnabled",
-            "description": "value indicating whether the extension is enabled for virtual machine scale set support"
+            "description": "Value indicating whether the extension is enabled for virtual machine scale set support."
           },
           "x-ps-output-format-info": {
             "include": true,
@@ -359,7 +400,7 @@
         "isSystemExtension": {
           "x-ps-parameter-info": {
             "name": "IsSystemExtension",
-            "description": "Denotes if extension is for system or not."
+            "description": "Indicates if the extension is for the system."
           },
           "x-ps-output-format-info": {
             "include": true,
@@ -418,28 +459,18 @@
         
       }
     },
-    "AzureBlob": {
+    "VMExtension": {
       "x-ps-cmdlet-infos": [
         {
-          "name": "New-AzureBlobObject",
-          "description": "Azure blob information.",
-          "defaultParameterSet": "AzureBlob",
+          "name": "New-VMExtensionObject",
+          "description": "Virtual Machine Extension Image.",
+          "defaultParameterSet": "VMExtension",
           "generateCommand": true,
           "generateOutputFormat": true
         }
       ],
       "properties": {
-        "uri": {
-          "x-ps-parameter-info": {
-            "name": "Uri",
-            "description": "URI to azure blob."
-          },
-          "x-ps-output-format-info": {
-            "include": true,
-            "position": 0,
-            "width": 10
-          }
-        }
+        
       }
     },
     "PlatformImage": {
@@ -513,18 +544,61 @@
         }
       }
     },
-    "VMExtension": {
+    "Display": {
       "x-ps-cmdlet-infos": [
         {
-          "name": "New-VMExtensionObject",
-          "description": "Virtual machine extenion.",
-          "defaultParameterSet": "VMExtension",
+          "name": "New-DisplayObject",
+          "description": "Contains the localized display information for this particular operation or action.",
+          "defaultParameterSet": "Display",
           "generateCommand": true,
           "generateOutputFormat": true
         }
       ],
       "properties": {
-        
+        "provider": {
+          "x-ps-parameter-info": {
+            "name": "Provider",
+            "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute.\""
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "description": {
+          "x-ps-parameter-info": {
+            "name": "Description",
+            "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "resource": {
+          "x-ps-parameter-info": {
+            "name": "Resource",
+            "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "operation": {
+          "x-ps-parameter-info": {
+            "name": "Operation",
+            "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
       }
     },
     "OsType": {
@@ -535,6 +609,20 @@
           "defaultParameterSet": "OsType",
           "generateCommand": false,
           "generateOutputFormat": false
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "Quota": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-QuotaObject",
+          "description": "Holds quota information used to control resource allocation.",
+          "defaultParameterSet": "Quota",
+          "generateCommand": true,
+          "generateOutputFormat": true
         }
       ],
       "properties": {
@@ -598,18 +686,77 @@
         }
       }
     },
-    "Quota": {
+    "ProvisioningState": {
       "x-ps-cmdlet-infos": [
         {
-          "name": "New-QuotaObject",
-          "description": "Holds quota information used to control resource allocation.",
-          "defaultParameterSet": "Quota",
+          "name": "New-ProvisioningStateObject",
+          "description": "The provisioning state of the resource.",
+          "defaultParameterSet": "ProvisioningState",
+          "generateCommand": false,
+          "generateOutputFormat": false
+        }
+      ],
+      "properties": {
+        
+      }
+    },
+    "AzureBlob": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-AzureBlobObject",
+          "description": "Azure or AzureStack blob information.",
+          "defaultParameterSet": "AzureBlob",
           "generateCommand": true,
           "generateOutputFormat": true
         }
       ],
       "properties": {
-        
+        "uri": {
+          "x-ps-parameter-info": {
+            "name": "Uri",
+            "description": "URI to Azure or AzureStack blob."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        }
+      }
+    },
+    "OperationList": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-OperationListObject",
+          "description": "List of Operations",
+          "defaultParameterSet": "OperationList",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "value": {
+          "x-ps-parameter-info": {
+            "name": "Value",
+            "description": "Array of operations"
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "nextLink": {
+          "x-ps-parameter-info": {
+            "name": "NextLink",
+            "description": "URI to the next page of operations."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        }
       }
     },
     "QuotaList": {
@@ -672,7 +819,7 @@
         "id": {
           "x-ps-parameter-info": {
             "name": "Id",
-            "description": "Id of the resource."
+            "description": "ID of the resource."
           },
           "x-ps-output-format-info": {
             "include": true,
@@ -683,7 +830,7 @@
         "type": {
           "x-ps-parameter-info": {
             "name": "Type",
-            "description": "Resource type."
+            "description": "Type of Resource."
           },
           "x-ps-output-format-info": {
             "include": true,
@@ -730,14 +877,14 @@
     "SubscriptionIdParameter": {
       "x-ps-parameter-info": {
         "name": "SubscriptionId",
-        "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
+        "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
         "flatten": false
       }
     },
     "TypeParameter": {
       "x-ps-parameter-info": {
         "name": "Type",
-        "description": "Type of the extension.",
+        "description": "Type of extension.",
         "flatten": false
       }
     },
@@ -751,14 +898,14 @@
     "VMExtensionParameter": {
       "x-ps-parameter-info": {
         "name": "Extension",
-        "description": "Model of an extension.",
-        "flatten": true
+        "description": "Virtual Machine Extension Image creation properties.",
+        "flatten": false
       }
     },
     "ApiVersionParameter": {
       "x-ps-parameter-info": {
         "name": "Apiversion",
-        "description": "Client Api Version.",
+        "description": "Client API Version.",
         "flatten": false
       }
     },
@@ -766,7 +913,7 @@
       "x-ps-parameter-info": {
         "name": "NewImage",
         "description": "New platform image.",
-        "flatten": true
+        "flatten": false
       }
     },
     "VersionParameter": {
@@ -792,7 +939,7 @@
     },
     "LocationParameter": {
       "x-ps-parameter-info": {
-        "name": "Location",
+        "name": "LocationName",
         "description": "Location of the resource.",
         "flatten": false
       }
@@ -800,7 +947,7 @@
     "SkuParameter": {
       "x-ps-parameter-info": {
         "name": "Sku",
-        "description": "Name of the sku.",
+        "description": "Name of the SKU.",
         "flatten": false
       }
     }

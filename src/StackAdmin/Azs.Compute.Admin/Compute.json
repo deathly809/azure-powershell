@@ -10,10 +10,57 @@
     "https"
   ],
   "paths": {
+    "/providers/Microsoft.Compute.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of supported REST operations.": {
+            "parameters": {
+              "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+              "location": "local",
+              "api-version": "2015-06-01-preview",
+              "reportedStartTime": "2017-08-01T00:00:00.00Z",
+              "reportedEndTime": "2017-08-02T00:00:00.00Z",
+              "aggregationGranularity": "",
+              "subscriberId": "",
+              "continuationToken": ""
+            },
+            "responses": {
+              "200": {
+                "body": {
+                  "value": [],
+                  "nextLink": ""
+                }
+              }
+            }
+          }
+        },
+        "description": "Returns the list of supported REST operations.",
+        "tags": [
+          "Compute"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/platformImage": {
       "get": {
         "x-ms-examples": {
-          "Get a list of all platform images.": {
+          "Returns a list of all platform images.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -37,8 +84,8 @@
         "tags": [
           "PlatformImages"
         ],
-        "summary": "Gets all platform images.",
-        "description": "Get a list of all platform images.",
+        "summary": "Returns all platform images.",
+        "description": "Returns a list of all platform images.",
         "operationId": "PlatformImages_List",
         "consumes": [],
         "produces": [
@@ -95,8 +142,8 @@
         "tags": [
           "PlatformImages"
         ],
-        "summary": "Gets a single platform image.",
-        "description": "Get a platform image by name.",
+        "summary": "Returns the requested platform image.",
+        "description": "Returns the requested platform image.",
         "operationId": "PlatformImages_Get",
         "consumes": [
           "application/json"
@@ -141,7 +188,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create a new platform image.": {
+          "Creates a new platform image.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -165,8 +212,8 @@
         "tags": [
           "PlatformImages"
         ],
-        "description": "Create a new platform image.",
-        "summary": "Create a platform image.",
+        "description": "Creates a new platform image.",
+        "summary": "Creates a platform image.",
         "operationId": "PlatformImages_Create",
         "consumes": [
           "application/json"
@@ -222,7 +269,8 @@
           "404": {
             "description": "NOT FOUND"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "x-ms-examples": {
@@ -319,7 +367,7 @@
         "tags": [
           "Quotas"
         ],
-        "summary": "Gets the quota.",
+        "summary": "Returns the requested quota.",
         "description": "Get an existing Quota.",
         "operationId": "Quotas_Get",
         "consumes": [
@@ -356,7 +404,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create a quota.": {
+          "Creates or Updates a Quota.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -380,9 +428,9 @@
         "tags": [
           "Quotas"
         ],
-        "description": "Create a new Quota.",
-        "summary": "Create a quota.",
-        "operationId": "Quotas_Create",
+        "description": "Creates or Updates a Quota.",
+        "summary": "Creates or Updates a Quota.",
+        "operationId": "Quotas_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -417,7 +465,7 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete an existing quota.": {
+          "Deletes specified quota.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -441,8 +489,8 @@
         "tags": [
           "Quotas"
         ],
+        "summary": "Deletes specified quota",
         "description": "Delete an existing quota.",
-        "summary": "Deletes a quota",
         "operationId": "Quotas_Delete",
         "consumes": [
           "application/json"
@@ -537,7 +585,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/VMExtension/publishers/{publisher}/types/{type}/versions/{version}": {
       "get": {
         "x-ms-examples": {
-          "Get a platform image by name.": {
+          "Returns requested Virtual Machine Extension Image.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -561,8 +609,8 @@
         "tags": [
           "VMExtensions"
         ],
-        "summary": "Get a platform images.",
-        "description": "Get a platform image by name.",
+        "summary": "Returns requested Virtual Machine Extension Image.",
+        "description": "Returns requested Virtual Machine Extension Image.",
         "operationId": "VMExtensions_Get",
         "consumes": [
           "application/json"
@@ -604,7 +652,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Get a list of all platform images.": {
+          "Create a Virtual Machine Extension Image.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -628,8 +676,8 @@
         "tags": [
           "VMExtensions"
         ],
-        "summary": "Create a platform images.",
-        "description": "Create a new platform image.",
+        "summary": "Create a Virtual Machine Extension Image.",
+        "description": "Create a Virtual Machine Extension Image.",
         "operationId": "VMExtensions_Create",
         "consumes": [
           "application/json"
@@ -677,7 +725,7 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a platform image by name.": {
+          "Delete a Virtual Machine Extension Image.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -701,8 +749,8 @@
         "tags": [
           "VMExtensions"
         ],
-        "summary": "Delete a platform images.",
-        "description": "Delete a platform image by name.",
+        "summary": "Deletes a Virtual Machine Extension Image.",
+        "description": "Deletes specified Virtual Machine Extension Image.",
         "operationId": "VMExtensions_Delete",
         "consumes": [
           "application/json"
@@ -740,7 +788,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/VMExtension": {
       "get": {
         "x-ms-examples": {
-          "Get a list of all platform images.": {
+          "Returns a list of all Virtual Machine Extension Image.": {
             "parameters": {
               "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
               "location": "local",
@@ -764,8 +812,8 @@
         "tags": [
           "VMExtensions"
         ],
-        "summary": "Get a list of platform images.",
-        "description": "Get a list of all platform images.",
+        "summary": "Returns a list of all Virtual Machine Extension Image.",
+        "description": "Returns a list of all Virtual Machine Extension Image.",
         "operationId": "VMExtensions_List",
         "consumes": [
           "application/json"
@@ -804,18 +852,18 @@
       "type": "object",
       "properties": {
         "id": {
-          "readonly": true,
-          "description": "Id of the resource.",
+          "readOnly": true,
+          "description": "ID of the resource.",
           "type": "string"
         },
         "name": {
-          "readonly": true,
+          "readOnly": true,
           "description": "Name of the resource.",
           "type": "string"
         },
         "type": {
-          "readonly": true,
-          "description": "Resource type.",
+          "readOnly": true,
+          "description": "Type of Resource.",
           "type": "string"
         },
         "location": {
@@ -836,6 +884,56 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState"
+      }
+    },
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object. This name should match the name that appears in RBAC or the event service.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation or action.",
+          "$ref": "#/definitions/Display"
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation or action.",
+      "properties": {
+        "provider": {
+          "description": "The localized, friendly version of the resource provider name. The provider name is expected to include the name of the publisher or company responsible. The provider name format should use title case and begin with \"Microsoft\" for first-party services. For example, the provider name may be\"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized, friendly version of the resource type related to this action or operation; the resource type should match the public documentation for the resource provider.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized, friendly name for the operation. Use the name as it will displayed to the user.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized, friendly description for the operation. The description will be displayed to the user. It should be thorough and concise for used in both tooltips and detailed views.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of Operations",
+      "properties": {
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page of operations.",
+          "type": "string"
+        }
       }
     },
     "PlatformImage": {
@@ -913,7 +1011,7 @@
       "type": "object",
       "properties": {
         "billingPartNumber": {
-          "description": "Something about billing?.",
+          "description": "The part number is used to bill for software costs.",
           "type": "string"
         }
       }
@@ -1001,11 +1099,11 @@
       }
     },
     "VMExtension": {
-      "description": "Virtual machine extenion.",
+      "description": "Virtual Machine Extension Image.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Inner properties of a virtual machine extension.",
+          "description": "Inner properties of a Virtual Machine Extension Image.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VMExtensionProperties"
         }
@@ -1017,11 +1115,11 @@
       ]
     },
     "VMExtensionProperties": {
-      "description": "Properties of a virtual machine extension.",
+      "description": "Properties of a Virtual Machine Extension Image.",
       "type": "object",
       "properties": {
         "vmOsType": {
-          "description": "Target virtaul machine operating system type necessary for deploying the extension handler",
+          "description": "Target virtual machine operating system type necessary for deploying the extension handler.",
           "$ref": "#/definitions/OsType"
         },
         "computeRole": {
@@ -1029,7 +1127,7 @@
           "type": "string"
         },
         "vmScaleSetEnabled": {
-          "description": "value indicating whether the extension is enabled for virtual machine scale set support",
+          "description": "Value indicating whether the extension is enabled for virtual machine scale set support.",
           "type": "boolean"
         },
         "supportMultipleExtensions": {
@@ -1037,11 +1135,11 @@
           "type": "boolean"
         },
         "isSystemExtension": {
-          "description": "Denotes if extension is for system or not.",
+          "description": "Indicates if the extension is for the system.",
           "type": "boolean"
         },
         "sourceBlob": {
-          "description": "URI to azure blob.",
+          "description": "URI to Azure or AzureStack blob.",
           "$ref": "#/definitions/AzureBlob"
         },
         "provisioningState": {
@@ -1051,11 +1149,11 @@
       }
     },
     "AzureBlob": {
-      "description": "Azure blob information.",
+      "description": "Azure or AzureStack blob information.",
       "type": "object",
       "properties": {
         "uri": {
-          "description": "URI to azure blob.",
+          "description": "URI to Azure or AzureStack blob.",
           "type": "string"
         }
       }
@@ -1072,14 +1170,14 @@
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.",
+      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
       "required": true,
       "type": "string"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "Client Api Version.",
+      "description": "Client API Version.",
       "required": true,
       "type": "string",
       "default": "2015-06-01-preview"
@@ -1117,7 +1215,7 @@
       "x-ms-parameter-location": "method"
     },
     "SkuParameter": {
-      "description": "Name of the sku.",
+      "description": "Name of the SKU.",
       "name": "sku",
       "in": "path",
       "required": true,
@@ -1153,7 +1251,7 @@
       "x-ms-parameter-location": "method"
     },
     "VMExtensionParameter": {
-      "description": "Model of an extension.",
+      "description": "Virtual Machine Extension Image creation properties.",
       "name": "extension",
       "in": "body",
       "required": true,
@@ -1163,7 +1261,7 @@
       "x-ms-parameter-location": "method"
     },
     "TypeParameter": {
-      "description": "Type of the extension.",
+      "description": "Type of extension.",
       "name": "type",
       "in": "path",
       "required": true,
@@ -1176,7 +1274,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }

@@ -14,22 +14,28 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     Delete a platform image
 
 .PARAMETER Sku
-    Name of the sku.
+    Name of the SKU.
 
-.PARAMETER Version
+.PARAMETER Name
     The version of the resource.
 
 .PARAMETER Offer
     Name of the offer.
 
-.PARAMETER Location
+.PARAMETER ResourceId
+    The resource id.
+
+.PARAMETER LocationName
     Location of the resource.
 
 .PARAMETER Publisher
     Name of the publisher.
 
+.PARAMETER InputObject
+    The input object of type Microsoft.AzureStack.Management.Compute.Admin.Models.PlatformImage.
+
 #>
-function Remove-PlatformImage
+function Delete-AzsComputePlatformImage
 {
     [CmdletBinding(DefaultParameterSetName='PlatformImages_Delete')]
     param(    
@@ -38,20 +44,29 @@ function Remove-PlatformImage
         $Sku,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Delete')]
+        [Alias('Version')]
         [System.String]
-        $Version,
+        $Name,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Delete')]
         [System.String]
         $Offer,
     
-        [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Delete')]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId_PlatformImages_Delete')]
         [System.String]
-        $Location,
+        $ResourceId,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Delete')]
         [System.String]
-        $Publisher
+        $LocationName,
+    
+        [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Delete')]
+        [System.String]
+        $Publisher,
+    
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject_PlatformImages_Delete')]
+        [Microsoft.AzureStack.Management.Compute.Admin.Models.PlatformImage]
+        $InputObject
     )
 
     Begin 
@@ -74,75 +89,57 @@ function Remove-PlatformImage
         FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'
     }
 
-    $GlobalParameterHashtable = @{}      
+    $GlobalParameterHashtable = @{}
+    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+     
     $GlobalParameterHashtable['SubscriptionId'] = $null
     if($PSBoundParameters.ContainsKey('SubscriptionId')) {
         $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
     }
- 
-    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable 
-    $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
-    
-    
-    
 
-    $skippedCount = 0
-    $returnedCount = 0
-    if ('PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName) {
+    $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
+
+    $Version = $Name
+
+ 
+    if('InputObject_PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName) {
+        $GetArmResourceIdParameterValue_params = @{
+            IdTemplate = '/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/platformImage/publishers/{publisher}/offers/{offer}/skus/{sku}/versions/{version}'
+        }
+
+        if('ResourceId_PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName) {
+            $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
+        }
+        else {
+            $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+        }
+        $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
+        $locationName = $ArmResourceIdParameterValues['locationName']
+
+        $publisher = $ArmResourceIdParameterValues['publisher']
+
+        $offer = $ArmResourceIdParameterValues['offer']
+
+        $sku = $ArmResourceIdParameterValues['sku']
+
+        $version = $ArmResourceIdParameterValues['version']
+    }
+
+
+    if ('PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName -or 'InputObject_PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_PlatformImages_Delete' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $ComputeAdminClient.'
-        $taskResult = $ComputeAdminClient.PlatformImages.DeleteWithHttpMessagesAsync($Location, $Publisher, $Offer, $Sku, $Version)
+        $TaskResult = $ComputeAdminClient.PlatformImages.DeleteWithHttpMessagesAsync($LocationName, $Publisher, $Offer, $Sku, $Version)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'
     }
 
     if ($TaskResult) {
-        $result = $null
-        $ErrorActionPreference = 'Stop'
-                    
-        $null = $taskResult.AsyncWaitHandle.WaitOne()
-                    
-        Write-Debug -Message "$($taskResult | Out-String)"
-
-
-        if((Get-Member -InputObject $taskResult -Name 'Result') -and
-           $taskResult.Result -and
-           (Get-Member -InputObject $taskResult.Result -Name 'Body') -and
-           $taskResult.Result.Body)
-        {
-            Write-Verbose -Message 'Operation completed successfully.'
-            $result = $taskResult.Result.Body
-            Write-Debug -Message "$($result | Out-String)"
-            $result
+        $GetTaskResult_params = @{
+            TaskResult = $TaskResult
         }
-        elseif($taskResult.IsFaulted)
-        {
-            Write-Verbose -Message 'Operation failed.'
-            if ($taskResult.Exception)
-            {
-                if ((Get-Member -InputObject $taskResult.Exception -Name 'InnerExceptions') -and $taskResult.Exception.InnerExceptions)
-                {
-                    foreach ($ex in $taskResult.Exception.InnerExceptions)
-                    {
-                        Write-Error -Exception $ex
-                    }
-                } elseif ((Get-Member -InputObject $taskResult.Exception -Name 'InnerException') -and $taskResult.Exception.InnerException)
-                {
-                    Write-Error -Exception $taskResult.Exception.InnerException
-                } else {
-                    Write-Error -Exception $taskResult.Exception
-                }
-            }
-        } 
-        elseif ($taskResult.IsCanceled)
-        {
-            Write-Verbose -Message 'Operation got cancelled.'
-            Throw 'Operation got cancelled.'
-        }
-        else
-        {
-            Write-Verbose -Message 'Operation completed successfully.'
-        }
+            
+        Get-TaskResult @GetTaskResult_params
         
     }
     }
@@ -154,3 +151,4 @@ function Remove-PlatformImage
         }
     }
 }
+

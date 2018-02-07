@@ -48,3 +48,4 @@ function New-DataDiskObject
 
     return $Object
 }
+

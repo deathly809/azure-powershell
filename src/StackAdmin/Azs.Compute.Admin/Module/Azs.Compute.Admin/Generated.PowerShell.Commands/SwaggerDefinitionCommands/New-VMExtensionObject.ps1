@@ -8,28 +8,28 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 
 <#
 .SYNOPSIS
-    Virtual machine extenion.
+    Virtual Machine Extension Image.
 
 .DESCRIPTION
-    Virtual machine extenion.
+    Virtual Machine Extension Image.
 
 .PARAMETER ProvisioningState
     Provisioning state of extension.
 
 .PARAMETER SourceBlob
-    URI to azure blob.
+    URI to Azure or AzureStack blob.
 
 .PARAMETER Id
-    Id of the resource.
+    ID of the resource.
 
 .PARAMETER Type
-    Resource type.
+    Type of Resource.
 
 .PARAMETER ComputeRole
     Compute role
 
 .PARAMETER VmOsType
-    Target virtaul machine operating system type necessary for deploying the extension handler
+    Target virtual machine operating system type necessary for deploying the extension handler.
 
 .PARAMETER Name
     Name of the resource.
@@ -41,10 +41,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     True if supports multiple extensions.
 
 .PARAMETER IsSystemExtension
-    Denotes if extension is for system or not.
+    Indicates if the extension is for the system.
 
 .PARAMETER VmScaleSetEnabled
-    value indicating whether the extension is enabled for virtual machine scale set support
+    Value indicating whether the extension is enabled for virtual machine scale set support.
 
 #>
 function New-VMExtensionObject
@@ -111,3 +111,4 @@ function New-VMExtensionObject
 
     return $Object
 }
+

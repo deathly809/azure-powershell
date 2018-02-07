@@ -17,10 +17,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     Maximum number of availability sets allowed.
 
 .PARAMETER Id
-    Id of the resource.
+    ID of the resource.
 
 .PARAMETER Type
-    Resource type.
+    Type of Resource.
 
 .PARAMETER CoresLimit
     Maximum number of core allowed.
@@ -90,3 +90,4 @@ function New-QuotaObject
 
     return $Object
 }
+

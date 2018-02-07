@@ -20,10 +20,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     Operating system used for this platform image.
 
 .PARAMETER Id
-    Id of the resource.
+    ID of the resource.
 
 .PARAMETER Type
-    Resource type.
+    Type of Resource.
 
 .PARAMETER DataDisks
     Data disks used by the platform image.
@@ -90,3 +90,4 @@ function New-PlatformImageObject
 
     return $Object
 }
+

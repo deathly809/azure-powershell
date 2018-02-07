@@ -14,7 +14,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     Information about the disk image.
 
 .PARAMETER BillingPartNumber
-    Something about billing?.
+    The part number is used to bill for software costs.
 
 #>
 function New-ImageDetailsObject
@@ -41,3 +41,4 @@ function New-ImageDetailsObject
 
     return $Object
 }
+

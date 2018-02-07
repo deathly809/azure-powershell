@@ -8,13 +8,13 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 
 <#
 .SYNOPSIS
-    Azure blob information.
+    Azure or AzureStack blob information.
 
 .DESCRIPTION
-    Azure blob information.
+    Azure or AzureStack blob information.
 
 .PARAMETER Uri
-    URI to azure blob.
+    URI to Azure or AzureStack blob.
 
 #>
 function New-AzureBlobObject
@@ -41,3 +41,4 @@ function New-AzureBlobObject
 
     return $Object
 }
+

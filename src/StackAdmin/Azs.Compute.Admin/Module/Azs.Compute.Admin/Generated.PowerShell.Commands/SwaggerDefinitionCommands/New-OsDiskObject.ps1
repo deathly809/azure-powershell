@@ -48,3 +48,4 @@ function New-OsDiskObject
 
     return $Object
 }
+
