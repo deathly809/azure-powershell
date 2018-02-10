@@ -2,7 +2,7 @@
   "info": {
     "x-ps-code-generation-settings": {
       "codeGenerator": "AzureCSharp",
-      "nameSpacePrefix": "Microsoft.AzureStack.Management.",
+      "nameSpacePrefix": "Microsoft.PowerShell.",
       "noAssembly": false,
       "powerShellCorePath": "",
       "includeCoreFxAssembly": false,
@@ -18,10 +18,10 @@
     "x-ps-module-info": {
       "name": "ComputeAdminClient",
       "moduleVersion": "0.0.1",
-      "guid": "55753fea-4aca-4e29-a44e-53f004795e9f",
+      "guid": "81baf6a4-011f-4c8f-a963-c1cf3147dcbe",
       "description": "Compute Admin Client",
-      "author": "",
-      "companyName": "",
+      "author": "Microsoft",
+      "companyName": "Microsoft",
       "CopyRight": "",
       "licenseUri": "",
       "projectUri": "",
@@ -35,11 +35,11 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas/{quota}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas/{quotaName}": {
       "delete": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Delete-AzsComputeQuota",
+            "name": "Remove-AzsComputeQuota",
             "description": "Delete an existing quota.",
             "defaultParameterSet": "Quotas_Delete",
             "generateCommand": true
@@ -112,7 +112,7 @@
       "delete": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Delete-AzsComputePlatformImage",
+            "name": "Remove-AzsComputePlatformImage",
             "description": "Delete a platform image",
             "defaultParameterSet": "PlatformImages_Delete",
             "generateCommand": true
@@ -170,7 +170,7 @@
       "delete": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Delete-AzsComputeVMExtension",
+            "name": "Remove-AzsComputeVMExtension",
             "description": "Deletes specified Virtual Machine Extension Image.",
             "defaultParameterSet": "VMExtensions_Delete",
             "generateCommand": true
@@ -198,7 +198,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-AzsComputeOperation",
+            "name": "Get-Operation",
             "description": "Returns the list of supported REST operations.",
             "defaultParameterSet": "Operations_List",
             "generateCommand": false
@@ -544,6 +544,63 @@
         }
       }
     },
+    "QuotaProperties": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-QuotaPropertiesObject",
+          "description": "Properties for a Quota",
+          "defaultParameterSet": "QuotaProperties",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        "coresLimit": {
+          "x-ps-parameter-info": {
+            "name": "CoresLimit",
+            "description": "Maximum number of core allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 0,
+            "width": 10
+          }
+        },
+        "vmScaleSetCount": {
+          "x-ps-parameter-info": {
+            "name": "VmScaleSetCount",
+            "description": "Maximum number of scale sets allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 1,
+            "width": 10
+          }
+        },
+        "virtualMachineCount": {
+          "x-ps-parameter-info": {
+            "name": "VirtualMachineCount",
+            "description": "Maximum number of virtual machines allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 2,
+            "width": 10
+          }
+        },
+        "availabilitySetCount": {
+          "x-ps-parameter-info": {
+            "name": "AvailabilitySetCount",
+            "description": "Maximum number of availability sets allowed."
+          },
+          "x-ps-output-format-info": {
+            "include": true,
+            "position": 3,
+            "width": 10
+          }
+        }
+      }
+    },
     "Display": {
       "x-ps-cmdlet-infos": [
         {
@@ -629,61 +686,18 @@
         
       }
     },
-    "QuotaProperties": {
+    "PlatformImageParameters": {
       "x-ps-cmdlet-infos": [
         {
-          "name": "New-QuotaPropertiesObject",
-          "description": "Properties for a Quota",
-          "defaultParameterSet": "QuotaProperties",
+          "name": "New-PlatformImageParametersObject",
+          "description": "Parameters used to create a new platform image.",
+          "defaultParameterSet": "PlatformImageParameters",
           "generateCommand": true,
           "generateOutputFormat": true
         }
       ],
       "properties": {
-        "coresLimit": {
-          "x-ps-parameter-info": {
-            "name": "CoresLimit",
-            "description": "Maximum number of core allowed."
-          },
-          "x-ps-output-format-info": {
-            "include": true,
-            "position": 0,
-            "width": 10
-          }
-        },
-        "vmScaleSetCount": {
-          "x-ps-parameter-info": {
-            "name": "VmScaleSetCount",
-            "description": "Maximum number of scale sets allowed."
-          },
-          "x-ps-output-format-info": {
-            "include": true,
-            "position": 1,
-            "width": 10
-          }
-        },
-        "virtualMachineCount": {
-          "x-ps-parameter-info": {
-            "name": "VirtualMachineCount",
-            "description": "Maximum number of virtual machines allowed."
-          },
-          "x-ps-output-format-info": {
-            "include": true,
-            "position": 2,
-            "width": 10
-          }
-        },
-        "availabilitySetCount": {
-          "x-ps-parameter-info": {
-            "name": "AvailabilitySetCount",
-            "description": "Maximum number of availability sets allowed."
-          },
-          "x-ps-output-format-info": {
-            "include": true,
-            "position": 3,
-            "width": 10
-          }
-        }
+        
       }
     },
     "ProvisioningState": {
@@ -722,6 +736,20 @@
             "width": 10
           }
         }
+      }
+    },
+    "VMExtensionParameters": {
+      "x-ps-cmdlet-infos": [
+        {
+          "name": "New-VMExtensionParametersObject",
+          "description": "Parameters used to create a new Virtual Machine Extension Image.",
+          "defaultParameterSet": "VMExtensionParameters",
+          "generateCommand": true,
+          "generateOutputFormat": true
+        }
+      ],
+      "properties": {
+        
       }
     },
     "OperationList": {
@@ -869,7 +897,7 @@
   "parameters": {
     "QuotaParameter": {
       "x-ps-parameter-info": {
-        "name": "Quota",
+        "name": "QuotaName",
         "description": "Name of the quota.",
         "flatten": false
       }
@@ -892,7 +920,7 @@
       "x-ps-parameter-info": {
         "name": "NewQuota",
         "description": "New quota to create.",
-        "flatten": true
+        "flatten": false
       }
     },
     "VMExtensionParameter": {

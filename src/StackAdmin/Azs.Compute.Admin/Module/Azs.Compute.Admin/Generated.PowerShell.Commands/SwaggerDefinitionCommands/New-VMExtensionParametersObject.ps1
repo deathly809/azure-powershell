@@ -8,10 +8,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 
 <#
 .SYNOPSIS
-    Virtual Machine Extension Image.
+    Parameters used to create a new Virtual Machine Extension Image.
 
 .DESCRIPTION
-    Virtual Machine Extension Image.
+    Parameters used to create a new Virtual Machine Extension Image.
 
 .PARAMETER ProvisioningState
     Provisioning state of extension.
@@ -19,23 +19,14 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER SourceBlob
     URI to Azure or AzureStack blob.
 
-.PARAMETER Id
-    ID of the resource.
-
-.PARAMETER Type
-    Type of Resource.
+.PARAMETER VmOsType
+    Target virtual machine operating system type necessary for deploying the extension handler.
 
 .PARAMETER ComputeRole
     Compute role
 
-.PARAMETER VmOsType
-    Target virtual machine operating system type necessary for deploying the extension handler.
-
-.PARAMETER Name
-    Name of the resource.
-
-.PARAMETER Location
-    Location of the resource.
+.PARAMETER VmScaleSetEnabled
+    Value indicating whether the extension is enabled for virtual machine scale set support.
 
 .PARAMETER SupportMultipleExtensions
     True if supports multiple extensions.
@@ -43,11 +34,8 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER IsSystemExtension
     Indicates if the extension is for the system.
 
-.PARAMETER VmScaleSetEnabled
-    Value indicating whether the extension is enabled for virtual machine scale set support.
-
 #>
-function New-VMExtensionObject
+function New-VMExtensionParametersObject
 {
     param(    
         [Parameter(Mandatory = $false)]
@@ -59,28 +47,16 @@ function New-VMExtensionObject
         $SourceBlob,
     
         [Parameter(Mandatory = $false)]
-        [string]
-        $Id,
-    
-        [Parameter(Mandatory = $false)]
-        [string]
-        $Type,
+        [Microsoft.AzureStack.Management.Compute.Admin.Models.OsType]
+        $VmOsType,
     
         [Parameter(Mandatory = $false)]
         [string]
         $ComputeRole,
     
         [Parameter(Mandatory = $false)]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.OsType]
-        $VmOsType,
-    
-        [Parameter(Mandatory = $false)]
-        [string]
-        $Name,
-    
-        [Parameter(Mandatory = $false)]
-        [string]
-        $Location,
+        [switch]
+        $VmScaleSetEnabled,
     
         [Parameter(Mandatory = $false)]
         [switch]
@@ -88,14 +64,10 @@ function New-VMExtensionObject
     
         [Parameter(Mandatory = $false)]
         [switch]
-        $IsSystemExtension,
-    
-        [Parameter(Mandatory = $false)]
-        [switch]
-        $VmScaleSetEnabled
+        $IsSystemExtension
     )
     
-    $Object = New-Object -TypeName Microsoft.AzureStack.Management.Compute.Admin.Models.VMExtension
+    $Object = New-Object -TypeName Microsoft.AzureStack.Management.Compute.Admin.Models.VMExtensionParameters
 
     $PSBoundParameters.GetEnumerator() | ForEach-Object { 
         if(Get-Member -InputObject $Object -Name $_.Key -MemberType Property)

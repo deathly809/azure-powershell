@@ -8,16 +8,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 
 <#
 .SYNOPSIS
-    Deletes a Virtual Machine Extension Image.
+    Deletes specified quota
 
 .DESCRIPTION
-    Deletes specified Virtual Machine Extension Image.
-
-.PARAMETER Type
-    Type of extension.
-
-.PARAMETER Name
-    The version of the resource.
+    Delete an existing quota.
 
 .PARAMETER LocationName
     Location of the resource.
@@ -25,41 +19,33 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER ResourceId
     The resource id.
 
-.PARAMETER Publisher
-    Name of the publisher.
-
 .PARAMETER InputObject
-    The input object of type Microsoft.AzureStack.Management.Compute.Admin.Models.VMExtension.
+    The input object of type Microsoft.AzureStack.Management.Compute.Admin.Models.Quota.
+
+.PARAMETER Name
+    Name of the quota.
 
 #>
-function Delete-AzsComputeVMExtension
+function Remove-AzsComputeQuota
 {
-    [CmdletBinding(DefaultParameterSetName='VMExtensions_Delete')]
+    [CmdletBinding(DefaultParameterSetName='Quotas_Delete')]
     param(    
-        [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Delete')]
-        [System.String]
-        $Type,
-    
-        [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Delete')]
-        [Alias('Version')]
-        [System.String]
-        $Name,
-    
-        [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Delete')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_Delete')]
         [System.String]
         $LocationName,
     
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId_VMExtensions_Delete')]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId_Quotas_Delete')]
         [System.String]
         $ResourceId,
     
-        [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Delete')]
-        [System.String]
-        $Publisher,
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject_Quotas_Delete')]
+        [Microsoft.AzureStack.Management.Compute.Admin.Models.Quota]
+        $InputObject,
     
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject_VMExtensions_Delete')]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.VMExtension]
-        $InputObject
+        [Parameter(Mandatory = $true, ParameterSetName = 'Quotas_Delete')]
+        [Alias('QuotaName')]
+        [System.String]
+        $Name
     )
 
     Begin 
@@ -92,15 +78,15 @@ function Delete-AzsComputeVMExtension
 
     $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
 
-    $Version = $Name
+    $QuotaName = $Name
 
  
-    if('InputObject_VMExtensions_Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_VMExtensions_Delete' -eq $PsCmdlet.ParameterSetName) {
+    if('InputObject_Quotas_Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Quotas_Delete' -eq $PsCmdlet.ParameterSetName) {
         $GetArmResourceIdParameterValue_params = @{
-            IdTemplate = '/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/artifactTypes/VMExtension/publishers/{publisher}/types/{type}/versions/{version}'
+            IdTemplate = '/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas/{quotaName}'
         }
 
-        if('ResourceId_VMExtensions_Delete' -eq $PsCmdlet.ParameterSetName) {
+        if('ResourceId_Quotas_Delete' -eq $PsCmdlet.ParameterSetName) {
             $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
         }
         else {
@@ -109,17 +95,13 @@ function Delete-AzsComputeVMExtension
         $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
         $locationName = $ArmResourceIdParameterValues['locationName']
 
-        $publisher = $ArmResourceIdParameterValues['publisher']
-
-        $type = $ArmResourceIdParameterValues['type']
-
-        $version = $ArmResourceIdParameterValues['version']
+        $quotaName = $ArmResourceIdParameterValues['quotaName']
     }
 
 
-    if ('VMExtensions_Delete' -eq $PsCmdlet.ParameterSetName -or 'InputObject_VMExtensions_Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_VMExtensions_Delete' -eq $PsCmdlet.ParameterSetName) {
+    if ('Quotas_Delete' -eq $PsCmdlet.ParameterSetName -or 'InputObject_Quotas_Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Quotas_Delete' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $ComputeAdminClient.'
-        $TaskResult = $ComputeAdminClient.VMExtensions.DeleteWithHttpMessagesAsync($LocationName, $Publisher, $Type, $Version)
+        $TaskResult = $ComputeAdminClient.Quotas.DeleteWithHttpMessagesAsync($LocationName, $QuotaName)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'

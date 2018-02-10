@@ -8,73 +8,45 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 
 <#
 .SYNOPSIS
-    Platform image represents a virtual machine.
+    Parameters used to create a new platform image.
 
 .DESCRIPTION
-    Platform image represents a virtual machine.
-
-.PARAMETER ProvisioningState
-    Provisioning status of the platform image.
+    Parameters used to create a new platform image.
 
 .PARAMETER OsDisk
     Operating system used for this platform image.
 
-.PARAMETER Id
-    ID of the resource.
-
-.PARAMETER Type
-    Type of Resource.
+.PARAMETER Details
+    Information about the image.
 
 .PARAMETER DataDisks
     Data disks used by the platform image.
 
-.PARAMETER Details
-    Information about the image.
-
-.PARAMETER Name
-    Name of the resource.
-
-.PARAMETER Location
-    Location of the resource.
+.PARAMETER ProvisioningState
+    Provisioning status of the platform image.
 
 #>
-function New-PlatformImageObject
+function New-PlatformImageParametersObject
 {
     param(    
         [Parameter(Mandatory = $false)]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.ProvisioningState]
-        $ProvisioningState,
-    
-        [Parameter(Mandatory = $false)]
         [Microsoft.AzureStack.Management.Compute.Admin.Models.OsDisk]
         $OsDisk,
-    
-        [Parameter(Mandatory = $false)]
-        [string]
-        $Id,
-    
-        [Parameter(Mandatory = $false)]
-        [string]
-        $Type,
-    
-        [Parameter(Mandatory = $false)]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.DataDisk[]]
-        $DataDisks,
     
         [Parameter(Mandatory = $false)]
         [Microsoft.AzureStack.Management.Compute.Admin.Models.ImageDetails]
         $Details,
     
         [Parameter(Mandatory = $false)]
-        [string]
-        $Name,
+        [Microsoft.AzureStack.Management.Compute.Admin.Models.DataDisk[]]
+        $DataDisks,
     
         [Parameter(Mandatory = $false)]
-        [string]
-        $Location
+        [Microsoft.AzureStack.Management.Compute.Admin.Models.ProvisioningState]
+        $ProvisioningState
     )
     
-    $Object = New-Object -TypeName Microsoft.AzureStack.Management.Compute.Admin.Models.PlatformImage
+    $Object = New-Object -TypeName Microsoft.AzureStack.Management.Compute.Admin.Models.PlatformImageParameters
 
     $PSBoundParameters.GetEnumerator() | ForEach-Object { 
         if(Get-Member -InputObject $Object -Name $_.Key -MemberType Property)

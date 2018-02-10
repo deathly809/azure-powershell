@@ -340,7 +340,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas/{quota}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{locationName}/quotas/{quotaName}": {
       "get": {
         "x-ms-examples": {
           "Get an existing Quota.": {
@@ -1035,6 +1035,17 @@
         "$ref": "#/definitions/PlatformImage"
       }
     },
+    "PlatformImageParameters": {
+      "description": "Parameters used to create a new platform image.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Platform image properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PlatformImageProperties"
+        }
+      }
+    },
     "Quota": {
       "description": "Holds quota information used to control resource allocation.",
       "type": "object",
@@ -1164,6 +1175,17 @@
       "items": {
         "$ref": "#/definitions/VMExtension"
       }
+    },
+    "VMExtensionParameters": {
+      "description": "Parameters used to create a new Virtual Machine Extension Image.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a Virtual Machine Extension Image.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VMExtensionProperties"
+        }
+      }
     }
   },
   "parameters": {
@@ -1228,13 +1250,13 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/PlatformImage"
+        "$ref": "#/definitions/PlatformImageParameters"
       },
       "x-ms-parameter-location": "method"
     },
     "QuotaParameter": {
       "description": "Name of the quota.",
-      "name": "quota",
+      "name": "quotaName",
       "type": "string",
       "required": true,
       "in": "path",
@@ -1256,7 +1278,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/VMExtension"
+        "$ref": "#/definitions/VMExtensionParameters"
       },
       "x-ms-parameter-location": "method"
     },

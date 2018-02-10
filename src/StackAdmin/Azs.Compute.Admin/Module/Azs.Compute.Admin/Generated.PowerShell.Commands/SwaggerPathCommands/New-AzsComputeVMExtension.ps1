@@ -68,7 +68,7 @@ function New-AzsComputeVMExtension
         [Parameter(Mandatory = $true, ParameterSetName = 'VMExtensions_Create')]
         [Parameter(Mandatory = $true, ParameterSetName = 'ResourceId_VMExtensions_Create')]
         [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_VMExtensions_Create')]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.VMExtension]
+        [Microsoft.AzureStack.Management.Compute.Admin.Models.VMExtensionParameters]
         $Extension
     )
 

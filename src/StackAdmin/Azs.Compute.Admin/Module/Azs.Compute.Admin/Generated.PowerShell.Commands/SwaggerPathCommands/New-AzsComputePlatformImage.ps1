@@ -50,7 +50,7 @@ function New-AzsComputePlatformImage
         [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_PlatformImages_Create')]
         [Parameter(Mandatory = $true, ParameterSetName = 'ResourceId_PlatformImages_Create')]
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Create')]
-        [Microsoft.AzureStack.Management.Compute.Admin.Models.PlatformImage]
+        [Microsoft.AzureStack.Management.Compute.Admin.Models.PlatformImageParameters]
         $NewImage,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'PlatformImages_Create')]

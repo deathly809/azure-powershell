@@ -63,7 +63,6 @@ param(
 )
 
 $file = "https://github.com/$Repo/azure-rest-api-specs/blob/$Branch/specification/azsadmin/resource-manager/$RPName/readme.md"
-
 Invoke-Expression "& autorest $file --version=latest --output-artifact=swagger-document.json --output-folder=$Location"
 
 if ($PSSwaggerLocation) {
