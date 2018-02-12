@@ -34,7 +34,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     Name of the backup location.
 
 #>
-function Restore-Backup
+function Restore-AzsBackup
 {
     [CmdletBinding(DefaultParameterSetName='Backups_Restore')]
     param(    
@@ -48,7 +48,11 @@ function Restore-Backup
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Backups_Restore')]
         [System.String]
-        $BackupLocation
+        $BackupLocation,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $AsJob
     )
 
     Begin 
@@ -71,76 +75,69 @@ function Restore-Backup
         FullClientTypeName = 'Microsoft.AzureStack.Management.Backup.Admin.BackupAdminClient'
     }
 
-    $GlobalParameterHashtable = @{}      
+    $GlobalParameterHashtable = @{}
+    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+     
     $GlobalParameterHashtable['SubscriptionId'] = $null
     if($PSBoundParameters.ContainsKey('SubscriptionId')) {
         $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
     }
- 
-    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable 
-    $BackupAdminClient = New-ServiceClient @NewServiceClient_params
-    
-    
-    
 
-    $skippedCount = 0
-    $returnedCount = 0
+    $BackupAdminClient = New-ServiceClient @NewServiceClient_params
+
+
     if ('Backups_Restore' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation RestoreWithHttpMessagesAsync on $BackupAdminClient.'
-        $taskResult = $BackupAdminClient.Backups.RestoreWithHttpMessagesAsync($BackupLocation, $ResourceGroup, $Backup)
+        $TaskResult = $BackupAdminClient.Backups.RestoreWithHttpMessagesAsync($BackupLocation, $ResourceGroup, $Backup)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'
     }
 
-    if ($TaskResult) {
-        $result = $null
-        $ErrorActionPreference = 'Stop'
-                    
-        $null = $taskResult.AsyncWaitHandle.WaitOne()
-                    
-        Write-Debug -Message "$($taskResult | Out-String)"
+    Write-Verbose -Message "Waiting for the operation to complete."
 
+    $PSSwaggerJobScriptBlock = {
+        [CmdletBinding()]
+        param(    
+            [Parameter(Mandatory = $true)]
+            [System.Threading.Tasks.Task]
+            $TaskResult,
 
-        if((Get-Member -InputObject $taskResult -Name 'Result') -and
-           $taskResult.Result -and
-           (Get-Member -InputObject $taskResult.Result -Name 'Body') -and
-           $taskResult.Result.Body)
-        {
-            Write-Verbose -Message 'Operation completed successfully.'
-            $result = $taskResult.Result.Body
-            Write-Debug -Message "$($result | Out-String)"
-            $result
-        }
-        elseif($taskResult.IsFaulted)
-        {
-            Write-Verbose -Message 'Operation failed.'
-            if ($taskResult.Exception)
-            {
-                if ((Get-Member -InputObject $taskResult.Exception -Name 'InnerExceptions') -and $taskResult.Exception.InnerExceptions)
-                {
-                    foreach ($ex in $taskResult.Exception.InnerExceptions)
-                    {
-                        Write-Error -Exception $ex
-                    }
-                } elseif ((Get-Member -InputObject $taskResult.Exception -Name 'InnerException') -and $taskResult.Exception.InnerException)
-                {
-                    Write-Error -Exception $taskResult.Exception.InnerException
-                } else {
-                    Write-Error -Exception $taskResult.Exception
-                }
+            [Parameter(Mandatory = $true)]
+			[string]
+			$TaskHelperFilePath
+        )
+        if ($TaskResult) {
+            . $TaskHelperFilePath
+            $GetTaskResult_params = @{
+                TaskResult = $TaskResult
             }
-        } 
-        elseif ($taskResult.IsCanceled)
-        {
-            Write-Verbose -Message 'Operation got cancelled.'
-            Throw 'Operation got cancelled.'
+            
+            Get-TaskResult @GetTaskResult_params
+            
         }
-        else
-        {
-            Write-Verbose -Message 'Operation completed successfully.'
-        }
-        
+    }
+
+    $PSCommonParameters = Get-PSCommonParameter -CallerPSBoundParameters $PSBoundParameters
+    $TaskHelperFilePath = Join-Path -Path $ExecutionContext.SessionState.Module.ModuleBase -ChildPath 'Get-TaskResult.ps1'
+    if($AsJob)
+    {
+        $ScriptBlockParameters = New-Object -TypeName 'System.Collections.Generic.Dictionary[string,object]'
+        $ScriptBlockParameters['TaskResult'] = $TaskResult
+        $ScriptBlockParameters['AsJob'] = $AsJob
+        $ScriptBlockParameters['TaskHelperFilePath'] = $TaskHelperFilePath
+        $PSCommonParameters.GetEnumerator() | ForEach-Object { $ScriptBlockParameters[$_.Name] = $_.Value }
+
+        Start-PSSwaggerJobHelper -ScriptBlock $PSSwaggerJobScriptBlock `
+                                     -CallerPSBoundParameters $ScriptBlockParameters `
+                                     -CallerPSCmdlet $PSCmdlet `
+                                     @PSCommonParameters
+    }
+    else
+    {
+        Invoke-Command -ScriptBlock $PSSwaggerJobScriptBlock `
+                       -ArgumentList $TaskResult,$TaskHelperFilePath `
+                       @PSCommonParameters
     }
     }
 
@@ -151,3 +148,4 @@ function Restore-Backup
         }
     }
 }
+
