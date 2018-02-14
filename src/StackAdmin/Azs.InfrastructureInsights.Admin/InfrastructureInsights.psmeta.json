@@ -113,7 +113,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-AzsInfraRoleHealth",
+            "name": "Get-AzsRegistrationHealth",
             "description": "Returns a list of each resource\u0027s health under a service.",
             "defaultParameterSet": "ResourceHealths_List",
             "generateCommand": true
@@ -126,7 +126,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-AzsInfraRoleHealth",
+            "name": "Get-AzsRegistrationHealth",
             "description": "Returns the requested health information about a resource.",
             "defaultParameterSet": "ResourceHealths_List",
             "generateCommand": true

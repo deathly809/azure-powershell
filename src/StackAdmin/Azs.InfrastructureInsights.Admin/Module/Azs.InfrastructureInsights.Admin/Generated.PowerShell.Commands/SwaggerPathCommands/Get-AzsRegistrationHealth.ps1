@@ -38,7 +38,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
     Skip the first N items as specified by the parameter value.
 
 #>
-function Get-AzsInfraRoleHealth
+function Get-AzsRegistrationHealth
 {
     [OutputType([Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.ResourceHealth])]
     [CmdletBinding(DefaultParameterSetName='ResourceHealths_List')]
@@ -155,12 +155,12 @@ $filterInfos = @(
 })
 $applicableFilters = Get-ApplicableFilters -Filters $filterInfos
 if ($applicableFilters | Where-Object { $_.Strict }) {
-    Write-Verbose -Message 'Performing server-side call ''Get-AzsInfraRoleHealth -'''
+    Write-Verbose -Message 'Performing server-side call ''Get-AzsRegistrationHealth -'''
     $serverSideCall_params = @{
 
 }
 
-$serverSideResults = Get-AzsInfraRoleHealth @serverSideCall_params
+$serverSideResults = Get-AzsRegistrationHealth @serverSideCall_params
 foreach ($serverSideResult in $serverSideResults) {
     $valid = $true
     foreach ($applicableFilter in $applicableFilters) {

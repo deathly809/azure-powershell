@@ -133,7 +133,7 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
 				foreach($serviceHealth in $ServiceHealths) {
 					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
-					$ResourceHealths = Get-AzsInfraRoleHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					$ResourceHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
 					foreach($ResourceHealth in $ResourceHealths) {
 						ValidateResourceHealth -ResourceHealth $ResourceHealth
 					}
@@ -153,11 +153,11 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 				foreach($serviceHealth in $ServiceHealths) {
 
 					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
-					$infraRoleHealths = Get-AzsInfraRoleHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					$infraRoleHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
 					foreach($infraRoleHealth in $infraRoleHealths) {
 
 						$infraRoleHealthName = Extract-Name -Name $infraRoleHealth.Name
-						$retrieved = Get-AzsInfraRoleHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName -Name $infraRoleHealthName
+						$retrieved = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName -Name $infraRoleHealthName
 						AssertResourceHealthsAreSame -Expected $infraRoleHealth -Found $retrieved
 						break
 					}
@@ -178,11 +178,11 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 				foreach($serviceHealth in $ServiceHealths) {
 
 					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
-					$infraRoleHealths = Get-AzsInfraRoleHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					$infraRoleHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
 					foreach($infraRoleHealth in $infraRoleHealths) {
 
 						$infraRoleHealthName = Extract-Name -Name $infraRoleHealth.Name
-						$retrieved = Get-AzsInfraRoleHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName -Name $infraRoleHealthName
+						$retrieved = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName -Name $infraRoleHealthName
 						AssertResourceHealthsAreSame -Expected $infraRoleHealth -Found $retrieved
 					}
 				}
@@ -200,10 +200,10 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 				foreach($serviceHealth in $ServiceHealths) {
 
 					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
-					$infraRoleHealths = Get-AzsInfraRoleHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					$infraRoleHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
 					foreach($infraRoleHealth in $infraRoleHealths) {
 						
-						$retrieved = $infraRoleHealth | Get-AzsInfraRoleHealth
+						$retrieved = $infraRoleHealth | Get-AzsRegistrationHealth
 						AssertResourceHealthsAreSame -Expected $infraRoleHealth -Found $retrieved
 					}
 				}
