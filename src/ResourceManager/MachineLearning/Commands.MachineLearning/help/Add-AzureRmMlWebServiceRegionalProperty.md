@@ -1,7 +1,7 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
 Module Name: AzureRM.MachineLearning
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.machinelearning/add-azurermmlwebserviceregionalproperty
 schema: 2.0.0
 ---
 
@@ -23,7 +23,6 @@ Creates Azure Machine Learning regional properties for an existing web service.
 ## EXAMPLES
 
 ### --------------------------  Example 1: Add new regional properties for West Central US  --------------------------
-@{paragraph=PS C:\\\>}
 
 ```
 Add-AzureRmMlWebServiceRegionalProperty -ResourceGroupName "myresourcegroup" -Name "mywebservicename" -Region westcentralus

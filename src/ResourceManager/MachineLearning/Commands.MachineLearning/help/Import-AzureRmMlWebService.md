@@ -1,7 +1,7 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
 Module Name: AzureRM.MachineLearning
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.machinelearning/import-azurermmlwebservice
 schema: 2.0.0
 ---
 
@@ -28,18 +28,11 @@ The Import-AzureRmMlWebService cmdlet imports , specified either directly or in 
 ## EXAMPLES
 
 ### --------------------------  Example 1: Import from string  --------------------------
-@{paragraph=PS C:\\\>}
-
-
-
 ```
 Import-AzureRmMlWebService -JsonString $jsonDefinition
 ```
 
 ### --------------------------  Example 2: Import from file path  --------------------------
-@{paragraph=PS C:\\\>}
-
-
 ```
 Import-AzureRmMlWebService -InputFile "C:\mlservice.json"
 ```

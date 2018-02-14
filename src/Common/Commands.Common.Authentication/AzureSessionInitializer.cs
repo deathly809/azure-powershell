@@ -15,7 +15,6 @@
 using Microsoft.Azure.Commands.Common.Authentication.Abstractions;
 using Microsoft.Azure.Commands.Common.Authentication.Factories;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.WindowsAzure.Commands.Common;
 using System;
 using System.IO;
 using System.Diagnostics;
@@ -138,6 +137,7 @@ namespace Microsoft.Azure.Commands.Common.Authentication
             session.TokenCacheFile = autoSave.CacheFile;
             session.TokenCache = InitializeTokenCache(dataStore, session.TokenCacheDirectory, session.TokenCacheFile, autoSave.Mode);
             InitializeDataCollection(session);
+            session.RegisterComponent(HttpClientOperationsFactory.Name, () => HttpClientOperationsFactory.Create());
             return session;
         }
 
@@ -183,15 +183,15 @@ namespace Microsoft.Azure.Commands.Common.Authentication
             {
             }
 
-            public override TraceLevel AuthenticationLegacyTraceLevel
+            public override System.Diagnostics.TraceLevel AuthenticationLegacyTraceLevel
             {
                 get
                 {
-                    return TraceLevel.Off;
+                    return System.Diagnostics.TraceLevel.Off;
                 }
                 set
                 {
-
+                    
                 }
             }
 

@@ -1,7 +1,7 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Profile.dll-Help.xml
 Module Name: AzureRM.Profile
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.profile/select-azurermcontext
 schema: 2.0.0
 ---
 
@@ -85,7 +85,7 @@ Accept wildcard characters: False
 ```
 
 ### -Scope
-Determines the scope of context changes, for example, wheher changes apply only to the cusrrent process, or to all sessions started by this user
+Determines the scope of context changes, for example, whether changes apply only to the current process, or to all sessions started by this user
 
 ```yaml
 Type: ContextModificationScope

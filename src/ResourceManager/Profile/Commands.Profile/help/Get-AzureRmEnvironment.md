@@ -1,7 +1,7 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Profile.dll-Help.xml
 Module Name: AzureRM.Profile
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.profile/get-azurermenvironment
 schema: 2.0.0
 ---
 
@@ -90,7 +90,7 @@ PublishSettingsFileUrl                            : https://manage.windowsazure.
 ResourceManagerUrl                                : https://management.usgovcloudapi.net/
 SqlDatabaseDnsSuffix                              : .database.usgovcloudapi.net
 StorageEndpointSuffix                             : core.usgovcloudapi.net
-ActiveDirectoryAuthority                          : https://login-us.microsoftonline.com/
+ActiveDirectoryAuthority                          : https://login.microsoftonline.us/
 GraphUrl                                          : https://graph.windows.net/
 GraphEndpointResourceId                           : https://graph.windows.net/
 TrafficManagerDnsSuffix                           : usgovtrafficmanager.net

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     Please leave this section at the top of the change log.
 
     Changes for the current release should go under the section titled "Current Release", and should adhere to the following format:
@@ -18,126 +18,33 @@
         - Additional information about change #1
 -->
 ## Current Release
+* Fix bug in Get-AzureRmEventHubGeoDRConfiguration help
 
-The following cmdlets were affected this release:
-	
-	**New-AzureRmEventHubNamespaceAuthorizationRule**
-	- 'New-AzureRmEventHubNamespaceAuthorizationRule' cmdlet removed in this build. Please use the New cmdlet 'New-AzureRmEventHubAuthorizationRule'
-	
-	**Get-AzureRmEventHubNamespaceAuthorizationRule**
-	- 'Get-AzureRmEventHubNamespaceAuthorizationRule' cmdlet removed in this build. Please use the New cmdlet 'Get-AzureRmEventHubAuthorizationRule'
-	
-	**Set-AzureRmEventHubNamespaceAuthorizationRule**
-	- 'Set-AzureRmEventHubNamespaceAuthorizationRule' cmdlet removed in this build. Please use the New cmdlet 'Set-AzureRmEventHubAuthorizationRule'
-	
-	**Remove-AzureRmEventHubNamespaceAuthorizationRule**
-	- 'Remove-AzureRmEventHubNamespaceAuthorizationRule' cmdlet removed in this build. Please use the New cmdlet 'Remove-AzureRmEventHubAuthorizationRule'
-	
-	**New-AzureRmEventHubNamespaceKey**
-	- 'New-AzureRmEventHubNamespaceKey' cmdlet removed in this build. Please use the New cmdlet 'New-AzureRmEventHubKey'
-	
-	**Get-AzureRmEventHubNamespaceKey**
-	- 'Get-AzureRmEventHubNamespaceKey' cmdlet removed in this build. Please use the New cmdlet 'Get-AzureRmEventHubKey'
+## Version 0.6.0
+* Added below new commands for Geo Disaster Recovery operations. 
+	-Creating a new Alias(Disaster Recovery configuration): 
+		- New-AzureRmEventHubGeoDRConfiguration [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String> [-PartnerNamespace] <String> [-WhatIf] [-Confirm]
+	-Retrieve Alias(Disaster Recovery configuration) : 
+		- Get-AzureRmEventHubGeoDRConfiguration [-ResourceGroupName] <String> [-Namespace] <String> [[-Name] <String>]
+	-Disabling the Disaster Recovery and stops replicating changes from primary to secondary namespaces
+		- Set-AzureRmEventHubGeoDRConfigurationBreakPair [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
+	-Invoking Disaster Recovery failover and reconfigure the alias to point to the secondary namespace
+		- Set-AzureRmEventHubGeoDRConfigurationFailOver [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String>
+	-Deleting an Alias(Disaster Recovery configuration)
+		- Remove-AzureRmEventHubGeoDRConfiguration [-ResourceGroupName] <String> [-Namespace] <String> [-Name] <String> [-WhatIf] [-Confirm]
+
+* Added below new commands for checking the Namespace Name and GeoDr Configuration Name - Alias availability. 
+	-Check the Availability of Namespace name or Alias(Disaster Recovery configuration) name: 
+		- Test-AzureRmEventHubName [-ResourceGroupName] <String> [-Namespace] <String> [-AliasName] <String>
 		
-    **New-AzureRmEventHubNamespace**
-	
-    - The property 'Status' and 'Enabled' from the NamespceAttributes is removed. 
-
-    ```powershell
-    # Old
-	# The $namespace has Status and Enabled property  
-    $namespace = New-AzureRmEventHubNamespace <parameters>
-	$namespace.Status
-	$namespace.Enabled
-	
-    # New
-
-    # The call remains the same, but the returned values NameSpace object will not have the Status and Enabled property    
-    $namespace = Get-AzureRmEventHubNamespace <parameters>
-    
-    ```
-	
-	**Get-AzureRmEventHubNamespace**
-    - The property 'Status' and 'Enabled' from the NamespceAttributes is removed. 
-
-    ```powershell
-    # Old
-	# The $namespace has Status and Enabled property 
-    $namespace = Get-AzureRmEventHubNamespace <parameters>
-	$namespace.Status
-	$namespace.Enabled
-	
-    # New
-
-    # The call remains the same, but the returned values NameSpace object will not have the Status and Enabled property    
-    $namespace = Get-AzureRmEventHubNamespace <parameters>
-    
-    ```
-	
-	**Set-AzureRmEventHubNamespace**
-    - The property 'Status' and 'Enabled' from the NamespceAttributes is removed. 
-
-    ```powershell
-    # Old
-	# The $namespace has Status and Enabled property 
-    $namespace = Set-AzureRmEventHubNamespace <parameters>
-	$namespace.Status
-	$namespace.Enabled
-	
-    # New
-
-    # The call remains the same, but the returned values NameSpace object will not have the Status and Enabled property    
-    $namespace = Set-AzureRmEventHubNamespace <parameters>
-    
-    ```	
-  
-  **New-AzureRmEventHubConsumerGroup**
-    - The property 'EventHubPath' from the ConsumerGroupAttributes is removed.
-
-    ```powershell
-    # Old
-	# The $consumergroup has EventHubPath property 
-    $consumergroup = New-AzureRmEventHubConsumerGroup <parameters>
-	$consumergroup.EventHubPath
-	
-    # New
-
-    # The call remains the same, but the returned values ConsumerGroup object will not have the EventHubPath property    
-    $consumergroup = New-AzureRmEventHubConsumerGroup <parameters>
-    
-    ```
-	
-	**Set-AzureRmEventHubConsumerGroup**
-    - The property 'EventHubPath' from the ConsumerGroupAttributes is removed.
-
-    ```powershell
-    # Old
-	# The $consumergroup has EventHubPath property 
-    $consumergroup = Set-AzureRmEventHubConsumerGroup <parameters>
-	$consumergroup.EventHubPath
-	
-    # New
-
-    # The call remains the same, but the returned values ConsumerGroup object will not have the EventHubPath property    
-    $consumergroup = Set-AzureRmEventHubConsumerGroup <parameters>
-    
-    ```
-	
-	**Get-AzureRmEventHubConsumerGroup**
-    - The property 'EventHubPath' from the ConsumerGroupAttributes is removed.
-
-    ```powershell
-    # Old
-	# The $consumergroup has EventHubPath property 
-    $consumergroup = Get-AzureRmEventHubConsumerGroup <parameters>
-	$consumergroup.EventHubPath
-	
-    # New
-
-    # The call remains the same, but the returned values ConsumerGroup object will not have the EventHubPath property    
-    $consumergroup = Get-AzureRmEventHubConsumerGroup <parameters>
-    
-    ```
+## Version 0.5.1
+* Added Location Completer to -Location parameters allowing tab completion through valid Locations
+* Added ResourceGroup Completer to -ResourceGroup parameters allowing tab completion through resource groups in current subscription
+		
+## Version 0.5.0
+* NOTE: This is a breaking change release. Please see the migration guide (https://aka.ms/azps-migration-guide) for a full list of breaking changes introduced.
+* Add support for online help
+    - Run Get-Help with the -Online parameter to open the online help in your default Internet browser
 
 ## Version 0.4.7
 

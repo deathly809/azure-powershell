@@ -1,7 +1,7 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
 Module Name: AzureRM.MachineLearning
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.machinelearning/get-azurermmlwebservice
 schema: 2.0.0
 ---
 
@@ -24,28 +24,16 @@ Depending on the paramenters passed, the cmdlet returns the defintion for a spec
 ## EXAMPLES
 
 ### --------------------------  Example 1: Get details of specific web service  --------------------------
-@{paragraph=PS C:\\\>}
-
-
-
 ```
 Get-AzureRmMlWebService -ResourceGroupName "myresourcegroup" -Name "mywebservicename"
 ```
 
 ### --------------------------  Example 2: Get all web service resources in current subscription  --------------------------
-@{paragraph=PS C:\\\>}
-
-
-
 ```
 Get-AzureRmMlWebService
 ```
 
 ### --------------------------  Example 3: Get all web services in the current subscription and given resource group  --------------------------
-@{paragraph=PS C:\\\>}
-
-
-
 ```
 Get-AzureRmMlWebService -ResourceGroupName "myresourcegroup"
 ```

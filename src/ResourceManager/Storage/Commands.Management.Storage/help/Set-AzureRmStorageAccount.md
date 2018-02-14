@@ -1,8 +1,8 @@
 ---
 external help file: Microsoft.Azure.Commands.Management.Storage.dll-Help.xml
-Module Name: AzureRM
+Module Name: AzureRM.Storage
 ms.assetid: 4D7EEDD7-89D4-4B1E-A9A1-B301E759CE72
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.storage/set-azurermstorageaccount
 schema: 2.0.0
 ---
 
@@ -20,8 +20,8 @@ Set-AzureRmStorageAccount [-ResourceGroupName] <String> [-Name] <String> [-Force
  [-EnableEncryptionService <EncryptionSupportServiceEnum>]
  [-DisableEncryptionService <EncryptionSupportServiceEnum>] [-Tag <Hashtable>]
  [-EnableHttpsTrafficOnly <Boolean>] [-StorageEncryption] [-AssignIdentity]
- [-NetworkRuleSet <PSNetworkRuleSet>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-NetworkRuleSet <PSNetworkRuleSet>] [-UpgradeToStorageV2] [-AsJob] [-DefaultProfile <IAzureContextContainer>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### KeyvaultEncryption
@@ -31,7 +31,7 @@ Set-AzureRmStorageAccount [-ResourceGroupName] <String> [-Name] <String> [-Force
  [-EnableEncryptionService <EncryptionSupportServiceEnum>]
  [-DisableEncryptionService <EncryptionSupportServiceEnum>] [-Tag <Hashtable>]
  [-EnableHttpsTrafficOnly <Boolean>] [-KeyvaultEncryption] -KeyName <String> -KeyVersion <String>
- -KeyVaultUri <String> [-AssignIdentity] [-NetworkRuleSet <PSNetworkRuleSet>]
+ -KeyVaultUri <String> [-AssignIdentity] [-NetworkRuleSet <PSNetworkRuleSet>] [-UpgradeToStorageV2] [-AsJob]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -55,14 +55,7 @@ PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountNa
 
 This command sets a custom domain for a Storage account.
 
-### Example 3: Enable encryption on Blob and File Services
-```
-PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -EnableEncryptionService "Blob,File"
-```
-
-This command enables Storage Service encryption on Blob and File for a Storage account.
-
-### Example 4: Set the access tier value
+### Example 3: Set the access tier value
 ```
 PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -AccessTier Cool
 ```
@@ -74,30 +67,30 @@ The command sets the Access Tier value to be cool.
 PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -CustomDomainName "www.domainname.com" -UseSubDomain $true -Tag @{tag0="value0";tag1="value1";tag2="value2"}
 ```
 
-The command sets the Access Tier value to be cool.
+The command sets the custom domain and tags for a Storage account.
 
-### Example 5: Enable encryption on Blob Services with Keyvault
+### Example 5: Set Encryption KeySource to Keyvault
 ```
 PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -AssignIdentity
 PS C:\>$account = Get-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount"
 
 PS C:\>$keyVault = New-AzureRmKeyVault -VaultName "MyKeyVault" -ResourceGroupName "MyResourceGroup" -Location "EastUS2"
 PS C:\>$key = Add-AzureKeyVaultKey -VaultName "MyKeyVault" -Name "MyKey" -Destination 'Software'
-PS C:\>Set-AzureRmKeyVaultAccessPolicy -VaultName "MyKeyVault" -ObjectId $account.Identity.PrincipalId -PermissionsToKeys wrapkey,unwrapkey
+PS C:\>Set-AzureRmKeyVaultAccessPolicy -VaultName "MyKeyVault" -ObjectId $account.Identity.PrincipalId -PermissionsToKeys wrapkey,unwrapkey,get
 
-PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -EnableEncryptionService "Blob" -KeyvaultEncryption -KeyName $key.Name -KeyVersion $key.Version -KeyVaultUri $keyVault.VaultUri
+PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -KeyvaultEncryption -KeyName $key.Name -KeyVersion $key.Version -KeyVaultUri $keyVault.VaultUri
 ```
 
-This command enables Storage Service encryption on Blob with a new created Keyvault.
+This command set Encryption KeySource with a new created Keyvault.
 
-### Example 6: Disable encryption on File Services with KeySource set to "Microsoft.Storage"
+### Example 6: Set Encryption KeySource to "Microsoft.Storage"
 ```
-PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -DisableEncryptionService File  -StorageEncryption
+PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -StorageEncryption
 ```
 
-This command disables encryption on File Services with KeySource set to "Microsoft.Storage"
+This command set Encryption KeySource to "Microsoft.Storage"
 
-### Example 7: Set NetworkRuleSet property of a Storage Account with JSON
+### Example 7: Set NetworkRuleSet property of a Storage account with JSON
 ```
 PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -NetworkRuleSet (@{bypass="Logging,Metrics";
     ipRules=(@{IPAddressOrRange="20.11.0.0/16";Action="allow"},
@@ -107,15 +100,22 @@ PS C:\>Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountNa
     defaultAction="allow"})
 ```
 
-This command sets NetworkRuleSet property of a Storage Account with JSON
+This command sets NetworkRuleSet property of a Storage account with JSON
 
-### Example 8: Get NetworkRuleSet property from a Storage Account, and set it to another storage account
+### Example 8: Get NetworkRuleSet property from a Storage account, and set it to another Storage account
 ```
 PS C:\> $networkRuleSet = (Get-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount").NetworkRuleSet 
 PS C:\> Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount2" -NetworkRuleSet $networkRuleSet
 ```
 
-This first command gets NetworkRuleSet property from a Storage Account, and the second command sets it to another Storage Account 
+This first command gets NetworkRuleSet property from a Storage account, and the second command sets it to another Storage account 
+
+### Example 9: Upgrade a Storage account with Kind "Storage" or "BlobStorage" to "StorageV2" kind Storage account
+```
+PS C:\> Set-AzureRmStorageAccount -ResourceGroupName "MyResourceGroup" -AccountName "MyStorageAccount" -UpgradeToStorageV2
+```
+
+The command upgrade a Storage account with Kind "Storage" or "BlobStorage" to "StorageV2" kind Storage account.
 
 ## PARAMETERS
 
@@ -126,9 +126,8 @@ The acceptable values for this parameter are: Hot and Cool.
 If you change the access tier, it may result in additional charges. For more information, see
 [Azure Blob Storage: Hot and cool storage tiers](http://go.microsoft.com/fwlink/?LinkId=786482).
 
-If you specify a value of BlobStorage for the *Kind* parameter of the New-AzureRmStorageAccount
-cmdlet, you must specify a value for the *AccessTier* parameter. If you specify a value of Storage
-for this *Kind* parameter, do not specify the *AccessTier* parameter.
+If the Storage account has Kind as StorageV2 or BlobStorage, you can specify the *AccessTier* parameter. 
+If the Storage account has Kind as Storage, do not specify the *AccessTier* parameter.
 
 ```yaml
 Type: String
@@ -143,8 +142,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -AsJob
+Run cmdlet in the background
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -AssignIdentity
-Generate and assign a new Storage Account Identity for this storage account for use with key management services like Azure KeyVault.
+Generate and assign a new Storage account Identity for this Storage account for use with key management services like Azure KeyVault.
 
 ```yaml
 Type: SwitchParameter
@@ -174,7 +188,7 @@ Accept wildcard characters: False
 ```
 
 ### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with azure.
+The credentials, account, tenant, and subscription used for communication with Azure.
 
 ```yaml
 Type: IAzureContextContainer
@@ -189,8 +203,8 @@ Accept wildcard characters: False
 ```
 
 ### -DisableEncryptionService
-Indicates whether this cmdlet disables Storage Service encryption on the Storage Service.
-Azure Blob and Azure File Services are supported.
+Indicates whether this cmdlet disables Storage Service Encryption. 
+Azure Blob storage and Azure Files are supported.
 
 ```yaml
 Type: EncryptionSupportServiceEnum
@@ -206,8 +220,8 @@ Accept wildcard characters: False
 ```
 
 ### -EnableEncryptionService
-Indicates whether this cmdlet enables Storage Service encryption on the Storage Service.
-Azure Blob and Azure File Services are supported.
+Indicates whether this cmdlet enables Storage Service Encryption. 
+Azure Blob storage and Azure Files are supported.
 
 ```yaml
 Type: EncryptionSupportServiceEnum
@@ -223,7 +237,7 @@ Accept wildcard characters: False
 ```
 
 ### -EnableHttpsTrafficOnly
-Indicates whether or not the Storage Account only enable https traffic.
+Indicates whether or not the Storage account only enables HTTPS traffic.
 
 ```yaml
 Type: Boolean
@@ -253,7 +267,7 @@ Accept wildcard characters: False
 ```
 
 ### -KeyName
-Storage Account encryption keySource KeyVault KeyName
+If using -KeyvaultEncryption to enable encryption with Key Vault, specify the Keyname property with this option.
 
 ```yaml
 Type: String
@@ -268,8 +282,8 @@ Accept wildcard characters: False
 ```
 
 ### -KeyvaultEncryption
-Whether to set Storage Account Encryption KeySource to Microsoft.Keyvault or not.
-If you specify KeyName, KeyVersion and KeyvaultUri, Storage Account encryption keySource will also be set to Microsoft.Keyvault whether this parameter is set or not.
+Indicates whether or not to use Microsoft KeyVault for the encryption keys when using Storage Service Encryption. 
+If KeyName, KeyVersion, and KeyVaultUri are all set, KeySource will be set to Microsoft.Keyvault whether this parameter is set or not. 
 
 ```yaml
 Type: SwitchParameter
@@ -284,7 +298,7 @@ Accept wildcard characters: False
 ```
 
 ### -KeyVaultUri
-Storage Account encryption keySource KeyVault KeyVaultUri
+When using Key Vault Encryption by specifying the -KeyvaultEncryption parameter, use this option to specify the URI to the Key Vault.
 
 ```yaml
 Type: String
@@ -299,7 +313,7 @@ Accept wildcard characters: False
 ```
 
 ### -KeyVersion
-Storage Account encryption keySource KeyVault KeyVersion
+When using Key Vault Encryption by specifying the -KeyvaultEncryption parameter, use this option to specify the URI to the Key Version.
 
 ```yaml
 Type: String
@@ -314,7 +328,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-Specifies the name of the Storage account to Modify.
+Specifies the name of the Storage account to modify.
 
 ```yaml
 Type: String
@@ -329,7 +343,7 @@ Accept wildcard characters: False
 ```
 
 ### -NetworkRuleSet
-Storage Account NetworkRuleSet
+NetworkRuleSet is used to define a set of configuration rules for firewalls and virtual networks, as well as to set values for network properties such as services allowed to bypass the rules and how to handle requests that don't match any of the defined rules.
 
 ```yaml
 Type: PSNetworkRuleSet
@@ -359,7 +373,7 @@ Accept wildcard characters: False
 ```
 
 ### -SkuName
-Specifies the SKU name of the storage account.
+Specifies the SKU name of the Storage account.
 The acceptable values for this parameter are:
 
 - Standard_LRS - Locally-redundant storage.
@@ -385,7 +399,7 @@ Accept wildcard characters: False
 ```
 
 ### -StorageEncryption
-Whether to set Storage Account Encryption KeySource to Microsoft.Storage or not.
+Indicates whether or not to set the Storage account encryption to use Microsoft-managed keys.
 
 ```yaml
 Type: SwitchParameter
@@ -413,6 +427,21 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -UpgradeToStorageV2
+Upgrade Storage account Kind from  Storage or BlobStorage to StorageV2.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -469,7 +498,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Microsoft.Azure.Management.Storage.Models.StorageAccount
+### Microsoft.Azure.Commands.Management.Storage.Models.PSStorageAccount
 
 ## NOTES
 

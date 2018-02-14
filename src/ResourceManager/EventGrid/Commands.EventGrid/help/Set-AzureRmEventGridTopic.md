@@ -1,14 +1,14 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.EventGrid.dll-Help.xml
 Module Name: AzureRM.EventGrid
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.eventgrid/set-azurermeventgridtopic
 schema: 2.0.0
 ---
 
 # Set-AzureRmEventGridTopic
 
 ## SYNOPSIS
-Set the properties of an Event Grid topic.
+Sets the properties of an Event Grid topic.
 
 ## SYNTAX
 
@@ -31,7 +31,7 @@ Set-AzureRmEventGridTopic [-InputObject] <PSTopic> [-Tag] <Hashtable>
 ```
 
 ## DESCRIPTION
-Set the properties of an Event Grid topic. This can be used to replace the tags of an Event Grid topic.
+Sets the properties of an Event Grid topic. This can be used to replace the tags of an Event Grid topic.
 
 ## EXAMPLES
 

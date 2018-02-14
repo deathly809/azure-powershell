@@ -248,6 +248,12 @@ Gets the next hop from a VM.
 ### [Get-AzureRmNetworkWatcherPacketCapture](Get-AzureRmNetworkWatcherPacketCapture.md)
 Gets information and properties and status of a packet capture resource.
 
+### [Get-AzureRmNetworkWatcherReachabilityProvidersList](Get-AzureRmNetworkWatcherReachabilityProvidersList.md)
+Lists all available internet service providers for a specified Azure region.
+
+### [Get-AzureRMNetworkWatcherReachabilityReport](Get-AzureRMNetworkWatcherReachabilityReport.md)
+Gets the relative latency score for internet service providers from a specified location to Azure regions.
+
 ### [Get-AzureRmNetworkWatcherSecurityGroupView](Get-AzureRmNetworkWatcherSecurityGroupView.md)
 View the configured and effective network security group rules applied on a VM.
 

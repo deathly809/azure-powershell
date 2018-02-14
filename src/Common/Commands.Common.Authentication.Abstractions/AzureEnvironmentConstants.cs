@@ -80,7 +80,7 @@ namespace Microsoft.Azure.Commands.Common.Authentication.Abstractions
         /// </summary>
         public const string AzureActiveDirectoryEndpoint = "https://login.microsoftonline.com/";
         public const string ChinaActiveDirectoryEndpoint = "https://login.chinacloudapi.cn/";
-        public const string USGovernmentActiveDirectoryEndpoint = "https://login-us.microsoftonline.com/";
+        public const string USGovernmentActiveDirectoryEndpoint = "https://login.microsoftonline.us/";
         public const string GermanActiveDirectoryEndpoint = "https://login.microsoftonline.de/";
 
         /// <summary>
@@ -114,6 +114,16 @@ namespace Microsoft.Azure.Commands.Common.Authentication.Abstractions
         public const string ChinaKeyVaultServiceEndpointResourceId = "https://vault.azure.cn";
         public const string USGovernmentKeyVaultServiceEndpointResourceId = "https://vault.usgovcloudapi.net";
         public const string GermanAzureKeyVaultServiceEndpointResourceId = "https://vault.microsoftazure.de";
+
+        /// <summary>
+        /// The token audience for Log Analytics Queries
+        /// </summary>
+        public const string AzureOperationalInsightsEndpointResourceId = "https://api.loganalytics.io";
+
+        /// <summary>
+        /// The endpoint URI for Log Analytics Queries
+        /// </summary>
+        public const string AzureOperationalInsightsEndpoint = "https://api.loganalytics.io/v1";
 
         /// <summary>
         /// The domain name suffix for Azure DataLake services

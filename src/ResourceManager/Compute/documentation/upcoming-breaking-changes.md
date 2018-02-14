@@ -1,44 +1,17 @@
-<!--
-    Please leave this section at the top of the breaking change documentation.
+# Upcoming Breaking Changes
 
-    New breaking changes should go under the section titled "Upcoming Breaking Changes", and should adhere to the following format:
-
-    # Upcoming Breaking Changes
-
-    ## Release X.0.0 - January 2017
-
-    The following cmdlets were affected this release:
-
-    **Cmdlet 1**
-    - Description of what has changed
-
-    ```powershell
-    # Old
-    # Sample of how the cmdlet was previously called
-
-    # New
-    # Sample of how the cmdlet should now be called
-    ```
-
-    Note: the above section follows the template found in the link below: 
-
-    https://github.com/Azure/azure-powershell/blob/dev/documentation/breaking-changes/breaking-change-template.md
--->
-
-# Upcoming Breaking Changes   
-
-## Release 5.0.0 - November 2017
+## Release X.0.0 - May 2018
 
 The following cmdlets were affected this release:
 
-**Set-AzureRmVMAccessExtension**
-- Parameters "UserName" and "Password" are being replaced in favor of a PSCredential
+**New-AzureRmAvailabilitySet**
+- Switch parameter, Managed, will be replaced with Sku parameter.
+In order to set a managed availability set, a user should give Sku parameter with 'Aligned' value.
 
 ```powershell
-
 # Old
-# Set-AzureRmVMAccessExtension [other required parameters] -UserName "plain-text string" -Password "plain-text string"
+# New-AzureRmAvailabilitySet -Managed
+
 
 # New
-# Set-AzureRmVMAccessExtension [other required parameters] -Credential $PSCredential
-```
+# New-AzureRmAvailabilitySet -Sku 'Aligned'

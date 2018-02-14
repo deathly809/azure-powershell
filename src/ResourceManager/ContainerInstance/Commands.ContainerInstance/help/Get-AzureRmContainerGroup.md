@@ -1,7 +1,7 @@
 ---
 external help file: Microsoft.Azure.Commands.ContainerInstance.dll-Help.xml
-Module Name: AzureRM
-online version: 
+Module Name: AzureRM.ContainerInstance
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.containerinstance/get-azurermcontainergroup
 schema: 2.0.0
 ---
 
@@ -52,6 +52,8 @@ IpAddress                : 13.88.10.240
 Ports                    : {8000}
 OsType                   : Linux
 Volumes                  :
+State                    : Running
+Events                   : {}
 ```
 
 The command gets the specified container group.
@@ -98,6 +100,8 @@ IpAddress                : 13.88.10.240
 Ports                    : {8000}
 OsType                   : Linux
 Volumes                  :
+State                    : Running
+Events                   : {}
 ```
 
 The command gets the container group with the resource Id.
@@ -125,7 +129,7 @@ The container group Name.
 ```yaml
 Type: String
 Parameter Sets: GetContainerGroupInResourceGroupParamSet
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -140,7 +144,7 @@ The resource Group Name.
 ```yaml
 Type: String
 Parameter Sets: ListContainerGroupParamSet
-Aliases: 
+Aliases:
 
 Required: False
 Position: 0
@@ -152,7 +156,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: GetContainerGroupInResourceGroupParamSet
-Aliases: 
+Aliases:
 
 Required: True
 Position: 0
@@ -167,7 +171,7 @@ The resource id.
 ```yaml
 Type: String
 Parameter Sets: GetContainerGroupByResourceIdParamSet
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -190,4 +194,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-

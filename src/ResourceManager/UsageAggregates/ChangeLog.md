@@ -18,7 +18,12 @@
         - Additional information about change #1
 -->
 ## Current Release
+* Corrected usage of `Login-AzureRmAccount` to use `Connect-AzureRmAccount`
 
+## Version 4.0.0
+* Add support for online help
+    - Run Get-Help with the -Online parameter to open the online help in your default Internet browser
+    
 ## Version 3.4.1
 
 ## Version 3.4.0

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     Please leave this section at the top of the change log.
 
     Changes for the current release should go under the section titled "Current Release", and should adhere to the following format:
@@ -18,24 +18,26 @@
         - Additional information about change #1
 -->
 ## Current Release
-    Add commands to get/create/remove applicaiton insights resource
-        Get-AzureRmApplicationInsights 
-        New-AzureRmApplicationInsights
-        Remove-AzureRmApplicationInsights
 
-    Add commands to get/update pricing/daily cap of applicaiton insights resource        
-        Get-AzureRmApplicationInsights -IncludeDailyCap
-        Set-AzureRmApplicationInsightsPricingPlan
-        Set-AzureRmApplicationInsightsDailyCap
+## Version 0.1.1
+* Added Location Completer to -Location parameters allowing tab completion through valid Locations
+* Added ResourceGroup Completer to -ResourceGroup parameters allowing tab completion through resource groups in current subscription
 
-    Add commands to get/create/update/remove continuous export of applicaiton insights resource
-		Get-AzureRmApplicationInsightsContinuousExport
-		Set-AzureRmApplicationInsightsContinuousExport
-		New-AzureRmApplicationInsightsContinuousExport
-		Remove-AzureRmApplicationInsightsContinuousExport
-    
-    Add commands to get/create/remove api keys of applicaiton insights resoruce
-		Get-AzureRmApplicationInsightsApiKey
-		New-AzureRmApplicationInsightsApiKey
-		Remove-AzureRmApplicationInsightsApiKey
-
+## Version 0.1.0
+* Add commands to get/create/remove applicaiton insights resource
+    - Get-AzureRmApplicationInsights 
+    - New-AzureRmApplicationInsights
+    - Remove-AzureRmApplicationInsights
+* Add commands to get/update pricing/daily cap of applicaiton insights resource        
+    - Get-AzureRmApplicationInsights -IncludeDailyCap
+    - Set-AzureRmApplicationInsightsPricingPlan
+    - Set-AzureRmApplicationInsightsDailyCap
+* Add commands to get/create/update/remove continuous export of applicaiton insights resource
+	- Get-AzureRmApplicationInsightsContinuousExport
+	- Set-AzureRmApplicationInsightsContinuousExport
+    - New-AzureRmApplicationInsightsContinuousExport
+	- Remove-AzureRmApplicationInsightsContinuousExport
+* Add commands to get/create/remove api keys of applicaiton insights resoruce
+	- Get-AzureRmApplicationInsightsApiKey
+	- New-AzureRmApplicationInsightsApiKey
+	- Remove-AzureRmApplicationInsightsApiKey

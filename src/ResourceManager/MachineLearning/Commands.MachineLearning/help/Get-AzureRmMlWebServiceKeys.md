@@ -1,7 +1,7 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.MachineLearning.dll-Help.xml
 Module Name: AzureRM.MachineLearning
-online version: 
+online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.machinelearning/get-azurermmlwebservicekeys
 schema: 2.0.0
 ---
 
@@ -30,19 +30,11 @@ Gets the access keys for the Azure Machine Learning web service's runtime APIs.
 ## EXAMPLES
 
 ### --------------------------  Example 1 - Get the keys for a web service specified by resource group and name  --------------------------
-@{paragraph=PS C:\\\>}
-
-
-
 ```
 Get-AzureRmMlWebServiceKeys -ResourceGroupName "myresourcegroup" -Name "mywebservicename"
 ```
 
 ### --------------------------  Example 2 - Get keys for web service instance  --------------------------
-@{paragraph=PS C:\\\>}
-
-
-
 ```
 Get-AzureRmMlWebServiceKeys -MlWebService $mlService
 ```

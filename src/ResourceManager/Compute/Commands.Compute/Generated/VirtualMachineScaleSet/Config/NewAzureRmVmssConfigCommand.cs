@@ -29,7 +29,7 @@ using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute.Automation
 {
-    [Cmdlet("New", "AzureRmVmssConfig", SupportsShouldProcess = true)]
+    [Cmdlet("New", "AzureRmVmssConfig", SupportsShouldProcess = true, DefaultParameterSetName = "DefaultParameterSet")]
     [OutputType(typeof(PSVirtualMachineScaleSet))]
     public partial class NewAzureRmVmssConfigCommand : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
@@ -43,6 +43,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 1,
             ValueFromPipelineByPropertyName = true)]
+        [ResourceManager.Common.ArgumentCompleters.LocationCompleter("Microsoft.Compute/virtualMachineScaleSets")]
         public string Location { get; set; }
 
         [Parameter(
@@ -68,7 +69,7 @@ namespace Microsoft.Azure.Commands.Compute.Automation
             Mandatory = false,
             Position = 5,
             ValueFromPipelineByPropertyName = true)]
-        public Int64? SkuCapacity { get; set; }
+        public int? SkuCapacity { get; set; }
 
         [Parameter(
             Mandatory = false,
@@ -157,8 +158,20 @@ namespace Microsoft.Azure.Commands.Compute.Automation
 
         [Parameter(
             Mandatory = false,
-            ValueFromPipelineByPropertyName = false)]
-        public SwitchParameter AssignIdentity { get; set; }
+            ValueFromPipelineByPropertyName = true)]
+        public string Priority { get; set; }
+
+        [Parameter(
+            Mandatory = true,
+            ParameterSetName = "ExplicitIdentityParameterSet",
+            ValueFromPipelineByPropertyName = true)]
+        public ResourceIdentityType? IdentityType { get; set; }
+
+        [Parameter(
+            Mandatory = false,
+            ParameterSetName = "ExplicitIdentityParameterSet",
+            ValueFromPipelineByPropertyName = true)]
+        public string[] IdentityId { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -358,6 +371,15 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 vVirtualMachineProfile.LicenseType = this.LicenseType;
             }
 
+            if (this.Priority != null)
+            {
+                if (vVirtualMachineProfile == null)
+                {
+                    vVirtualMachineProfile = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetVMProfile();
+                }
+                vVirtualMachineProfile.Priority = this.Priority;
+            }
+
             if (this.AssignIdentity.IsPresent)
             {
                 if (vIdentity == null)
@@ -367,6 +389,23 @@ namespace Microsoft.Azure.Commands.Compute.Automation
                 vIdentity.Type = ResourceIdentityType.SystemAssigned;
             }
 
+            if (this.IdentityType != null)
+            {
+                if (vIdentity == null)
+                {
+                    vIdentity = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetIdentity();
+                }
+                vIdentity.Type = this.IdentityType;
+            }
+
+            if (this.IdentityId != null)
+            {
+                if (vIdentity == null)
+                {
+                    vIdentity = new Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetIdentity();
+                }
+                vIdentity.IdentityIds = this.IdentityId;
+            }
 
             var vVirtualMachineScaleSet = new PSVirtualMachineScaleSet
             {
