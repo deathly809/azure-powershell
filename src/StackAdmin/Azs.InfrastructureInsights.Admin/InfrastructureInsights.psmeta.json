@@ -1193,8 +1193,8 @@
     "AlertParameter": {
       "x-ps-parameter-info": {
         "name": "Alert",
-        "description": "Updated Alert Parameter.",
-        "flatten": false
+        "description": "Alert Parameter.",
+        "flatten": true
       }
     },
     "ServiceRegistrationIdParameter": {
