@@ -25,7 +25,3 @@ Get the regions health status.  Azure Stack currently only supports a single reg
 
 ### [Get-AzsServiceHealth](Get-AzsServiceHealth.md)
 {{Manually Enter Get-AzsServiceHealth Description Here}}
-
-### [New-AzsAlertObject](New-AzsAlertObject.md)
-This class models an alert resource.
-

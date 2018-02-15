@@ -1,5 +1,5 @@
 ---
-external help file: Azs.InfrastructureInsights.Admin-help.xml
+external help file: Azs.Infrastructureinsights.Admin-help.xml
 Module Name: Azs.InfrastructureInsights.Admin
 online version: 
 schema: 2.0.0
@@ -8,35 +8,57 @@ schema: 2.0.0
 # Get-AzsRegionHealth
 
 ## SYNOPSIS
-Get the regions health status.  Azure Stack currently only supports a single region.
+Returns alerts at a given location.
 
 ## SYNTAX
 
 ### RegionHealths_List (Default)
 ```
-Get-AzsRegionHealth [-Filter <String>] [-Skip <Int32>] -Location <String> [-Top <Int32>] [<CommonParameters>]
+Get-AzsRegionHealth [-Filter <String>] -ResourceGroupName <String> [-Top <Int32>] [-Skip <Int32>]
+ [<CommonParameters>]
 ```
 
 ### RegionHealths_Get
 ```
-Get-AzsRegionHealth -Region <String> -Location <String> [<CommonParameters>]
+Get-AzsRegionHealth -Name <String> -ResourceGroupName <String> [<CommonParameters>]
+```
+
+### ResourceId_RegionHealths_Get
+```
+Get-AzsRegionHealth -ResourceId <String> [<CommonParameters>]
+```
+
+### InputObject_RegionHealths_Get
+```
+Get-AzsRegionHealth -InputObject <RegionHealth> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get the regions health status.
+Returns alerts at a given location.
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> Get-AzsRegionHealth -Location local
+PS C:\> Get-AzsRegionHealth -ResourceGroupName System.local
 
-Type                                                 Name  Location
-----                                                 ----  --------
-Microsoft.InfrastructureInsights.Admin/regionHealths local local
+Id                       Type                     Tags                     Name                     Location
+--                       ----                     ----                     ----                     --------
+/subscriptions/815849... Microsoft.Infrastruct... {}                       local                    local
 ```
 
-Get all regions health.
+Get all alerts at a location.
+
+### Example 1
+```
+PS C:\> Get-AzsRegionHealth -ResourceGroupName System.local -Region local
+
+Id                       Type                     Tags                     Name                     Location
+--                       ----                     ----                     ----                     --------
+/subscriptions/815849... Microsoft.Infrastruct... {}                       local                    local
+```
+
+Get an alert by name at a location.
 
 ## PARAMETERS
 
@@ -55,12 +77,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Location
-Location name.
+### -InputObject
+The input object of type Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert.```yaml
+Type: RegionHealth
+Parameter Sets: InputObject_RegionHealths_Get
+Aliases: 
 
-```yaml
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Name
+Name of the alert.```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: RegionHealths_Get
+Aliases: Region
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ResourceGroupName
+resourceGroupName.```yaml
+Type: String
+Parameter Sets: RegionHealths_List, RegionHealths_Get
 Aliases: 
 
 Required: True
@@ -70,18 +116,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Region
-Name of the region
-
-```yaml
+### -ResourceId
+The resource id.```yaml
 Type: String
-Parameter Sets: RegionHealths_Get
+Parameter Sets: ResourceId_RegionHealths_Get
 Aliases: 
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -123,7 +167,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.RegionHealth
+### Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert
 
 ## NOTES
 

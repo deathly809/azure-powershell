@@ -72,10 +72,7 @@ FormatsToProcess = '.\Generated.PowerShell.Commands\FormatFiles\Alert.ps1xml',
                '.\Generated.PowerShell.Commands\FormatFiles\AlertList.ps1xml', 
                '.\Generated.PowerShell.Commands\FormatFiles\AlertSummary.ps1xml', 
                '.\Generated.PowerShell.Commands\FormatFiles\BaseHealth.ps1xml', 
-               '.\Generated.PowerShell.Commands\FormatFiles\Display.ps1xml', 
                '.\Generated.PowerShell.Commands\FormatFiles\Metrics.ps1xml', 
-               '.\Generated.PowerShell.Commands\FormatFiles\Operation.ps1xml', 
-               '.\Generated.PowerShell.Commands\FormatFiles\OperationList.ps1xml', 
                '.\Generated.PowerShell.Commands\FormatFiles\RegionHealth.ps1xml', 
                '.\Generated.PowerShell.Commands\FormatFiles\RegionHealthList.ps1xml', 
                '.\Generated.PowerShell.Commands\FormatFiles\Resource.ps1xml', 
@@ -89,9 +86,8 @@ FormatsToProcess = '.\Generated.PowerShell.Commands\FormatFiles\Alert.ps1xml',
 NestedModules = @('PSSwaggerUtility')
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Close-AzsAlert', 'Get-AzsRegionHealth', 'Get-Operation', 
-               'Get-AzsAlert', 'Get-AzsRPHealth', 'Get-AzsRegistrationHealth', 
-               'New-AlertObject'
+FunctionsToExport = 'Close-AzsAlert', 'Get-AzsRegionHealth', 
+               'Get-AzsAlert', 'Get-AzsRPHealth', 'Get-AzsRegistrationHealth'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
