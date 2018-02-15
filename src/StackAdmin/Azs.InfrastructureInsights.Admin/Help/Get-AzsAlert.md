@@ -8,33 +8,32 @@ schema: 2.0.0
 # Get-AzsAlert
 
 ## SYNOPSIS
-Returns alerts at a given location.
+Returns the list of all alerts in a given region.
 
 ## SYNTAX
 
 ### Alerts_List (Default)
 ```
 Get-AzsAlert [-Filter <String>] -Region <String> -ResourceGroupName <String> [-Top <Int32>] [-Skip <Int32>]
- [<CommonParameters>]
 ```
 
 ### InputObject_Alerts_Get
 ```
-Get-AzsAlert -InputObject <Alert> [<CommonParameters>]
+Get-AzsAlert -InputObject <Alert>
 ```
 
 ### Alerts_Get
 ```
-Get-AzsAlert -Region <String> -ResourceGroupName <String> -Name <String> [<CommonParameters>]
+Get-AzsAlert -Region <String> -ResourceGroupName <String> -Name <String>
 ```
 
 ### ResourceId_Alerts_Get
 ```
-Get-AzsAlert -ResourceId <String> [<CommonParameters>]
+Get-AzsAlert -ResourceId <String>
 ```
 
 ## DESCRIPTION
-Returns alerts at a given location.
+Returns the list of all alerts in a given region.
 
 ## EXAMPLES
 
@@ -55,9 +54,9 @@ AzureStackNotActivated            08/25/2017 18:29:55 ciserviceadmin@msazurestac
 AzureStackNotActivated
 ```
 
-Get all alerts at a location.
+Get all alerts in a region.
 
-### Example 1
+### Example 2
 ```
 PS C:\> Get-AzsAlert -ResourceGroupName System.local -Region local -Name 060a41e5-0992-45a1-a472-5046329c1908
 
@@ -71,7 +70,7 @@ d           stamp erAli       gistr       estam dTime ovide       n     sourc   
 Se... {}    02...       06...       Wa... 02... 02... e5... Mi... {S... /s... In... Ke... {[... {S... /s... Cl... local Se... 060a41e5-0992-45a1-a472-5046329c1908
 ```
 
-Get an alert by name at a location.
+Get an alert by name in a region.
 
 ## PARAMETERS
 
@@ -79,7 +78,7 @@ Get an alert by name at a location.
 OData filter parameter.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: Alerts_List
 Aliases: 
 
@@ -91,8 +90,10 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-The input object of type Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert.```yaml
-Type: Alert
+The input object of type Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert.
+
+```yaml
+Type: Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert
 Parameter Sets: InputObject_Alerts_Get
 Aliases: 
 
@@ -104,8 +105,10 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-Name of the alert.```yaml
-Type: String
+Name of the alert.
+
+```yaml
+Type: System.String
 Parameter Sets: Alerts_Get
 Aliases: AlertName
 
@@ -117,8 +120,10 @@ Accept wildcard characters: False
 ```
 
 ### -Region
-Name of the region```yaml
-Type: String
+Name of the region
+
+```yaml
+Type: System.String
 Parameter Sets: Alerts_List, Alerts_Get
 Aliases: 
 
@@ -130,8 +135,10 @@ Accept wildcard characters: False
 ```
 
 ### -ResourceGroupName
-resourceGroupName.```yaml
-Type: String
+resourceGroupName.
+
+```yaml
+Type: System.String
 Parameter Sets: Alerts_List, Alerts_Get
 Aliases: 
 
@@ -143,8 +150,10 @@ Accept wildcard characters: False
 ```
 
 ### -ResourceId
-The resource id.```yaml
-Type: String
+The resource id.
+
+```yaml
+Type: System.String
 Parameter Sets: ResourceId_Alerts_Get
 Aliases: 
 
@@ -159,7 +168,7 @@ Accept wildcard characters: False
 Skip the first N items as specified by the parameter value.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: Alerts_List
 Aliases: 
 
@@ -175,7 +184,7 @@ Return the top N items as specified by the parameter value.
 Applies after the -Skip parameter.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: Alerts_List
 Aliases: 
 
@@ -185,9 +194,6 @@ Default value: -1
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 

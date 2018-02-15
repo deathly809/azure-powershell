@@ -1,27 +1,28 @@
 ---
 Module Name: Azs.InfrastructureInsights.Admin
-Module Guid: 5f4f08fd-3828-408a-9891-3d09e3cce261
-Download Help Link: 
-Help Version: 0.1.0
+Module Guid: d137ff2f-6bd1-4220-896f-ec47b0485cb2
+Download Help Link: {{Please enter FwLink manually}}
+Help Version: {{Please enter version of help manually (X.X.X.X) format}}
 Locale: en-US
 ---
 
 # Azs.InfrastructureInsights.Admin Module
 ## Description
-Allows AzureStack administrators to view the health of their resource providers.
+{{Manually Enter Description Here}}
 
 ## Azs.InfrastructureInsights.Admin Cmdlets
 ### [Close-AzsAlert](Close-AzsAlert.md)
-Close an alert.
+Closes the given alert.
 
 ### [Get-AzsAlert](Get-AzsAlert.md)
-Returns alerts at a given location.
+Returns the list of all alerts in a given region.
 
 ### [Get-AzsRegionHealth](Get-AzsRegionHealth.md)
-Get the regions health status.  Azure Stack currently only supports a single region.
+Returns a list of region's health status.
 
-### [Get-AzsResourceHealth](Get-AzsResourceHealth.md)
-{{Manually Enter Get-AzsResourceHealth Description Here}}
+### [Get-AzsRegistrationHealth](Get-AzsRegistrationHealth.md)
+Returns a list of each resource's health under a service.
 
-### [Get-AzsServiceHealth](Get-AzsServiceHealth.md)
-{{Manually Enter Get-AzsServiceHealth Description Here}}
+### [Get-AzsRPHealth](Get-AzsRPHealth.md)
+Returns a list of each service's health.
+

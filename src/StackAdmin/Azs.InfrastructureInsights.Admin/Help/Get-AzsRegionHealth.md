@@ -8,33 +8,32 @@ schema: 2.0.0
 # Get-AzsRegionHealth
 
 ## SYNOPSIS
-Returns alerts at a given location.
+Returns a list of region's health status.
 
 ## SYNTAX
 
 ### RegionHealths_List (Default)
 ```
 Get-AzsRegionHealth [-Filter <String>] -ResourceGroupName <String> [-Top <Int32>] [-Skip <Int32>]
- [<CommonParameters>]
 ```
 
 ### RegionHealths_Get
 ```
-Get-AzsRegionHealth -Name <String> -ResourceGroupName <String> [<CommonParameters>]
+Get-AzsRegionHealth -Name <String> -ResourceGroupName <String>
 ```
 
 ### ResourceId_RegionHealths_Get
 ```
-Get-AzsRegionHealth -ResourceId <String> [<CommonParameters>]
+Get-AzsRegionHealth -ResourceId <String>
 ```
 
 ### InputObject_RegionHealths_Get
 ```
-Get-AzsRegionHealth -InputObject <RegionHealth> [<CommonParameters>]
+Get-AzsRegionHealth -InputObject <RegionHealth>
 ```
 
 ## DESCRIPTION
-Returns alerts at a given location.
+Returns a list of region's health status.
 
 ## EXAMPLES
 
@@ -47,9 +46,9 @@ Id                       Type                     Tags                     Name 
 /subscriptions/815849... Microsoft.Infrastruct... {}                       local                    local
 ```
 
-Get all alerts at a location.
+Returns all region healths.
 
-### Example 1
+### Example 2
 ```
 PS C:\> Get-AzsRegionHealth -ResourceGroupName System.local -Region local
 
@@ -58,7 +57,7 @@ Id                       Type                     Tags                     Name 
 /subscriptions/815849... Microsoft.Infrastruct... {}                       local                    local
 ```
 
-Get an alert by name at a location.
+Return the specified region health.
 
 ## PARAMETERS
 
@@ -66,7 +65,7 @@ Get an alert by name at a location.
 OData filter parameter.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: RegionHealths_List
 Aliases: 
 
@@ -78,8 +77,10 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-The input object of type Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert.```yaml
-Type: RegionHealth
+The input object of type Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.RegionHealth.
+
+```yaml
+Type: Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.RegionHealth
 Parameter Sets: InputObject_RegionHealths_Get
 Aliases: 
 
@@ -91,8 +92,10 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-Name of the alert.```yaml
-Type: String
+Name of the region
+
+```yaml
+Type: System.String
 Parameter Sets: RegionHealths_Get
 Aliases: Region
 
@@ -104,8 +107,10 @@ Accept wildcard characters: False
 ```
 
 ### -ResourceGroupName
-resourceGroupName.```yaml
-Type: String
+resourceGroupName.
+
+```yaml
+Type: System.String
 Parameter Sets: RegionHealths_List, RegionHealths_Get
 Aliases: 
 
@@ -117,8 +122,10 @@ Accept wildcard characters: False
 ```
 
 ### -ResourceId
-The resource id.```yaml
-Type: String
+The resource id.
+
+```yaml
+Type: System.String
 Parameter Sets: ResourceId_RegionHealths_Get
 Aliases: 
 
@@ -133,7 +140,7 @@ Accept wildcard characters: False
 Skip the first N items as specified by the parameter value.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: RegionHealths_List
 Aliases: 
 
@@ -149,7 +156,7 @@ Return the top N items as specified by the parameter value.
 Applies after the -Skip parameter.
 
 ```yaml
-Type: Int32
+Type: System.Int32
 Parameter Sets: RegionHealths_List
 Aliases: 
 
@@ -160,14 +167,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
-
 ## INPUTS
 
 ## OUTPUTS
 
-### Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert
+### Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.RegionHealth
 
 ## NOTES
 

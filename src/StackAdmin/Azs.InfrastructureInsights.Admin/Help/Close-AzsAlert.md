@@ -8,22 +8,22 @@ schema: 2.0.0
 # Close-AzsAlert
 
 ## SYNOPSIS
-Close an alert.
+Closes the given alert.
 
 ## SYNTAX
 
 ### InputObject_Alerts_Close
 ```
-Close-AzsAlert -InputObject <Alert> [-User <String>] [<CommonParameters>]
+Close-AzsAlert -InputObject <Alert> [-User <String>]
 ```
 
 ### ResourceId_Alerts_Close
 ```
-Close-AzsAlert [-User <String>] -ResourceId <String> [<CommonParameters>]
+Close-AzsAlert [-User <String>] -ResourceId <String>
 ```
 
 ## DESCRIPTION
-Close an alert.
+Closes the given alert.
 
 ## EXAMPLES
 
@@ -41,8 +41,9 @@ d           stamp erAli       gistr       estam dTime ovide       n     sourc   
 Se... {}    02...       06...       Wa... 02... 02... e5... Mi... {S... /s... In... Ke... {[... {S... /s... Cl... local Se... 060a41e5-0992-45a1-a472-5046329c1908
 ```
 
+Close an alert using the alert object.
 
-### Example 1
+### Example 2
 ```
 PS C:\> Close-AzsAlert -ResourceId "/subscriptions/44444444-3333-2222-1111-000000000000/resourceGroups/System.local/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/local/alerts/060a41e5-0992-45a1-a472-5046329c1908"
 
@@ -56,13 +57,15 @@ d           stamp erAli       gistr       estam dTime ovide       n     sourc   
 Se... {}    02...       06...       Wa... 02... 02... e5... Mi... {S... /s... In... Ke... {[... {S... /s... Cl... local Se... 060a41e5-0992-45a1-a472-5046329c1908
 ```
 
-Close an alert.
+Close an alert using the alert id.
 
 ## PARAMETERS
 
 ### -InputObject
-The input object of type Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert.```yaml
-Type: Alert
+The input object of type Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert.
+
+```yaml
+Type: Microsoft.AzureStack.Management.InfrastructureInsights.Admin.Models.Alert
 Parameter Sets: InputObject_Alerts_Close
 Aliases: 
 
@@ -74,8 +77,10 @@ Accept wildcard characters: False
 ```
 
 ### -ResourceId
-The resource id.```yaml
-Type: String
+The resource id.
+
+```yaml
+Type: System.String
 Parameter Sets: ResourceId_Alerts_Close
 Aliases: 
 
@@ -90,7 +95,7 @@ Accept wildcard characters: False
 The username used to perform the operation.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases: 
 
@@ -100,9 +105,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
