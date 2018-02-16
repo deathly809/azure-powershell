@@ -81,29 +81,21 @@ InModuleScope Azs.Backup.Admin {
 			}
 		}
 
-		It "TestSetBackupLocationByName" -Skip {
-			$global:TestName = 'TestCreateBackupLocation'
+		It "TestSetBackupLocationByName" {
+			$global:TestName = 'TestUpdateBackupLocation'
 			
 			[String]$username = "azurestack\AzureStackAdmin"
-			[SecureString]$password = "!!123abc"
-			[String]$path = ""
-			[SecureString]$encryptionKey = "YVVOa0J3S2xTamhHZ1lyRU9wQ1pKQ0xWanhjaHlkaU5ZQnNDeHRPTGFQenJKdWZsRGtYT25oYmlaa1RMVWFKeQ=="
+			[SecureString]$password = ConvertTo-SecureString -String "password" -AsPlainText -Force
+			[String]$path = "\\192.168.1.1\Share"
+			[SecureString]$encryptionKey = ConvertTo-SecureString -String "YVVOa0J3S2xTamhHZ1lyRU9wQ1pKQ0xWanhjaHlkaU5ZQnNDeHRPTGFQenJKdWZsRGtYT25oYmlaa1RMVWFKeQ==" -AsPlainText -Force
 
-			$backup = Set-AzsBackupLocation -ResourceGroupName System.local -Location local -Username $username -Password $password -BackupShare $path -EncryptionKey $encryptionKey
+			$backup = Set-AzsBackupShare -ResourceGroup System.local -BackupLocation local -Username $username -Password $password -BackupShare $path -EncryptionKey $encryptionKey
 			
 			$backup 					| Should Not Be $Null
 			$backup.Path 				| Should Be $path
-			$backup.Username 			| Should be $null
-			$backup.Password 			| Should be $null
-			$backup.EncryptionKeyBase64 | Should be $null
-
-			$backup = $backup | Set-AzsBackupLocation -Location local -Username $null -Password $null -BackupShare $null -EncryptionKey $null
-
-			$backup 					| Should Not Be $Null
-			$backup.Path 				| Should Be $null
-			$backup.Username 			| Should be $null
-			$backup.Password 			| Should be $null
-			$backup.EncryptionKeyBase64 | Should be $null
+			$backup.Username 			| Should be $username
+			$backup.Password 			| Should be ""
+			$backup.EncryptionKeyBase64 | Should be ""
 			
 		}
 	}

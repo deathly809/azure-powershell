@@ -84,15 +84,5 @@ InModuleScope Azs.Backup.Admin {
 				ValidateBackup -Backup $backup
 			}
 		}
-
-		It "TestRestoreBackup" {
-			$global:TestName = 'TestRestoreBackup'
-			
-            $backup = Get-AzsBackup -ResourceGroup System.local -BackupLocation local -Top 1
-            $backup | Should Not Be Null
-
-            $backup | Restore-AzsBackup
-			
-		}
 	}
 }

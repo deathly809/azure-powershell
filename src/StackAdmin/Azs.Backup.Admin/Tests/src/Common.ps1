@@ -7,7 +7,7 @@ if(-not $RunRaw) {
 	$scriptBlock = { 
 		Get-MockClient -ClassName 'BackupAdminClient' -TestName $global:TestName -Verbose
 	}
-	Mock Get-ServiceClient $scriptBlock -ModuleName "Azs.Backup.Admin"
+	Mock New-ServiceClient $scriptBlock -ModuleName "Azs.Backup.Admin"
 }
 
 function Repeat{
