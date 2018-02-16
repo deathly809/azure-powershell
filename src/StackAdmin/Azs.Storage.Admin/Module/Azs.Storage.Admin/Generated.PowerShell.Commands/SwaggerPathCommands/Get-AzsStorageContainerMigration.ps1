@@ -26,10 +26,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
     The input object of type Microsoft.AzureStack.Management.Storage.Admin.Models.MigrationResult.
 
 #>
-function Get-AzsStorageContainerMigration
-{
+function Get-AzsStorageContainerMigration {
     [OutputType([Microsoft.AzureStack.Management.Storage.Admin.Models.MigrationResult])]
-    [CmdletBinding(DefaultParameterSetName='Containers_MigrationStatus')]
+    [CmdletBinding(DefaultParameterSetName = 'Containers_MigrationStatus')]
     param(    
         [Parameter(Mandatory = $true, ParameterSetName = 'Containers_MigrationStatus')]
         [Alias('OperationId')]
@@ -38,7 +37,7 @@ function Get-AzsStorageContainerMigration
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Containers_MigrationStatus')]
         [System.String]
-        $ResourceGroupName,
+        $ResourceGroup,
     
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId_Containers_MigrationStatus')]
         [System.String]
@@ -53,75 +52,75 @@ function Get-AzsStorageContainerMigration
         $InputObject
     )
 
-    Begin 
-    {
-	    Initialize-PSSwaggerDependencies -Azure
+    Begin {
+        Initialize-PSSwaggerDependencies -Azure
         $tracerObject = $null
         if (('continue' -eq $DebugPreference) -or ('inquire' -eq $DebugPreference)) {
             $oldDebugPreference = $global:DebugPreference
-			$global:DebugPreference = "continue"
+            $global:DebugPreference = "continue"
             $tracerObject = New-PSSwaggerClientTracing
             Register-PSSwaggerClientTracing -TracerObject $tracerObject
         }
-	}
+    }
 
     Process {
     
-    $ErrorActionPreference = 'Stop'
+        $ErrorActionPreference = 'Stop'
 
-    $NewServiceClient_params = @{
-        FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
-    }
+        $NewServiceClient_params = @{
+            FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
+        }
 
-    $GlobalParameterHashtable = @{}
-    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+        $GlobalParameterHashtable = @{}
+        $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
      
-    $GlobalParameterHashtable['SubscriptionId'] = $null
-    if($PSBoundParameters.ContainsKey('SubscriptionId')) {
-        $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-    }
+        $GlobalParameterHashtable['SubscriptionId'] = $null
+        if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
+            $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
+        }
 
-    $StorageAdminClient = New-ServiceClient @NewServiceClient_params
+        $StorageAdminClient = New-ServiceClient @NewServiceClient_params
 
-    $OperationId = $Name
+        $OperationId = $Name
 
  
-    if('InputObject_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName) {
-        $GetArmResourceIdParameterValue_params = @{
-            IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/shares/operationresults/{operationId}'
+        if ('InputObject_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName) {
+            $GetArmResourceIdParameterValue_params = @{
+                IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/shares/operationresults/{operationId}'
+            }
+
+            if ('ResourceId_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName) {
+                $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
+            }
+            else {
+                $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+            }
+            $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
+            $ResourceGroup = $ArmResourceIdParameterValues['resourceGroupName']
+
+            $farmId = $ArmResourceIdParameterValues['farmId']
+
+            $operationId = $ArmResourceIdParameterValues['operationId']
         }
 
-        if('ResourceId_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName) {
-            $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
+
+        if ('Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName -or 'InputObject_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName) {
+            Write-Verbose -Message 'Performing operation MigrationStatusWithHttpMessagesAsync on $StorageAdminClient.'
+            $TaskResult = $StorageAdminClient.Containers.MigrationStatusWithHttpMessagesAsync($ResourceGroup, $FarmId, $OperationId)
         }
         else {
-            $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+            Write-Verbose -Message 'Failed to map parameter set to operation method.'
+            throw 'Module failed to find operation to execute.'
         }
-        $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
-        $resourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
 
-        $farmId = $ArmResourceIdParameterValues['farmId']
-
-        $operationId = $ArmResourceIdParameterValues['operationId']
-    }
-
-
-    if ('Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName -or 'InputObject_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Containers_MigrationStatus' -eq $PsCmdlet.ParameterSetName) {
-        Write-Verbose -Message 'Performing operation MigrationStatusWithHttpMessagesAsync on $StorageAdminClient.'
-        $TaskResult = $StorageAdminClient.Containers.MigrationStatusWithHttpMessagesAsync($ResourceGroupName, $FarmId, $OperationId)
-    } else {
-        Write-Verbose -Message 'Failed to map parameter set to operation method.'
-        throw 'Module failed to find operation to execute.'
-    }
-
-    if ($TaskResult) {
-        $GetTaskResult_params = @{
-            TaskResult = $TaskResult
-        }
+        if ($TaskResult) {
+            $GetTaskResult_params = @{
+                TaskResult = $TaskResult
+            }
             
-        Get-TaskResult @GetTaskResult_params
+            Get-TaskResult @GetTaskResult_params
         
-    }
+        }
     }
 
     End {

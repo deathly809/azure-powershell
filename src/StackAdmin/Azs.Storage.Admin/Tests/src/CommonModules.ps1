@@ -14,9 +14,12 @@
 
 $ModuleName = "Azs.Storage.Admin"
 If ( !(Get-module AzureRm.Profile )) {
-Import-Module "..\..\..\Stack\Debug\ResourceManager\AzureResourceManager\AzureRM.Profile"
+    Import-Module "..\..\..\Stack\Debug\ResourceManager\AzureResourceManager\AzureRM.Profile"
 }
-Import-Module ..\Module\$ModuleName
+
+If ( !(Get-module $ModuleName )) {
+    Import-Module ..\Module\$ModuleName -Force
+}
 
 if(Test-Path bin\Debug) {
     Import-Module ".\bin\Debug\$ModuleName.Tests.dll" -Force 

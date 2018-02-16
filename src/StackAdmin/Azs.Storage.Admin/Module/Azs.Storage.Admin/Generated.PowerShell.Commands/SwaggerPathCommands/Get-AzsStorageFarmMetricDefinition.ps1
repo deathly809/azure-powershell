@@ -20,9 +20,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
     Farm Id.
 
 #>
-function Get-AzsStorageFarmMetricDefinition
-{
-    [CmdletBinding(DefaultParameterSetName='Farms_GetGarbageCollectionState')]
+function Get-AzsStorageFarmMetricDefinition {
+    [CmdletBinding(DefaultParameterSetName = 'Farms_GetGarbageCollectionState')]
     param(    
         [Parameter(Mandatory = $true, ParameterSetName = 'Farms_GetGarbageCollectionState')]
         [System.String]
@@ -30,60 +29,60 @@ function Get-AzsStorageFarmMetricDefinition
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Farms_GetGarbageCollectionState')]
         [System.String]
-        $ResourceGroupName,
+        $ResourceGroup,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Farms_GetGarbageCollectionState')]
         [System.String]
         $FarmId
     )
 
-    Begin 
-    {
-	    Initialize-PSSwaggerDependencies -Azure
+    Begin {
+        Initialize-PSSwaggerDependencies -Azure
         $tracerObject = $null
         if (('continue' -eq $DebugPreference) -or ('inquire' -eq $DebugPreference)) {
             $oldDebugPreference = $global:DebugPreference
-			$global:DebugPreference = "continue"
+            $global:DebugPreference = "continue"
             $tracerObject = New-PSSwaggerClientTracing
             Register-PSSwaggerClientTracing -TracerObject $tracerObject
         }
-	}
+    }
 
     Process {
     
-    $ErrorActionPreference = 'Stop'
+        $ErrorActionPreference = 'Stop'
 
-    $NewServiceClient_params = @{
-        FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
-    }
-
-    $GlobalParameterHashtable = @{}
-    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
-     
-    $GlobalParameterHashtable['SubscriptionId'] = $null
-    if($PSBoundParameters.ContainsKey('SubscriptionId')) {
-        $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-    }
-
-    $StorageAdminClient = New-ServiceClient @NewServiceClient_params
-
-
-    if ('Farms_GetGarbageCollectionState' -eq $PsCmdlet.ParameterSetName) {
-        Write-Verbose -Message 'Performing operation GetGarbageCollectionStateWithHttpMessagesAsync on $StorageAdminClient.'
-        $TaskResult = $StorageAdminClient.Farms.GetGarbageCollectionStateWithHttpMessagesAsync($ResourceGroupName, $FarmId, $OperationId)
-    } else {
-        Write-Verbose -Message 'Failed to map parameter set to operation method.'
-        throw 'Module failed to find operation to execute.'
-    }
-
-    if ($TaskResult) {
-        $GetTaskResult_params = @{
-            TaskResult = $TaskResult
+        $NewServiceClient_params = @{
+            FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
         }
+
+        $GlobalParameterHashtable = @{}
+        $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+     
+        $GlobalParameterHashtable['SubscriptionId'] = $null
+        if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
+            $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
+        }
+
+        $StorageAdminClient = New-ServiceClient @NewServiceClient_params
+
+
+        if ('Farms_GetGarbageCollectionState' -eq $PsCmdlet.ParameterSetName) {
+            Write-Verbose -Message 'Performing operation GetGarbageCollectionStateWithHttpMessagesAsync on $StorageAdminClient.'
+            $TaskResult = $StorageAdminClient.Farms.GetGarbageCollectionStateWithHttpMessagesAsync($ResourceGroup, $FarmId, $OperationId)
+        }
+        else {
+            Write-Verbose -Message 'Failed to map parameter set to operation method.'
+            throw 'Module failed to find operation to execute.'
+        }
+
+        if ($TaskResult) {
+            $GetTaskResult_params = @{
+                TaskResult = $TaskResult
+            }
             
-        Get-TaskResult @GetTaskResult_params
+            Get-TaskResult @GetTaskResult_params
         
-    }
+        }
     }
 
     End {

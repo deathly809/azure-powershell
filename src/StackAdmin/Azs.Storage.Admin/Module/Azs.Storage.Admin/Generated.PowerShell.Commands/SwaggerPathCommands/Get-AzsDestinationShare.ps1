@@ -20,13 +20,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
     Farm Id.
 
 #>
-function Get-AzsDestinationShare
-{
-    [CmdletBinding(DefaultParameterSetName='Containers_ListDestinationShares')]
+function Get-AzsDestinationShare {
+    [CmdletBinding(DefaultParameterSetName = 'Containers_ListDestinationShares')]
     param(    
         [Parameter(Mandatory = $true, ParameterSetName = 'Containers_ListDestinationShares')]
         [System.String]
-        $ResourceGroupName,
+        $ResourceGroup,
     
         [Parameter(Mandatory = $true, ParameterSetName = 'Containers_ListDestinationShares')]
         [System.String]
@@ -37,53 +36,53 @@ function Get-AzsDestinationShare
         $FarmId
     )
 
-    Begin 
-    {
-	    Initialize-PSSwaggerDependencies -Azure
+    Begin {
+        Initialize-PSSwaggerDependencies -Azure
         $tracerObject = $null
         if (('continue' -eq $DebugPreference) -or ('inquire' -eq $DebugPreference)) {
             $oldDebugPreference = $global:DebugPreference
-			$global:DebugPreference = "continue"
+            $global:DebugPreference = "continue"
             $tracerObject = New-PSSwaggerClientTracing
             Register-PSSwaggerClientTracing -TracerObject $tracerObject
         }
-	}
+    }
 
     Process {
     
-    $ErrorActionPreference = 'Stop'
+        $ErrorActionPreference = 'Stop'
 
-    $NewServiceClient_params = @{
-        FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
-    }
-
-    $GlobalParameterHashtable = @{}
-    $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
-     
-    $GlobalParameterHashtable['SubscriptionId'] = $null
-    if($PSBoundParameters.ContainsKey('SubscriptionId')) {
-        $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-    }
-
-    $StorageAdminClient = New-ServiceClient @NewServiceClient_params
-
-
-    if ('Containers_ListDestinationShares' -eq $PsCmdlet.ParameterSetName) {
-        Write-Verbose -Message 'Performing operation ListDestinationSharesWithHttpMessagesAsync on $StorageAdminClient.'
-        $TaskResult = $StorageAdminClient.Containers.ListDestinationSharesWithHttpMessagesAsync($ResourceGroupName, $FarmId, $ShareName)
-    } else {
-        Write-Verbose -Message 'Failed to map parameter set to operation method.'
-        throw 'Module failed to find operation to execute.'
-    }
-
-    if ($TaskResult) {
-        $GetTaskResult_params = @{
-            TaskResult = $TaskResult
+        $NewServiceClient_params = @{
+            FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
         }
+
+        $GlobalParameterHashtable = @{}
+        $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+     
+        $GlobalParameterHashtable['SubscriptionId'] = $null
+        if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
+            $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
+        }
+
+        $StorageAdminClient = New-ServiceClient @NewServiceClient_params
+
+
+        if ('Containers_ListDestinationShares' -eq $PsCmdlet.ParameterSetName) {
+            Write-Verbose -Message 'Performing operation ListDestinationSharesWithHttpMessagesAsync on $StorageAdminClient.'
+            $TaskResult = $StorageAdminClient.Containers.ListDestinationSharesWithHttpMessagesAsync($ResourceGroup, $FarmId, $ShareName)
+        }
+        else {
+            Write-Verbose -Message 'Failed to map parameter set to operation method.'
+            throw 'Module failed to find operation to execute.'
+        }
+
+        if ($TaskResult) {
+            $GetTaskResult_params = @{
+                TaskResult = $TaskResult
+            }
             
-        Get-TaskResult @GetTaskResult_params
+            Get-TaskResult @GetTaskResult_params
         
-    }
+        }
     }
 
     End {
