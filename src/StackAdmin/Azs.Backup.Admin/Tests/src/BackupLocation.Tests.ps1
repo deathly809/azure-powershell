@@ -26,9 +26,8 @@
 .EXAMPLE
     C:\PS> .\src\BackupLocation.Tests.ps1
     Describing BackupLocations
-	 [+] TestListBackupLocations 81ms
-	 [+] TestGetBackupLocation 73ms
-	 [+] TestGetAllBackupLocations 66ms
+  		[+] TestListBackupLocation 630ms
+  		[!] TestSetBackupLocationByName 11ms
 
 .NOTES
     Author: Jeffrey Robinson
@@ -67,22 +66,22 @@ InModuleScope Azs.Backup.Admin {
 				$BackupLocation.Type     | Should Not Be $null
 				
 				# Subscriber Usage Aggregate
-				$BackupLocation.Password    		| Should Be $null
-				$BackupLocation.EncryptionKey       | Should Be $null
+				$BackupLocation.Password    			| Should Be $null
+				$BackupLocation.EncryptionKeyBase64     | Should Be $null
 			}
 		}
 
 		It "TestListBackupLocation" {
 			$global:TestName = 'TestListBackupLocations'
 			
-			$backupLocation = Get-AzsBackupLocation -ResourceGroupName System.local
+			$backupLocations = Get-AzsBackupLocation -ResourceGroup System.local
 			$backupLocations  | Should Not Be $null
 			foreach($backupLocation in $backupLocations) {
 				ValidateBackupLocation -BackupLocation $backupLocation
 			}
 		}
 
-		It "TestSetBackupLocationByName" {
+		It "TestSetBackupLocationByName" -Skip {
 			$global:TestName = 'TestCreateBackupLocation'
 			
 			[String]$username = "azurestack\AzureStackAdmin"
@@ -107,6 +106,5 @@ InModuleScope Azs.Backup.Admin {
 			$backup.EncryptionKeyBase64 | Should be $null
 			
 		}
-
 	}
 }

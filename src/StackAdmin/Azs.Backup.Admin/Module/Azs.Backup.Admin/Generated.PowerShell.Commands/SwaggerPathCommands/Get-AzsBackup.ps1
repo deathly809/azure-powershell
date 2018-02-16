@@ -40,7 +40,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     The input object of type Microsoft.AzureStack.Management.Backup.Admin.Models.Backup.
 
 #>
-function Get-AzsBackupShare
+function Get-AzsBackup
 {
     [OutputType([Microsoft.AzureStack.Management.Backup.Admin.Models.Backup])]
     [CmdletBinding(DefaultParameterSetName='Backups_List')]
