@@ -22,11 +22,11 @@ The name of the output directory the module is placed.
 
 #>
 param(
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     [System.String]$RPName,
     
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory=$true)]
     [ValidateNotNullOrEmpty()]
     [System.String]$Location,
     
@@ -41,66 +41,77 @@ param(
     [System.String]$Name,
     
     [ValidateNotNullOrEmpty()]
-    [System.String]$Repo = "Azure",
-    
-    [ValidateNotNullOrEmpty()]
-    [System.String]$Branch = "current",
-    
-    [ValidateNotNullOrEmpty()]
     [System.String]$ModuleDirectory = "Module",
     
     [ValidateNotNullOrEmpty()]
-    [System.Version]$ModuleVersion = "0.1.0",
-    
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [System.String]$ClientName,
-        
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [System.String]$DLLName
+    [System.Version]$Version = "0.1.0",
 
+    [ValidateNotNullOrEmpty()]
+    [System.String]$GithubAccount = "Azure",
+
+    [ValidateNotNullOrEmpty()]
+    [System.String]$GithubBranch = "current",
+
+    [ValidateNotNullOrEmpty()]
+    [System.String]
+    $PredefinedAssemblies,
+
+    [ValidateNotNullOrEmpty()]
+    [System.String]
+    $ClientTypeName,
+    
+    [switch]$GenerateSwagger
 )
 
-$file = "https://github.com/$Repo/azure-rest-api-specs/blob/$Branch/specification/azsadmin/resource-manager/$RPName/readme.md"
-
-Invoke-Expression "& autorest $file --version=latest --output-artifact=swagger-document.json --output-folder=$Location"
-
-if ($PSSwaggerLocation) {
-    $env:PSModulePath = "$PSSwaggerLocation;$env:PSModulePath"    
-    Import-Module $PSSwaggerLocation\PSSwagger
-}
-else {
-    Import-Module PSSwagger
+if($GenerateSwagger) {
+    $file="https://github.com/$GithubAccount/azure-rest-api-specs/blob/$GithubBranch/specification/azsadmin/resource-manager/$RPName/readme.md"
+    Invoke-Expression "& autorest $file --version=latest --output-artifact=swagger-document.json --output-folder=$Location"
 }
 
-if (-not $Name) {
+if($PSSwaggerLocation) {
+    $clone = $env:PSModulePath.Clone()
+    try {
+        $env:PSModulePath = "$PSSwaggerLocation;$env:PSModulePath"
+        $env:PSModulePath = "$PSSwaggerLocation\PSSwagger;$env:PSModulePath"
+        Import-Module PSSwagger -Force
+    } finally {
+        $env:PSModulePath = $clone
+    }
+} else {
+    Import-Module PSSwagger -Force
+}
+
+if(-not $Name) {
     $Name = $RPName
 }
 
 $postfix = ""
 $prefix = "Az."
 
-if ($Admin) {
+if($Admin) {
     $postFix = ".Admin"
 }
 
-if ($AzureStack) {
+if($AzureStack) {
     $preFix = "Azs."
 }
 
-$RPName = $RPName.Substring(0, 1).ToUpper() + $RPName.Substring(1);
+$RPName = $RPName.Substring(0,1).ToUpper() + $RPName.Substring(1);
 
 $specPath = Join-Path $Location -ChildPath "$Name.json"
 $namespace = "$prefix$RPName$postfix"
 $output = Join-Path $Location -ChildPath $ModuleDirectory
 
-<#
-$GeneratedModuleBase = Join-Path $output -ChildPath $namespace
-if (test-path $GeneratedModuleBase) {
-    Remove-Item "$GeneratedModuleBase" -Force -Recurse
-}
-$null = New-Item $GeneratedModuleBase -type directory
-#>
-
-New-PSSwaggerModule -SpecificationPath $specPath -Name $namespace  -UseAzureCsharpGenerator -DefaultCommandPrefix Azs -Path $output -Version $ModuleVersion -Verbose -Header MICROSOFT_APACHE -ClientTypeName $ClientName -AssemblyFileName $DllName -NoVersionFolder 
+New-PSSwaggerModule `
+    -SpecificationPath $specPath `
+    -Path $output `
+    -AssemblyFileName $PredefinedAssemblies `
+    -ClientTypeName $clientTypeName `
+    -Name $namespace `
+    -Version $Version `
+    -NoVersionFolder `
+    -UseAzureCsharpGenerator `
+    -Header MICROSOFT_MIT_NO_CODEGEN `
+    -Verbose `
+    -CopyUtilityModuleToOutput `
+    -Debug

@@ -10,7 +10,7 @@
       "confirmBootstrap": false,
       "path": ".",
       "symbolPath": ".",
-      "serviceType": "stack_admin",
+      "serviceType": "azure_stack",
       "customAuthCommand": "",
       "hostOverrideCommand": "",
       "noAuthChallenge": ""
@@ -67,7 +67,7 @@
       "put": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Set-AzsBackupLocation",
+            "name": "Set-AzsBackupShare",
             "description": "Create a new backup location.",
             "defaultParameterSet": "BackupLocations_Update",
             "generateCommand": true
@@ -97,7 +97,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-AzsBackupShare",
+            "name": "Get-AzsBackup",
             "description": "Returns a backup from a location based on name.",
             "defaultParameterSet": "Backups_List",
             "generateCommand": true
@@ -114,7 +114,7 @@
           {
             "name": "Start-AzsBackup",
             "description": "Back up a specific location.",
-            "defaultParameterSet": "BackupLocations_CreateBackup",
+            "defaultParameterSet": "CreateBackup",
             "generateCommand": true
           }
         ],

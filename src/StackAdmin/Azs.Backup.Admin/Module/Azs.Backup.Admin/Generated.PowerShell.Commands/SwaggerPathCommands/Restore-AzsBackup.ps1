@@ -50,6 +50,14 @@ function Restore-AzsBackup
         [System.String]
         $BackupLocation,
 
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject_Backups_Restore')]
+        [Microsoft.AzureStack.Management.Backup.Admin.Models.Backup]
+        $InputObject,
+    
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId_Backups_Restore')]
+        [System.String]
+        $ResourceId,
+
         [Parameter(Mandatory = $false)]
         [switch]
         $AsJob
@@ -86,7 +94,26 @@ function Restore-AzsBackup
     $BackupAdminClient = New-ServiceClient @NewServiceClient_params
 
 
-    if ('Backups_Restore' -eq $PsCmdlet.ParameterSetName) {
+    if('InputObject_Backups_Restore' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Backups_Restore' -eq $PsCmdlet.ParameterSetName) {
+        $GetArmResourceIdParameterValue_params = @{
+            IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{backupLocation}/backups/{backup}'
+        }
+
+        if('ResourceId_Backups_Restore' -eq $PsCmdlet.ParameterSetName) {
+            $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
+        }
+        else {
+            $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+        }
+
+        $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
+
+        $resourceGroup = $ArmResourceIdParameterValues['resourceGroup']
+        $backupLocation = $ArmResourceIdParameterValues['backupLocation']
+        $backup = $ArmResourceIdParameterValues['backup']
+    }
+
+    if ('Backups_Restore' -eq $PsCmdlet.ParameterSetName -or 'InputObject_Backups_Restore' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_Backups_Restore' -eq $PsCmdlet.ParameterSetName) {
         Write-Verbose -Message 'Performing operation RestoreWithHttpMessagesAsync on $BackupAdminClient.'
         $TaskResult = $BackupAdminClient.Backups.RestoreWithHttpMessagesAsync($BackupLocation, $ResourceGroup, $Backup)
     } else {

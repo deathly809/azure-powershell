@@ -24,23 +24,8 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .DESCRIPTION
     Create a new backup location.
 
-.PARAMETER Id
-    URI of the resource.
-
-.PARAMETER Type
-    Type of resource.
-
-.PARAMETER ExternalStoreDefault
-    Information about an external storage location.
-
 .PARAMETER Name
     Name of the backup location.
-
-.PARAMETER Tags
-    List of key value pairs.
-
-.PARAMETER Name
-    Name of the resource.
 
 .PARAMETER ResourceGroup
     Name of the resource group.
@@ -54,34 +39,66 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 .PARAMETER InputObject
     The input object of type Microsoft.AzureStack.Management.Backup.Admin.Models.BackupLocation.
 
+.PARAMETER BackupShare
+    Location where backups will be stored.
+
+.PARAMETER Username
+    Username required to access backup location.
+
+.PARAMETER Password
+    Password required to access backup location.
+
+.PARAMETER EncryptionKey
+    Encryption key used to encrypt backups.
+    
 #>
-function Set-AzsBackupLocation
+function Set-AzsBackupShare
 {
     [OutputType([Microsoft.AzureStack.Management.Backup.Admin.Models.BackupLocation])]
     [CmdletBinding(DefaultParameterSetName='BackupLocations_Update')]
     param(
-        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Microsoft.AzureStack.Management.Backup.Admin.Models.BackupLocation]
+        $InputObject,
+        
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId_BackupLocations_Update')]
+        [System.String]
+        $ResourceId,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_Update')]
         [System.String]
         $ResourceGroup,
 
-        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_Update')]
         [Alias('BackupLocation')]
         [System.String]
         $Name,
         
+        [Parameter(Mandatory = $true, ParameterSetName = 'ResourceId_BackupLocations_Update')]
         [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_Update')]
+        [AllowEmptyString()]
         [System.String]
         $BackupShare,
 
+        [Parameter(Mandatory = $true, ParameterSetName = 'ResourceId_BackupLocations_Update')]
         [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_Update')]
+        [AllowEmptyString()]
         [System.String]
         $Username,
 
+        [Parameter(Mandatory = $true, ParameterSetName = 'ResourceId_BackupLocations_Update')]
         [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_Update')]
+        [AllowNull()]
         [securestring]
         $Password,
 
+        [Parameter(Mandatory = $true, ParameterSetName = 'ResourceId_BackupLocations_Update')]
         [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_Update')]
+        [AllowNull()]
         [securestring]
         $EncryptionKey,
 
@@ -120,16 +137,37 @@ function Set-AzsBackupLocation
 
     $BackupAdminClient = New-ServiceClient @NewServiceClient_params
  
-    if ('InputObject_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName) {
-        $InputObject = Get-AzsBackupLocation -ResourceGroup $ResourceGroup -BackupLocation $BackupLocation
+    if('InputObject_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName) {
+        
+        $GetArmResourceIdParameterValue_params = @{
+            IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{backupLocation}'
+        }
+
+        if('ResourceId_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName) {
+            $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
+        }
+        else {
+            $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+        }
+        $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
+        $resourceGroup = $ArmResourceIdParameterValues['resourceGroup']
+
+        $Name = $ArmResourceIdParameterValues['backupLocation']
+    }
+
+    if ('InputObject_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName -or 'BackupLocations_Update' -eq $PsCmdlet.ParameterSetName -or 'ResourceId_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName) {
+
+        if($InputObject -eq $null) {
+            $InputObject = Get-AzsBackupLocation -ResourceGroup $ResourceGroup -BackupLocation $Name
+        }
 
         $InputObject.Path                   = $BackupShare
         $InputObject.UserName               = $Username
-        $InputObject.Password               = $Password
-        $InputObject.EncryptionKeyBase64    = $EncryptionKey
+        $InputObject.Password               = ConvertTo-String -SecureString $Password
+        $InputObject.EncryptionKeyBase64    = ConvertTo-String $EncryptionKey
 
         Write-Verbose -Message 'Performing operation UpdateWithHttpMessagesAsync on $BackupAdminClient.'
-        $TaskResult = $BackupAdminClient.BackupLocations.UpdateWithHttpMessagesAsync($ResourceGroup, $BackupLocation, $InputObject)
+        $TaskResult = $BackupAdminClient.BackupLocations.UpdateWithHttpMessagesAsync($ResourceGroup, $Name, $InputObject)
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'
@@ -190,3 +228,13 @@ function Set-AzsBackupLocation
     }
 }
 
+
+function ConvertTo-String {
+    param(
+        [SecureString]$SecureString
+    )
+    $Ptr = [System.Runtime.InteropServices.Marshal]::SecureStringToCoTaskMemUnicode($SecureString)
+    $Result = [System.Runtime.InteropServices.Marshal]::PtrToStringUni($Ptr)
+    [System.Runtime.InteropServices.Marshal]::ZeroFreeCoTaskMemUnicode($Ptr)
+    $Result
+}

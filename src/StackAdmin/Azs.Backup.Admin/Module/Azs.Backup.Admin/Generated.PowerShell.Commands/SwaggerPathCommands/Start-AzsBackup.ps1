@@ -34,22 +34,22 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 function Start-AzsBackup
 {
     [OutputType([Microsoft.AzureStack.Management.Backup.Admin.Models.LongRunningOperationStatus])]
-    [CmdletBinding(DefaultParameterSetName='BackupLocations_CreateBackup')]
+    [CmdletBinding(DefaultParameterSetName='CreateBackup')]
     param(    
-        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_CreateBackup')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CreateBackup')]
         [System.String]
         $ResourceGroup,
     
-        [Parameter(Mandatory = $true, ParameterSetName = 'BackupLocations_CreateBackup')]
+        [Parameter(Mandatory = $true, ParameterSetName = 'CreateBackup')]
         [System.String]
         $BackupLocation,
 
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'BackupLocations_CreateBackup_FromInput')]
-        [Microsoft.AzureStack.Management.Backup.Admin.Models.Backup]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'CreateBackup_FromInput')]
+        [Microsoft.AzureStack.Management.Backup.Admin.Models.BackupLocation]
         $InputObject,
 
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'BackupLocations_CreateBackup_FromResourceId')]
-        [Microsoft.AzureStack.Management.Backup.Admin.Models.Backup]
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'CreateBackup_FromResourceId')]
+        [System.String]
         $ResourceId,
 
         [Parameter(Mandatory = $false)]
@@ -88,12 +88,12 @@ function Start-AzsBackup
     $BackupAdminClient = New-ServiceClient @NewServiceClient_params
 
     
-    if( ('BackupLocations_CreateBackup_FromInput' -eq $PsCmdlet.ParameterSetName) -or ('BackupLocations_CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) ) {
+    if( ('CreateBackup_FromInput' -eq $PsCmdlet.ParameterSetName) -or ('CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) ) {
         $GetArmResourceIdParameterValue_params = @{
-            IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{backupLocation}/backups/{backup}'
+            IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{backupLocation}/'
         }
 
-        if('BackupLocations_CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) {
+        if('CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) {
             $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
         }
         else {
@@ -105,7 +105,7 @@ function Start-AzsBackup
         $BackupLocation = $ArmResourceIdParameterValues['backupLocation']
     }
 
-    if ( ('BackupLocations_CreateBackup' -eq $PsCmdlet.ParameterSetName) -or ('BackupLocations_CreateBackup_FromInput' -eq $PsCmdlet.ParameterSetName) -or ('BackupLocations_CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) ){
+    if ( ('CreateBackup' -eq $PsCmdlet.ParameterSetName) -or ('CreateBackup_FromInput' -eq $PsCmdlet.ParameterSetName) -or ('CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) ){
         Write-Verbose -Message 'Performing operation CreateBackupWithHttpMessagesAsync on $BackupAdminClient.'
         $TaskResult = $BackupAdminClient.BackupLocations.CreateBackupWithHttpMessagesAsync($ResourceGroup, $BackupLocation)
     } else {
