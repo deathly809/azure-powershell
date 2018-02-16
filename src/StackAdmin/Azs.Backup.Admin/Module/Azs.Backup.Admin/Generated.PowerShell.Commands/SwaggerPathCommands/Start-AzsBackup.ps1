@@ -44,6 +44,14 @@ function Start-AzsBackup
         [System.String]
         $BackupLocation,
 
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'BackupLocations_CreateBackup_FromInput')]
+        [Microsoft.AzureStack.Management.Backup.Admin.Models.Backup]
+        $InputObject,
+
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'BackupLocations_CreateBackup_FromResourceId')]
+        [Microsoft.AzureStack.Management.Backup.Admin.Models.Backup]
+        $ResourceId,
+
         [Parameter(Mandatory = $false)]
         [switch]
         $AsJob
@@ -79,8 +87,25 @@ function Start-AzsBackup
 
     $BackupAdminClient = New-ServiceClient @NewServiceClient_params
 
+    
+    if( ('BackupLocations_CreateBackup_FromInput' -eq $PsCmdlet.ParameterSetName) -or ('BackupLocations_CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) ) {
+        $GetArmResourceIdParameterValue_params = @{
+            IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{backupLocation}/backups/{backup}'
+        }
 
-    if ('BackupLocations_CreateBackup' -eq $PsCmdlet.ParameterSetName) {
+        if('BackupLocations_CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) {
+            $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
+        }
+        else {
+            $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+        }
+        $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
+
+        $ResourceGroup = $ArmResourceIdParameterValues['resourceGroup']
+        $BackupLocation = $ArmResourceIdParameterValues['backupLocation']
+    }
+
+    if ( ('BackupLocations_CreateBackup' -eq $PsCmdlet.ParameterSetName) -or ('BackupLocations_CreateBackup_FromInput' -eq $PsCmdlet.ParameterSetName) -or ('BackupLocations_CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) ){
         Write-Verbose -Message 'Performing operation CreateBackupWithHttpMessagesAsync on $BackupAdminClient.'
         $TaskResult = $BackupAdminClient.BackupLocations.CreateBackupWithHttpMessagesAsync($ResourceGroup, $BackupLocation)
     } else {

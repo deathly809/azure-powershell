@@ -100,7 +100,7 @@ NestedModules = @('PSSwaggerUtility')
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = 'Get-AzsBackupLocation', 'Get-AzsBackupShare', 'Restore-AzsBackup', 
-               'Get-Operation', 'Get-AzsBackup', 'Set-AzsBackupLocation', 
+               'Get-AzsBackup', 'Set-AzsBackupLocation', 
                'Start-AzsBackup', 'New-ExternalStoreObject', 
                'New-BackupLocationObject'
 

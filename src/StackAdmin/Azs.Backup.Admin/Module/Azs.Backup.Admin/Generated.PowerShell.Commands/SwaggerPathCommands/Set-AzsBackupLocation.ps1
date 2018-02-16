@@ -60,9 +60,30 @@ function Set-AzsBackupLocation
     [OutputType([Microsoft.AzureStack.Management.Backup.Admin.Models.BackupLocation])]
     [CmdletBinding(DefaultParameterSetName='BackupLocations_Update')]
     param(
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
-        [Microsoft.AzureStack.Management.Backup.Admin.Models.BackupLocation]
-        $InputObject,
+        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [System.String]
+        $ResourceGroup,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [Alias('BackupLocation')]
+        [System.String]
+        $Name,
+        
+        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [System.String]
+        $BackupShare,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [System.String]
+        $Username,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [securestring]
+        $Password,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'InputObject_BackupLocations_Update')]
+        [securestring]
+        $EncryptionKey,
 
         [Parameter(Mandatory = $false)]
         [switch]
@@ -99,19 +120,14 @@ function Set-AzsBackupLocation
 
     $BackupAdminClient = New-ServiceClient @NewServiceClient_params
  
-    if('InputObject_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName) {
-        $GetArmResourceIdParameterValue_params = @{
-            IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{backupLocation}'
-        }
-
-        $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
-        $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
-        $resourceGroup = $ArmResourceIdParameterValues['resourceGroup']
-        $backupLocation = $ArmResourceIdParameterValues['backupLocation']
-    }
-
-
     if ('InputObject_BackupLocations_Update' -eq $PsCmdlet.ParameterSetName) {
+        $InputObject = Get-AzsBackupLocation -ResourceGroup $ResourceGroup -BackupLocation $BackupLocation
+
+        $InputObject.Path                   = $BackupShare
+        $InputObject.UserName               = $Username
+        $InputObject.Password               = $Password
+        $InputObject.EncryptionKeyBase64    = $EncryptionKey
+
         Write-Verbose -Message 'Performing operation UpdateWithHttpMessagesAsync on $BackupAdminClient.'
         $TaskResult = $BackupAdminClient.BackupLocations.UpdateWithHttpMessagesAsync($ResourceGroup, $BackupLocation, $InputObject)
     } else {

@@ -127,7 +127,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-Operation",
+            "name": "Get-AzsBackupOperation",
             "description": "Returns the list of support REST operations.",
             "defaultParameterSet": "Operations_List",
             "generateCommand": false
