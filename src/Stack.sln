@@ -67,10 +67,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.AzureStackAdmin", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.AzureStackStorage", "StackAdmin\AzureStackStorage\Commands.AzureStackStorage\Commands.AzureStackStorage.csproj", "{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Commerce.Admin", "StackAdmin\Azs.Commerce.Admin\Module\Azs.Commerce.Admin.csproj", "{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Commerce.Admin.Tests", "StackAdmin\Azs.Commerce.Admin\Tests\Azs.Commerce.Admin.Tests.csproj", "{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Fabric.Admin", "StackAdmin\Azs.Fabric.Admin\Module\Azs.Fabric.Admin.csproj", "{94678CB3-8F0B-44D6-8B65-39B4AE43568F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Fabric.Admin.Tests", "StackAdmin\Azs.Fabric.Admin\Tests\Azs.Fabric.Admin.Tests.csproj", "{88DCE80E-D019-460F-B4AD-B332E8700B96}"
