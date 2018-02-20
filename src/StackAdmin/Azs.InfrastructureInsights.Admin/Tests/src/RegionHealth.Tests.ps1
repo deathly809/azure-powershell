@@ -133,7 +133,8 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 		
 		It "TestListRegionHealths" {
 			$global:TestName = 'TestListRegionHealths'
-			$RegionHealths = Get-AzsRegionHealth -Location $Global:Location
+
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
 			$RegionHealths | Should Not Be $null
 			foreach($RegionHealth in $RegionHealths) {
 				ValidateRegionHealth -Region $RegionHealth
@@ -144,20 +145,37 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 		It "TestGetRegionHealth" {
             $global:TestName = 'TestGetRegionHealth'
 
-			$RegionHealths = Get-AzsRegionHealth -Location $Global:Location
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
 			foreach($RegionHealth in $RegionHealths) {
-				$retrieved = Get-AzsRegionHealth -Location $RegionHealth.Location -Region $RegionHealth.Name
+				$regionName = Extract-Name -Name $RegionHealth.Name
+
+				$retrieved = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName -Region $regionName
 				AssertRegionHealthsAreSame -Expected $RegionHealth -Found $retrieved
-				break
+				return
 			}
 		}
 
 		It "TestGetAllRegionHealths" {
 			$global:TestName = 'TestGetAllRegionHealths'
 
-			$RegionHealths = Get-AzsRegionHealth -Location $Global:Location
+			
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
 			foreach($RegionHealth in $RegionHealths) {
-				$retrieved = Get-AzsRegionHealth -Location $RegionHealth.Location -Region $RegionHealth.Name
+				$regionName = Extract-Name -Name $RegionHealth.Name
+
+				$retrieved = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				AssertRegionHealthsAreSame -Expected $RegionHealth -Found $retrieved
+			}
+		}
+
+		It "TestRegionHealthsPipeline" {
+			$global:TestName = 'TestGetAllRegionHealths'
+
+			
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+
+				$retrieved = $RegionHealth | Get-AzsRegionHealth 
 				AssertRegionHealthsAreSame -Expected $RegionHealth -Found $retrieved
 			}
 		}

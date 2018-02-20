@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" 
-  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,9 +39,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AzureStack.Management.InfrastructureInsights.Admin, Version=0.1.0-preview">
-      <HintPath>..\..\..\packages\Microsoft.AzureStack.Management.InfrastructureInsights.Admin.0.1.0-preview\lib\net452\Microsoft.AzureStack.Management.InfrastructureInsights.Admin.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime.Azure.TestFramework, Version=1.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Rest.ClientRuntime.Azure.TestFramework.1.6.0\lib\net45\Microsoft.Rest.ClientRuntime.Azure.TestFramework.dll</HintPath>
       <Private>True</Private>
@@ -53,6 +49,9 @@
     <Reference Include="Microsoft.Azure.Test.HttpRecorder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Azure.Test.HttpRecorder.1.7.0\lib\net45\Microsoft.Azure.Test.HttpRecorder.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AzureStack.Management.InfrastructureInsights.Admin, Version=0.1.0-preview">
+      <HintPath>..\..\..\packages\Microsoft.AzureStack.Management.InfrastructureInsights.Admin.0.1.0-preview\lib\net452\Microsoft.AzureStack.Management.InfrastructureInsights.Admin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

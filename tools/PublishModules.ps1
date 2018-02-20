@@ -57,6 +57,9 @@ function Get-Directories {
     }
 }
 
+#
+#   Get the list of rollup modules, AzureRM and AzureRM.Profile
+#
 function Get-RollupModules {
     [CmdletBinding()]
     param
@@ -86,6 +89,9 @@ function Get-RollupModules {
     }
 }
 
+#
+#   Get the list of admin modules, Azs.Commerce.Admin, Asz.KeyVault.Admin, etc...
+#
 function Get-AdminModules
 {
     [CmdletBinding()]
@@ -112,6 +118,9 @@ function Get-AdminModules
     }
 }
 
+#
+#   Get the list of independent client modules, CRP, SRP, etc...
+#
 function Get-ClientModules
 {
     [CmdletBinding()]
@@ -172,6 +181,9 @@ function Get-ClientModules
     }
 }
 
+#
+#   Set the version of each dependecy.
+#
 function Set-StrictModuleDependencies
 {
     [CmdletBinding()]
@@ -195,6 +207,9 @@ function Set-StrictModuleDependencies
     }
 }
 
+#
+#   Make the psm1 file a dependency.
+#
 function Add-PSM1Dependency
 {
     [CmdletBinding()]
@@ -215,7 +230,9 @@ function Add-PSM1Dependency
     }
 }
 
-
+#
+#   Move required module dependencies.
+#
 function Remove-ModuleDependencies
 {
     [CmdletBinding()]
@@ -233,6 +250,9 @@ function Remove-ModuleDependencies
 
 }
 
+#
+#   Update licensing
+#
 function Update-NugetPackage
 {
     [CmdletBinding()]
@@ -263,6 +283,9 @@ function Update-NugetPackage
     }
 }
 
+#
+#   Cleanup modules
+#
 function Update-RMModule
 {
     [CmdletBinding()]

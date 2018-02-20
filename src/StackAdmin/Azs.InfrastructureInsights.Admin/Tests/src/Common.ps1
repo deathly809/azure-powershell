@@ -12,14 +12,22 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------------
 
-$global:ResourceGroup = "System.local"
-$global:Location = "local"
+$global:ResourceGroupName = "System.local"
 $global:TestName = ""
+
+
+function Extract-Name {
+	param(
+		$Name
+	)
+	$Name = $Name.Split('/')
+	return $Name[-1]
+}
 
 if(-not $RunRaw) {
 		# Load the script block
 		$scriptBlock = { 
 			Get-MockClient -ClassName 'InfrastructureInsightsAdminClient' -TestName $global:TestName
 		}
-		Mock Get-ServiceClient $scriptBlock -ModuleName "Azs.InfrastructureInsights.Admin"
+		Mock New-ServiceClient $scriptBlock -ModuleName "Azs.InfrastructureInsights.Admin"
 }

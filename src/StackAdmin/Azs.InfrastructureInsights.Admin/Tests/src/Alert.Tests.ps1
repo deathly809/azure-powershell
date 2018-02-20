@@ -151,45 +151,76 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 		It "TestListAlerts" {
 			$global:TestName = 'TestListAlerts'
 
-			$Alerts = Get-AzsAlert -Location $Location
-			$Alerts | Should Not Be $null
-			foreach($Alert in $Alerts) {
-				ValidateAlert -Alert $Alert
+			$Regions = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($Region in $Regions) {
+				$Alerts = Get-AzsAlert -ResourceGroupName $ResourceGroupName -Region $Region
+				foreach($Alert in $Alerts) {
+					ValidateAlert -Alert $Alert
+				}
 			}
 		}
 
 		It "TestGetAlert" {
 			$global:TestName = 'TestGetAlert'
-
-			$Alerts = Get-AzsAlert -Location $Location
-			foreach($Alert in $Alerts) {
-				$retrieved = Get-AzsAlert -Location $Location -Alert $Alert.Name
-				AssertAlertsAreSame -Expected $Alert -Found $retrieved
-				break
+			$Regions = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($Region in $Regions) {
+				$Alerts = Get-AzsAlert -ResourceGroupName $ResourceGroupName -Region $Region
+				foreach($Alert in $Alerts) {
+					$retrieved = Get-AzsAlert -Location $Location -Alert $Alert.Name
+					AssertAlertsAreSame -Expected $Alert -Found $retrieved
+					return
+				}
 			}
 		}
 
 		It "TestGetAllAlerts" {
 			$global:TestName = 'TestGetAllAlerts'
 
-			$Alerts = Get-AzsAlert -Location $Location
-			foreach($Alert in $Alerts) {
-				$retrieved = Get-AzsAlert -Location $Location -Alert $Alert.Name
-				AssertAlertsAreSame -Expected $Alert -Found $retrieved
+			
+			$Regions = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($Region in $Regions) {
+				$Alerts = Get-AzsAlert -ResourceGroupName $ResourceGroupName -Region $Region
+				foreach($Alert in $Alerts) {
+					$retrieved = Get-AzsAlert -Location $Location -Alert $Alert.Name
+					AssertAlertsAreSame -Expected $Alert -Found $retrieved
+				}
+			}
+		}
+
+		It "TestAlertsPipeline" {
+			$global:TestName = 'TestGetAllAlerts'
+
+			
+			$Regions = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($Region in $Regions) {
+				$Alerts = Get-AzsAlert -ResourceGroupName $ResourceGroupName -Region $Region
+				foreach($Alert in $Alerts) {
+					$retrieved = $Alert | Get-AzsAlert
+					AssertAlertsAreSame -Expected $Alert -Found $retrieved
+				}
 			}
 		}
 		
-		It "TestCloseAlert" {
+		It "TestCloseAlert" -Skip {
 			$global:TestName = 'TestCloseAlert'
 
-			$Alerts = Get-AzsAlert -Location $Location
-			$Alerts | Should Not Be $null
-			foreach($Alert in $Alerts) {
-				if($Alert.State -ne "Closed") {
-					$Alert.State = "Closed"
-					Close-AzsAlert -Location $Location -User "AlertCloseTests" -AlertName $Alert.Name -Alert $Alert
-					$retrieved = Get-AzsAlert -Location $Location -Alert $Alert.Name
-					break
+			$Regions = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($Region in $Regions) {
+				
+				$regionName = Extract-Name -Name $Region.Name
+
+				$Alerts = Get-AzsAlert -ResourceGroupName $ResourceGroupName -Region $regionName
+				$Alerts | Should Not Be $null
+
+				foreach($Alert in $Alerts) {
+
+					if($Alert.State -ne "Closed") {
+						$Alert.State = "Closed"
+						$alertName = Extract-Name -Name $Alert.Name
+						Close-AzsAlert -ResourceGroupName $ResourceGroupName -Region $regionName -User "AlertCloseTests" -AlertName $alertName -Alert $Alert
+						$retrieved = Get-AzsAlert -Location $Location -Alert $Alert.Name
+						return
+					}
 				}
 			}
 		}

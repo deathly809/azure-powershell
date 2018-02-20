@@ -1,6 +1,22 @@
 
-$rpName = "InfrastructureInsights"
-$location = pwd
+$rpName = "infrastructureinsights"
+$name = "InfrastructureInsights"
+$location = Get-Location
 $psswagger = "E:\github\PSswagger"
 $module = "Module"
-. ..\..\..\tools\GeneratePSSwagger.ps1 -RPName $rpName -Location $location -Admin -ModuleDirectory $module -AzureStack -PSSwaggerLocation $psswagger
+$namespace = "Microsoft.AzureStack.Management.$Name.Admin"
+$assembly = "$namespace.dll"
+$client = "$namespace.$($name)AdminClient"
+
+. ..\..\..\tools\GeneratePSSwagger.ps1 `
+    -RPName $rpName `
+    -Location $location `
+    -Admin `
+    -ModuleDirectory $module `
+    -AzureStack `
+    -PSSwaggerLocation $psswagger `
+    -GithubAccount deathly809 `
+    -GithubBranch azs.$rpname.admin `
+    -PredefinedAssemblies $assembly `
+    -Name $name `
+    -ClientTypeName $client

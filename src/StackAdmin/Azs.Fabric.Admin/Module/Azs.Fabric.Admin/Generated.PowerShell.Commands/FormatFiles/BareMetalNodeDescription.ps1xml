@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License. See License.txt in the project root for license information.
+-->
+
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>Microsoft.AzureStack.Management.Fabric.Admin.Models.BareMetalNodeDescription</Name>
+            <ViewSelectedBy>
+                <TypeName>Microsoft.AzureStack.Management.Fabric.Admin.Models.BareMetalNodeDescription</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Width>15</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>15</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>15</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>15</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>15</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>15</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>15</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader/>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <PropertyName>SerialNumber</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>BiosVersion</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ClusterName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>ComputerName</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>MacAddress</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Model</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>BMCIPv4Address</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Vendor</PropertyName>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

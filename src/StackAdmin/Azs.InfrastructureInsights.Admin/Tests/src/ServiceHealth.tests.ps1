@@ -120,32 +120,71 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 		
 		It "TestListAzsServiceHealths" {
 			$global:TestName = 'TestListServiceHealths'
-			$serviceHealths = Get-AzsServiceHealth -Location $Location
-			$serviceHealths | Should Not Be $null
-			foreach($serviceHealth in $serviceHealths) {
-				ValidateAzsServiceHealth -ServiceHealth $serviceHealth
+			
+			
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+				$regionName = Extract-Name -Name $RegionHealth.Name
+
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
+					ValidateAzsServiceHealth -ServiceHealth $serviceHealth
+				}
 			}
 	    }
 	
 		It "TestGetAzsServiceHealth" {
             $global:TestName = 'TestGetServiceHealth'
-
-			$serviceHealths = Get-AzsServiceHealth -Location $Location
 			
-			foreach($serviceHealth in $serviceHealths) {
-				$retrieved = Get-AzsServiceHealth -Location $Location -ServiceHealth $serviceHealth.Name
-				AssertAzsServiceHealthsAreSame -Expected $serviceHealth -Found $retrieved
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+
+				$regionName = Extract-Name -Name $RegionHealth.Name
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+
+					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
+					$retrieved = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName -Name $serviceHealthName
+					AssertAzsServiceHealthsAreSame -Expected $serviceHealth -Found $retrieved
+					break
+				}
 				break
 			}
 		}
 
 		It "TestGetAllAzsServiceHealths" {
 			$global:TestName = 'TestGetAllServiceHealths'
+			
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
 
-			$serviceHealths = Get-AzsServiceHealth -Location $Location
-			foreach($serviceHealth in $serviceHealths) {
-				$retrieved = Get-AzsServiceHealth -Location $Location -ServiceHealth $serviceHealth.Name
-				AssertAzsServiceHealthsAreSame -Expected $serviceHealth -Found $retrieved
+				$regionName = Extract-Name -Name $RegionHealth.Name
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+
+					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
+					$retrieved = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName -Name $serviceHealthName
+					AssertAzsServiceHealthsAreSame -Expected $serviceHealth -Found $retrieved
+				}
+			}
+		}
+
+		
+
+		It "TestAzsServiceHealthsPipeline" {
+			$global:TestName = 'TestGetAllServiceHealths'
+			
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+
+				$regionName = Extract-Name -Name $RegionHealth.Name
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+
+					$retrieved = $serviceHealth | Get-AzsRPHealth 
+					AssertAzsServiceHealthsAreSame -Expected $serviceHealth -Found $retrieved
+				}
 			}
 		}
     }

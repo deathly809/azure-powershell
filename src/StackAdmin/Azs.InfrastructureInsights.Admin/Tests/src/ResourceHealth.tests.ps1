@@ -104,12 +104,12 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 						$Found.AlertSummary | Should be $null
 					} else {
 						$Found.AlertSummary                     | Should Not Be $null
-						$Found.AlertSummary.CriticalAlertCount  | Should Not Be $Expected.AlertSummary.CriticalAlertCount
-						$Found.AlertSummary.WarningAlertCount  	| Should Not Be $Expected.AlertSummary.WarningAlertCount
+						$Found.AlertSummary.CriticalAlertCount  | Should Be $Expected.AlertSummary.CriticalAlertCount
+						$Found.AlertSummary.WarningAlertCount  	| Should Be $Expected.AlertSummary.WarningAlertCount
 					}
 					
 					$Found.HealthState      	| Should Be $Expected.HealthState
-					$Found.Namespace      		| Should Be $Expected.Namespace
+					$Found.NamespaceProperty	| Should Be $Expected.NamespaceProperty
 					$Found.RegistrationId       | Should Be $Expected.RegistrationId
 					$Found.ResourceDisplayName  | Should Be $Expected.ResourceDisplayName
 					$Found.ResourceLocation   	| Should Be $Expected.ResourceLocation
@@ -125,11 +125,18 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 		
 		It "TestListResourceHealths" {
 			$global:TestName = 'TestListResourceHealths'
-			$ServiceHealths = Get-AzsServiceHealth -Location $Location
-			foreach($serviceHealth in $ServiceHealths) {
-				$ResourceHealths = Get-AzsResourceHealth -Location $Location -ServiceRegistrationId $serviceHealth.RegistrationId
-				foreach($ResourceHealth in $ResourceHealths) {
-					ValidateResourceHealth -ResourceHealth $ResourceHealth
+
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+				$regionName = Extract-Name -Name $RegionHealth.Name
+
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
+					$ResourceHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					foreach($ResourceHealth in $ResourceHealths) {
+						ValidateResourceHealth -ResourceHealth $ResourceHealth
+					}
 				}
 			}
 	    }
@@ -138,12 +145,22 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 		It "TestGetResourceHealth" {
             $global:TestName = 'TestGetResourceHealth'
 
-			$ServiceHealths = Get-AzsServiceHealth -Location $Location
-			foreach($serviceHealth in $ServiceHealths) {
-				$ResourceHealths = Get-AzsResourceHealth -Location $Location -ServiceRegistrationId $serviceHealth.RegistrationId
-				foreach($ResourceHealth in $ResourceHealths) {
-					$retrieved = Get-AzsResourceHealth -Location $Location -ServiceRegistrationId $serviceHealth.RegistrationId -ResourceRegistrationId $ResourceHealth.RegistrationId
-					AssertResourceHealthsAreSame -Expected $ResourceHealth -Found $retrieved
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+
+				$regionName = Extract-Name -Name $RegionHealth.Name
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+
+					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
+					$infraRoleHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					foreach($infraRoleHealth in $infraRoleHealths) {
+
+						$infraRoleHealthName = Extract-Name -Name $infraRoleHealth.Name
+						$retrieved = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName -Name $infraRoleHealthName
+						AssertResourceHealthsAreSame -Expected $infraRoleHealth -Found $retrieved
+						break
+					}
 					break
 				}
 				break
@@ -153,15 +170,43 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 		It "TestGetAllResourceHealths" {
 			$global:TestName = 'TestGetAllResourceHealths'
 
-			$ServiceHealths = Get-AzsServiceHealth -Location $Location
-			foreach($serviceHealth in $ServiceHealths) {
-				$ResourceHealths = Get-AzsResourceHealth -Location $Location -ServiceRegistrationId $serviceHealth.RegistrationId
-				foreach($ResourceHealth in $ResourceHealths) {
-					$retrieved = Get-AzsResourceHealth -Location $Location -ServiceRegistrationId $serviceHealth.RegistrationId -ResourceRegistrationId $ResourceHealth.RegistrationId
-					AssertResourceHealthsAreSame -Expected $ResourceHealth -Found $retrieved
-					break
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+
+				$regionName = Extract-Name -Name $RegionHealth.Name
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+
+					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
+					$infraRoleHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					foreach($infraRoleHealth in $infraRoleHealths) {
+
+						$infraRoleHealthName = Extract-Name -Name $infraRoleHealth.Name
+						$retrieved = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName -Name $infraRoleHealthName
+						AssertResourceHealthsAreSame -Expected $infraRoleHealth -Found $retrieved
+					}
 				}
-				break
+			}
+		}
+
+		It "TestResourceHealthsPipeline" {
+			$global:TestName = 'TestGetAllResourceHealths'
+
+			$RegionHealths = Get-AzsRegionHealth -ResourceGroupName $ResourceGroupName
+			foreach($RegionHealth in $RegionHealths) {
+
+				$regionName = Extract-Name -Name $RegionHealth.Name
+				$ServiceHealths = Get-AzsRPHealth -ResourceGroupName $ResourceGroupName -Region $regionName
+				foreach($serviceHealth in $ServiceHealths) {
+
+					$serviceHealthName = Extract-Name -Name $serviceHealth.Name
+					$infraRoleHealths = Get-AzsRegistrationHealth -ResourceGroupName $ResourceGroupName -Region $regionName -ServiceRegistrationId $serviceHealthName
+					foreach($infraRoleHealth in $infraRoleHealths) {
+						
+						$retrieved = $infraRoleHealth | Get-AzsRegistrationHealth
+						AssertResourceHealthsAreSame -Expected $infraRoleHealth -Found $retrieved
+					}
+				}
 			}
 		}
     }
