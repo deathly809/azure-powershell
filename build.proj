@@ -6,7 +6,7 @@
 
     /t:Clean
       Removes temporary build outputs.
-    
+
     /t:Build
       Builds assemblies.
 
@@ -17,7 +17,7 @@
       Code sign binaries, mainly for official release. Default is false.
 
     /p:CodeSign=True;DelaySign=True
-      Test the code sign workflow locally. 
+      Test the code sign workflow locally.
 
     /p:Scope
       'ServiceManagement': service management
@@ -32,7 +32,7 @@
   <!-- Define build properties -->
   <PropertyGroup>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
-    <LibrarySourceFolder>$(LibraryRoot)src</LibrarySourceFolder>  
+    <LibrarySourceFolder>$(LibraryRoot)src</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)tools</LibraryToolsFolder>
     <PublishDirectory>$(LibrarySourceFolder)\Publish</PublishDirectory>
     <PackageDirectory>$(LibrarySourceFolder)\Package</PackageDirectory>
@@ -48,8 +48,8 @@
     <NuGetPublishingSource Condition=" '$(NuGetPublishingSource)' == '' ">http://psget/PSGallery/api/v2/</NuGetPublishingSource>
     <StackPublishingSource Condition=" '$(StackPublishingSource)' == '' ">$(LibrarySourceFolder)</StackPublishingSource>
    <Scope Condition=" $(Scope) == '' " >all</Scope>
-    <NetCore Condition=" $(NetCore) == '' " >false</NetCore>
-    <SkipHelp Condition =" '$(SkipHelp)' == '' ">false</SkipHelp>
+    <NetCore Condition=" $(NetCore) != 'true' " >false</NetCore>
+    <SkipHelp Condition =" '$(SkipHelp)' != 'true' ">false</SkipHelp>
     <BuildTasksPath>$(LibraryToolsFolder)\BuildPackagesTask\Microsoft.Azure.Build.Tasks\bin\$(Configuration)</BuildTasksPath>
     <Stack Condition = "'$(Scope)' == '' or '$(Scope)' == 'all' or '$(Scope)' == 'Stack' ">true</Stack>
     <Latest Condition = "'$(Scope)' == '' or '$(Scope)' != 'Stack'">true</Latest>
@@ -66,7 +66,7 @@
                             Condition=" '$(Scope)' == 'AzureStorage' "/>
     <CmdletSolutionsToBuild Include=".\src\Stack.sln"
                             Condition=" '$(Stack)' == 'true' "/>
-                            
+
     <SetupSln Include=".\setup\azurepowershell.sln" />
     <StaticAnalysis Include=".\tools\StaticAnalysis\StaticAnalysis.sln" />
     <LocalBuildTasks Include="$(LibraryToolsFolder)\BuildPackagesTask\Microsoft.Azure.Build.Tasks.sln" />
@@ -78,17 +78,17 @@
   <UsingTask TaskName="DebugTask" AssemblyFile="$(BuildTasksPath)\Microsoft.Azure.Build.Tasks.dll" />
   <UsingTask TaskName="VerifyAuthenticodeSignatureTask" AssemblyFile="$(BuildTasksPath)\Microsoft.Azure.Build.Tasks.dll" />
   <UsingTask TaskName="SmartTestingTask" AssemblyFile="$(BuildTasksPath)\Microsoft.Azure.Build.Tasks.dll" />
-  <UsingTask TaskName="SetEnvVar" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >  
+  <UsingTask TaskName="SetEnvVar" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
 	  <ParameterGroup>
 	    <EnvName ParameterType="System.String" Required="true" />
 		  <EnvValue ParameterType="System.String" Required="true" />
     </ParameterGroup>
     <Task>
 		  <Using Namespace="System"/>
-		  <Code Type="Fragment" Language="cs">  
+		  <Code Type="Fragment" Language="cs">
 			<![CDATA[System.Environment.SetEnvironmentVariable(EnvName, EnvValue);]]>
-		  </Code>  
-	  </Task>  
+		  </Code>
+	  </Task>
   </UsingTask>  <!--
   CI build related
   -->
@@ -194,30 +194,30 @@
     <Message Importance="high" Text="Building Cmdlets..." />
 
     <MakeDir Directories="$(PackageDirectory)" />
-    <Exec ContinueOnError="false" 
+    <Exec ContinueOnError="false"
       Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot; . $(LibraryToolsFolder)\CreateMappings.ps1 -RootPath $(LibrarySourceFolder) -OutputFile $(PackageDirectory)\groupMapping.json -WarningFile $(PackageDirectory)\groupMappingWarnings.json -RulesFile $(LibraryToolsFolder)\CreateMappings_rules.json &quot;" Condition="'$(Latest)' == 'true'"/>
-	
+
     <MSBuild
       Projects="@(CmdletSolutionsToBuild)"
       Targets="Build"
       Properties="Configuration=$(Configuration);Platform=Any CPU"
       BuildInParallel="$(BuildInParallel)"
-      ContinueOnError="false" />     
+      ContinueOnError="false" />
 
     <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\GenerateHelp.ps1 -ValidateMarkdownHelp -GenerateMamlHelp -BuildConfig $(Configuration) &quot;"
     	ContinueOnError="false"
     	Condition=" '$(SkipHelp)' == 'false' and '$(Latest)' == 'true'"/>
     <CallTarget Targets="BuildSetupTest"/>
  <!-- moved copy tasks -->
- 
-    <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\UpdateModules.ps1 $(Configuration) $(Scope) -Profile Latest &quot; " Condition="'$(Latest)' == 'true' "/>    
-     <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\UpdateModules.ps1 $(Configuration) $(Scope) -Profile Stack &quot; " Condition="'$(Stack)' == 'true' "/>    
+
+    <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\UpdateModules.ps1 $(Configuration) $(Scope) -Profile Latest &quot; " Condition="'$(Latest)' == 'true' "/>
+    <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\UpdateModules.ps1 $(Configuration) $(Scope) -Profile Stack &quot; " Condition="'$(Stack)' == 'true' "/>
    <!-- Copying shortcut to be signed -->
     <Copy SourceFiles="$(LibraryRoot)tools\AzureRM\AzureRM.psd1"
           DestinationFolder="$(LibrarySourceFolder)\Package\$(Configuration)" Condition= " '$(NetCore)' == 'false' and '$(Latest)' == 'true'"/>
     <Copy SourceFiles="$(LibraryRoot)tools\AzureRM\AzureRM.psm1"
           DestinationFolder="$(LibrarySourceFolder)\Package\$(Configuration)" Condition= " '$(NetCore)' == 'false' and '$(Latest)' == 'true'"/>
-    
+
     <Copy SourceFiles="$(LibrarySourceFolder)\StackAdmin\AzureRM\AzureRM.psd1"
           DestinationFolder="$(LibrarySourceFolder)\Stack\$(Configuration)" Condition= " '$(NetCore)' == 'false' and '$(Stack)' == 'true' "/>
     <Copy SourceFiles="$(LibrarySourceFolder)\StackAdmin\AzureRM\AzureRM.psm1"
@@ -234,7 +234,7 @@
       DestinationFolder="$(LibrarySourceFolder)\Package\$(Configuration)"
       Condition=" '$(CodeSign)' == 'true' "/>
 
-    <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />	
+    <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
 
 
     <Copy SourceFiles="$(LibrarySourceFolder)\Package\$(Configuration)\AzureRM.psd1"
@@ -258,7 +258,7 @@
     <CallTarget targets="DependencyAnalysis" ContinueOnError="ErrorAndContinue" />
     <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\CleanupBuild.ps1 -BuildConfig $(Configuration) &quot;" />
   </Target>
-  
+
   <!-- Build .Net Core Cmdlets -->
   <Target Name="BuildNetCore">
     <Message Importance="high" Text="Building Cmdlets..." />
@@ -272,7 +272,7 @@
     <!-- Delete powershell runtime files -->
     <ItemGroup>
       <RedundantDlls Include="$(PackageDirectory)\**\netcoreapp2.0\publish\Microsoft.Powershell.*.dll" />
-      <RedundantDlls Include="$(PackageDirectory)\**\netcoreapp2.0\publish\System*.dll" 
+      <RedundantDlls Include="$(PackageDirectory)\**\netcoreapp2.0\publish\System*.dll"
                      Exclude="$(PackageDirectory)\**\netcoreapp2.0\publish\System.Security.Cryptography.ProtectedData.dll" />
       <RedundantDlls Include="$(PackageDirectory)\**\netcoreapp2.0\publish\Microsoft.VisualBasic.dll" />
       <RedundantDlls Include="$(PackageDirectory)\**\netcoreapp2.0\publish\Microsoft.CSharp.dll" />
@@ -319,7 +319,7 @@
     </ItemGroup>
 
     <Delete Files="@(ExtraPsdFiles->'%(FullPath)')"/>
-    <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " /> 
+    <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
 
   <!-- Do everything possible -->
@@ -334,11 +334,11 @@
       Properties="Configuration=$(Configuration);Platform=AnyCPU"
       ContinueOnError="false"
       Condition=" '$(Scope)' == 'all' "/>
-    
+
     <Copy SourceFiles="$(LibraryRoot)\setup\PowerShellSetup.Test\bin\$(Configuration)\PowerShellSetup.Test.dll"
-      DestinationFolder="$(LibrarySourceFolder)\Package\$(Configuration)" Condition="Exists('$(LibraryRoot)\setup\PowerShellSetup.Test\bin\$(Configuration)\PowerShellSetup.Test.dll')" />    
+      DestinationFolder="$(LibrarySourceFolder)\Package\$(Configuration)" Condition="Exists('$(LibraryRoot)\setup\PowerShellSetup.Test\bin\$(Configuration)\PowerShellSetup.Test.dll')" />
   </Target>
-  
+
   <Target Name="BuildSetup" Condition=" '$(Scope)' == 'all' ">
     <!-- Copying shortcut to be signed -->
     <Copy SourceFiles="$(LibrarySourceFolder)\Package\$(Configuration)\RemoveGalleryModules.ps1;$(LibrarySourceFolder)\Package\$(Configuration)\SetExecutionPolicy.ps1"
@@ -352,10 +352,10 @@
       ContinueOnError="false"
       Condition=" '$(Scope)' == 'all' "/>
   </Target>
-  
+
   <Target Name="BuildMsBuildTask" DependsOnTargets="RestoreNugetPackages">
     <MSBuild Projects="@(LocalBuildTasks)"
-             Targets="Build" 
+             Targets="Build"
              Properties="Configuration=$(Configuration);Platform=Any CPU" />
   </Target>
 
@@ -387,7 +387,7 @@
       <ScriptsToSign Include="$(LibrarySourceFolder)\Package\$(Configuration)\**\*.ps1xml" Condition="'$(Latest)' == 'true' " />
       <ScriptsToSign Include="$(LibrarySourceFolder)\Package\$(Configuration)\**\*.js" Condition="'$(Latest)' == 'true' " />
       <ScriptsToSign Include="$(LibraryRoot)setup\Setup\*.ps1" Condition="'$(Latest)' == 'true' "/>
- 
+
       <ScriptsToSign Include="$(LibrarySourceFolder)\Stack\$(Configuration)\**\*.ps1" Condition="'$(Stack)' == 'true' "/>
       <ScriptsToSign Include="$(LibrarySourceFolder)\Stack\$(Configuration)\**\*.psm1" Condition="'$(Stack)' == 'true' " />
       <ScriptsToSign Include="$(LibrarySourceFolder)\Stack\$(Configuration)\**\*.ps1xml" Condition="'$(Stack)' == 'true' " />
@@ -479,7 +479,7 @@
       Certificates="402"
       ToolsPath="$(CIToolsPath)"
       Condition="!$(DelaySign) and '@(InstallersToSign)' != ''"/>
-    
+
     <!--If we are testing locally then we copy the binaries and do not submit to the code sign server-->
     <Copy SourceFiles="@(InstallersToSign)" DestinationFolder="signed" Condition="$(DelaySign)" />
     <SetEnvVar EnvName="SignedMsiDir" EnvValue="$(SignedOutputRootDir)" />
@@ -492,7 +492,7 @@
       Targets="Build"
       Properties="Configuration=Debug;Platform=Any CPU"
       ContinueOnError="false" />
-    
+
     <Message Importance="high" Text="Running Dependency Analysis..." />
     <Exec Command="$(MSBuildProjectDirectory)\src\Package\StaticAnalysis.exe $(MSBuildProjectDirectory)\src\Package\$(Configuration) $(MSBuildProjectDirectory)\src\Package true $(SkipHelp)" Condition="'$(Latest)' == 'true'"/>
     <Exec Command="$(MSBuildProjectDirectory)\src\Package\StaticAnalysis.exe $(MSBuildProjectDirectory)\src\Stack\$(Configuration) $(MSBuildProjectDirectory)\src\Stack" Condition="'$(Stack)' == 'true'" ContinueOnError="True"/>
@@ -502,9 +502,9 @@
   <Target Name="Publish">
     <Error Condition=" '$(NuGetKey)' == '' " Text="You must provide the NuGetKey parameter to the build: /p:NuGetKey=YOUR_PUBLISHING_KEY" />
     <Message Importance="high" Text="Publishing Cmdlets using Latest profile" Condition="'$(Latest)' == 'true' "/>
-    <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\PublishModules.ps1 $(NetCore) $(Configuration) $(Scope) $(NuGetKey) \&quot;$(NuGetPublishingSource)\&quot; -Profile Latest &quot; $(NuGetCommand)" Condition="'$(Latest)' == 'true' "/>
-     <Message Importance="high" Text="Publishing Cmdlets using Stack profile" Condition="'$(Stack)' == 'true' "/>
-    <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\PublishModules.ps1 $(NetCore) $(Configuration) $(Scope) $(NuGetKey) \&quot;$(StackPublishingSource)\&quot; -Profile Stack &quot; $(NuGetCommand)" Condition="'$(Stack)' == 'true' " />
+    <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\PublishModules.ps1 -IsNetCore:$$(NetCore) -BuildConfig $(Configuration) -Scope $(Scope) -ApiKey $(NuGetKey) -RepositoryLocation \&quot;$(NuGetPublishingSource)\&quot; -Profile Latest &quot; -NugetExe $(NuGetCommand)" Condition="'$(Latest)' == 'true' "/>
+    <Message Importance="high" Text="Publishing Cmdlets using Stack profile" Condition="'$(Stack)' == 'true' "/>
+    <Exec Command="&quot;$(PowerShellCommand)&quot; -NonInteractive -NoLogo -NoProfile -Command &quot;. $(LibraryToolsFolder)\PublishModules.ps1 -IsNetCore:$$(NetCore) -BuildConfig $(Configuration) -Scope $(Scope) -ApiKey $(NuGetKey) -RepositoryLocation \&quot;$(StackPublishingSource)\&quot; -Profile Stack &quot; -NugetExe $(NuGetCommand)" Condition="'$(Stack)' == 'true' "/>
  </Target>
 
   <PropertyGroup>
@@ -524,7 +524,7 @@
 
     <!-- Azs.Commerce.Admin -->
     <Exec Condition=" '$(Stack)' == 'true' " Command="$(PowerShellCommand) -NonInteractive -NoLogo -NoProfile -Command &quot;$(LibraryToolsFolder)\Run-UnitTests.ps1 -RootTestLocation $(LibrarySourceFolder)\StackAdmin\Azs.Commerce.Admin\Tests;Write-Host ' '&quot;" ContinueOnError="false"/>
-    
+
     <!-- Azs.Fabric.Admin -->
     <Exec Condition=" '$(Stack)' == 'true' " Command="$(PowerShellCommand) -NonInteractive -NoLogo -NoProfile -Command &quot;$(LibraryToolsFolder)\Run-UnitTests.ps1 -RootTestLocation $(LibrarySourceFolder)\StackAdmin\Azs.Fabric.Admin\Tests;Write-Host ' '&quot;" ContinueOnError="false"/>
 
