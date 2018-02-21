@@ -58,21 +58,27 @@ param(
 
     [ValidateNotNullOrEmpty()]
     [System.String]
-    $ClientTypeName
+    $ClientTypeName,
     
+    [switch]$GenerateSwagger
 )
 
-$file="https://github.com/$GithubAccount/azure-rest-api-specs/blob/$GithubBranch/specification/azsadmin/resource-manager/$RPName/readme.md"
-
-Write-Host "URI=$file"
-
-Invoke-Expression "& autorest $file --version=latest --output-artifact=swagger-document.json --output-folder=$Location"
+if($GenerateSwagger) {
+    $file="https://github.com/$GithubAccount/azure-rest-api-specs/blob/$GithubBranch/specification/azsadmin/resource-manager/$RPName/readme.md"
+    Invoke-Expression "& autorest $file --version=latest --output-artifact=swagger-document.json --output-folder=$Location"
+}
 
 if($PSSwaggerLocation) {
-    $env:PSModulePath = "$PSSwaggerLocation;$env:PSModulePath"    
-    Import-Module $PSSwaggerLocation\PSSwagger
+    $clone = $env:PSModulePath.Clone()
+    try {
+        $env:PSModulePath = "$PSSwaggerLocation;$env:PSModulePath"
+        $env:PSModulePath = "$PSSwaggerLocation\PSSwagger;$env:PSModulePath"
+        Import-Module PSSwagger -Force
+    } finally {
+        $env:PSModulePath = $clone
+    }
 } else {
-    Import-Module PSSwagger
+    Import-Module PSSwagger -Force
 }
 
 if(-not $Name) {
@@ -96,8 +102,6 @@ $specPath = Join-Path $Location -ChildPath "$Name.json"
 $namespace = "$prefix$RPName$postfix"
 $output = Join-Path $Location -ChildPath $ModuleDirectory
 
-Write-Host $specPath
-
 New-PSSwaggerModule `
     -SpecificationPath $specPath `
     -Path $output `
@@ -107,6 +111,7 @@ New-PSSwaggerModule `
     -Version $Version `
     -NoVersionFolder `
     -UseAzureCsharpGenerator `
-    -DefaultCommandPrefix Azs `
     -Header MICROSOFT_MIT_NO_CODEGEN `
-    -Verbose 
+    -Verbose `
+    -CopyUtilityModuleToOutput `
+    -Debug
