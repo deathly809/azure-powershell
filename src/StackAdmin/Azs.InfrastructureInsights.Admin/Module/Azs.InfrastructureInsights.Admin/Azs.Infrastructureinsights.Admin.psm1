@@ -1,41 +1,35 @@
 <#
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the MIT License. See License.txt in the project root for license information.
+The MIT License (MIT)
+
+Copyright (c) 2017 Microsoft
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 #>
 
 Microsoft.PowerShell.Core\Set-StrictMode -Version Latest
+Microsoft.PowerShell.Utility\Import-LocalizedData  LocalizedData -filename Azs.InfrastructureInsights.Admin.Resources.psd1
 
 # If the user supplied -Prefix to Import-Module, that applies to the nested module as well
 # Force import the nested module again without -Prefix
 if (-not (Get-Command Get-OperatingSystemInfo -Module PSSwaggerUtility -ErrorAction Ignore)) {
-    # Simply doing "Import-Module PSSwaggerUtility" doesn't work for local case
-	if (Test-Path -Path (Join-Path -Path $PSScriptRoot -ChildPath PSSwaggerUtility)) {
-		Import-Module (Join-Path -Path $PSScriptRoot -ChildPath PSSwaggerUtility) -Force
-	} else {
-		Import-Module PSSwaggerUtility -Force
-	}
+    Import-Module PSSwaggerUtility -Force
 }
 
-if ((Get-OperatingSystemInfo).IsCore) {
-    . (Join-Path -Path $PSScriptRoot "Test-CoreRequirements.ps1")
-    $clr = 'coreclr'
-}
-else {
-    . (Join-Path -Path $PSScriptRoot "Test-FullRequirements.ps1")
-    $clr = 'fullclr'
-}
-
-$ClrPath = Join-Path -Path $PSScriptRoot -ChildPath 'ref' | Join-Path -ChildPath $clr
-
-$allDllsPath = Join-Path -Path $ClrPath -ChildPath '*.dll'
-if (Test-Path -Path $ClrPath -PathType Container) {
-    Get-ChildItem -Path $allDllsPath -File | ForEach-Object { Add-Type -Path $_.FullName -ErrorAction SilentlyContinue }
-}
-
-. (Join-Path -Path $PSScriptRoot -ChildPath 'New-ServiceClient.ps1')
-. (Join-Path -Path $PSScriptRoot -ChildPath 'Get-TaskResult.ps1')
-. (Join-Path -Path $PSScriptRoot -ChildPath 'Get-ApplicableFilters.ps1')
-. (Join-Path -Path $PSScriptRoot -ChildPath 'Test-FilteredResult.ps1')
-. (Join-Path -Path $PSScriptRoot -ChildPath 'Get-ArmResourceIdParameterValue.ps1')
-$allPs1FilesPath = Join-Path -Path $PSScriptRoot -ChildPath 'Generated.PowerShell.Commands' | Join-Path -ChildPath '*.ps1'
-Get-ChildItem -Path $allPs1FilesPath -Recurse -File | ForEach-Object { . $_.FullName}
+Get-ChildItem -Path (Join-Path -Path "$PSScriptRoot" -ChildPath "ref" | Join-Path -ChildPath "fullclr" | Join-Path -ChildPath "*.dll") -File | ForEach-Object { Add-Type -Path $_.FullName -ErrorAction SilentlyContinue }
+Get-ChildItem -Path "$PSScriptRoot\Generated.PowerShell.Commands\*.ps1" -Recurse -File | ForEach-Object { . $_.FullName}
