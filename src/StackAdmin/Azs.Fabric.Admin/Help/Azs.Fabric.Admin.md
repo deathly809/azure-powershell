@@ -1,7 +1,7 @@
 ---
 Module Name: Azs.Fabric.Admin
 Module Guid: 5e04dc01-069b-4fad-a590-ccff2c6e20b5
-Download Help Link: 
+Download Help Link:
 Help Version: 0.1.0
 Locale: en-US
 ---
@@ -76,9 +76,6 @@ Get storage subsystems given a location.
 
 ### [New-AzsIpPool](New-AzsIpPool.md)
 Create an infrastructure ip pool.
-
-### [New-AzsIpPoolObject](New-AzsIpPoolObject.md)
-This resource defines the range of IP addresses from which addresses are  allocated for nodes within a subnet.
 
 ### [Restart-AzsInfrastructureRoleInstance](Restart-AzsInfrastructureRoleInstance.md)
 Reboot an infrastructure role instance.  On failure an exception is thrown.

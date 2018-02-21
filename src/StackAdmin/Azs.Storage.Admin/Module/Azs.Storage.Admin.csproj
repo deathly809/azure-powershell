@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94678CB3-8F0B-44D6-8B65-39B4AE43568F}</ProjectGuid>
+    <ProjectGuid>{33116C4E-08B6-407B-A8D3-B5B5582A7098}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Azs.Storage.Admin</RootNamespace>
@@ -59,7 +59,7 @@
       <MarkdownFiles Include="$(ProjectDir)..\Help\*.md" />
     </ItemGroup>
     <ItemGroup>
-      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*"/>
+      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(MarkdownFiles)" DestinationFolder="..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\help\" ContinueOnError="false" />

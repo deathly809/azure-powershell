@@ -18,7 +18,7 @@ param(
     [Parameter(Mandatory = $false, Position = 1)]
     [string]$BuildConfig,
     [Parameter(Mandatory = $false, Position = 2)]
-    [string]$Scope,
+    [string]$Scope = 'All',
     [Parameter(Mandatory = $false, Position = 3)]
     [string]$ApiKey,
     [Parameter(Mandatory = $false, Position = 4)]
