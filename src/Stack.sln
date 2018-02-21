@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8531411A-0137-4E27-9C5E-49E07C245048}"
 	ProjectSection(SolutionItems) = preProject
@@ -66,6 +66,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.AzureStackAdmin", "StackAdmin\AzureStackAdmin\Commands.AzureStackAdmin\Commands.AzureStackAdmin.csproj", "{0B02390C-8AA9-4D99-8AA8-2A9D2D39682F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commands.AzureStackStorage", "StackAdmin\AzureStackStorage\Commands.AzureStackStorage\Commands.AzureStackStorage.csproj", "{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Commerce.Admin", "StackAdmin\Azs.Commerce.Admin\Module\Azs.Commerce.Admin.csproj", "{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azs.Commerce.Admin.Tests", "StackAdmin\Azs.Commerce.Admin\Tests\Azs.Commerce.Admin.Tests.csproj", "{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -413,6 +417,30 @@ Global
 		{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}.Release|x64.Build.0 = Release|Any CPU
 		{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}.Release|x86.ActiveCfg = Release|Any CPU
 		{D4CA0CC1-CD0A-4CE2-A40D-2D8A082D8791}.Release|x86.Build.0 = Release|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Debug|x64.Build.0 = Debug|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Debug|x86.Build.0 = Debug|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Release|x64.ActiveCfg = Release|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Release|x64.Build.0 = Release|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Release|x86.ActiveCfg = Release|Any CPU
+		{B092AFF8-1BEE-4F42-880C-ADD69CADB77D}.Release|x86.Build.0 = Release|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Debug|x64.Build.0 = Debug|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Debug|x86.Build.0 = Debug|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Release|x64.ActiveCfg = Release|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Release|x64.Build.0 = Release|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Release|x86.ActiveCfg = Release|Any CPU
+		{06B6D2CF-7B0B-40BC-857B-E89001B5FABB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -423,5 +451,8 @@ Global
 		{C2CF99A2-D35E-4AED-AFB9-C26960AF1D0D} = {95C16AED-FD57-42A0-86C3-2CF4300A4817}
 		{C1BDA476-A5CC-4394-914D-48B0EC31A710} = {95C16AED-FD57-42A0-86C3-2CF4300A4817}
 		{CFF09E81-1E31-444E-B4D4-A21E946C29E2} = {95C16AED-FD57-42A0-86C3-2CF4300A4817}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D4051E0-D35D-42D5-89C1-F42A84DDA72E}
 	EndGlobalSection
 EndGlobal

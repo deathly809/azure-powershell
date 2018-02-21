@@ -3,10 +3,10 @@ $rpName = "commerce"
 $name = "Commerce"
 $location = Get-Location
 $psswagger = "E:\github\PSswagger"
-$module = "TestModule"
+$module = "Module"
 $namespace = "Microsoft.AzureStack.Management.$Name.Admin"
 $assembly = "$namespace.dll"
-$client = "$namespace.CommerceAdminClient"
+$client = "$namespace.$($name)AdminClient"
 
 . ..\..\..\tools\GeneratePSSwagger.ps1 `
     -RPName $rpName `
