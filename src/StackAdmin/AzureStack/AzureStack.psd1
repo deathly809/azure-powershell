@@ -47,7 +47,8 @@ CLRVersion = '4.0'
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(@{ModuleName="AzureRM.Profile"; RequiredVersion="4.2.0"},
   @{ModuleName="AzureRM.AzureStackAdmin"; RequiredVersion="0.11.1"},
-  @{ModuleName="AzureRM.AzureStackStorage"; RequiredVersion="0.10.9"})
+  @{ModuleName="AzureRM.AzureStackStorage"; RequiredVersion="0.10.9"},
+  @{ModuleName="Azs.AzureStack.Admin"; RequiredVersion="0.1.0"})
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
@@ -84,7 +85,7 @@ RequiredModules = @(@{ModuleName="AzureRM.Profile"; RequiredVersion="4.2.0"},
 
 # List of all files packaged with this module
 # FileList = @()
-  
+
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
 
