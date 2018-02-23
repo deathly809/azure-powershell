@@ -460,14 +460,14 @@ try {
     Add-Modules -ModulePath $clientModules
     Write-Output  " "
 
-    Write-Output "Getting rollup modules..."
-    $rollupModules = Get-RollupModules -BuildConfig $BuildConfig -Scope $Scope -IsNetCore:$isNetCore
-    Add-Modules -ModulePath $adminModules -Admin
-    Write-Output  " "
-
     Write-Output "Getting admin modules..."
     $adminModules = Get-AdminModules -BuildConfig $BuildConfig -Scope $Scope -IsNetCore:$isNetCore
     Add-Modules -ModulePath $adminModules
+    Write-Output  " "
+
+    Write-Output "Getting rollup modules..."
+    $rollupModules = Get-RollupModules -BuildConfig $BuildConfig -Scope $Scope -IsNetCore:$isNetCore
+    Add-Modules -ModulePath $adminModules -Admin
     Write-Output  " "
 
     if (!$publishToLocal)
