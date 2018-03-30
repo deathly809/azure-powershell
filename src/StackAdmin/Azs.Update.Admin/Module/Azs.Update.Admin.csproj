@@ -44,8 +44,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Azs.Update.Admin\Generated.PowerShell.Commands\FormatFiles\Azs.Update.Admin.Format.ps1xml" />
-    <None Include="Azs.Update.Admin\Generated.PowerShell.Commands\FormatFiles\Azs.Update.Admin.Type.ps1xml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -61,7 +59,7 @@
       <MarkdownFiles Include="$(ProjectDir)..\Help\*.md" />
     </ItemGroup>
     <ItemGroup>
-      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\fullclr\$(RootNameSpace).*" />
+      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\fullclr\$(RootNameSpace).*"/>
     </ItemGroup>
     <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(MarkdownFiles)" DestinationFolder="..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\help\" ContinueOnError="false" />

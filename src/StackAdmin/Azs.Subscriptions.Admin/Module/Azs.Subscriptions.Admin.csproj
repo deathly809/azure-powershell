@@ -44,104 +44,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Azs.Subscriptions.Admin\Generated.PowerShell.Commands\FormatFiles\Azs.Subscriptions.Admin.Format.ps1xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Azs.Subscriptions.Admin\Generated.PowerShell.Commands\FormatFiles\Azs.Subscriptions.Admin.Type.ps1xml">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Azs.Subscriptions.Admin.psd1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Azs.Subscriptions.Admin.psm1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-AddonPlanDefinitionObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-CheckNameAvailabilityDefinitionObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-DirectoryTenantObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-OfferDelegationObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-OfferObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-PlanAcquisitionPropertiesObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-PlanLinkDefinitionObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-PlanObject.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerDefinitionCommands\New-SubscriptionObject.ps1" />
-    <None Include="Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Add-AzsPlanToOffer.ps1" />
-    <None Include="Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Remove-AzsPlanToOffer.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsDelegatedProvider.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsDelegatedProviderManagedOffer.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsDirectoryTenant.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsLocation.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsManagedOffer.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsOfferDelegation.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsOfferMetric.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsOfferMetricDefinition.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsPlan.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsPlanMetric.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsPlanMetricDefinition.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsSubscriptionPlan.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsSubscriptionsQuota.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Get-AzsUserSubscription.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\New-AzsOffer.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\New-AzsOfferDelegation.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\New-AzsPlan.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\New-AzsSubscriptionPlan.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\New-AzsUserSubscription.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Remove-AzsDirectoryTenant.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Remove-AzsOffer.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Remove-AzsOfferDelegation.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Remove-AzsPlan.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Remove-AzsSubscriptionPlan.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Remove-AzsUserSubscription.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Set-AzsDirectoryTenant.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Set-AzsOffer.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Set-AzsOfferDelegation.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Set-AzsPlan.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Set-AzsUserSubscription.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Generated.PowerShell.Commands\SwaggerPathCommands\Test-AzsNameAvailability.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Get-ApplicableFilters.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Get-ArmResourceIdParameterValue.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Get-TaskResult.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\New-ServiceClient.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\PSSwaggerUtility\PSSwaggerClientTracing.psm1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\PSSwaggerUtility\PSSwaggerNetUtilities.Core.Code.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\PSSwaggerUtility\PSSwaggerServiceCredentialsHelpers.psm1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\PSSwaggerUtility\PSSwaggerUtility.psd1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\PSSwaggerUtility\PSSwaggerUtility.psm1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\PSSwaggerUtility\PSSwaggerUtility.Resources.psd1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Azs.Subscriptions.Admin.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Azs.Subscriptions.Admin.pdb" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Hyak.Common.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Hyak.Common.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.ApplicationInsights.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.ApplicationInsights.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Azure.Common.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Azure.Common.NetFramework.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Azure.Common.NetFramework.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Azure.Common.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Azure.KeyVault.Core.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Azure.KeyVault.Core.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.AzureStack.Management.Subscriptions.Admin.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.AzureStack.Management.Subscriptions.Admin.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Rest.ClientRuntime.Azure.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Rest.ClientRuntime.Azure.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Rest.ClientRuntime.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Rest.ClientRuntime.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Threading.Tasks.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Threading.Tasks.Extensions.Desktop.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Threading.Tasks.Extensions.Desktop.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Threading.Tasks.Extensions.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Threading.Tasks.Extensions.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.Threading.Tasks.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.WindowsAzure.Management.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Microsoft.WindowsAzure.Management.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Newtonsoft.Json.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\Newtonsoft.Json.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\System.Net.Http.Extensions.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\System.Net.Http.Extensions.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\System.Net.Http.Primitives.dll" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\ref\fullclr\System.Net.Http.Primitives.xml" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Test-CoreRequirements.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Test-FilteredResult.ps1" />
-    <None Include="C:\github\azure-powershell\src\StackAdmin\Azs.Subscriptions.Admin\Module\Azs.Subscriptions.Admin\Test-FullRequirements.ps1" />
+    <None Include="$(ProjectDir)$(RootNameSpace)\**\*.*" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -153,7 +59,7 @@
       <MarkdownFiles Include="$(ProjectDir)..\Help\*.md" />
     </ItemGroup>
     <ItemGroup>
-      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\fullclr\$(RootNameSpace).*" />
+      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\fullclr\$(RootNameSpace).*"/>
     </ItemGroup>
     <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(MarkdownFiles)" DestinationFolder="..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\help\" ContinueOnError="false" />
