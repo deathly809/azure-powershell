@@ -40,8 +40,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER OfferId
     Identifier of the offer under the scope of a delegated provider.
 
-.PARAMETER Subscription
-    Subscription parameter.
+.PARAMETER ResourceId
+    The resource ID.
+
+.PARAMETER InputObject
+    The input object of type Microsoft.AzureStack.Management.Network.Admin.Models.Quota.
 
 .EXAMPLE
 
@@ -51,54 +54,60 @@ Licensed under the MIT License. See License.txt in the project root for license 
 #>
 function Set-AzsUserSubscription {
     [OutputType([Microsoft.AzureStack.Management.Subscriptions.Admin.Models.Subscription])]
-    [CmdletBinding(DefaultParameterSetName = 'Subscriptions_CreateOrUpdate')]
+    [CmdletBinding(DefaultParameterSetName = 'Set')]
     param(
-        [Parameter(Mandatory = $true, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
-        [ValidateScript( {
-                [System.Guid]::TryParse($SubscriptionId)
-            })]
-            [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory = $true, ParameterSetName = 'Set')]
+        [ValidateNotNullOrEmpty()]
         [System.Guid]
         $SubscriptionId,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [string]
         $DisplayName,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [string]
         $DelegatedProviderSubscriptionId,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [string]
         $Owner,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [string]
         $TenantId,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [ValidateSet('Default', 'Admin')]
         [string]
         $RoutingResourceManagerType,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [string]
         $ExternalReferenceId,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [ValidateSet('NotDefined', 'Enabled', 'Warned', 'PastDue', 'Disabled', 'Deleted')]
         [string]
         $State,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [string]
         [Alias("ArmLocation")]
         $Location,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Subscriptions_CreateOrUpdate')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [string]
-        $OfferId
+        $OfferId,
+
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId')]
+        [Alias('id')]
+        [System.String]
+        $ResourceId,
+
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject')]
+        [Microsoft.AzureStack.Management.Subscriptions.Admin.Models.Subscription]
+        $InputObject
     )
 
     Begin {
@@ -123,6 +132,24 @@ function Set-AzsUserSubscription {
             }
         }
 
+        $updatedSubscription = $null
+
+        if ( 'InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName ) {
+            $GetArmResourceIdParameterValue_params = @{
+                IdTemplate = '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}'
+            }
+
+            if ('ResourceId' -eq $PsCmdlet.ParameterSetName) {
+                $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
+            } else {
+                $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+                $updatedSubscription = $InputObject
+            }
+            $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
+
+            $SubscriptionId = $ArmResourceIdParameterValues['targetSubscriptionId']
+        }
+
         $NewServiceClient_params = @{
             FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'
         }
@@ -131,22 +158,26 @@ function Set-AzsUserSubscription {
         $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
         $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
 
-        $flattenedParameters = @('TenantId', 'SubscriptionId', 'DisplayName', 'DelegatedProviderSubscriptionId', 'Owner', 'RoutingResourceManagerType', 'ExternalReferenceId', 'State', 'Location', 'OfferId')
-        $utilityCmdParams = @{}
-        $flattenedParameters | ForEach-Object {
-            if ($PSBoundParameters.ContainsKey($_)) {
-                $utilityCmdParams[$_] = $PSBoundParameters[$_]
-            }
-        }
-        $NewSubscription = New-SubscriptionObject @utilityCmdParams
-
         if (-not $PSBoundParameters.ContainsKey('Location')) {
             $Location = (Get-AzureRMLocation).Location
         }
 
-        if ('Subscriptions_CreateOrUpdate' -eq $PsCmdlet.ParameterSetName) {
+        if ( 'InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName -or 'Set' -eq $PsCmdlet.ParameterSetName ) {
+
+            if ( $updatedSubscription -eq $null ) {
+                $updatedSubscription = Get-AzsUserSubscription | Where-Object { $_.SubscriptionId -eq $SubscriptionId }
+            }
+
+            $flattenedParameters = @('TenantId', 'SubscriptionId', 'DisplayName', 'DelegatedProviderSubscriptionId', 'Owner', 'RoutingResourceManagerType', 'ExternalReferenceId', 'State', 'Location', 'OfferId')
+            $flattenedParameters | ForEach-Object {
+                if ($PSBoundParameters.ContainsKey($_)) {
+                    $updatedSubscription.$($_) = $PSBoundParameters[$_]
+                }
+            }
+
             Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $SubscriptionsAdminClient.'
-            $TaskResult = $SubscriptionsAdminClient.Subscriptions.CreateOrUpdateWithHttpMessagesAsync($SubscriptionId, $NewSubscription)
+            $TaskResult = $SubscriptionsAdminClient.Subscriptions.CreateOrUpdateWithHttpMessagesAsync($SubscriptionId, $updatedSubscription)
+
         } else {
             Write-Verbose -Message 'Failed to map parameter set to operation method.'
             throw 'Module failed to find operation to execute.'

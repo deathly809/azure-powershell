@@ -109,7 +109,6 @@ function Set-AzsOffer
         [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
         [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Alias('ArmLocation')]
         [string]
         [Alias("ArmLocation")]        
         $Location,
@@ -182,18 +181,7 @@ function Set-AzsOffer
          $PSBoundParameters.Add("Location", $Location)
     }
 
-    $flattenedParameters = @('MaxSubscriptionsPerAccount', 'BasePlanIds', 'DisplayName', 'Description', 'ExternalReferenceId', 'State', 'Location', 'SubscriptionCount', 'AddonPlanDefinition')
-    $utilityCmdParams = @{}
-    $flattenedParameters | ForEach-Object {
-        if($PSBoundParameters.ContainsKey($_)) {
-            $utilityCmdParams[$_] = $PSBoundParameters[$_]
-        }
-    }
-    $NewOffer = New-OfferObject @utilityCmdParams
-
-
     $Offer = $Name
-
 
     if('InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
         $GetArmResourceIdParameterValue_params = @{
@@ -205,17 +193,30 @@ function Set-AzsOffer
         }
         else {
             $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
+            $updatedOffer = $InputObject
         }
         $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
         $resourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
 
-        $offer = $ArmResourceIdParameterValues['offer']
+        $Offer = $ArmResourceIdParameterValues['offer']
     }
 
-
     if ('Update' -eq $PsCmdlet.ParameterSetName -or 'InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
+    
+        if ($updatedOffer -eq $null) {
+            $updatedOffer = Get-AzsManagedOffer -Name $Offer
+        }
+        
+        $flattenedParameters = @('MaxSubscriptionsPerAccount', 'BasePlanIds', 'DisplayName', 'Description', 'ExternalReferenceId', 'State', 'Location', 'SubscriptionCount', 'AddonPlanDefinition')
+        $flattenedParameters | ForEach-Object {
+            if ($PSBoundParameters.ContainsKey($_)) {
+                $updatedOffer.$($_) = $PSBoundParameters[$_]
+            }
+        }
+
         Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $SubscriptionsAdminClient.'
-        $TaskResult = $SubscriptionsAdminClient.Offers.CreateOrUpdateWithHttpMessagesAsync($ResourceGroupName, $Offer, $NewOffer)
+        $TaskResult = $SubscriptionsAdminClient.Offers.CreateOrUpdateWithHttpMessagesAsync($ResourceGroupName, $Offer, $updatedOffer)
+
     } else {
         Write-Verbose -Message 'Failed to map parameter set to operation method.'
         throw 'Module failed to find operation to execute.'
