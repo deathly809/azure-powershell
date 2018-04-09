@@ -43,6 +43,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER InputObject
     The input object of type Microsoft.AzureStack.Management.Network.Admin.Models.Quota.
 
+.PARAMETER Force
+    Don't ask for confirmation.
+	
 .EXAMPLE
 
     PS C:\> Set-AzsSubscription -SubscriptionId 2d9f5af9-3397-44fb-8700-d98762c2422a -DisplayName MyTestSub -State Enabled -OfferId /delegatedProviders/default/offers/offer1
@@ -52,7 +55,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
 function Set-AzsSubscription
 {
     [OutputType([Microsoft.AzureStack.Management.Subscriptions.Models.Subscription])]
-    [CmdletBinding(DefaultParameterSetName='Set')]
+    [CmdletBinding(DefaultParameterSetName='Set', SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $false, ParameterSetName = 'Set')]
         [ValidateNotNullOrEmpty()]
@@ -97,8 +100,12 @@ function Set-AzsSubscription
         $ResourceId,
 
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject')]
-        [Microsoft.AzureStack.Management.Subscriptions.Models.Subscription]
-        $InputObject
+        [Microsoft.AzureStack.Management.Models.SubscriptionDefinition]
+        $InputObject,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
     )
 
     Begin
@@ -151,27 +158,32 @@ function Set-AzsSubscription
 	    $SubscriptionId = $ArmResourceIdParameterValues['subscriptionId']
 	}
 
-    if ('Set' -eq $PsCmdlet.ParameterSetName -or 'InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
+	if ($PSCmdlet.ShouldProcess("$DisplayName" , "Update subscription")) {
+	    if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update subscription?", "Performing operation CreateOrUpdateWithHttpMessagesAsync on $DisplayName."))) {
 
-		if ($updatedSubscription -eq $null)
-		{
-			$updatedSubscription = Get-AzsSubscription -SubscriptionId $SubscriptionId
+			if ('Set' -eq $PsCmdlet.ParameterSetName -or 'InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
+
+				if ($updatedSubscription -eq $null)
+				{
+					$updatedSubscription = Get-AzsSubscription -SubscriptionId $SubscriptionId
+				}
+
+				$flattenedParameters = @('OfferId', 'Id', 'Type', 'Tags', 'SubscriptionId', 'State', 'TenantId', 'Location', 'DisplayName')
+				$flattenedParameters | ForEach-Object {
+					if ($PSBoundParameters.ContainsKey($_)) {
+						$updatedSubscription.$($_) = $PSBoundParameters[$_]
+					}
+				}
+
+				Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $SubscriptionsManagementClient.'
+				$TaskResult = $SubscriptionsManagementClient.Subscriptions.CreateOrUpdateWithHttpMessagesAsync($SubscriptionId, $updatedSubscription)
+
+			} else {
+				Write-Verbose -Message 'Failed to map parameter set to operation method.'
+				throw 'Module failed to find operation to execute.'
+			}
 		}
-
-	    $flattenedParameters = @('OfferId', 'Id', 'Type', 'Tags', 'SubscriptionId', 'State', 'TenantId', 'Location', 'DisplayName')
-        $flattenedParameters | ForEach-Object {
-            if ($PSBoundParameters.ContainsKey($_)) {
-                $updatedSubscription.$($_) = $PSBoundParameters[$_]
-            }
-        }
-
-        Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $SubscriptionsManagementClient.'
-        $TaskResult = $SubscriptionsManagementClient.Subscriptions.CreateOrUpdateWithHttpMessagesAsync($SubscriptionId, $updatedSubscription)
-
-    } else {
-        Write-Verbose -Message 'Failed to map parameter set to operation method.'
-        throw 'Module failed to find operation to execute.'
-    }
+	}
 
     if ($TaskResult) {
         $GetTaskResult_params = @{
