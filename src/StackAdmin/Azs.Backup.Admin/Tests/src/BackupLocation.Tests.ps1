@@ -161,7 +161,7 @@ InModuleScope Azs.Backup.Admin {
 		It "TestCreateBackup" {
 			$global:TestName = 'TestCreateBackup'
 
-			$backup = Start-AzsBackup -ResourceGroupName $global:ResourceGroup -Location $global:Location
+			$backup = Start-AzsBackup -ResourceGroupName $global:ResourceGroup -Location $global:Location -Force
 			$backup 					| Should Not Be $Null
 
 		}
