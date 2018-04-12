@@ -43,7 +43,6 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
 #>
 function New-AzsComputeQuota {
     [OutputType([Microsoft.AzureStack.Management.Compute.Admin.Models.Quota])]
-    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -89,45 +88,43 @@ function New-AzsComputeQuota {
     Process {
 
         $ErrorActionPreference = 'Stop'
-        if ($PSCmdlet.ShouldProcess("$Name" , "Add new compute quota")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Add new compute quota?", "Adding a new compute quota with name $Name")) {
+        if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Add new compute quota?", "Adding a new compute quota with name $Name")) {
 
-                $NewServiceClient_params = @{
-                    FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'
+            $NewServiceClient_params = @{
+                FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'
+            }
+
+            $GlobalParameterHashtable = @{}
+            $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+
+            $GlobalParameterHashtable['SubscriptionId'] = $null
+            if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
+                $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
+            }
+
+            $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
+
+            # Default location if missing
+            if ([String]::IsNullOrEmpty($Location)) {
+                $Location = (Get-AzureRmLocation).Location
+            }
+
+            # Create object
+            $flattenedParameters = @('AvailabilitySetCount', 'CoresLimit', 'VmScaleSetCount', 'VirtualMachineCount', 'Location' )
+            $utilityCmdParams = @{}
+            $flattenedParameters | ForEach-Object {
+                $utilityCmdParams[$_] = Get-Variable -Name $_ -ValueOnly
+            }
+            $NewQuota = New-QuotaObject @utilityCmdParams
+
+            Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $ComputeAdminClient.'
+            $TaskResult = $ComputeAdminClient.Quotas.CreateOrUpdateWithHttpMessagesAsync($Location, $Name, $NewQuota)
+
+            if ($TaskResult) {
+                $GetTaskResult_params = @{
+                    TaskResult = $TaskResult
                 }
-
-                $GlobalParameterHashtable = @{}
-                $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
-
-                $GlobalParameterHashtable['SubscriptionId'] = $null
-                if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
-                    $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-                }
-
-                $ComputeAdminClient = New-ServiceClient @NewServiceClient_params
-
-                # Default location if missing
-                if ([String]::IsNullOrEmpty($Location)) {
-                    $Location = (Get-AzureRmLocation).Location
-                }
-
-                # Create object
-                $flattenedParameters = @('AvailabilitySetCount', 'CoresLimit', 'VmScaleSetCount', 'VirtualMachineCount', 'Location' )
-                $utilityCmdParams = @{}
-                $flattenedParameters | ForEach-Object {
-                    $utilityCmdParams[$_] = Get-Variable -Name $_ -ValueOnly
-                }
-                $NewQuota = New-QuotaObject @utilityCmdParams
-
-                Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $ComputeAdminClient.'
-                $TaskResult = $ComputeAdminClient.Quotas.CreateOrUpdateWithHttpMessagesAsync($Location, $Name, $NewQuota)
-
-                if ($TaskResult) {
-                    $GetTaskResult_params = @{
-                        TaskResult = $TaskResult
-                    }
-                    Get-TaskResult @GetTaskResult_params
-                }
+                Get-TaskResult @GetTaskResult_params
             }
         }
     }
