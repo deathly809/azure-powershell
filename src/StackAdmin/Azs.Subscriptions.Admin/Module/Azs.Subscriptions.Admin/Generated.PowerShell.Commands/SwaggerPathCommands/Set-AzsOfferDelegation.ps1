@@ -31,6 +31,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER InputObject
     The input object of type Microsoft.AzureStack.Management.Subscriptions.Admin.Models.OfferDelegation.
 
+.PARAMETER Force
+    Don't ask for confirmation.
+
 .EXAMPLE
 
     PS C:\> Set-AzsOfferDelegation -Offer offer1 -ResourceGroupName rg1 -Name delegate1 -SubscriptionId "c90173b1-de7a-4b1d-8600-b832b0e65946" -Location "local"
@@ -77,7 +80,11 @@ function Set-AzsOfferDelegation {
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject')]
         [ValidateNotNullOrEmpty()]
         [Microsoft.AzureStack.Management.Subscriptions.Admin.Models.OfferDelegation]
-        $InputObject
+        $InputObject,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
     )
 
     Begin {
@@ -115,7 +122,6 @@ function Set-AzsOfferDelegation {
 
         if ($PSCmdlet.ShouldProcess("$Name" , "Update offer")) {
             if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update offer?", "Performing operation update for offer $Name."))) {
-
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'

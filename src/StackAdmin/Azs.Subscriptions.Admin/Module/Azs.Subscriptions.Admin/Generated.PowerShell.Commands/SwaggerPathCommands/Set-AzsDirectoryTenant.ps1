@@ -28,6 +28,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER Name
     Directory tenant name.
 
+.PARAMETER Force
+    Don't ask for confirmation.
+
 .EXAMPLE
 
     Set-AzsDirectoryTenant -ResourceGroupName rg1 -Name tenant1
@@ -71,7 +74,11 @@ function Set-AzsDirectoryTenant {
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject')]
         [ValidateNotNullOrEmpty()]
         [Microsoft.AzureStack.Management.Subscriptions.Admin.Models.DirectoryTenant]
-        $InputObject
+        $InputObject,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
     )
 
     Begin {

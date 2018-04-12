@@ -49,6 +49,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER AddonPlanDefinition
     References to add-on plans that a tenant can optionally acquire as a part of the offer.
 
+.PARAMETER Force
+    Don't ask for confirmation.
+
 .EXAMPLE
 
     PS C:\> Set-AzsOffer -Name offer1 -ResourceGroupName rg1 -State Private
@@ -134,7 +137,11 @@ function Set-AzsOffer {
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId')]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $ResourceId
+        $ResourceId,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
 
     )
 

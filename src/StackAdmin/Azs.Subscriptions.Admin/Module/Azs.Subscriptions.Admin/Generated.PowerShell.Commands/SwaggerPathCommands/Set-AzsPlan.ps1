@@ -43,6 +43,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER SubscriptionCount
     Subscription count.
 
+.PARAMETER Force
+    Don't ask for confirmation.
+
 .EXAMPLE
 
     PS C:\> Set-AzsPlan -Name "plan1" -ResourceGroupName "rg1" -Description "This plan is meant to be used by accounting only."
@@ -117,7 +120,11 @@ function Set-AzsPlan {
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId')]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $ResourceId
+        $ResourceId,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
     )
 
     Begin {
