@@ -149,7 +149,7 @@ InModuleScope Azs.Backup.Admin {
 			[String]$path = "\\192.168.1.1\Share"
 			[SecureString]$encryptionKey = ConvertTo-SecureString -String "YVVOa0J3S2xTamhHZ1lyRU9wQ1pKQ0xWanhjaHlkaU5ZQnNDeHRPTGFQenJKdWZsRGtYT25oYmlaa1RMVWFKeQ==" -AsPlainText -Force
 
-			$backup = Set-AzsBackupShare -ResourceGroupName $global:ResourceGroup -Location $global:Location -Username $username -Password $password -BackupShare $path -EncryptionKey $encryptionKey
+			$backup = Set-AzsBackupShare -ResourceGroupName $global:ResourceGroup -Location $global:Location -Username $username -Password $password -BackupShare $path -EncryptionKey $encryptionKey -Force
 
 			$backup 					| Should Not Be $Null
 			$backup.Path 				| Should Be $path
@@ -174,7 +174,7 @@ InModuleScope Azs.Backup.Admin {
 			[String]$path = "\\su1fileserver\SU1_Infrastructure_2"
 			[SecureString]$encryptionKey = ConvertTo-SecureString -String "YVVOa0J3S2xTamhHZ1lyRU9wQ1pKQ0xWanhjaHlkaU5ZQnNDeHRPTGFQenJKdWZsRGtYT25oYmlaa1RMVWFKeQ==" -AsPlainText -Force
 
-			$backup = Set-AzsBackupShare -ResourceGroupName $global:ResourceGroup -Location $global:ResourceGroup -Username $username -Password $password -BackupShare $path -EncryptionKey $encryptionKey
+			$backup = Set-AzsBackupShare -ResourceGroupName $global:ResourceGroup -Location $global:ResourceGroup -Username $username -Password $password -BackupShare $path -EncryptionKey $encryptionKey -Force
 
 			$backup 					| Should Not Be $Null
 			Restore-AzsBackup -ResourceGroupName $global:ResourceGroup -Location $global:ResourceGroup -Backup (Select-Name $backup.Name)

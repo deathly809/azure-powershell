@@ -97,7 +97,7 @@ function New-ModulePsm1 {
         # Add deprecation messages
         if ($ModulePath -like "*Profile*") {
             $WarningMessage = "`"PowerShell version 3 and 4 will no longer be supported starting in May 2018. Please update to the latest version of PowerShell 5.1`""
-            $template = $template -replace "%PSVersionDeprecationMessage%",
+            $template = $template -replace "%PSVersionDeprecationMessage%", 
             "`$SpecialFolderPath = Join-Path -Path ([Environment]::GetFolderPath('ApplicationData')) -ChildPath 'Windows Azure Powershell' `
             `$DeprecationFile = Join-Path -Path `$SpecialFolderPath -ChildPath 'PSDeprecationWarning.txt' `
             if (!(Test-Path `$DeprecationFile)) { `
@@ -121,7 +121,7 @@ function New-ModulePsm1 {
         Write-Host "Writing psm1 manifest to $templateOutputPath"
         $template | Out-File -FilePath $templateOutputPath -Force
         $file = Get-Item -Path $templateOutputPath
-
+        
     }
 }
 
@@ -412,8 +412,8 @@ function Update-Stack {
     New-ModulePsm1 -ModulePath "$script:StackRMRoot\AzureRM.Profile" -TemplatePath $script:TemplateLocation -IsRMModule
     Write-Host "Updated profile module"
     Write-Host " "
-
-    $modulePath = "$script:StackPackages\$buildConfig\Storage\Azure.Storage"
+    
+    $modulePath = "$script:StackRMRoot\$buildConfig\Storage\Azure.Storage"
     Write-Host "Updating AzureStorage module from $modulePath"
     New-ModulePsm1 -ModulePath $modulePath -TemplatePath $templateLocation -IsRMModule:$false
     Write-Host " "
@@ -439,7 +439,7 @@ function Update-Netcore {
 
     # Publish the Netcore modules and rollup module, if specified.
     Write-Host "Updating profile module"
-    New-ModulePsm1 -ModulePath "$script:StackPackages\AzureRM.Profile.Netcore" -TemplatePath $script:TemplateLocation -IsRMModule
+    New-ModulePsm1 -ModulePath "$script:AzureRMRoot\AzureRM.Profile.Netcore" -TemplatePath $script:TemplateLocation -IsRMModule
     Write-Host "Updated profile module"
 
     $env:PSModulePath += "$([IO.Path]::PathSeparator)$script:AzureRMRoot\AzureRM.Profile.Netcore";

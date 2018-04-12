@@ -249,12 +249,13 @@ function Get-ClientModules {
 
         # Azure non-resource modules not using NetCore
         if (-not $IsNetCore) {
-
-            if ($Scope -eq 'All' -or $Scope -eq "Stack" -or $Scope -eq 'AzureStorage') {
+            $StorageScopes = @('All', 'Latest', 'Stack', 'AzureStorage')
+            if ($Scope -in $StorageScopes) {
                 $targets += "$packageFolder\$buildConfig\Storage\Azure.Storage"
             }
 
-            if (($Scope -eq 'All') -or ($Scope -eq 'ServiceManagement')) {
+            $ServiceScopes = @('All', 'Latest', 'ServiceManagement')
+            if ($Scope -in $ServiceScopes) {
                 $targets += "$packageFolder\$buildConfig\ServiceManagement\Azure"
             }
         }
@@ -269,7 +270,6 @@ function Get-ClientModules {
                 $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.*,*.Netcore
             }
 
-
             # We should ignore these, they are handled separatly.
             $excludedModules = @('AzureRM.Profile', 'Azure.Storage', 'AzureRM.Profile.Netcore')
 
@@ -281,7 +281,6 @@ function Get-ClientModules {
                 }
             }
         }
-
         Write-Output -InputObject $targets
     }
 }
@@ -366,7 +365,6 @@ function Remove-ModuleDependencies {
         $regex = New-Object System.Text.RegularExpressions.Regex "NestedModules\s*=\s*@\([^\)]+\)"
         $content = (Get-Content -Path $Path) -join "`r`n"
         $text = $regex.Replace($content, "NestedModules = @()")
-        $text | Out-File -FilePath $Path
         Out-FileNoBom -File $Path -Text $text
     }
 }
@@ -506,6 +504,29 @@ function Add-AllModules {
 #
 #################################################>
 
+<#
+.SYNOPSIS
+Adds Rootmodule
+
+
+#>
+function Add-PSM1Dependency {
+    [CmdletBinding()]
+    param(
+        [string] $Path)
+
+    PROCESS {
+        $file = Get-Item -Path $Path
+        $manifestFile = $file.Name
+        $psm1file = $manifestFile -replace ".psd1", ".psm1"
+
+        # RootModule = ''
+        $regex = New-Object System.Text.RegularExpressions.Regex "#\s*RootModule\s*=\s*''"
+        $content = (Get-Content -Path $Path) -join "`r`n"
+        $text = $regex.Replace($content, "RootModule = '$psm1file'")
+        $text | Out-File -FilePath $Path
+    }
+}
 
 <#
 
@@ -586,6 +607,9 @@ function Add-Module {
 
             Write-Output "Expanding $zipPath"
             Expand-Archive $zipPath -DestinationPath $dirPath
+
+            Write-Output "Adding PSM1 dependency to $unzippedManifest"
+            Add-PSM1Dependency -Path $unzippedManifest
 
             Write-Output "Removing module manifest dependencies for $unzippedManifest"
             Remove-ModuleDependencies -Path (Join-Path $TempRepoPath $unzippedManifest)
