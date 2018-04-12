@@ -27,19 +27,19 @@ Licensed under the MIT License. See License.txt in the project root for license 
 #>
 function New-AzsSubscriptionPlan {
     [OutputType([Microsoft.AzureStack.Management.Subscriptions.Admin.Models.PlanAcquisition])]
-    [CmdletBinding(DefaultParameterSetName = 'Create')]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $false, ParameterSetName = 'Create')]
+        [Parameter(Mandatory = $false)]
         [ValidateNotNull()]
         [System.Guid]
         $AcquisitionId,
 
-        [Parameter(Mandatory = $true, ParameterSetName = 'Create')]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNull()]
         [System.String]
         $PlanId,
 
-        [Parameter(Mandatory = $true, ParameterSetName = 'Create')]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNull()]
         [System.Guid]
         $TargetSubscriptionId
@@ -60,49 +60,48 @@ function New-AzsSubscriptionPlan {
 
         $ErrorActionPreference = 'Stop'
 
-        $NewServiceClient_params = @{
-            FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'
-        }
+        if ($PSCmdlet.ShouldProcess("$TargetSubscriptionId" , "Register subscription to use plan")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Register subscription to use plan?", "Performing operation register subscription to plan for subscription $TargetSubscriptionId."))) {
 
-        $GlobalParameterHashtable = @{}
-        $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+                $NewServiceClient_params = @{
+                    FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'
+                }
 
-        $GlobalParameterHashtable['SubscriptionId'] = $null
-        if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
-            $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-        }
+                $GlobalParameterHashtable = @{}
+                $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
 
-        $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
+                $GlobalParameterHashtable['SubscriptionId'] = $null
+                if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
+                    $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
+                }
 
-        if (-not $PSBoundParameters.ContainsKey('AcquisitionId')) {
-            $AcquisitionId = [Guid]::NewGuid().ToString()
-            $PSBoundParameters.Add("AcquisitionId", $AcquisitionId)
-        }
+                $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
 
+                if (-not $PSBoundParameters.ContainsKey('AcquisitionId')) {
+                    $AcquisitionId = [Guid]::NewGuid().ToString()
+                    $PSBoundParameters.Add("AcquisitionId", $AcquisitionId)
+                }
 
-        $flattenedParameters = @('PlanId', 'AcquisitionId')
-        $utilityCmdParams = @{}
-        $flattenedParameters | ForEach-Object {
-            if ($PSBoundParameters.ContainsKey($_)) {
-                $utilityCmdParams[$_] = $PSBoundParameters[$_]
+                $flattenedParameters = @('PlanId', 'AcquisitionId')
+                $utilityCmdParams = @{}
+                $flattenedParameters | ForEach-Object {
+                    if ($PSBoundParameters.ContainsKey($_)) {
+                        $utilityCmdParams[$_] = $PSBoundParameters[$_]
+                    }
+                }
+
+                $NewAcquiredPlan = New-PlanAcquisitionPropertiesObject @utilityCmdParams
+
+                Write-Verbose -Message 'Performing operation CreateWithHttpMessagesAsync on $SubscriptionsAdminClient.'
+                $TaskResult = $SubscriptionsAdminClient.AcquiredPlans.CreateWithHttpMessagesAsync($TargetSubscriptionId.ToString(), $AcquisitionId.ToString(), $NewAcquiredPlan)
+
+                if ($TaskResult) {
+                    $GetTaskResult_params = @{
+                        TaskResult = $TaskResult
+                    }
+                    Get-TaskResult @GetTaskResult_params
+                }
             }
-        }
-
-        $NewAcquiredPlan = New-PlanAcquisitionPropertiesObject @utilityCmdParams
-
-        if ('Create' -eq $PsCmdlet.ParameterSetName) {
-            Write-Verbose -Message 'Performing operation CreateWithHttpMessagesAsync on $SubscriptionsAdminClient.'
-            $TaskResult = $SubscriptionsAdminClient.AcquiredPlans.CreateWithHttpMessagesAsync($TargetSubscriptionId.ToString(), $AcquisitionId.ToString(), $NewAcquiredPlan)
-        } else {
-            Write-Verbose -Message 'Failed to map parameter set to operation method.'
-            throw 'Module failed to find operation to execute.'
-        }
-
-        if ($TaskResult) {
-            $GetTaskResult_params = @{
-                TaskResult = $TaskResult
-            }
-            Get-TaskResult @GetTaskResult_params
         }
     }
 

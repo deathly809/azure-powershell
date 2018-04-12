@@ -19,36 +19,43 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER Location
     Resource location.
 
-.PARAMETER QuotaName
+.PARAMETER Name
     The name of the storage quota.
+
+.PARAMETER Force
+    Don't ask for confirmation.
 
 .EXAMPLE
 
-	PS C:\> New-AzsStorageQuota -CapacityInGb 1000 -NumberOfStorageAccounts 100 -QuotaName 'TestCreateStorageQuota'
+	PS C:\> New-AzsStorageQuota -CapacityInGb 1000 -NumberOfStorageAccounts 100 -Name 'TestCreateStorageQuota'
 
     Create a new storage quota with specified values.
 
 #>
 function New-AzsStorageQuota {
     [OutputType([Microsoft.AzureStack.Management.Storage.Admin.Models.StorageQuota])]
-    [CmdletBinding(DefaultParameterSetName = 'Create')]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory = $true, ParameterSetName = 'Create')]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $QuotaName,
+        $Name,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Create')]
+        [Parameter(Mandatory = $false)]
         [int32]
         $CapacityInGb = 500,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Create')]
+        [Parameter(Mandatory = $false)]
         [int32]
         $NumberOfStorageAccounts = 20,
 
-        [Parameter(Mandatory = $false, ParameterSetName = 'Create')]
+        [Parameter(Mandatory = $false)]
         [System.String]
-        $Location
+        $Location,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
     )
 
     Begin {
@@ -66,49 +73,52 @@ function New-AzsStorageQuota {
 
         $ErrorActionPreference = 'Stop'
 
-        $NewServiceClient_params = @{
-            FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
-        }
+        if ($PSCmdlet.ShouldProcess("$Name" , "Create new storage quota")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Create new storage quota?", "Performing operation create storage quota with name $Name."))) {
 
-        $GlobalParameterHashtable = @{}
-        $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
+                $NewServiceClient_params = @{
+                    FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
+                }
 
-        $GlobalParameterHashtable['SubscriptionId'] = $null
-        if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
-            $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-        }
+                $GlobalParameterHashtable = @{}
+                $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
 
-        $StorageAdminClient = New-ServiceClient @NewServiceClient_params
+                $GlobalParameterHashtable['SubscriptionId'] = $null
+                if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
+                    $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
+                }
 
-        $flattenedParameters = @('NumberOfStorageAccounts', 'CapacityInGb')
-        $utilityCmdParams = @{}
-        $flattenedParameters | ForEach-Object {
-            if ($PSBoundParameters.ContainsKey($_)) {
-                $utilityCmdParams[$_] = $PSBoundParameters[$_]
+                $StorageAdminClient = New-ServiceClient @NewServiceClient_params
+
+                $flattenedParameters = @('NumberOfStorageAccounts', 'CapacityInGb')
+                $utilityCmdParams = @{}
+                $flattenedParameters | ForEach-Object {
+                    if ($PSBoundParameters.ContainsKey($_)) {
+                        $utilityCmdParams[$_] = $PSBoundParameters[$_]
+                    }
+                }
+
+                $Parameters = New-StorageQuotaObject @utilityCmdParams
+
+                if ([String]::IsNullOrEmpty($Location)) {
+                    $Location = (Get-AzureRMLocation).Location
+                }
+
+                if ('Create' -eq $PsCmdlet.ParameterSetName) {
+                    Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $StorageAdminClient.'
+                    $TaskResult = $StorageAdminClient.StorageQuotas.CreateOrUpdateWithHttpMessagesAsync($Location, $Name, $Parameters)
+                } else {
+                    Write-Verbose -Message 'Failed to map parameter set to operation method.'
+                    throw 'Module failed to find operation to execute.'
+                }
+
+                if ($TaskResult) {
+                    $GetTaskResult_params = @{
+                        TaskResult = $TaskResult
+                    }
+                    Get-TaskResult @GetTaskResult_params
+                }
             }
-        }
-
-        $Parameters = New-StorageQuotaObject @utilityCmdParams
-
-        if (-not $PSBoundParameters.ContainsKey('Location')) {
-            $Location = (Get-AzureRMLocation).Location
-        }
-
-        if ('Create' -eq $PsCmdlet.ParameterSetName) {
-            Write-Verbose -Message 'Performing operation CreateOrUpdateWithHttpMessagesAsync on $StorageAdminClient.'
-            $TaskResult = $StorageAdminClient.StorageQuotas.CreateOrUpdateWithHttpMessagesAsync($Location, $QuotaName, $Parameters)
-        } else {
-            Write-Verbose -Message 'Failed to map parameter set to operation method.'
-            throw 'Module failed to find operation to execute.'
-        }
-
-        if ($TaskResult) {
-            $GetTaskResult_params = @{
-                TaskResult = $TaskResult
-            }
-
-            Get-TaskResult @GetTaskResult_params
-
         }
     }
 
