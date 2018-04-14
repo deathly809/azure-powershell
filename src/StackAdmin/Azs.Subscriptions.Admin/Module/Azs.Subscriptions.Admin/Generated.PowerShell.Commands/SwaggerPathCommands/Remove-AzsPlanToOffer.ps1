@@ -79,8 +79,8 @@ function Remove-AzsPlanFromOffer {
 
         $ErrorActionPreference = 'Stop'
 
-        if ($PSCmdlet.ShouldProcess("$PlanLink" , "Disconnect plan from offer")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Disconnect the plan from the offer?", "Performing operation UnlinkWithHttpMessagesAsync on $PlanLink."))) {
+        if ($PSCmdlet.ShouldProcess("$PlanName to $OfferName" , "Disconnect plan from offer")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Disconnect the plan from the offer?", "Performing operation unlink plan from offer for $PlanName to $OfferName."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'

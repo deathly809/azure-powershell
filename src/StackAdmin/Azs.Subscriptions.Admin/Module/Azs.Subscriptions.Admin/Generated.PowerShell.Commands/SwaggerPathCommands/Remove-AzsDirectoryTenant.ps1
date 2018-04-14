@@ -76,11 +76,11 @@ function Remove-AzsDirectoryTenant {
             $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
 
             $resourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
-            $tenant = $ArmResourceIdParameterValues['tenant']
+            $Name = $ArmResourceIdParameterValues['tenant']
         }
 
-        if ($PSCmdlet.ShouldProcess("$tenant" , "Delete directory tenant")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete directory tenant?", "Performing operation DeleteWithHttpMessagesAsync on $tenant."))) {
+        if ($PSCmdlet.ShouldProcess("$Name" , "Delete directory tenant")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete directory tenant?", "Performing operation DeleteWithHttpMessagesAsync on $Name."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'
@@ -96,11 +96,9 @@ function Remove-AzsDirectoryTenant {
 
                 $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
 
-                $Tenant = $Name
-
                 if ('Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
                     Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $SubscriptionsAdminClient.'
-                    $TaskResult = $SubscriptionsAdminClient.DirectoryTenants.DeleteWithHttpMessagesAsync($ResourceGroupName, $Tenant)
+                    $TaskResult = $SubscriptionsAdminClient.DirectoryTenants.DeleteWithHttpMessagesAsync($ResourceGroupName, $Name)
                 } else {
                     Write-Verbose -Message 'Failed to map parameter set to operation method.'
                     throw 'Module failed to find operation to execute.'

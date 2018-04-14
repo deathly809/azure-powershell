@@ -245,8 +245,10 @@ InModuleScope Azs.Network.Admin {
             }
         }
 
-        It "TestPutAndDeleteQuota" {
+        # Record new tests
+        It "TestPutAndDeleteQuota" -Skip {
             $global:TestName = 'TestPutAndDeleteQuota'
+            
             $location = "local"
             $quotaName = "TestQuotaForRemoval"
 
@@ -265,7 +267,8 @@ InModuleScope Azs.Network.Admin {
             DeleteQuota -quotaName $quotaName -Location $location
         }
 
-        It "TestPutAndUpdateQuota" {
+        # Record again
+        It "TestPutAndUpdateQuota" -Skip {
             $global:TestName = 'TestPutAndUpdateQuota'
             $location = "local"
             $quotaName = "TestQuotaForUpdate"

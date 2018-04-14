@@ -100,8 +100,8 @@ function Remove-AzsVMExtension {
             $version = $ArmResourceIdParameterValues['version']
         }
 
-        if ($PSCmdlet.ShouldProcess("$Publisher" , "Delete the VM extension")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete the VM extension?", "Performing operation DeleteWithHttpMessagesAsync on $Publisher."))) {
+        if ($PSCmdlet.ShouldProcess("$Publisher / $Type / $Version" , "Delete virtual machine image extension")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete virtual machine image extension?", "Performing operation delete virtual machine image extension for $Publisher / $Type / $Version."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'

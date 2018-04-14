@@ -90,7 +90,7 @@ function Remove-AzsNetworkQuota {
         }
 
         if ($PSCmdlet.ShouldProcess("$Name" , "Delete the network quota")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete the network quota?", "Performing operation DeleteWithHttpMessagesAsync on $Name."))) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete the network quota?", "Performing operation delete $Name."))) {
 
                 $ErrorActionPreference = 'Stop'
 

@@ -106,8 +106,8 @@ function Start-AzsStorageContainerMigration {
         }
 
         # Should process
-        if ($PSCmdlet.ShouldProcess("$ShareName" , "Start container migration")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start container migration?", "Performing operation migrate on share $ShareName.")) {
+        if ($PSCmdlet.ShouldProcess("$ContainerName" , "Start container migration")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start container migration?", "Performing operation migrate on container $ContainerName.")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'

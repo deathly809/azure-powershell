@@ -148,8 +148,8 @@ function Set-AzsNetworkQuota {
             $Name = $ArmResourceIdParameterValues['resourceName']
         }
 
-        if ($PSCmdlet.ShouldProcess("$Name" , "Create or update network quota")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Create or update network quota?", "Performing operation CreateOrUpdateWithHttpMessagesAsync on $Name."))) {
+        if ($PSCmdlet.ShouldProcess("$Name" , "Update network quota")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update network quota?", "Performing operation update $Name."))) {
 
                 if ([String]::IsNullOrEmpty($Location)) {
                     $Location = (Get-AzureRMLocation).Location

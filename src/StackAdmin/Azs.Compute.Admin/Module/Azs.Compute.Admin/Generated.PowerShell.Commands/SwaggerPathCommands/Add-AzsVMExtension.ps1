@@ -126,8 +126,8 @@ function Add-AzsVMExtension {
     Process {
         $ErrorActionPreference = 'Stop'
 
-        if ($PSCmdlet.ShouldProcess("$Publisher/$Type/$Version" , "Add new virtual machine image extension")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Add new virtual machine image extension?", "Performing operation add virtual machine image extension with publisher $Publisher, type $Type, and version $Version.")) {
+        if ($PSCmdlet.ShouldProcess("$Publisher / $Type / $Version" , "Add virtual machine image extension")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Add virtual machine image extension?", "Performing operation add virtual machine image extension with publisher $Publisher, type $Type, and version $Version.")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'

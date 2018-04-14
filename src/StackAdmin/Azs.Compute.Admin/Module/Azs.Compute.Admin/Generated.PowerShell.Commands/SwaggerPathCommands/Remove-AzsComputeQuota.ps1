@@ -89,7 +89,7 @@ function Remove-AzsComputeQuota {
         }
 
         if ($PSCmdlet.ShouldProcess("$Name" , "Delete compute quota")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete compute quota?", "Performing operation DeleteWithHttpMessagesAsync on $Name."))) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete compute quota?", "Performing operation delete on quota $Name."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'

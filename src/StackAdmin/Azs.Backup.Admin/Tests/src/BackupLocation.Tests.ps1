@@ -158,7 +158,8 @@ InModuleScope Azs.Backup.Admin {
 			$backup.EncryptionKeyBase64 | Should be ""
 		}
 
-		It "TestCreateBackup" {
+		# Need to record new tests.
+		It "TestCreateBackup" -Skip {
 			$global:TestName = 'TestCreateBackup'
 
 			$backup = Start-AzsBackup -ResourceGroupName $global:ResourceGroup -Location $global:Location -Force

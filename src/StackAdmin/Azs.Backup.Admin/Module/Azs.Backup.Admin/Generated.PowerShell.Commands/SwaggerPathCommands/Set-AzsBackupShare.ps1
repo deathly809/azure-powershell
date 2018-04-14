@@ -143,7 +143,7 @@ function Set-AzsBackupShare {
 
         # Should process
         if ($PSCmdlet.ShouldProcess("$Location" , "Set backup configuration for location.")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Set backup configuration backup for location?", "Performing operation update backup configuration at $Location.")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Set backup configuration backup for location?", "Performing operation set backup configuration at $Location.")) {
 
                 if ([String]::IsNullOrEmpty($Location)) {
                     $Location = (Get-AzureRMLocation).Location

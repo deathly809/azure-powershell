@@ -79,8 +79,8 @@ function Add-AzsPlanToOffer {
 
         $ErrorActionPreference = 'Stop'
 
-        if ($PSCmdlet.ShouldProcess("$PlanLink" , "Connect plan to offer")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Connect the plan to the offer?", "Performing operation LinkWithHttpMessagesAsync on $PlanLink."))) {
+        if ($PSCmdlet.ShouldProcess("$PlanName to $OfferName" , "Connect plan to offer")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Connect the plan to the offer?", "Performing operation link plan to offer with $PlanName to $OfferName."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'

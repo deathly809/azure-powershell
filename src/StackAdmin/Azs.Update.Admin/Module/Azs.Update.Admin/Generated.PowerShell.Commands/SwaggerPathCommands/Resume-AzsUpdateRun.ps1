@@ -100,7 +100,7 @@ function Resume-AzsUpdateRun {
         }
 
         if ($PsCmdlet.ShouldProcess($Name, "Resume the update")) {
-            if ($Force.IsPresent -or $PsCmdlet.ShouldContinue("Resume the update?", "Performing operation RerunWithHttpMessagesAsync on $UpdateAdminClient")) {
+            if ($Force.IsPresent -or $PsCmdlet.ShouldContinue("Resume the update?", "Performing operation resume on $Name")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Update.Admin.UpdateAdminClient'

@@ -76,11 +76,11 @@ function Remove-AzsOffer {
             $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
 
             $resourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
-            $offer = $ArmResourceIdParameterValues['offer']
+            $Name = $ArmResourceIdParameterValues['offer']
         }
 
-        if ($PSCmdlet.ShouldProcess("$Offer" , "Delete offer")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete offer?", "Performing operation DeleteWithHttpMessagesAsync on $Offer."))) {
+        if ($PSCmdlet.ShouldProcess("$Name" , "Delete offer")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete offer?", "Performing operation DeleteWithHttpMessagesAsync on $Name."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'
@@ -96,11 +96,9 @@ function Remove-AzsOffer {
 
                 $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
 
-                $Offer = $Name
-
                 if ('Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
                     Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $SubscriptionsAdminClient.'
-                    $TaskResult = $SubscriptionsAdminClient.Offers.DeleteWithHttpMessagesAsync($ResourceGroupName, $Offer)
+                    $TaskResult = $SubscriptionsAdminClient.Offers.DeleteWithHttpMessagesAsync($ResourceGroupName, $Name)
                 } else {
                     Write-Verbose -Message 'Failed to map parameter set to operation method.'
                     throw 'Module failed to find operation to execute.'

@@ -60,9 +60,9 @@ function Remove-AzsSubscription {
 
         $SubscriptionsManagementClient = New-ServiceClient @NewServiceClient_params
 
-
         if ($PSCmdlet.ShouldProcess("$SubscriptionId" , "Delete the subscription")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete the subscription?", "Performing operation DeleteWithHttpMessagesAsync on $SubscriptionId."))) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete the subscription?", "Performing operation delete on $SubscriptionId."))) {
+
                 Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $SubscriptionsManagementClient.'
                 $TaskResult = $SubscriptionsManagementClient.Subscriptions.DeleteWithHttpMessagesAsync($SubscriptionId)
                 if ($TaskResult) {

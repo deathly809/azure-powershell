@@ -158,8 +158,8 @@ function Set-AzsSubscription
 	    $SubscriptionId = $ArmResourceIdParameterValues['subscriptionId']
 	}
 
-	if ($PSCmdlet.ShouldProcess("$DisplayName" , "Update subscription")) {
-	    if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update subscription?", "Performing operation CreateOrUpdateWithHttpMessagesAsync on $DisplayName."))) {
+	if ($PSCmdlet.ShouldProcess("$SubscriptionId" , "Update subscription")) {
+	    if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update subscription?", "Performing operation update on $SubscriptionId."))) {
 
 			if ('Set' -eq $PsCmdlet.ParameterSetName -or 'InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
 

@@ -136,20 +136,33 @@ InModuleScope Azs.Storage.Admin {
         }
 
         # Recorded test sessions cannot deal with two PUTs on the same URIs but with different bodies.
-        It "TestUpdateStorageQuota" -Skip {
+        It "TestUpdateStorageQuota" {
             $global:TestName = 'TestUpdateStorageQuota'
 
             $name = "TestUpdateQuota"
-            Remove-AzsStorageQuota -Location $global:Location -Name $name -Force
-            $quota = New-AzsStorageQuota -CapacityInGb 50 -NumberOfStorageAccounts 100 -Location $global:Location -Name $name
-            $quota                          |    Should Not Be $null
-            $quota.CapacityInGb             | Should Be 50
-            $quota.NumberOfStorageAccounts  | Should Be 100
 
-            $updated = Set-AzsStorageQuota -CapacityInGb 123 -NumberOfStorageAccounts 10 -Location local -Name $name -Force
+            $quota = Get-AzsStorageQuota -Name $name -Location $global:Location
+            if($quota -eq $null) {
+                $quota = New-AzsStorageQuota -CapacityInGb 10 -NumberOfStorageAccounts 123 -Location $global:Location -Name $name
+            }
+
+            $quota | Should Not Be $null
+
+            $CapInGB = $quota.CapacityInGb + 1
+            $NumStorageAccounts = $quota.NumberOfStorageAccounts + 1
+
+            "Begin" | Out-File "Output.txt"
+            $updated = Set-AzsStorageQuota `
+                -CapacityInGb $CapInGB `
+                -NumberOfStorageAccounts $NumStorageAccounts `
+                -Location $global:Location `
+                -Name $name `
+                -Force
+
+            $Updated | Format-List * | Out-File "Output.txt" -Append
             ValidateStorageQuota -storageQuota $updated
-            $updated.CapacityInGb               | Should Be 123
-            $updated.NumberOfStorageAccounts    | Should Be 10
+            $updated.CapacityInGb               | Should Be $CapInGB
+            $updated.NumberOfStorageAccounts    | Should Be $NumStorageAccounts
 
             Remove-AzsStorageQuota -Location $global:Location -Name $name -Force
         }

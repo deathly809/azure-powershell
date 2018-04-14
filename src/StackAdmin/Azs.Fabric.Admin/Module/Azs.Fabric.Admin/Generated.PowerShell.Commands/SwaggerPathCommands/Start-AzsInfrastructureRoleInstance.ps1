@@ -96,7 +96,7 @@ function Start-AzsInfrastructureRoleInstance {
         }
 
         if ($PSCmdlet.ShouldProcess("$Name" , "Start infrastructure role instance")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start  infrastructure role instance?", "Performing operation start for infrastructure role instance $Name")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start infrastructure role instance?", "Performing operation start for infrastructure role instance $Name")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Fabric.Admin.FabricAdminClient'

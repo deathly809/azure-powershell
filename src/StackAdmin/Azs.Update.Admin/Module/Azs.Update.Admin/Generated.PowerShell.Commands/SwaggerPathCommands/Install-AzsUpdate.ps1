@@ -36,6 +36,11 @@ function Install-AzsUpdate {
     [OutputType([Microsoft.AzureStack.Management.Update.Admin.Models.Update])]
     [CmdletBinding(DefaultParameterSetName = 'Apply', SupportsShouldProcess = $true)]
     param(
+        [Parameter(Mandatory = $true, ParameterSetName = 'Apply')]
+        [ValidateNotNullOrEmpty()]
+        [System.String]
+        $Name,
+
         [Parameter(Mandatory = $false, ParameterSetName = 'Apply')]
         [ValidateLength(1, 90)]
         [System.String]
@@ -44,11 +49,6 @@ function Install-AzsUpdate {
         [Parameter(Mandatory = $false, ParameterSetName = 'Apply')]
         [System.String]
         $Location,
-
-        [Parameter(Mandatory = $true, ParameterSetName = 'Apply')]
-        [ValidateNotNullOrEmpty()]
-        [System.String]
-        $Name,
 
         [Parameter(Mandatory = $false)]
         [switch]
@@ -94,7 +94,7 @@ function Install-AzsUpdate {
         }
 
         if ($PsCmdlet.ShouldProcess($Name, "Install the update")) {
-            if ($Force.IsPresent -or $PsCmdlet.ShouldContinue("Install the update?", "Performing operation ApplyWithHttpMessagesAsync on $UpdateAdminClient")) {
+            if ($Force.IsPresent -or $PsCmdlet.ShouldContinue("Install the update?", "Performing operation ApplyWithHttpMessagesAsync on $Name")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Update.Admin.UpdateAdminClient'

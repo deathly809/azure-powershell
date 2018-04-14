@@ -134,10 +134,11 @@ InModuleScope Azs.AzureBridge.Admin {
 
         }
 
+        # Re-record
         Context "Invoke-AzsAzureBridgeProductDownload" {
-            It "TestDownloadAzsAzureBridgeProduct" {
+            It "TestDownloadAzsAzureBridgeProduct" -Skip {
                 $global:TestName = "TestDownloadAzsAzureBridgeProduct"
-                Invoke-AzsAzureBridgeProductDownload -ActivationName $ActivationName -ProductName $ProductName1 -ResourceGroupName $ResourceGroupName -Force -ErrorAction Stop
+                Invoke-AzsAzureBridgeProductDownload -ActivationName $ActivationName -Name $ProductName1 -ResourceGroupName $ResourceGroupName -Force -ErrorAction Stop
 			}
 
 			It "TestDownloadAzsAzureBridgeProductPipeline" -Skip {

@@ -68,9 +68,7 @@ function Remove-AzsUserSubscription {
                     $GetTaskResult_params = @{
                         TaskResult = $TaskResult
                     }
-
                     Get-TaskResult @GetTaskResult_params
-
                 }
             }
         }

@@ -56,7 +56,7 @@
           "14750"
         ],
         "x-ms-routing-request-id": [
-          "LOCAL:20180126T233144Z:817479b2-d012-4af0-856d-0b9992853dfd"
+          "local:20180126T233144Z:817479b2-d012-4af0-856d-0b9992853dfd"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -126,13 +126,13 @@
           "b5bf566a-f171-4f40-8617-a71bb705066f"
         ],
         "Azure-AsyncOperation": [
-          "https://adminmanagement.local.azurestack.external/subscriptions/8827b0fb-6039-47eb-a7e8-35ca9d2a7a00/providers/Microsoft.Network.Admin/locations/westus/operations/b5bf566a-f171-4f40-8617-a71bb705066f?api-version=2015-06-15"
+          "https://adminmanagement.local.azurestack.external/subscriptions/8827b0fb-6039-47eb-a7e8-35ca9d2a7a00/providers/Microsoft.Network.Admin/locations/local/operations/b5bf566a-f171-4f40-8617-a71bb705066f?api-version=2015-06-15"
         ],
         "x-ms-ratelimit-remaining-subscription-writes": [
           "1189"
         ],
         "x-ms-routing-request-id": [
-          "LOCAL:20180126T233144Z:bc24e003-5f46-4881-ba90-2a2cff2145de"
+          "local:20180126T233144Z:bc24e003-5f46-4881-ba90-2a2cff2145de"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -178,7 +178,7 @@
           "no-cache"
         ],
         "Location": [
-          "https://adminmanagement.local.azurestack.external/subscriptions/8827b0fb-6039-47eb-a7e8-35ca9d2a7a00/providers/Microsoft.Network.Admin/locations/westus/operationResults/6ef3138d-5d25-4016-818c-bfa7983811b2?api-version=2015-06-15"
+          "https://adminmanagement.local.azurestack.external/subscriptions/8827b0fb-6039-47eb-a7e8-35ca9d2a7a00/providers/Microsoft.Network.Admin/locations/local/operations/6ef3138d-5d25-4016-818c-bfa7983811b2?api-version=2015-06-15"
         ],
         "Retry-After": [
           "10"
@@ -195,14 +195,11 @@
         "x-ms-request-id": [
           "6ef3138d-5d25-4016-818c-bfa7983811b2"
         ],
-        "Azure-AsyncOperation": [
-          "https://adminmanagement.local.azurestack.external/subscriptions/8827b0fb-6039-47eb-a7e8-35ca9d2a7a00/providers/Microsoft.Network.Admin/locations/westus/operations/6ef3138d-5d25-4016-818c-bfa7983811b2?api-version=2015-06-15"
-        ],
         "x-ms-ratelimit-remaining-subscription-writes": [
           "1188"
         ],
         "x-ms-routing-request-id": [
-          "LOCAL:20180126T233144Z:5a48683c-bbc7-46f3-9726-84428ae42577"
+          "local:20180126T233144Z:5a48683c-bbc7-46f3-9726-84428ae42577"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"
@@ -214,8 +211,8 @@
       "StatusCode": 202
     },
     {
-      "RequestUri": "/subscriptions/8827b0fb-6039-47eb-a7e8-35ca9d2a7a00/providers/Microsoft.Network.Admin/locations/westus/operations/6ef3138d-5d25-4016-818c-bfa7983811b2?api-version=2015-06-15",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvODgyN2IwZmItNjAzOS00N2ViLWE3ZTgtMzVjYTlkMmE3YTAwL3Byb3ZpZGVycy9NaWNyb3NvZnQuTmV0d29yay5BZG1pbi9sb2NhdGlvbnMvd2VzdHVzL29wZXJhdGlvbnMvNmVmMzEzOGQtNWQyNS00MDE2LTgxOGMtYmZhNzk4MzgxMWIyP2FwaS12ZXJzaW9uPTIwMTUtMDYtMTU=",
+      "RequestUri": "/subscriptions/8827b0fb-6039-47eb-a7e8-35ca9d2a7a00/providers/Microsoft.Network.Admin/locations/local/operations/6ef3138d-5d25-4016-818c-bfa7983811b2?api-version=2015-06-15",
+      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvODgyN2IwZmItNjAzOS00N2ViLWE3ZTgtMzVjYTlkMmE3YTAwL3Byb3ZpZGVycy9NaWNyb3NvZnQuTmV0d29yay5BZG1pbi9sb2NhdGlvbnMvbG9jYWwvb3BlcmF0aW9ucy82ZWYzMTM4ZC01ZDI1LTQwMTYtODE4Yy1iZmE3OTgzODExYjI/YXBpLXZlcnNpb249MjAxNS0wNi0xNQ==",
       "RequestMethod": "GET",
       "RequestBody": "",
       "RequestHeaders": {
@@ -260,7 +257,7 @@
           "14749"
         ],
         "x-ms-routing-request-id": [
-          "LOCAL:20180126T233155Z:27ca8853-df15-4736-aaf9-95315aadfa7b"
+          "local:20180126T233155Z:27ca8853-df15-4736-aaf9-95315aadfa7b"
         ],
         "Strict-Transport-Security": [
           "max-age=31536000; includeSubDomains"

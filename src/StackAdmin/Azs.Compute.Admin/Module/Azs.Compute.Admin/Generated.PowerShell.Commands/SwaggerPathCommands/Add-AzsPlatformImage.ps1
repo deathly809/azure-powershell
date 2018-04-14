@@ -122,7 +122,7 @@ function Add-AzsPlatformImage {
     Process {
         $ErrorActionPreference = 'Stop'
 
-        if ($PSCmdlet.ShouldProcess("$Publisher/$Offer/$Sku/$Version" , "Add new virtual machine image")) {
+        if ($PSCmdlet.ShouldProcess("$Publisher / $Offer / $Sku / $Version" , "Add new virtual machine image")) {
             if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Add new virtual machine image?", "Performing operation add virtual machine image with publisher $Publisher, offer $Offer, SKU $Sku, and version $Version.")) {
 
                 $NewServiceClient_params = @{

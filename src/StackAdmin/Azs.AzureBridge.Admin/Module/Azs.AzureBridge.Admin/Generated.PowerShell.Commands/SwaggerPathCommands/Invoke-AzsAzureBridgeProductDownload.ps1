@@ -34,12 +34,12 @@ function Invoke-AzsAzureBridgeProductDownload {
         [Parameter(Mandatory = $true, ParameterSetName = 'Products_Download')]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $ActivationName,
+        $Name,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'Products_Download')]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $ProductName,
+        $ActivationName,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'Products_Download')]
         [ValidateLength(1, 90)]
@@ -86,11 +86,11 @@ function Invoke-AzsAzureBridgeProductDownload {
 
             $ResourceGroupName = $ArmResourceIdParameterValues['resourceGroup']
             $activationName = $ArmResourceIdParameterValues['activationName']
-            $productName = $ArmResourceIdParameterValues['productName']
+            $Name = $ArmResourceIdParameterValues['productName']
         }
 
-        if ($PSCmdlet.ShouldProcess("$ProductName" , "Start product download")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start the product download?", "Performing operation download $ProductName."))) {
+        if ($PSCmdlet.ShouldProcess("$Name" , "Start product download")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start the product download?", "Performing operation download $Name."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.AzureBridge.Admin.AzureBridgeAdminClient'
@@ -108,7 +108,7 @@ function Invoke-AzsAzureBridgeProductDownload {
 
                 if ('Products_Download' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
                     Write-Verbose -Message 'Performing operation DownloadWithHttpMessagesAsync on $AzureBridgeAdminClient.'
-                    $TaskResult = $AzureBridgeAdminClient.Products.DownloadWithHttpMessagesAsync($ResourceGroupName, $ActivationName, $ProductName)
+                    $TaskResult = $AzureBridgeAdminClient.Products.DownloadWithHttpMessagesAsync($ResourceGroupName, $ActivationName, $Name)
                 } else {
                     Write-Verbose -Message 'Failed to map parameter set to operation method.'
                     throw 'Module failed to find operation to execute.'

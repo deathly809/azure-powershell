@@ -108,8 +108,8 @@ function Remove-AzsPlatformImage {
             $version = $ArmResourceIdParameterValues['version']
         }
 
-        if ($PSCmdlet.ShouldProcess("$sku" , "Delete platform image")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete platform image?", "Performing operation DeleteWithHttpMessagesAsync on $sku."))) {
+        if ($PSCmdlet.ShouldProcess("$Publisher / $Offer / $Sku / $Version" , "Delete virtual machine image")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete virtual machine image?", "Performing operation delete virtual machine image with publisher $Publisher, offer $Offer, SKU $Sku, and version $Version.")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'

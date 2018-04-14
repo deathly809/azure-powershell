@@ -110,7 +110,7 @@ function Close-AzsAlert {
         }
 
         if ($PSCmdlet.ShouldProcess("$Name" , "Close Alert")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Close Alert?", "Performing operation close alert from $Name")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Close Alert?", "Performing operation close alert $Name")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.InfrastructureInsights.Admin.InfrastructureInsightsAdminClient'

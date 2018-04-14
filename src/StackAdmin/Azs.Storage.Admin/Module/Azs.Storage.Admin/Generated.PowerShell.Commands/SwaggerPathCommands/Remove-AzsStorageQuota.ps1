@@ -84,7 +84,7 @@ function Remove-AzsStorageQuota {
         }
 
         if ($PSCmdlet.ShouldProcess("$Name" , "Delete the storage quota")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete the storage quota?", "Performing operation DeleteWithHttpMessagesAsync on $Name."))) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete the storage quota?", "Performing operation delete $Name."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'

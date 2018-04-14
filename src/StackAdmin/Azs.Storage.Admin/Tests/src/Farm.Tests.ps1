@@ -209,7 +209,8 @@ InModuleScope Azs.Storage.Admin {
 			}
 		}
 
-		It "TestForAllFarmsStartGarbageCollection" {
+		# Record new tests
+		It "TestForAllFarmsStartGarbageCollection" -Skip {
 			$global:TestName = 'TestForAllFarmsStartGarbageCollection'
 
 			$farms =  Get-AzsStorageFarm -ResourceGroupName $global:ResourceGroup

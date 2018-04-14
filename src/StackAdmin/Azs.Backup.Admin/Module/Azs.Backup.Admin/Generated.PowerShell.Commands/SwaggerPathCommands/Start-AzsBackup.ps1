@@ -74,7 +74,7 @@ function Start-AzsBackup {
 
         if ( 'CreateBackup_FromResourceId' -eq $PsCmdlet.ParameterSetName) {
             $GetArmResourceIdParameterValue_params = @{
-                IdTemplate = '/subscriptions/ {subscriptionId}/resourcegroups/ {resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/ {location}/'
+                IdTemplate = '/subscriptions/ {subscriptionId}/resourcegroups/ {resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{location}/'
             }
             $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
             $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
@@ -84,8 +84,8 @@ function Start-AzsBackup {
         }
 
         # Should process
-        if ($PSCmdlet.ShouldProcess("$Location" , "Start backup for location")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start backup for location?", "Performing operation backup at $Location.")) {
+        if ($PSCmdlet.ShouldProcess("$Location" , "Start backup at $Location")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Start backup at $Location?", "Performing operation backup at $Location.")) {
 
                 if ([String]::IsNullOrEmpty($Location)) {
                     $Location = (Get-AzureRMLocation).Location
@@ -137,14 +137,14 @@ function Start-AzsBackup {
                         try {
                             Get-TaskResult @GetTaskResult_params
                         } catch {
-                            $_ | FL * | Out-File "output.txt" -Force 
-                            if ($_.Exception.Body -ne $null) {
-                                @{
-                                    "Code"    = $_.Exception.Body.Code;
-                                    "Message" = $_.Exception.Body.Message
+                            $ex = $_
+                            try {
+                                throw @{
+                                    "Code"    = $ex.Exception.Body.Code;
+                                    "Message" = $ex.Exception.Body.Message
                                 }
-                            } else {
-                                $_ 
+                            } catch {
+                                throw $ex
                             }
                         }
                     }

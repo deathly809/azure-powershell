@@ -124,7 +124,8 @@ function Set-AzsComputeQuota {
         }
 
         if ($PSCmdlet.ShouldProcess("$Name" , "Update compute quota")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update compute quota?", "Performing operation Update on $Name.")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update compute quota?", "Performing operation update on $Name.")) {
+
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Compute.Admin.ComputeAdminClient'
                 }

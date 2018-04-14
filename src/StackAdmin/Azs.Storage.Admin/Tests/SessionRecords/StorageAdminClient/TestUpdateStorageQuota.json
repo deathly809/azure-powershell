@@ -3,69 +3,7 @@
     {
       "RequestUri": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota?api-version=2015-12-01-preview",
       "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvOGFiMjU1MWQtNDFlNS00ODliLTkyNzMtMWNkZjFjYmM3ZGM2L3Byb3ZpZGVycy9NaWNyb3NvZnQuU3RvcmFnZS5BZG1pbi9sb2NhdGlvbnMvbG9jYWwvcXVvdGFzL1Rlc3RVcGRhdGVRdW90YT9hcGktdmVyc2lvbj0yMDE1LTEyLTAxLXByZXZpZXc=",
-      "RequestMethod": "DELETE",
-      "RequestBody": "",
-      "RequestHeaders": {
-        "x-ms-client-request-id": [
-          "ee74e5e1-1045-4992-b4b1-11a1918db59f"
-        ],
-        "accept-language": [
-          "en-US"
-        ],
-        "User-Agent": [
-          "FxVersion/4.6.25211.01",
-          "Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient/1.0.0.0"
-        ]
-      },
-      "ResponseBody": "",
-      "ResponseHeaders": {
-        "Content-Length": [
-          "0"
-        ],
-        "Expires": [
-          "-1"
-        ],
-        "Cache-Control": [
-          "no-cache"
-        ],
-        "Date": [
-          "Tue, 20 Mar 2018 22:05:59 GMT"
-        ],
-        "Pragma": [
-          "no-cache"
-        ],
-        "Server": [
-          "Microsoft-HTTPAPI/2.0"
-        ],
-        "WWW-Authenticate": [
-          "oYG3MIG0oAMKAQChCwYJKoZIgvcSAQICooGfBIGcYIGZBgkqhkiG9xIBAgICAG+BiTCBhqADAgEFoQMCAQ+iejB4oAMCARKicQRvjzB5oE0PWRXorEFH76KT9PqaW6JHb/M2irVAqKB8DBwKpl8m346i1vhOstfRAIGwse8NHt/SmFwZP3iVd581XUAlAJvW2SUROkSbKmumlluQKqR7oh3JE+e8Qjp8ukwQqV57tJvrm/OxcmuRLIb9"
-        ],
-        "x-ms-correlation-request-id": [
-          "57183109-c34d-4f90-b423-540f0b3568f2"
-        ],
-        "x-ms-ratelimit-remaining-subscription-writes": [
-          "1170"
-        ],
-        "x-ms-request-id": [
-          "57183109-c34d-4f90-b423-540f0b3568f2"
-        ],
-        "x-ms-routing-request-id": [
-          "LOCAL:20180320T220600Z:57183109-c34d-4f90-b423-540f0b3568f2"
-        ],
-        "Strict-Transport-Security": [
-          "max-age=31536000; includeSubDomains"
-        ],
-        "X-Content-Type-Options": [
-          "nosniff"
-        ]
-      },
-      "StatusCode": 200
-    },
-    {
-      "RequestUri": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota?api-version=2015-12-01-preview",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvOGFiMjU1MWQtNDFlNS00ODliLTkyNzMtMWNkZjFjYmM3ZGM2L3Byb3ZpZGVycy9NaWNyb3NvZnQuU3RvcmFnZS5BZG1pbi9sb2NhdGlvbnMvbG9jYWwvcXVvdGFzL1Rlc3RVcGRhdGVRdW90YT9hcGktdmVyc2lvbj0yMDE1LTEyLTAxLXByZXZpZXc=",
-      "RequestMethod": "PUT",
-      "RequestBody": "{\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 100,\r\n    \"capacityInGb\": 50\r\n  }\r\n}",
+      "RequestMethod": "GET",
       "RequestHeaders": {
         "Content-Type": [
           "application/json; charset=utf-8"
@@ -84,7 +22,7 @@
           "Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient/1.0.0.0"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota\",\r\n  \"name\": \"local/TestUpdateQuota\",\r\n  \"type\": \"Microsoft.Storage.Admin/locations/quotas\",\r\n  \"location\": \"local\",\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 100,\r\n    \"capacityInGb\": 50\r\n  }\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota\",\r\n  \"name\": \"local/TestUpdateQuota\",\r\n  \"type\": \"Microsoft.Storage.Admin/locations/quotas\",\r\n  \"location\": \"local\",\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 123,\r\n    \"capacityInGb\": 10\r\n  }\r\n}",
       "ResponseHeaders": {
         "Content-Length": [
           "341"
@@ -134,78 +72,8 @@
     {
       "RequestUri": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota?api-version=2015-12-01-preview",
       "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvOGFiMjU1MWQtNDFlNS00ODliLTkyNzMtMWNkZjFjYmM3ZGM2L3Byb3ZpZGVycy9NaWNyb3NvZnQuU3RvcmFnZS5BZG1pbi9sb2NhdGlvbnMvbG9jYWwvcXVvdGFzL1Rlc3RVcGRhdGVRdW90YT9hcGktdmVyc2lvbj0yMDE1LTEyLTAxLXByZXZpZXc=",
-      "RequestMethod": "GET",
-      "RequestBody": "",
-      "RequestHeaders": {
-        "Content-Type": [
-          "application/json; charset=utf-8"
-        ],
-        "Content-Length": [
-          "89"
-        ],
-        "x-ms-client-request-id": [
-          "be609c18-4458-400f-aa5e-7dd952262d8f"
-        ],
-        "accept-language": [
-          "en-US"
-        ],
-        "User-Agent": [
-          "FxVersion/4.6.25211.01",
-          "Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient/1.0.0.0"
-        ]
-      },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota\",\r\n  \"name\": \"local/TestUpdateQuota\",\r\n  \"type\": \"Microsoft.Storage.Admin/locations/quotas\",\r\n  \"location\": \"local\",\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 10,\r\n    \"capacityInGb\": 123\r\n  }\r\n}",
-      "ResponseHeaders": {
-        "Content-Length": [
-          "341"
-        ],
-        "Content-Type": [
-          "application/json; charset=utf-8"
-        ],
-        "Expires": [
-          "-1"
-        ],
-        "Cache-Control": [
-          "no-cache"
-        ],
-        "Date": [
-          "Tue, 20 Mar 2018 22:05:59 GMT"
-        ],
-        "Pragma": [
-          "no-cache"
-        ],
-        "Server": [
-          "Microsoft-HTTPAPI/2.0"
-        ],
-        "WWW-Authenticate": [
-          "oYG3MIG0oAMKAQChCwYJKoZIgvcSAQICooGfBIGcYIGZBgkqhkiG9xIBAgICAG+BiTCBhqADAgEFoQMCAQ+iejB4oAMCARKicQRvEnMEOq5Ibu6Kirwke5fejCTnAfe3913muwrLhERfuqpsY8neO+YvYZ2QL3poQ31f7Zp3gH40QqWg6DpFIgFb5vy3iDIz2QvYhlzIN3E8MeoC4ERga4+FL24IHX0rgkfWKyQ55ULzHv+CdPrRkSrt"
-        ],
-        "x-ms-request-id": [
-          "97cab93b-3195-470f-807f-1bc6e3e371cb"
-        ],
-        "x-ms-correlation-request-id": [
-          "2cd011a2-6703-4884-a89b-26752098fdbc"
-        ],
-        "x-ms-ratelimit-remaining-subscription-writes": [
-          "1168"
-        ],
-        "x-ms-routing-request-id": [
-          "LOCAL:20180320T220600Z:2cd011a2-6703-4884-a89b-26752098fdbc"
-        ],
-        "Strict-Transport-Security": [
-          "max-age=31536000; includeSubDomains"
-        ],
-        "X-Content-Type-Options": [
-          "nosniff"
-        ]
-      },
-      "StatusCode": 200
-    },
-    {
-      "RequestUri": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota?api-version=2015-12-01-preview",
-      "EncodedRequestUri": "L3N1YnNjcmlwdGlvbnMvOGFiMjU1MWQtNDFlNS00ODliLTkyNzMtMWNkZjFjYmM3ZGM2L3Byb3ZpZGVycy9NaWNyb3NvZnQuU3RvcmFnZS5BZG1pbi9sb2NhdGlvbnMvbG9jYWwvcXVvdGFzL1Rlc3RVcGRhdGVRdW90YT9hcGktdmVyc2lvbj0yMDE1LTEyLTAxLXByZXZpZXc=",
       "RequestMethod": "PUT",
-      "RequestBody": "{\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 10,\r\n    \"capacityInGb\": 123\r\n  }\r\n}",
+      "RequestBody": "{\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 123,\r\n    \"capacityInGb\": 11\r\n  }\r\n}",
       "RequestHeaders": {
         "Content-Type": [
           "application/json; charset=utf-8"
@@ -224,7 +92,7 @@
           "Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient/1.0.0.0"
         ]
       },
-      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota\",\r\n  \"name\": \"local/TestUpdateQuota\",\r\n  \"type\": \"Microsoft.Storage.Admin/locations/quotas\",\r\n  \"location\": \"local\",\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 10,\r\n    \"capacityInGb\": 123\r\n  }\r\n}",
+      "ResponseBody": "{\r\n  \"id\": \"/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/providers/Microsoft.Storage.Admin/locations/local/quotas/TestUpdateQuota\",\r\n  \"name\": \"local/TestUpdateQuota\",\r\n  \"type\": \"Microsoft.Storage.Admin/locations/quotas\",\r\n  \"location\": \"local\",\r\n  \"properties\": {\r\n    \"numberOfStorageAccounts\": 124,\r\n    \"capacityInGb\": 11\r\n  }\r\n}",
       "ResponseHeaders": {
         "Content-Length": [
           "341"

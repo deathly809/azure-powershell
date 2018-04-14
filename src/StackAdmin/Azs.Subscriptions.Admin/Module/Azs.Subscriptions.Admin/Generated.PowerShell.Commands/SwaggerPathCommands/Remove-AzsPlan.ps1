@@ -76,11 +76,11 @@ function Remove-AzsPlan {
             $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
 
             $resourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
-            $plan = $ArmResourceIdParameterValues['plan']
+            $Name = $ArmResourceIdParameterValues['plan']
         }
 
-        if ($PSCmdlet.ShouldProcess("$plan" , "Delete plan")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete plan?", "Performing operation DeleteWithHttpMessagesAsync on $plan."))) {
+        if ($PSCmdlet.ShouldProcess("$Name" , "Delete plan")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Delete plan?", "Performing operation DeleteWithHttpMessagesAsync on $Name."))) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'
@@ -95,8 +95,6 @@ function Remove-AzsPlan {
                 }
 
                 $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
-
-
 
                 if ('Delete' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
                     Write-Verbose -Message 'Performing operation DeleteWithHttpMessagesAsync on $SubscriptionsAdminClient.'

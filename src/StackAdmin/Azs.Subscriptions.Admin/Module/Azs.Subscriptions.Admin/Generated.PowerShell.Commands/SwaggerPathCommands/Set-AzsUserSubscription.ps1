@@ -157,9 +157,8 @@ function Set-AzsUserSubscription {
             $SubscriptionId = $ArmResourceIdParameterValues['targetSubscriptionId']
         }
 
-
-        if ($PSCmdlet.ShouldProcess("$Name" , "Update offer")) {
-            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update offer?", "Performing operation update for offer $Name."))) {
+        if ($PSCmdlet.ShouldProcess("$SubscriptionId" , "Update subscription")) {
+            if (($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update subscription?", "Performing operation update for subscription $SubscriptionId."))) {
 
 
                 $NewServiceClient_params = @{

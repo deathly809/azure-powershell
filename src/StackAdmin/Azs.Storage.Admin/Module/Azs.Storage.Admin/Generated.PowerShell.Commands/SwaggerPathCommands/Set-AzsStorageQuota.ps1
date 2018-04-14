@@ -107,8 +107,8 @@ function Set-AzsStorageQuota {
         }
 
         # Should process
-        if ($PSCmdlet.ShouldProcess("$Name" , "Restore the storage account")) {
-            if (-not ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Restore the storage account?", "Performing operation UndeleteWithHttpMessagesAsync on $Name."))) {
+        if ($PSCmdlet.ShouldProcess("$Name" , "Update storage quota")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Update storage quota?", "Performing operation UndeleteWithHttpMessagesAsync on $Name.")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
@@ -138,8 +138,12 @@ function Set-AzsStorageQuota {
                     # Update the Quota object
                     $flattenedParameters = @('CapacityInGb', 'NumberOfStorageAccounts')
                     $flattenedParameters | ForEach-Object {
-                        if ($PSBoundParameters.ContainsKey($_)) {
-                            $Quota.$($_) = $PSBoundParameters[$_]
+                        $Key = $_
+                        if ($PSBoundParameters.ContainsKey($Key)) {
+                            $Value = $PSBoundParameters[$Key]
+                            "Setting $Key with value $Value" | Out-File -FilePath "Output.txt" -Append
+                            $Quota.$($Key) = $Value
+                            "Updated value $($Quota.$Key)" | Out-File -FilePath "Output.txt" -Append
                         }
                     }
 

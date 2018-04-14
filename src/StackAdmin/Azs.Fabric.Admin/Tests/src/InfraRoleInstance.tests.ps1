@@ -144,7 +144,8 @@ InModuleScope Azs.Fabric.Admin {
 			}
 		}
 
-		It "TestInfraRoleInstancePowerOn" {
+		# Need to record new tests
+		It "TestInfraRoleInstancePowerOn" -Skip {
 			$global:TestName = 'TestInfraRoleInstancePowerOn'
 
 			$InfrastructureRoleInstances = Get-AzsInfrastructureRoleInstance -ResourceGroupName $ResourceGroup -Location $Location
@@ -154,7 +155,8 @@ InModuleScope Azs.Fabric.Admin {
 			}
 		}
 
-		It "TestInfraRoleInstancePowerOnAll" {
+		# Need to record new tests
+		It "TestInfraRoleInstancePowerOnAll" -Skip {
 			$global:TestName = 'TestInfraRoleInstancePowerOnAll'
 
 			$InfrastructureRoleInstances = Get-AzsInfrastructureRoleInstance -ResourceGroupName $ResourceGroup -Location $Location

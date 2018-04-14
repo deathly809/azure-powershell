@@ -47,7 +47,7 @@ function Add-AzsScaleUnitNode {
         [Parameter(Mandatory = $true, ParameterSetName = 'ScaleOut')]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $ScaleUnitName,
+        $Name,
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -107,11 +107,11 @@ function Add-AzsScaleUnitNode {
 
             $ResourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
             $location = $ArmResourceIdParameterValues['location']
-            $ScaleUnitName = $ArmResourceIdParameterValues['scaleUnit']
+            $Name = $ArmResourceIdParameterValues['scaleUnit']
         }
 
-        if ($PSCmdlet.ShouldProcess("$ScaleUnitName" , "Add new scale unit node")) {
-            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Add new scale unit node?", "Performing operation add scale unit node for scale unit $ScaleUnitName")) {
+        if ($PSCmdlet.ShouldProcess("$Name" , "Add new scale unit node")) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Add new scale unit node?", "Performing operation add scale unit node for scale unit $Name")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Fabric.Admin.FabricAdminClient'
@@ -146,7 +146,7 @@ function Add-AzsScaleUnitNode {
 
                 if ('ScaleOut' -eq $PsCmdlet.ParameterSetName -or "ResourceId" -eq $PsCmdlet.ParameterSetName) {
                     Write-Verbose -Message 'Performing operation ScaleOutWithHttpMessagesAsync on $FabricAdminClient.'
-                    $TaskResult = $FabricAdminClient.ScaleUnits.ScaleOutWithHttpMessagesAsync($ResourceGroupName, $Location, $ScaleUnitName, $ListOfNodeParameters)
+                    $TaskResult = $FabricAdminClient.ScaleUnits.ScaleOutWithHttpMessagesAsync($ResourceGroupName, $Location, $Name, $ListOfNodeParameters)
                 } else {
                     Write-Verbose -Message 'Failed to map parameter set to operation method.'
                     throw 'Module failed to find operation to execute.'

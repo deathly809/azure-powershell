@@ -78,7 +78,7 @@ function Stop-AzsContainerMigration {
 
         # Should process
         if ($PSCmdlet.ShouldProcess("$JobId" , "Stop container migration")) {
-            if (-not ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Stop container migration?", "Performing operation CancelMigrationWithHttpMessagesAsync on $JobId."))) {
+            if ($Force.IsPresent -or $PSCmdlet.ShouldContinue("Stop container migration?", "Performing operation cancel migration using Job Id $JobId.")) {
 
                 $NewServiceClient_params = @{
                     FullClientTypeName = 'Microsoft.AzureStack.Management.Storage.Admin.StorageAdminClient'
