@@ -30,11 +30,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
 .EXAMPLE
 
-    PS C:\> Stop-AzsContainerMigration -FarmName "342fccbe-e8c0-468d-a90e-cfca5fa8877c" -JobId "ac8cde1b-804f-4ace-b39b-5322106703bf"
+    PS C:\> Stop-AzsStorageContainerMigration -FarmName "342fccbe-e8c0-468d-a90e-cfca5fa8877c" -JobId "ac8cde1b-804f-4ace-b39b-5322106703bf"
 
     Cancel container migration.
 #>
-function Stop-AzsContainerMigration {
+function Stop-AzsStorageContainerMigration {
     [CmdletBinding(SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true)]

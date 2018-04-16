@@ -1,11 +1,11 @@
 ---
 external help file: Azs.Storage.Admin-help.xml
 Module Name: Azs.Storage.Admin
-online version: 
+online version:
 schema: 2.0.0
 ---
 
-# Stop-AzsContainerMigration
+# Stop-AzsStorageContainerMigration
 
 ## SYNOPSIS
 Cancel a container migration job.
@@ -14,13 +14,13 @@ Cancel a container migration job.
 
 ### CancelMigration (Default)
 ```
-Stop-AzsContainerMigration -JobId <String> [-ResourceGroupName <String>] -FarmName <String> [-Wait]
+Stop-AzsStorageContainerMigration -JobId <String> [-ResourceGroupName <String>] -FarmName <String> [-Wait]
  [<CommonParameters>]
 ```
 
 ### ResourceId
 ```
-Stop-AzsContainerMigration -ResourceId <String> [-Wait] [<CommonParameters>]
+Stop-AzsStorageContainerMigration -ResourceId <String> [-Wait] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,7 +30,7 @@ Cancel a container migration job.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Stop-AzsContainerMigration -FarmName "342fccbe-e8c0-468d-a90e-cfca5fa8877c" -JobId "ac8cde1b-804f-4ace-b39b-5322106703bf"
+Stop-AzsStorageContainerMigration -FarmName "342fccbe-e8c0-468d-a90e-cfca5fa8877c" -JobId "ac8cde1b-804f-4ace-b39b-5322106703bf"
 ```
 
 Cancel container migration.
@@ -43,7 +43,7 @@ Farm Id.
 ```yaml
 Type: String
 Parameter Sets: CancelMigration
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -58,7 +58,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: CancelMigration
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -73,7 +73,7 @@ Resource group name.
 ```yaml
 Type: String
 Parameter Sets: CancelMigration
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named

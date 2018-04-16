@@ -95,6 +95,6 @@ Start garbage collection on deleted storage objects.
 ### [Start-AzsStorageContainerMigration](Start-AzsStorageContainerMigration.md)
 Starts a container migration job to migrate containers to the specified destination share.
 
-### [Stop-AzsContainerMigration](Stop-AzsContainerMigration.md)
+### [Stop-AzsStorageContainerMigration](Stop-AzsStorageContainerMigration.md)
 Cancel a container migration job.
 
