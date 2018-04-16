@@ -20,7 +20,7 @@ Returns a list of metrics for blob service.
 ### [Get-AzsBlobServiceMetricDefinition](Get-AzsBlobServiceMetricDefinition.md)
 Returns the list of metric definitions for blob service.
 
-### [Get-AzsDestinationShare](Get-AzsDestinationShare.md)
+### [Get-AzsStorageDestinationShare](Get-AzsStorageDestinationShare.md)
 Returns a list of destination shares that the system considers as best candidates for migration.
 
 ### [Get-AzsQueueService](Get-AzsQueueService.md)

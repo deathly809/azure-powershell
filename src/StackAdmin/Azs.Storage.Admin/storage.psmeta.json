@@ -202,7 +202,7 @@
       "get": {
         "x-ps-cmdlet-infos": [
           {
-            "name": "Get-AzsDestinationShare",
+            "name": "Get-AzsStorageDestinationShare",
             "description": "Returns a list of destination shares that the system considers as best candidates for migration.",
             "defaultParameterSet": "Containers_ListDestinationShares",
             "generateCommand": true

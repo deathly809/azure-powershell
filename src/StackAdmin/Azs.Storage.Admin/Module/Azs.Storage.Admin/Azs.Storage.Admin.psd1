@@ -79,7 +79,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
     'Get-AzsQueueServiceMetricDefinition', 'Get-AzsBlobServiceMetric',
     'Get-AzsStorageShare', 'Get-AzsStorageAcquisition',
     'Get-AzsTableServiceMetric', 'Start-AzsReclaimStorageCapacity',
-    'Get-AzsStorageShareMetric', 'Get-AzsDestinationShare',
+    'Get-AzsStorageShareMetric', 'Get-AzsStorageDestinationShare',
     'Get-AzsBlobService', 'Get-AzsStorageContainer',
     'Get-AzsStorageShareMetricDefinition', 'Get-AzsStorageAccount',
     'Get-AzsStorageQuota', 'Get-AzsStorageContainerMigrationStatus',
