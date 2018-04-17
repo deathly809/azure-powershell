@@ -10,17 +10,17 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .DESCRIPTION
     Cancel a container migration job.
 
-.PARAMETER Name
+.PARAMETER JobId
     Operation Id.
 
 .PARAMETER ResourceGroupName
     Resource group name.
 
-.PARAMETER ResourceId
-    The resource id.
-
 .PARAMETER FarmName
     Farm Id.
+
+.PARAMETER ResourceId
+    The resource id.
 
 .PARAMETER AsJob
     Run asynchronous as a job and return the job object.
