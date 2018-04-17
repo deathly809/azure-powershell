@@ -106,6 +106,7 @@ function Set-AzsComputeQuota {
         $ErrorActionPreference = 'Stop'
 
         $NewQuota = $null
+
         if ('InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
             $GetArmResourceIdParameterValue_params = @{
                 IdTemplate = '/subscriptions/{subscriptionId}/providers/Microsoft.Compute.Admin/locations/{location}/quotas/{quotaName}'
