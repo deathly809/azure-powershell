@@ -71,7 +71,11 @@ function Close-AzsAlert {
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId')]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $ResourceId
+        $ResourceId,
+
+        [Parameter(Mandatory = $false)]
+        [switch]
+        $Force
     )
 
     Begin {

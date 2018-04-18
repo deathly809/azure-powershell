@@ -171,7 +171,7 @@ InModuleScope Azs.Compute.Admin {
 			)
 
 			$name = "myQuota"
-			$data | % {
+			$data | ForEach-Object {
 				{
 					New-AzsComputeQuota -Location $global:Location -Name $name -AvailabilitySetCount $_[0] -CoresLimit $_[1] -VmScaleSetCount $_[2] -VirtualMachineCount $_[3]
 				} | Should Throw
@@ -220,6 +220,11 @@ InModuleScope Azs.Compute.Admin {
 				$name = $quotaNamePrefix + $_[4]
 				Get-AzsComputeQuota -Location | Where-Object { $_.Name -eq $name} | Should be $null
 			}
-		}
+        }
+
+        It "TestUpdateQuota" {
+            $global:TestName = 'TestUpdateQuota'
+            Set-AzsComputeQuota -Location $global:Location -Name "UpdateQuota" -AvailabilitySetCount 100 -CoresLimit 100 -VmScaleSetCount 100 -VirtualMachineCount 100 -Force
+        }
 	}
 }
