@@ -459,6 +459,35 @@ function Add-Modules {
 
 $global:PrintModules = $true
 
+function Save-Package {
+    [CmdletBinding()]
+    param(
+        $Module,
+        [string]$TempRepo,
+        [string]$TempRepoPath
+    )
+
+    $ModuleName = $module['ModuleName']
+    $RequiredVersion = $module['RequiredVersion']
+
+    # Only check for the modules that specifies = required exact dependency version
+    if($RequiredVersion -ne $null)
+    {
+        Write-Output "Checking for required module $ModuleName $RequiredVersion"
+        if (Find-Module -Name $ModuleName -RequiredVersion $RequiredVersion -Repository $TempRepo -ErrorAction SilentlyContinue)
+        {
+            Write-Output "Required dependency $ModuleName, $RequiredVersion found in the repo $TempRepo"
+        } else {
+            Write-Warning "Required dependency $ModuleName, $RequiredVersion not found in the repo $TempRepo"
+            Write-Output "Downloading the package from PsGallery to the path $TempRepoPath"
+            # We try to download the package from the PsGallery as we are likely intending to use the existing version of the module.
+            # If the module not found in psgallery, the following commnad would fail and hence publish to local repo process would fail as well
+            Save-Package -Name $ModuleName -RequiredVersion $RequiredVersion -ProviderName Nuget -Path $TempRepoPath -Source https://www.powershellgallery.com/api/v2
+            Write-Output "Downloaded the package sucessfully"
+        }
+    }
+}
+
 <#
 .SYNOPSIS
 Save the packages from PsGallery to local repo path
@@ -515,31 +544,10 @@ function Save-PackagesFromPsGallery {
 
                 Write-Output "`$RequiredModules type : $($RequiredModules.GetType().FullName)"
 
-                foreach($module in $RequiredModules) {
-
-                    Write-Output "Module type $($module.GetType())"
-                    Write-Output "Module contents"
-                    $module | FL *
-
-                    $ModuleName = $module['ModuleName']
-                    $RequiredVersion = $module['RequiredVersion']
-
-                    Write-Output "$ModuleName -> $RequiredVersion"
-
-                    # Only check for the modules that specifies = required exact dependency version
-                    if($module.RequiredVersion)
-                    {
-                        if (Find-Module -Name $ModuleName -RequiredVersion $RequiredVersion -Repository $TempRepo -ErrorAction SilentlyContinue)
-                        {
-                            Write-Output "Required dependency $ModuleName, $RequiredVersion found in the repo $TempRepo"
-                        } else {
-                            Write-Warning "Required dependency $ModuleName, $RequiredVersion not found in the repo $TempRepo"
-                            Write-Output "Downloading the package from PsGallery to the path $TempRepoPath"
-                            # We try to download the package from the PsGallery as we are likely intending to use the existing version of the module.
-                            # If the module not found in psgallery, the following commnad would fail and hence publish to local repo process would fail as well
-                            Save-Package -Name $ModuleName -RequiredVersion $RequiredVersion -ProviderName Nuget -Path $TempRepoPath -Source https://www.powershellgallery.com/api/v2
-                            Write-Output "Downloaded the package sucessfully"
-                        }
+                foreach($tmp in $RequiredModules) {
+                    # TODO : Change to check the type, if array do loop, else just call
+                    foreach($module in $tmp) {
+                        Save-Package -Module $module -TempRepo $TempRepo -TempRepoPath $TempRepoPath
                     }
                 }
             }
