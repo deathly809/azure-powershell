@@ -47,7 +47,7 @@ param(
     [string]$BuildConfig,
 
     [Parameter(Mandatory = $false, Position = 2)]
-    [ValidateSet("All", "Latest", "Stack", "NetCore","ServiceManagement","AzureStorage")]
+    [ValidateSet("All", "Latest", "Stack", "NetCore", "ServiceManagement", "AzureStorage")]
     [string]$Scope,
 
     [Parameter(Mandatory = $false, Position = 3)]
@@ -243,7 +243,7 @@ function Get-ClientModules {
         }
 
         # Everyone but Storage
-        $AllScopes = @('Stack','All', 'Latest')
+        $AllScopes = @('Stack', 'All', 'Latest')
         if ($Scope -in $AllScopes -or $PublishLocal) {
             $targets += "$resourceManagerRootFolder\AzureRM.Profile$NetSuffix"
         }
@@ -265,10 +265,10 @@ function Get-ClientModules {
         if ($Scope -in $AllScopes) {
 
             # Get all module directories
-            if($IsNetCore) {
+            if ($IsNetCore) {
                 $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.* -Include *.Netcore
             } else {
-                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.*,*.Netcore
+                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.*, *.Netcore
             }
 
             # We should ignore these, they are handled separatly.
@@ -457,8 +457,19 @@ function Add-Modules {
     }
 }
 
-$global:PrintModules = $true
+<#
+.SYNOPSIS
+    Saves a module into the local temporary repository
 
+.PARAMETER Module
+    Module information.
+
+.PARAMETER TempRepo
+    Name of the local temporary repository
+
+.PARAMETER TempRepoPath
+    Path to the local temporary repository
+#>
 function Save-PackageLocally {
     [CmdletBinding()]
     param(
@@ -471,18 +482,16 @@ function Save-PackageLocally {
     $RequiredVersion = $module['RequiredVersion']
 
     # Only check for the modules that specifies = required exact dependency version
-    if($RequiredVersion -ne $null)
-    {
-        Write-Output "Checking for required module $ModuleName $RequiredVersion"
-        if (Find-Module -Name $ModuleName -RequiredVersion $RequiredVersion -Repository $TempRepo -ErrorAction SilentlyContinue)
-        {
+    if ($RequiredVersion -ne $null) {
+        Write-Output "Checking for required module $ModuleName, $RequiredVersion"
+        if (Find-Module -Name $ModuleName -RequiredVersion $RequiredVersion -Repository $TempRepo -ErrorAction SilentlyContinue) {
             Write-Output "Required dependency $ModuleName, $RequiredVersion found in the repo $TempRepo"
         } else {
             Write-Warning "Required dependency $ModuleName, $RequiredVersion not found in the repo $TempRepo"
             Write-Output "Downloading the package from PsGallery to the path $TempRepoPath"
             # We try to download the package from the PsGallery as we are likely intending to use the existing version of the module.
             # If the module not found in psgallery, the following commnad would fail and hence publish to local repo process would fail as well
-            Save-Package -Name $ModuleName -RequiredVersion $RequiredVersion -ProviderName Nuget -Path $TempRepoPath -Source https://www.powershellgallery.com/api/v2
+            Save-Package -Name $ModuleName -RequiredVersion $RequiredVersion -ProviderName Nuget -Path $TempRepoPath -Source https://www.powershellgallery.com/api/v2 | Out-Null
             Write-Output "Downloaded the package sucessfully"
         }
     }
@@ -532,21 +541,9 @@ function Save-PackagesFromPsGallery {
             $psDataFile = Import-PowershellDataFile (Join-Path $modulePath -ChildPath $moduleManifest)
             $RequiredModules = $psDataFile['RequiredModules']
 
-                
-            if($global:PrintModules) {
-                Write-Output "Loaded modules"
-                Get-Module
-                Write-Output " "
-                $global:PrintModules = $false
-            }
-
-            if($RequiredModules -ne $null) {
-
-                Write-Output "`$RequiredModules type : $($RequiredModules.GetType().FullName)"
-
-                foreach($tmp in $RequiredModules) {
-                    # TODO : Change to check the type, if array do loop, else just call
-                    foreach($module in $tmp) {
+            if ($RequiredModules -ne $null) {
+                foreach ($tmp in $RequiredModules) {
+                    foreach ($module in $tmp) {
                         Save-PackageLocally -Module $module -TempRepo $TempRepo -TempRepoPath $TempRepoPath
                     }
                 }
@@ -832,11 +829,6 @@ function Publish-AllModules {
 #
 ###################################>
 
-
-Write-Host "Loaded modules"
-Get-Module
-Write-Host " "
-
 if ([string]::IsNullOrEmpty($buildConfig)) {
     Write-Verbose "Setting build configuration to 'Release'"
     $buildConfig = "Release"
@@ -859,14 +851,14 @@ Write-Host " "
 
 # NOTE: Can only be Azure or Azure Stack, not both.
 $packageFolder = "$PSScriptRoot\..\src\Package"
-if($Scope -eq 'Stack') {
+if ($Scope -eq 'Stack') {
     $packageFolder = "$PSScriptRoot\..\src\Stack"
 }
 # Set temporary repo location
 $PublishLocal = test-path $repositoryLocation
 [string]$tempRepoPath = "$packageFolder"
 if ($PublishLocal) {
-    if($Scope -eq 'Stack') {
+    if ($Scope -eq 'Stack') {
         $tempRepoPath = (Join-Path $repositoryLocation -ChildPath "Stack")
     } else {
         $tempRepoPath = (Join-Path $repositoryLocation -ChildPath "Package")
