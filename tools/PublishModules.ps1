@@ -459,7 +459,7 @@ function Add-Modules {
 
 $global:PrintModules = $true
 
-function Save-Package {
+function Save-PackageLocally {
     [CmdletBinding()]
     param(
         $Module,
@@ -547,7 +547,7 @@ function Save-PackagesFromPsGallery {
                 foreach($tmp in $RequiredModules) {
                     # TODO : Change to check the type, if array do loop, else just call
                     foreach($module in $tmp) {
-                        Save-Package -Module $module -TempRepo $TempRepo -TempRepoPath $TempRepoPath
+                        Save-PackageLocally -Module $module -TempRepo $TempRepo -TempRepoPath $TempRepoPath
                     }
                 }
             }
