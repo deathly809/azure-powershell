@@ -457,6 +457,7 @@ function Add-Modules {
     }
 }
 
+$global:PrintModules = $true
 
 <#
 .SYNOPSIS
@@ -502,13 +503,23 @@ function Save-PackagesFromPsGallery {
             $psDataFile = Import-PowershellDataFile (Join-Path $modulePath -ChildPath $moduleManifest)
             $RequiredModules = $psDataFile['RequiredModules']
 
+                
+            if($global:PrintModules) {
+                Write-Output "Loaded modules"
+                Get-Module
+                Write-Output " "
+                $global:PrintModules = $false
+            }
+
             if($RequiredModules -ne $null) {
 
                 Write-Output "`$RequiredModules type : $($RequiredModules.GetType().FullName)"
 
                 foreach($module in $RequiredModules) {
 
-                    Write-Output "Module contents ($module | FL *)"
+                    Write-Output "Module type $($module.GetType())"
+                    Write-Output "Module contents"
+                    $module | FL *
 
                     $ModuleName = $module['ModuleName']
                     $RequiredVersion = $module['RequiredVersion']
@@ -566,9 +577,8 @@ function Add-AllModules {
         [ValidateNotNullOrEmpty()]
         [String]$NugetExe
     )
-
-    #$Keys = @('ClientModules', 'AdminModules', 'RollupModules')
-    $Keys = @('RollupModules')
+    $Keys = @('ClientModules', 'AdminModules', 'RollupModules')
+    #$Keys = @('RollupModules')
     Write-Output "adding modules to local repo"
     foreach ($module in $Keys) {
         $modulePath = $Modules[$module]
@@ -814,6 +824,10 @@ function Publish-AllModules {
 #
 ###################################>
 
+
+Write-Host "Loaded modules"
+Get-Module
+Write-Host " "
 
 if ([string]::IsNullOrEmpty($buildConfig)) {
     Write-Verbose "Setting build configuration to 'Release'"
