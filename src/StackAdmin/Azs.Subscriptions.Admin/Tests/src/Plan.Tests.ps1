@@ -128,7 +128,7 @@ InModuleScope Azs.Subscriptions.Admin {
         It "TestCreateUpdateThenDeletePlan" {
             $global:TestName = 'TestCreateUpdateThenDeletePlan'
 
-            $location = "local"
+            $location = "redmond"
             $rg = "testrg"
             $name = "testplans"
             $description = "description of the plan"

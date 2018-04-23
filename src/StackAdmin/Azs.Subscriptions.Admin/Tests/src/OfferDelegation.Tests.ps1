@@ -25,11 +25,10 @@
 
 .EXAMPLE
     PS C:\> .\src\Offer.Tests.ps1
-	  Describing Offer
-		[+] TestListOffers 503ms
-		[+] TestGetOffer 118ms
-		[+] TestGetAllOffers 152ms
-		[+] TestCreateUpdateThenDeleteOffer 181ms
+
+	  Describing OfferDelegation
+		[+] TestListOfferDelegations 527ms
+		[+] TestCreateUpdateThenDeleteOfferDelegation 163ms
 
 .NOTES
     Author: Mike Giesler
@@ -47,13 +46,13 @@ $Global:RunRaw = $RunRaw
 
 InModuleScope Azs.Subscriptions.Admin {
 
-    Describe "Offer" -Tags @('Offers', 'SubscriptionsAdmin') {
+    Describe "OfferDelegation" -Tags @('Offers', 'SubscriptionsAdmin') {
 
         BeforeEach {
 
             . $PSScriptRoot\Common.ps1
 
-            function ValidateOffer {
+            function ValidateOfferDelegation {
                 param(
                     [Parameter(Mandatory = $true)]
                     $Offer
@@ -68,13 +67,10 @@ InModuleScope Azs.Subscriptions.Admin {
                 $Offer.Location      | Should Not Be $null
 
                 # Offer
-                $Offer.DisplayName   | Should Not Be $null
-                $Offer.OfferName     | Should Not Be $null
-				$Offer.Description   | Should Not Be $null
-				$Offer.State         | Should Not Be $null
+				$Offer.SubscriptionId | Should Not Be $null
             }
-
-            function AssertOffersSame {
+			
+			function AssertOfferDelegationsSame {
                 param(
                     [Parameter(Mandatory = $true)]
                     $Expected,
@@ -93,11 +89,8 @@ InModuleScope Azs.Subscriptions.Admin {
                     $Found.Name             | Should Be $Expected.Name
                     $Found.Type             | Should Be $Expected.Type
 
-					# Offer
-					$Found.DisplayName   | Should Be $Expected.DisplayName
-					$Found.OfferName     | Should Be $Expected.OfferName
-					$Found.Description   | Should Be $Expected.Description
-					$Found.State         | Should Be $Expected.State
+					# OfferDelegation
+					$Found.SubscriptionId   | Should Be $Expected.SubscriptionId
                 }
             }
 
@@ -113,53 +106,35 @@ InModuleScope Azs.Subscriptions.Admin {
             }
         }
 
-        It "TestListOffers" {
-            $global:TestName = 'TestListOffers'
+		It "TestListOfferDelegations" {
+			$global:TestName = "TestListOfferDelegations"
 
-            $allOffers = Get-AzsManagedOffer
-            $resourceGroups = New-Object  -TypeName System.Collections.Generic.HashSet[System.String]
+			$offers = Get-AzsManagedOffer
 
-            foreach($offer in $allOffers) {
-                $rgn = GetResourceGroupName -ID $offer.Id
-                $resourceGroups.Add($rgn)
-            }
-
-            foreach($rgn in $resourceGroups) {
-                Get-AzsManagedOffer -ResourceGroupName $rgn
-            }
-        }
-
-		It "TestGetOffer" {
-			$global:TestName = 'TestGetOffer'
-
-			$offer = (Get-AzsManagedOffer)[0]
-			$offer | Should Not Be $null
-			$rgn = GetResourceGroupName -ID $offer.Id
-			$offer2 = Get-AzsManagedOffer -ResourceGroupName $rgn -Name $offer.Name
-			AssertOffersSame $offer $offer2
-		}
-
-		It "TestGetAllOffers" {
-			$global:TestName = 'TestGetAllOffers'
-
-            $allOffers = Get-AzsManagedOffer
-			foreach($offer in $allOffers) {
+			foreach ($offer in $offers)
+			{
 				$rgn = GetResourceGroupName -ID $offer.Id
-				$offer2 = Get-AzsManagedOffer -ResourceGroupName $rgn -Name $offer.Name
-				AssertOffersSame $offer $offer2
+				$offerdel = Get-AzsOfferDelegation -ResourceGroupName $rgn -OfferName $offer.Name
+				ValidateOfferDelegation $offerdel
 			}
 		}
 
-		It "TestCreateUpdateThenDeleteOffer" {
-			$global:TestName = 'TestCreateUpdateThenDeleteOffer'
+		It "TestCreateUpdateThenDeleteOfferDelegation" {
+			$global:TestName = 'TestCreateUpdateThenDeleteOfferDelegation'
 
-			$rg = "testrg"
-			$name = "testOffer1"
-			$plan = (Get-AzsPlan)[0]
+			$rg = "offerdel-rg"
+			$name = "offerdel"
+			$offerName = "testOfferDelegation"
 
-			$offer = New-AzsOffer -Name $name -DisplayName "Test Offer" -ResourceGroupName $rg -BasePlanIds { $plan.Id } -Location local
-			$saved = Get-AzsManagedOffer -Name $name -ResourceGroupName $rg
-			AssertOffersSame $offer $saved
+			$offer = New-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -Location "local" -SubscriptionId "3c2a4c80-e594-46eb-b923-98fd98d50155" -OfferName $name
+			$saved = Get-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name
+			AssertOfferDelegationsSame $offer $saved
+
+			Remove-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name -Force
+
+			$saved = Get-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name
+			# No check as previous Get-AzsOfferDelegation value is returned
+			# $saved | Should Be $null
 		}
     }
 }
