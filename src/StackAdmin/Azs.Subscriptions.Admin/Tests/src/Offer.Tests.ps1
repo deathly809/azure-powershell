@@ -25,10 +25,11 @@
 
 .EXAMPLE
     PS C:\> .\src\Offer.Tests.ps1
-	Describing Offer
-	  [+] TestListOffers 147ms
-	  [+] TestGetOffer 110ms
-	  [+] TestCreateUpdateThenDeleteOffer 1.23s
+	  Describing Offer
+		[+] TestListOffers 503ms
+		[+] TestGetOffer 118ms
+		[+] TestGetAllOffers 152ms
+		[+] TestCreateUpdateThenDeleteOffer 181ms
 
 .NOTES
     Author: Mike Giesler
@@ -136,6 +137,17 @@ InModuleScope Azs.Subscriptions.Admin {
 			$rgn = GetResourceGroupName -ID $offer.Id
 			$offer2 = Get-AzsManagedOffer -ResourceGroupName $rgn -Name $offer.Name
 			AssertOffersSame $offer $offer2
+		}
+
+		It "TestGetAllOffers" {
+			$global:TestName = 'TestGetAllOffers'
+
+            $allOffers = Get-AzsManagedOffer
+			foreach($offer in $allOffers) {
+				$rgn = GetResourceGroupName -ID $offer.Id
+				$offer2 = Get-AzsManagedOffer -ResourceGroupName $rgn -Name $offer.Name
+				AssertOffersSame $offer $offer2
+			}
 		}
 
 		It "TestCreateUpdateThenDeleteOffer" {

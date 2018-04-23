@@ -24,15 +24,16 @@
     Run using our client creation path.
 
 .EXAMPLE
-    PS C:\> .\src\Plan.Tests.ps1
-	Describing Plan
-		[+] TestListPlans 185ms
-		[+] TestCreateUpdateThenDeletePlan 193ms
+    PS C:\> .\src\Offer.Tests.ps1
+
+	  Describing OfferDelegation
+		[+] TestListOfferDelegations 527ms
+		[+] TestCreateUpdateThenDeleteOfferDelegation 163ms
 
 .NOTES
-    Author: Jeffrey Robinson
+    Author: Mike Giesler
 	Copyright: Microsoft
-    Date:   March 13, 2018
+    Date:   March 16, 2018
 #>
 param(
     [bool]$RunRaw = $false,
@@ -45,33 +46,31 @@ $Global:RunRaw = $RunRaw
 
 InModuleScope Azs.Subscriptions.Admin {
 
-    Describe "Plan" -Tags @('Plans', 'SubscriptionsAdmin') {
+    Describe "OfferDelegation" -Tags @('Offers', 'SubscriptionsAdmin') {
 
         BeforeEach {
 
             . $PSScriptRoot\Common.ps1
 
-            function ValidatePlan {
+            function ValidateOfferDelegation {
                 param(
                     [Parameter(Mandatory = $true)]
-                    $Plan
+                    $Offer
                 )
                 # Overall
-                $Plan               | Should Not Be $null
+                $Offer               | Should Not Be $null
 
                 # Resource
-                $Plan.Id            | Should Not Be $null
-                $Plan.Name          | Should Not Be $null
-                $Plan.Type          | Should Not Be $null
-                $Plan.Location      | Should Not Be $null
+                $Offer.Id            | Should Not Be $null
+                $Offer.Name          | Should Not Be $null
+                $Offer.Type          | Should Not Be $null
+                $Offer.Location      | Should Not Be $null
 
-                # Plan
-                $Plan.DisplayName   | Should Not Be $null
-                $Plan.PlanName      | Should Not Be $null
-                $Plan.QuotaIds      | Should Not Be $null
+                # Offer
+				$Offer.SubscriptionId | Should Not Be $null
             }
-
-            function AssertPlansSame {
+			
+			function AssertOfferDelegationsSame {
                 param(
                     [Parameter(Mandatory = $true)]
                     $Expected,
@@ -90,10 +89,8 @@ InModuleScope Azs.Subscriptions.Admin {
                     $Found.Name             | Should Be $Expected.Name
                     $Found.Type             | Should Be $Expected.Type
 
-					# Plan
-					$Plan.DisplayName       | Should Be $Expected.DisplayName
-					$Plan.PlanName          | Should Be $Expected.PlanName
-					$Plan.QuotaIds          | Should Be $Expected.QuotaIds
+					# OfferDelegation
+					$Found.SubscriptionId   | Should Be $Expected.SubscriptionId
                 }
             }
 
@@ -109,39 +106,35 @@ InModuleScope Azs.Subscriptions.Admin {
             }
         }
 
-        It "TestListPlans" {
-            $global:TestName = 'TestListPlans'
+		It "TestListOfferDelegations" {
+			$global:TestName = "TestListOfferDelegations"
 
-            $allPlans = Get-AzsPlan
-            $resourceGroups = New-Object  -TypeName System.Collections.Generic.HashSet[System.String]
+			$offers = Get-AzsManagedOffer
 
-            foreach($plan in $allPlans) {
-                $rgn = GetResourceGroupName -ID $plan.Id
-                $resourceGroups.Add($rgn)
-            }
+			foreach ($offer in $offers)
+			{
+				$rgn = GetResourceGroupName -ID $offer.Id
+				$offerdel = Get-AzsOfferDelegation -ResourceGroupName $rgn -OfferName $offer.Name
+				ValidateOfferDelegation $offerdel
+			}
+		}
 
-            foreach($rgn in $resourceGroups) {
-                Get-AzsPlan -ResourceGroupName $rgn
-            }
-        }
+		It "TestCreateUpdateThenDeleteOfferDelegation" {
+			$global:TestName = 'TestCreateUpdateThenDeleteOfferDelegation'
 
-        It "TestCreateUpdateThenDeletePlan" {
-            $global:TestName = 'TestCreateUpdateThenDeletePlan'
+			$rg = "offerdel-rg"
+			$name = "offerdel"
+			$offerName = "testOfferDelegation"
 
-            $location = "redmond"
-            $rg = "testrg"
-            $name = "testplans"
-            $description = "description of the plan"
+			$offer = New-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -Location "local" -SubscriptionId "3c2a4c80-e594-46eb-b923-98fd98d50155" -OfferName $name
+			$saved = Get-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name
+			AssertOfferDelegationsSame $offer $saved
 
-            $quota = Get-AzsSubscriptionsQuota -Location $Location
+			Remove-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name -Force
 
-            $result = New-AzsPlan -Name $name -ResourceGroupName $rg -Location $location -DisplayName $name -QuotaIds $quota.Id -Description $description
-            ValidatePlan -Plan $result
-
-            $plan = Get-AzsPlan -Name $name -ResourceGroupName $rg
-            ValidatePlan -Plan $plan
-
-            Remove-AzsPlan -Name $name -ResourceGroupName $rg -Force
-        }
+			$saved = Get-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name
+			# No check as previous Get-AzsOfferDelegation value is returned
+			# $saved | Should Be $null
+		}
     }
 }
