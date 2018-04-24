@@ -88,29 +88,5 @@ InModuleScope Azs.Subscriptions.Admin {
 
 			Test-AzsNameAvailability -Name "Test Sub" -ResourceType "Microsoft.Subscriptions.Admin/plans"
 		}
-
-		It "CreateUpdateDeleteSubscription" {
-			$global:TestName = "CreateUpdateDeleteSubscription"
-
-			$delProviderSubscriptionId = "ca831431-dac2-4466-a538-59fa3f882f68"
-			$subscriptionId = "142e5aa1-4b05-43b7-aeee-9598c49caba3"
-			$owner = "tenantadmin1@msazurestack.onmicrosoft.com"
-
-			$offers = Get-AzsManagedOffer
-
-			New-AzsUserSubscription -SubscriptionId $subscriptionId -DelegatedProviderSubscriptionId $delProviderSubscriptionId -Owner $owner -OfferId $offers[0].Id 
-
-			$sub = Get-AzsUserSubscription -SubscriptionId $subscriptionId
-			ValidateSubscription $sub
-
-			Remove-AzsUserSubscription -SubscriptionId $subscriptionId -Force
-
-			$sub = Get-AzsUserSubscription -SubscriptionId $subscriptionId
-			if ($sub -ne $null)
-			{
-				# No check as previous Get-AzsUserSubscription value is returned
-				# $sub.State | Should Be "Deleted"
-			}
-		}
     }
 }

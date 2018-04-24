@@ -28,7 +28,6 @@
 
 	  Describing OfferDelegation
 		[+] TestListOfferDelegations 527ms
-		[+] TestCreateUpdateThenDeleteOfferDelegation 163ms
 
 .NOTES
     Author: Mike Giesler
@@ -117,24 +116,6 @@ InModuleScope Azs.Subscriptions.Admin {
 				$offerdel = Get-AzsOfferDelegation -ResourceGroupName $rgn -OfferName $offer.Name
 				ValidateOfferDelegation $offerdel
 			}
-		}
-
-		It "TestCreateUpdateThenDeleteOfferDelegation" {
-			$global:TestName = 'TestCreateUpdateThenDeleteOfferDelegation'
-
-			$rg = "offerdel-rg"
-			$name = "offerdel"
-			$offerName = "testOfferDelegation"
-
-			$offer = New-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -Location "local" -SubscriptionId "3c2a4c80-e594-46eb-b923-98fd98d50155" -OfferName $name
-			$saved = Get-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name
-			AssertOfferDelegationsSame $offer $saved
-
-			Remove-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name -Force
-
-			$saved = Get-AzsOfferDelegation -Name $offerName -ResourceGroupName $rg -OfferName $name
-			# No check as previous Get-AzsOfferDelegation value is returned
-			# $saved | Should Be $null
 		}
     }
 }

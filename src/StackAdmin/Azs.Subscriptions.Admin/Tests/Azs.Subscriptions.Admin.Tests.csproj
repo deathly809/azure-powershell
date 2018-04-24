@@ -62,7 +62,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="SessionRecords\SubscriptionsAdminClient\TestCreateUpdateThenDeleteDirectoryTenant.json" />
     <None Include="SessionRecords\SubscriptionsAdminClient\TestCreateUpdateThenDeleteOffer.json" />
     <None Include="SessionRecords\SubscriptionsAdminClient\TestCreateUpdateThenDeletePlan.json" />
     <None Include="SessionRecords\SubscriptionsAdminClient\TestGetAcquiredPlan.json" />
