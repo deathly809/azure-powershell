@@ -65,6 +65,7 @@ function Set-AzsOffer {
         $Name,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'Update')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [ValidateLength(1, 90)]
         [ValidateNotNullOrEmpty()]
         [System.String]

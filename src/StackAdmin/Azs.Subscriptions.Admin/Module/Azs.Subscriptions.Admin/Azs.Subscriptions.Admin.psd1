@@ -88,7 +88,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
     'New-AzsSubscriptionPlan',
     'Get-AzsDirectoryTenant', 'New-AzsPlan', 'Get-AzsPlan',
     'Remove-AzsOfferDelegation', 'Get-AzsOfferDelegation',
-    'Set-AzsDirectoryTenant', 'Get-AzsUserSubscription', 'Set-AzsOffer',
+    'Get-AzsUserSubscription', 'Set-AzsOffer',
     'Remove-AzsPlan', 'Set-AzsPlan', 'New-OfferObject',
     'New-CheckNameAvailabilityDefinitionObject',
     'New-DirectoryTenantObject', 'New-AddonPlanDefinitionObject',

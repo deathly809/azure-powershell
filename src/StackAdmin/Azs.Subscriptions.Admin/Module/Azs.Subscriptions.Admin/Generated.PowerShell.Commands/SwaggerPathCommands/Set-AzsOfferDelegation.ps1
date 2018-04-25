@@ -5,53 +5,40 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
 <#
 .SYNOPSIS
-    Updates the specified plan
+    Updates the offer delegation.
 
 .DESCRIPTION
-    Updates the specified plan
+    Updates the offer delegation.
 
-.PARAMETER ResourceGroupName
-    The resource group the resource is located under.
+.PARAMETER OfferName
+    Name of an offer.
 
-.PARAMETER DisplayName
-    Display name.
+.PARAMETER SubscriptionId
+    Identifier of the subscription receiving the delegated offer.
+
+.PARAMETER Name
+    Name of a offer delegation.
 
 .PARAMETER ResourceId
     The resource id.
 
-.PARAMETER QuotaIds
-    Quota identifiers under the plan.
-
-.PARAMETER InputObject
-    The input object of type Microsoft.AzureStack.Management.Subscriptions.Admin.Models.Plan.
-
-.PARAMETER SkuIds
-    SKU identifiers.
-
-.PARAMETER ExternalReferenceId
-    External reference identifier.
-
-.PARAMETER Description
-    Description of the plan.
+.PARAMETER ResourceGroupName
+    The resource group the resource is located under.
 
 .PARAMETER Location
     Location of the resource.
 
-.PARAMETER Name
-    Name of the plan.
-
-.PARAMETER SubscriptionCount
-    Subscription count.
+.PARAMETER InputObject
+    The input object of type Microsoft.AzureStack.Management.Subscriptions.Admin.Models.OfferDelegation.
 
 .EXAMPLE
 
-    PS C:\> Set-AzsPlan -Name "plan1" -ResourceGroupName "rg1" -Description "This plan is meant to be used by accounting only."
+    PS C:\> Set-AzsOfferDelegation -Offer offer1 -ResourceGroupName rg1 -Name delegate1 -SubscriptionId "c90173b1-de7a-4b1d-8600-b832b0e65946" -Location "local"
 
-    Updates the specified plan
-
+    Updates the offer delegation.
 #>
-function Set-AzsPlan {
-    [OutputType([Microsoft.AzureStack.Management.Subscriptions.Admin.Models.Plan])]
+function Set-AzsOfferDelegation {
+    [OutputType([Microsoft.AzureStack.Management.Subscriptions.Admin.Models.OfferDelegation])]
     [CmdletBinding(DefaultParameterSetName = 'Update', SupportsShouldProcess = $true)]
     param(
         [Parameter(Mandatory = $true, ParameterSetName = 'Update')]
@@ -60,50 +47,37 @@ function Set-AzsPlan {
         $Name,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
+        [ValidateNotNullOrEmpty()]
+        [System.String]
+        $OfferName,
+
+        [Parameter(Mandatory = $true, ParameterSetName = 'Update')]
         [ValidateLength(1, 90)]
         [ValidateNotNullOrEmpty()]
         [System.String]
         $ResourceGroupName,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [System.String]
-        $DisplayName,
-
-        [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [string[]]
-        $QuotaIds,
-
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject')]
-        [ValidateNotNullOrEmpty()]
-        [Microsoft.AzureStack.Management.Subscriptions.Admin.Models.Plan]
-        $InputObject,
-
-        [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [string[]]
-        $SkuIds,
-
-        [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [System.String]
-        $ExternalReferenceId,
-
-        [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [System.String]
-        $Description,
-
-        [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Alias('ArmLocation')]
-        [System.String]
-        $Location,
-
-        [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [int64]
-        $SubscriptionCount,
+        $SubscriptionId,
 
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'ResourceId')]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $ResourceId
+        $ResourceId,
+
+        [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
+        [System.String]
+        $Location,
+
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'InputObject')]
+        [ValidateNotNullOrEmpty()]
+        [Microsoft.AzureStack.Management.Subscriptions.Admin.Models.OfferDelegation]
+        $InputObject
     )
 
     Begin {
@@ -121,33 +95,27 @@ function Set-AzsPlan {
 
         $ErrorActionPreference = 'Stop'
 
-        $NewPlan = $null
+        $NewOfferDelegation = $null
 
         if ('InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
             $GetArmResourceIdParameterValue_params = @{
-                IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}'
+                IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/offerDelegations/{offerDelegationName}'
             }
 
             if ('ResourceId' -eq $PsCmdlet.ParameterSetName) {
                 $GetArmResourceIdParameterValue_params['Id'] = $ResourceId
             } else {
                 $GetArmResourceIdParameterValue_params['Id'] = $InputObject.Id
-                $NewPlan = $InputObject
+                $NewOfferDelegation = $InputObject
             }
             $ArmResourceIdParameterValues = Get-ArmResourceIdParameterValue @GetArmResourceIdParameterValue_params
-            $resourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
 
-            $Name = $ArmResourceIdParameterValues['plan']
+            $resourceGroupName = $ArmResourceIdParameterValues['resourceGroupName']
+            $OfferName = $ArmResourceIdParameterValues['offer']
+            $Name = $ArmResourceIdParameterValues['offerDelegationName']
         }
 
-        if ($PSCmdlet.ShouldProcess("$Name" , "Update plan")) {
-
-
-            if ($PSBoundParameters.ContainsKey('Location')) {
-                if ( $MyInvocation.Line -match "\s-ArmLocation\s") {
-                    Write-Warning -Message "The parameter alias ArmLocation will be deprecated in future release. Please use the parameter Location instead"
-                }
-            }
+        if ($PSCmdlet.ShouldProcess("$Name" , "Update offer")) {
 
             $NewServiceClient_params = @{
                 FullClientTypeName = 'Microsoft.AzureStack.Management.Subscriptions.Admin.SubscriptionsAdminClient'
@@ -156,32 +124,27 @@ function Set-AzsPlan {
             $GlobalParameterHashtable = @{}
             $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
 
-            $GlobalParameterHashtable['SubscriptionId'] = $null
-            if ($PSBoundParameters.ContainsKey('SubscriptionId')) {
-                $GlobalParameterHashtable['SubscriptionId'] = $PSBoundParameters['SubscriptionId']
-            }
-
             $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
 
-            if ([System.String]::IsNullOrEmpty('Location') -and 'Update' -eq $PsCmdlet.ParameterSetName) {
+            if (-not $PSBoundParameters.ContainsKey('Location')) {
                 $Location = (Get-AzureRMLocation).Location
                 $PSBoundParameters.Add("Location", $Location)
             }
 
-            $flattenedParameters = @('Description', 'SkuIds', 'ExternalReferenceId', 'DisplayName', 'Location', 'QuotaIds', 'SubscriptionCount')
-            if ($NewPlan -eq $null) {
-                $NewPlan = Get-AzsPlan -Name $Name -ResourceGroupName $ResourceGroupName
-            }
+                if ($NewOfferDelegation -eq $null) {
+                    $NewOfferDelegation = Get-AzsOfferDelegation -Name $Name -OfferName $OfferName -ResourceGroupName $ResourceGroupName
+                }
 
+            $flattenedParameters = @('SubscriptionId', 'Location')
             $flattenedParameters | ForEach-Object {
                 if ($PSBoundParameters.ContainsKey($_)) {
-                    $NewPlan.$($_) = $PSBoundParameters[$_]
+                    $NewOfferDelegation.$($_) = $PSBoundParameters[$_]
                 }
             }
 
             if ('Update' -eq $PsCmdlet.ParameterSetName -or 'InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
                 Write-Verbose -Message 'Performing operation update on $SubscriptionsAdminClient.'
-                $TaskResult = $SubscriptionsAdminClient.Plans.CreateOrUpdateWithHttpMessagesAsync($ResourceGroupName, $Name, $NewPlan)
+                $TaskResult = $SubscriptionsAdminClient.OfferDelegations.CreateOrUpdateWithHttpMessagesAsync($ResourceGroupName, $OfferName, $Name, $NewOfferDelegation)
             } else {
                 Write-Verbose -Message 'Failed to map parameter set to operation method.'
                 throw 'Module failed to find operation to execute.'
@@ -193,7 +156,6 @@ function Set-AzsPlan {
                 }
 
                 Get-TaskResult @GetTaskResult_params
-
             }
         }
     }
