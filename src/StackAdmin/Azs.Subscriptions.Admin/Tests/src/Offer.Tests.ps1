@@ -149,7 +149,21 @@ InModuleScope Azs.Subscriptions.Admin {
 				AssertOffersSame $offer $offer2
 			}
 		}
+		
+		It "TestSetOffer" {
+			$global:TestName = "TestSetOffer"
 
+			$allOffers = Get-AzsManagedOffer
+			$offer = $allOffers[0]
+			$rgn = GetResourceGroupName -Id $offer.Id
+
+			$offer.DisplayName += "-test"
+
+			$offer | Set-AzsOffer
+			$updated = Get-AzsManagedOffer -Name $offer.Name -ResourceGroupName $rgn
+			$updated.DisplayName | Should Be $offer.DisplayName
+		}
+		
 		It "TestCreateUpdateThenDeleteOffer" {
 			$global:TestName = 'TestCreateUpdateThenDeleteOffer'
 

@@ -160,7 +160,7 @@ function Set-AzsUserSubscription {
             $NewServiceClient_params['GlobalParameterHashtable'] = $GlobalParameterHashtable
             $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
 
-            if ([System.String]::IsNullOrEmpty($Location)) {
+            if ([System.String]::IsNullOrEmpty($Location) -and $PsCmdlet.ParameterSetName -eq 'Set') {
                 $Location = (Get-AzureRMLocation).Location
             }
 

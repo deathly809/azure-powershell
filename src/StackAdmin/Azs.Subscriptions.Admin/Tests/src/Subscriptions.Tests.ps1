@@ -83,6 +83,24 @@ InModuleScope Azs.Subscriptions.Admin {
             }
         }
 
+		It "TestSetSubscription" {
+			$global:TestName = "TestSetSubscription"
+			
+			$Subscriptions = Get-AzsUserSubscription
+			foreach ($sub in $subscriptions) {
+				$sub.DisplayName += "-test"
+				$sub.Owner = "user@microsoft.com"
+
+				$sub | Set-AzsUserSubscription
+
+				$updated = Get-AzsUserSubscription -SubscriptionId $sub.SubscriptionId
+
+				$updated.DisplayName | Should Be $sub.DisplayName
+				$updated.Owner       | Should Be "user@microsoft.com"
+
+				break;
+			}
+		}
 		It "CheckNameAvailability" {
 			$global:TEstName = 'CheckNameAvailability'
 

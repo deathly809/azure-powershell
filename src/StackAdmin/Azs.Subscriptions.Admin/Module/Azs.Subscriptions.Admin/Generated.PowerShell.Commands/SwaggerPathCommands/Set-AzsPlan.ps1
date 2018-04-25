@@ -60,21 +60,16 @@ function Set-AzsPlan {
         $Name,
 
         [Parameter(Mandatory = $true, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [ValidateLength(1, 90)]
         [ValidateNotNullOrEmpty()]
         [System.String]
         $ResourceGroupName,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [System.String]
         $DisplayName,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [string[]]
         $QuotaIds,
 
@@ -84,33 +79,23 @@ function Set-AzsPlan {
         $InputObject,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [string[]]
         $SkuIds,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [System.String]
         $ExternalReferenceId,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [System.String]
         $Description,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [Alias('ArmLocation')]
         [System.String]
         $Location,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'Update')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
         [int64]
         $SubscriptionCount,
 
@@ -177,7 +162,7 @@ function Set-AzsPlan {
 
             $SubscriptionsAdminClient = New-ServiceClient @NewServiceClient_params
 
-            if ([System.String]::IsNullOrEmpty('Location')) {
+            if ([System.String]::IsNullOrEmpty('Location') -and 'Update' -eq $PsCmdlet.ParameterSetName) {
                 $Location = (Get-AzureRMLocation).Location
                 $PSBoundParameters.Add("Location", $Location)
             }
