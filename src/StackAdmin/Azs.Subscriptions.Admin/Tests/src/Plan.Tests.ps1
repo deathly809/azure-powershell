@@ -125,6 +125,20 @@ InModuleScope Azs.Subscriptions.Admin {
             }
         }
 
+		It "TestSetPlan" {
+			$global:TestName = "TestSetPlan"
+
+			$allPlans = Get-AzsPlan
+			$plan = $allPlans[0]
+			$rgn = GetResourceGroupName -Id $plan.Id
+
+			$plan.DisplayName += "-test"
+
+			$plan | Set-AzsPlan
+			$updated = Get-AzsPlan -Name $plan.Name -ResourceGroupName $rgn
+			$updated.DisplayName | Should Be $plan.DisplayName
+		}
+		
         It "TestCreateUpdateThenDeletePlan" {
             $global:TestName = 'TestCreateUpdateThenDeletePlan'
 
