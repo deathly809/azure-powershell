@@ -48,7 +48,6 @@ $global:TestName = ""
 . $PSScriptRoot\Common.ps1
 
 $global:SkipList = @(
-    "TestDownloadAzsAzureBridgeProduct",
     "TestDownloadAzsAzureBridgeProductPipeline",
     "TestRemoveAzsAzureBridgeDownloadedProduct",
     "TestRemoveAzsAzureBridgeDownloadedProductPipeline"
