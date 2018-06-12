@@ -46,10 +46,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Location" -Tags @('Locations', 'SubscriptionsAdmin') {

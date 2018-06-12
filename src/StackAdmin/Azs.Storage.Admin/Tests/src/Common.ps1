@@ -7,7 +7,7 @@ $global:Location = "local"
 $global:Provider = "Microsoft.Storage.Admin"
 $global:ResourceGroupName = "System.local"
 
-if (-not $RunRaw) {
+if (-not $global:RunRaw) {
     $scriptBlock = {
         Get-MockClient -ClassName 'StorageAdminClient' -TestName $global:TestName -Verbose
     }
@@ -21,4 +21,8 @@ function Select-Name {
         $Name = $Name.Substring($Name.LastIndexOf("/") + 1)
     }
     $Name
+}
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
 }

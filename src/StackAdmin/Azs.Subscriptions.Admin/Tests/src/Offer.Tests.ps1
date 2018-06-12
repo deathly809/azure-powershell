@@ -47,10 +47,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Offer" -Tags @('Offers', 'SubscriptionsAdmin') {
@@ -155,7 +151,7 @@ InModuleScope Azs.Subscriptions.Admin {
                 AssertOffersSame $offer $offer2
             }
         }
-		
+
         it "TestSetOffer" -Skip:$('TestSetOffer' -in $global:SkippedTests) {
             $global:TestName = "TestSetOffer"
 
@@ -169,7 +165,7 @@ InModuleScope Azs.Subscriptions.Admin {
             $updated = Get-AzsManagedOffer -Name $offer.Name -ResourceGroupName $rgn
             $updated.DisplayName | Should Be $offer.DisplayName
         }
-		
+
         it "TestCreateUpdateThenDeleteOffer" -Skip:$('TestCreateUpdateThenDeleteOffer' -in $global:SkippedTests) {
             $global:TestName = 'TestCreateUpdateThenDeleteOffer'
             $plan = (Get-AzsPlan)[0]

@@ -46,18 +46,13 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.AzureBridge.Admin {
 
     Describe "AzsAzureBridgeActivation" -Tags @('AzureBridgeActivation', 'Azs.AzureBridge.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateActivationInfo {
                 param(

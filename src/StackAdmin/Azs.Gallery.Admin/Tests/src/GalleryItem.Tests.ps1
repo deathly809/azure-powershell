@@ -46,10 +46,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Gallery.Admin {
 
     Describe "GalleryItem" -Tags @('RegionHealth', 'GalleryAdmin') {
@@ -105,8 +101,7 @@ InModuleScope Azs.Gallery.Admin {
                 )
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                }
-                else {
+                } else {
                     $Found                  | Should Not Be $null
 
                     # Resource
@@ -118,8 +113,7 @@ InModuleScope Azs.Gallery.Admin {
                     # Gallery Item
                     if ($Expected.CategoryIds -and $Found.CategoryIds) {
                         $Found.CategoryIds				| Should Be $Expected.CategoryIds
-                    }
-                    elseif (($null -ne $Expected.CategoryIds) -and ($null -eq $Found.CategoryIds)) {
+                    } elseif (($null -ne $Expected.CategoryIds) -and ($null -eq $Found.CategoryIds)) {
                         throw "Category Ids do not match Expected: $($Expected.CategoryIds)"
                     }
                     $Found.Description				| Should Be $Expected.Description

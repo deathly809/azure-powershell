@@ -45,10 +45,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "OfferDelegation" -Tags @('Offers', 'SubscriptionsAdmin') {
@@ -74,7 +70,7 @@ InModuleScope Azs.Subscriptions.Admin {
                 # Offer
                 $Offer.SubscriptionId | Should Not Be $null
             }
-			
+
             function AssertOfferDelegationsSame {
                 param(
                     [Parameter(Mandatory = $true)]

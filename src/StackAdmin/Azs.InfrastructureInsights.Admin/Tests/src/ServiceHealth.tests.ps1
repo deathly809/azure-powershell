@@ -46,15 +46,11 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.InfrastructureInsights.Admin {
 
     Describe "AzsServiceHealths" -Tags @('AzsServiceHealth', 'InfrastructureInsightsAdmin') {
 
-        BeforeEach {            
+        BeforeEach {
 
             . $PSScriptRoot\Common.ps1
 
@@ -93,8 +89,7 @@ InModuleScope Azs.InfrastructureInsights.Admin {
                 )
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                }
-                else {
+                } else {
                     $Found                  | Should Not Be $null
 
                     # Resource
@@ -106,8 +101,7 @@ InModuleScope Azs.InfrastructureInsights.Admin {
                     # Service Health
                     if ($Expected.AlertSummary -eq $null) {
                         $Found.AlertSummary        				| Should Be $null
-                    }
-                    else {
+                    } else {
                         $Found.AlertSummary        				| Should Not Be $null
                         $Found.AlertSummary.CriticalAlertCount  | Should Be $Expected.AlertSummary.CriticalAlertCount
                         $Found.AlertSummary.WarningAlertCount  	| Should Be $Expected.AlertSummary.WarningAlertCount

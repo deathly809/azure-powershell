@@ -49,17 +49,13 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Backup.Admin {
 
     Describe "BackupLocations" -Tags @('BackupLocation', 'Azs.Backup.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateBackupLocation {
                 param(

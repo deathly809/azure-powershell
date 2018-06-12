@@ -46,17 +46,13 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Network.Admin {
-    
+
     Describe "VirtualNetworksTests" {
 
         . $PSScriptRoot\Common.ps1
 
-        BeforeEach {        
+        BeforeEach {
 
             function ValidateConfigurationState {
                 param(

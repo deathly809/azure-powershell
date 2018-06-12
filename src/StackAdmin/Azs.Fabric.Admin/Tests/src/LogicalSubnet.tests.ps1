@@ -46,17 +46,13 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Fabric.Admin {
 
     Describe "LogicalSubnets" -Tags @('LogicalSubnet', 'Azs.Fabric.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateLogicalSubnet {
                 param(

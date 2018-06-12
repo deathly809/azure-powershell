@@ -46,17 +46,13 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Compute.Admin {
 
     Describe "PlatformImages" -Tags @('SubscriberPlatformImage', 'Azs.Compute.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function Create() {
 

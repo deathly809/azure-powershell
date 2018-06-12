@@ -49,16 +49,12 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Update.Admin {
 
     Describe "UpdateAdminTests" -Tags @('UpdateAdminTests', 'Azs.Update.Admin') {
 
         BeforeEach {
-            
+
             . $PSScriptRoot\Common.ps1
 
             function ValidateUpdateLocation {

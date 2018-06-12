@@ -44,16 +44,12 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Quota" -Tags @('Quotas', 'SubscriptionsAdmin') {
 
         BeforeEach {
-            
+
             . $PSScriptRoot\Common.ps1
 
             function ValidateQuota {

@@ -47,10 +47,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.InfrastructureInsights.Admin {
 
     Describe "Alerts" -Tags @('Alert', 'InfrastructureInsightsAdmin') {
@@ -215,7 +211,7 @@ InModuleScope Azs.InfrastructureInsights.Admin {
             $Alerts = Get-AzsAlert -ResourceGroupName $global:ResourceGroupName -Location $global:location
             $Alerts | Should Not Be $null
             foreach ($Alert in $Alerts) {
-                
+
                 $Alert | Should not be $null
                 $Alert.State | Should not be $null
 

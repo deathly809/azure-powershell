@@ -23,9 +23,13 @@ function Extract-Name {
     return $Name[-1]
 }
 
-if (-not $RunRaw) {
+if (-not $global:RunRaw) {
     $scriptBlock = {
         Get-MockClient -ClassName 'InfrastructureInsightsAdminClient' -TestName $global:TestName
     }
     Mock New-ServiceClient $scriptBlock -ModuleName $global:ModuleName
+}
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
 }

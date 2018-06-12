@@ -47,10 +47,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "AcquiredPlan" -Tags @('AcquiredPlan', 'SubscriptionsAdmin') {
@@ -116,7 +112,7 @@ InModuleScope Azs.Subscriptions.Admin {
 
         it "TestGetAcquiredPlan" -Skip:$('TestGetAcquiredPlan' -in $global:SkippedTests) {
             $global:TestName = 'TestGetAcquiredPlan'
-            
+
             $plans = Get-AzsSubscriptionPlan -TargetSubscriptionId $global:subscriptionId
 
             foreach ($plan in $plans) {

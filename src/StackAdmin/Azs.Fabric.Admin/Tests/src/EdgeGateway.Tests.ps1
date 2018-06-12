@@ -46,17 +46,13 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Fabric.Admin {
 
     Describe "EdgeGateways" -Tags @('EdgeGateway', 'Azs.Fabric.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateEdgeGateway {
                 param(
@@ -90,8 +86,7 @@ InModuleScope Azs.Fabric.Admin {
 
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                }
-                else {
+                } else {
                     $Found                  | Should Not Be $null
 
                     # Resource

@@ -46,17 +46,14 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Fabric.Admin {
 
     Describe "InfrastructureShares" -Tags @('FileShare', 'Azs.Fabric.Admin') {
 
+        . $PSScriptRoot\Common.ps1
+
         BeforeEach {
 
-            . $PSScriptRoot\Common.ps1
             function ValidateFileShare {
                 param(
                     [Parameter(Mandatory = $true)]

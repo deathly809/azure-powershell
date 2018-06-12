@@ -40,10 +40,14 @@ $global:Owner = 'user@microsoft.com'
 $global:TestAvailability = "Test Sub"
 $global:ResourceType = "Microsoft.Subscriptions.Admin/plans"
 
-if (-not $RunRaw) {
+if (-not $global:RunRaw) {
     # Load the script block
     $scriptBlock = {
         Get-MockClient -ClassName 'SubscriptionsAdminClient' -TestName $global:TestName
     }
     Mock New-ServiceClient $scriptBlock -ModuleName $global:ModuleName
+}
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
 }

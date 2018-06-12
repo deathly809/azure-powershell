@@ -46,10 +46,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Network.Admin {
 
     Describe "QuotasTests" {
@@ -123,7 +119,7 @@ InModuleScope Azs.Network.Admin {
         # Record new tests
         It "TestPutAndDeleteQuota" -Skip:$('TestPutAndDeleteQuota' -in $global:SkippedTests) {
             $global:TestName = 'TestPutAndDeleteQuota'
-            
+
             $created = New-AzsNetworkQuota -Name $global:PutAndDeleteQuotaName -Location $global:location
             $quota = Get-AzsNetworkQuota -Name $global:PutAndDeleteQuotaName -Location $global:location
 
@@ -142,7 +138,7 @@ InModuleScope Azs.Network.Admin {
         # Record again
         It "TestPutAndUpdateQuota" -Skip:$('TestPutAndUpdateQuota' -in $global:SkippedTests) {
             $global:TestName = 'TestPutAndUpdateQuota'
-            
+
             $quota = New-AzsNetworkQuota -Name $global:CreateAndUpdateQuotaName -Location $global:location
             $created = Get-AzsNetworkQuota -Name $global:CreateAndUpdateQuotaName -Location $global:location
 

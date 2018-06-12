@@ -46,16 +46,12 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Subscription" -Tags @('Subscriptions', 'SubscriptionsAdmin') {
 
         BeforeEach {
-            
+
             . $PSScriptRoot\Common.ps1
 
             function ValidateSubscription {
@@ -91,7 +87,7 @@ InModuleScope Azs.Subscriptions.Admin {
 
         it "TestSetSubscription" -Skip:$('TestSetSubscription' -in $global:SkippedTests) {
             $global:TestName = "TestSetSubscription"
-			
+
             $Subscriptions = Get-AzsUserSubscription
             foreach ($sub in $subscriptions) {
                 $sub.DisplayName += "-test"

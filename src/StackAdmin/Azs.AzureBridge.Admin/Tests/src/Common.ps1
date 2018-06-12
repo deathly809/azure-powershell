@@ -21,3 +21,7 @@ if(-not $RunRaw) {
 	Mock New-ServiceClient $scriptBlock -ModuleName $global:ModuleName
 }
 
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
+}
+

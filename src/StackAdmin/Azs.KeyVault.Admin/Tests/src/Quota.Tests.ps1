@@ -44,10 +44,6 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.KeyVault.Admin {
 
     Describe "KeyVaultQuotas" -Tags @('KeyVaultQuotas', 'Azs.KeyVault.Admin') {

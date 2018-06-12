@@ -47,17 +47,14 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Fabric.Admin {
 
     Describe "IpPools" -Tags @('IpPool', 'Azs.Fabric.Admin') {
 
+        . $PSScriptRoot\Common.ps1
+
         BeforeEach {
 
-            . $PSScriptRoot\Common.ps1
             function ValidateIpPool {
                 param(
                     [Parameter(Mandatory = $true)]
@@ -91,8 +88,7 @@ InModuleScope Azs.Fabric.Admin {
                 )
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                }
-                else {
+                } else {
                     $Found                  | Should Not Be $null
 
                     # Resource

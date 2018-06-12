@@ -35,9 +35,9 @@ $global:PutAndDeleteQuotaName = "TestQuotaForRemoval"
 $global:CreateAndUpdateQuotaName = "TestQuotaForUpdate"
 $global:MaxNicsPerSubscription = 8
 
-if (-not $RunRaw) {
+if (-not $global:RunRaw) {
     # Load the script block
-    $scriptBlock = { 
+    $scriptBlock = {
         Get-MockClient -ClassName 'NetworkAdmin' -TestName $global:TestName
     }
     Mock New-ServiceClient $scriptBlock -ModuleName $global:ModuleName
@@ -63,4 +63,8 @@ function ValidateBaseResourceTenant {
     $Tenant                  	| Should Not Be $null
     $Tenant.SubscriptionId   | Should Not Be $null
     $Tenant.TenantResourceUri   | Should Not Be $null
+}
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
 }

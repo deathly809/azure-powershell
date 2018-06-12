@@ -45,16 +45,12 @@ $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-if (Test-Path "$PSScriptRoot\Override.ps1") {
-    . $PSScriptRoot\Override.ps1
-}
-
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Plan" -Tags @('Plans', 'SubscriptionsAdmin') {
 
         BeforeEach {
-            
+
             . $PSScriptRoot\Common.ps1
 
             function ValidatePlan {
@@ -145,7 +141,7 @@ InModuleScope Azs.Subscriptions.Admin {
             $updated = Get-AzsPlan -Name $plan.Name -ResourceGroupName $rgn
             $updated.DisplayName | Should Be $plan.DisplayName
         }
-		
+
         it "TestCreateUpdateThenDeletePlan" -Skip:$('TestCreateUpdateThenDeletePlan' -in $global:SkippedTests) {
             $global:TestName = 'TestCreateUpdateThenDeletePlan'
 

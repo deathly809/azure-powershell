@@ -12,7 +12,7 @@ $global:username = "azurestack\AzureStackAdmin"
 $global:path = "\\192.168.1.1\Share"
 [SecureString]$global:encryptionKey = ConvertTo-SecureString -String "YVVOa0J3S2xTamhHZ1lyRU9wQ1pKQ0xWanhjaHlkaU5ZQnNDeHRPTGFQenJKdWZsRGtYT25oYmlaa1RMVWFKeQ==" -AsPlainText -Force
 
-if (-not $RunRaw) {
+if (-not $global:RunRaw) {
     $scriptBlock = {
         Get-MockClient -ClassName 'BackupAdminClient' -TestName $global:TestName -Verbose
     }
@@ -26,4 +26,8 @@ function Select-Name {
         $Name = $Name.Substring($Name.LastIndexOf("/") + 1)
     }
     $Name
+}
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
 }
