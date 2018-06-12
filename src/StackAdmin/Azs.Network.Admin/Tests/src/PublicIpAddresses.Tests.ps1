@@ -51,51 +51,47 @@ if (Test-Path "$PSScriptRoot\Override.ps1") {
 }
 
 InModuleScope Azs.Network.Admin {
-
-    Describe "NetworkTests" {
+ 
+    Describe "PublicIpAddressesTests" {
 
         . $PSScriptRoot\Common.ps1
 
         BeforeEach {
 
-            function AssertAdminOverviewResourceHealth {
-                param(
-                    [Parameter(Mandatory = $true)]
-                    $Health
-                )
+        }
+        It "TestGetAllPublicIpAddresses" -Skip:$('TestGetAllPublicIpAddresses' -in $global:SkippedTests) {
+            $global:TestName = 'TestGetAllPublicIpAddresses'
 
-                $Health          | Should Not Be $null
-                $Health.ErrorResourceCount       | Should Not Be $null
-                $Health.HealthUnknownCount       | Should Not Be $null
-                $Health.HealthyResourceCount     | Should Not Be $null
-            }
+            $addresses = Get-AzsPublicIPAddress
 
-            function AssertAdminOverviewResourceUsage {
-                param(
-                    [Parameter(Mandatory = $true)]
-                    $Usage
-                )
-
-                $Usage                  	| Should Not Be $null
-                $Usage.InUseResourceCount   | Should Not Be $null
-                $Usage.TotalResourceCount   | Should Not Be $null
+            # This test should be using the SessionRecord which has an existing PublicIPAddress created
+            if ($null -ne $addresses) {
+                foreach ($address in $addresses) {
+                    ValidateBaseResources($address)
+                    ValidateBaseResourceTenant($address)
+                    $address.IpAddress | Should Not Be $null
+                    $address.IpPool | Should Not Be $null
+                }
             }
         }
 
+        It "TestGetAllPublicIpAddressesOData" -Skip:$('TestGetAllPublicIpAddressesOData' -in $global:SkippedTests) {
+            $global:TestName = 'TestGetAllPublicIpAddressesOData'
 
-        It "TestGetAdminOverview" -Skip:$('TestGetAdminOverview' -in $global:SkippedTests) {
-            $global:TestName = 'TestGetAdminOverview'
-
-            $Overview = Get-AzsNetworkAdminOverview
-            $Overview | Should Not Be $null
-
-            AssertAdminOverviewResourceHealth($Overview.LoadBalancerMuxHealth);
-            AssertAdminOverviewResourceHealth($Overview.VirtualNetworkHealth);
-            AssertAdminOverviewResourceHealth($Overview.VirtualGatewayHealth);
-
-            AssertAdminOverviewResourceUsage($Overview.MacAddressUsage);
-            AssertAdminOverviewResourceUsage($Overview.PublicIpAddressUsage);
-            AssertAdminOverviewResourceUsage($Overview.BackendIpUsage);
+            [System.Reflection.Assembly]::LoadWithPartialName("Microsoft.Rest.Azure.OData.ODataQuery")
+            $oDataQuery = New-Object -TypeName [Microsoft.Rest.Azure.OData.ODataQuery] -ArgumentList PublicIPAddress
+            $oDataQuery.Top = 10
+            $addresses = Get-AzsPublicIPAddress -Filter $oDataQuery
+            # This test should be using the SessionRecord which has an existing PublicIPAddress created
+            if ($null -ne $addresses) {
+                foreach ($address in $addresses) {
+                    ValidateBaseResources($address)
+                    ValidateBaseResourceTenant($address)
+                    $address.IpAddress | Should Not Be $null
+                    $address.IpPool | Should Not Be $null
+                }
+            }
         }
     }
+   
 }

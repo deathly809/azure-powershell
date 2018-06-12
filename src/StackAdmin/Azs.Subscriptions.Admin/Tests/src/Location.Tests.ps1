@@ -39,17 +39,22 @@ param(
     [bool]$RunRaw = $false,
     [bool]$UseInstalled = $false
 )
+
 $Global:UseInstalled = $UseInstalled
-$Global:RunRaw = $RunRaw
+$global:RunRaw = $RunRaw
+$global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
+}
 
 InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Location" -Tags @('Locations', 'SubscriptionsAdmin') {
 
         BeforeEach {
-
             . $PSScriptRoot\Common.ps1
 
             function ValidateLocation {
@@ -67,7 +72,7 @@ InModuleScope Azs.Subscriptions.Admin {
                 # Location
                 $Location.DisplayName   | Should Not Be $null
                 $Location.Latitude      | Should Not Be $null
-				$Location.Longitude     | Should Not Be $null
+                $Location.Longitude     | Should Not Be $null
             }
 
             function AssertLocationsSame {
@@ -80,49 +85,50 @@ InModuleScope Azs.Subscriptions.Admin {
                 )
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                } else {
+                }
+                else {
                     $Found                  | Should Not Be $null
 
                     # Resource
                     $Found.Id               | Should Be $Expected.Id
                     $Found.Name             | Should Be $Expected.Name
 
-					# Location
-					$Found.DisplayName      | Should Be $Expected.DisplayName
-					$Found.Latitude         | Should Be $Expected.Latitude
-					$Found.Longitude        | Should Be $Expected.Longitude
+                    # Location
+                    $Found.DisplayName      | Should Be $Expected.DisplayName
+                    $Found.Latitude         | Should Be $Expected.Latitude
+                    $Found.Longitude        | Should Be $Expected.Longitude
                 }
             }
         }
 
-        It "TestListLocations" {
+        it "TestListLocations" -Skip:$('TestListLocations' -in $global:SkippedTests) {
             $global:TestName = 'TestListLocations'
 
             $allLocations = Get-AzsLocation
-            $resourceGroups = New-Object  -TypeName System.Collections.Generic.HashSet[System.String]
+            $global:ResourceGroupNames = New-Object  -TypeName System.Collections.Generic.HashSet[System.String]
 
-            foreach($Location in $allLocations) {
-				ValidateLocation $location
+            foreach ($Location in $allLocations) {
+                ValidateLocation $location
             }
         }
 
-		It "TestGetAllLocations" {
-			$global:TestName = "TestGetAllLocations"
+        it "TestGetAllLocations" -Skip:$('TestGetAllLocations' -in $global:SkippedTests) {
+            $global:TestName = "TestGetAllLocations"
 
             $allLocations = Get-AzsLocation
-            foreach($Location in $allLocations) {
-				$location2 = Get-AzsLocation -Name $location.Name
-				AssertLocationsSame $location $location2
-			}
-		}
+            foreach ($Location in $allLocations) {
+                $location2 = Get-AzsLocation -Name $location.Name
+                AssertLocationsSame $location $location2
+            }
+        }
 
-		It "TestGetLocation" {
-			$global:TestName = 'TestGetLocation'
+        it "TestGetLocation" -Skip:$('TestGetLocation' -in $global:SkippedTests) {
+            $global:TestName = 'TestGetLocation'
 
-			$Location = (Get-AzsLocation)[0]
-			$Location | Should Not Be $null
-			$Location2 = Get-AzsLocation -Name $Location.Name
-			AssertLocationsSame $Location $Location2
-		}
+            $Location = (Get-AzsLocation)[0]
+            $Location | Should Not Be $null
+            $Location2 = Get-AzsLocation -Name $Location.Name
+            AssertLocationsSame $Location $Location2
+        }
     }
 }

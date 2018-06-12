@@ -1,2 +1,2 @@
 
-$global:SkipList += "TestDownloadAzsAzureBridgeProduct";
+$global:SkippedTests += "TestDownloadAzsAzureBridgeProduct";

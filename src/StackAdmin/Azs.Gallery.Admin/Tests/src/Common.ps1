@@ -19,5 +19,5 @@ if(-not $RunRaw) {
 		$scriptBlock = { 
 			Get-MockClient -ClassName 'GalleryAdminClient' -TestName $global:TestName
 		}
-		Mock New-ServiceClient $scriptBlock -ModuleName "Azs.Gallery.Admin"
+		Mock New-ServiceClient $scriptBlock -ModuleName $global:ModuleName
 }

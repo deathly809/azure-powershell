@@ -38,10 +38,16 @@ param(
     [bool]$RunRaw = $false,
     [bool]$UseInstalled = $false
 )
+
 $Global:UseInstalled = $UseInstalled
-$Global:RunRaw = $RunRaw
+$global:RunRaw = $RunRaw
+$global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
+}
 
 InModuleScope Azs.Subscriptions.Admin {
 
@@ -66,10 +72,10 @@ InModuleScope Azs.Subscriptions.Admin {
                 $Offer.Location      | Should Not Be $null
 
                 # Offer
-				$Offer.SubscriptionId | Should Not Be $null
+                $Offer.SubscriptionId | Should Not Be $null
             }
 			
-			function AssertOfferDelegationsSame {
+            function AssertOfferDelegationsSame {
                 param(
                     [Parameter(Mandatory = $true)]
                     $Expected,
@@ -79,7 +85,8 @@ InModuleScope Azs.Subscriptions.Admin {
                 )
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                } else {
+                }
+                else {
                     $Found                  | Should Not Be $null
 
                     # Resource
@@ -88,8 +95,8 @@ InModuleScope Azs.Subscriptions.Admin {
                     $Found.Name             | Should Be $Expected.Name
                     $Found.Type             | Should Be $Expected.Type
 
-					# OfferDelegation
-					$Found.SubscriptionId   | Should Be $Expected.SubscriptionId
+                    # OfferDelegation
+                    $Found.SubscriptionId   | Should Be $Expected.SubscriptionId
                 }
             }
 
@@ -105,17 +112,16 @@ InModuleScope Azs.Subscriptions.Admin {
             }
         }
 
-		It "TestListOfferDelegations" {
-			$global:TestName = "TestListOfferDelegations"
+        it "TestListOfferDelegations" -Skip:$('TestListOfferDelegations' -in $global:SkippedTests) {
+            $global:TestName = "TestListOfferDelegations"
 
-			$offers = Get-AzsManagedOffer
+            $offers = Get-AzsManagedOffer
 
-			foreach ($offer in $offers)
-			{
-				$rgn = GetResourceGroupName -ID $offer.Id
-				$offerdel = Get-AzsOfferDelegation -ResourceGroupName $rgn -OfferName $offer.Name
-				ValidateOfferDelegation $offerdel
-			}
-		}
+            foreach ($offer in $offers) {
+                $resourceGroupName = GetResourceGroupName -ID $offer.Id
+                $offerdel = Get-AzsOfferDelegation -ResourceGroupName $resourceGroupName -OfferName $offer.Name
+                ValidateOfferDelegation $offerdel
+            }
+        }
     }
 }

@@ -38,10 +38,16 @@ param(
     [bool]$RunRaw = $false,
     [bool]$UseInstalled = $false
 )
+
 $Global:UseInstalled = $UseInstalled
-$Global:RunRaw = $RunRaw
+$global:RunRaw = $RunRaw
+$global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
+
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
+}
 
 InModuleScope Azs.Subscriptions.Admin {
 
@@ -66,10 +72,10 @@ InModuleScope Azs.Subscriptions.Admin {
                 $DelegatedProvider.OfferId                    | Should Not Be $null
                 $DelegatedProvider.Owner                      | Should Not Be $null
                 $DelegatedProvider.RoutingResourceManagerType | Should Not Be $null
-				$DelegatedProvider.SubscriptionId             | Should Not Be $null
-				$DelegatedProvider.DisplayName                | Should Not Be $null
-				$DelegatedProvider.State                      | Should Not Be $null
-				$DelegatedProvider.TenantId                   | Should Not Be $null
+                $DelegatedProvider.SubscriptionId             | Should Not Be $null
+                $DelegatedProvider.DisplayName                | Should Not Be $null
+                $DelegatedProvider.State                      | Should Not Be $null
+                $DelegatedProvider.TenantId                   | Should Not Be $null
             }
 
             function AssertDelegatedProvidersSame {
@@ -82,44 +88,45 @@ InModuleScope Azs.Subscriptions.Admin {
                 )
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                } else {
+                }
+                else {
                     $Found                            | Should Not Be $null
 
                     # Resource
                     $Found.Id                         | Should Be $Expected.Id
 
-					# DelegatedProvider
-					$Found.OfferId                    | Should Be $Found.OfferId
-					$Found.Owner                      | Should Be $Found.Owner
-					$Found.RoutingResourceManagerType | Should Be $Found.RoutingResourceManagerType
-					$Found.SubscriptionId             | Should Be $Found.SubscriptionId
-					$Found.DisplayName                | Should Be $Found.DisplayName
-					$Found.State                      | Should Be $Found.State
-					$Found.TenantId                   | Should Be $Found.TenantId
+                    # DelegatedProvider
+                    $Found.OfferId                    | Should Be $Found.OfferId
+                    $Found.Owner                      | Should Be $Found.Owner
+                    $Found.RoutingResourceManagerType | Should Be $Found.RoutingResourceManagerType
+                    $Found.SubscriptionId             | Should Be $Found.SubscriptionId
+                    $Found.DisplayName                | Should Be $Found.DisplayName
+                    $Found.State                      | Should Be $Found.State
+                    $Found.TenantId                   | Should Be $Found.TenantId
                 }
             }
         }
 
-        It "TestListDelegatedProviders" {
+        it "TestListDelegatedProviders" -Skip:$('TestListDelegatedProviders' -in $global:SkippedTests) {
             $global:TestName = 'TestListDelegatedProviders'
 
             $providers = Get-AzsDelegatedProvider
 
-            foreach($provider in $providers) {
+            foreach ($provider in $providers) {
                 ValidateDelegatedProvider $provider
-	        }
+            }
         }
 
-		It "TestGetAllDelegatedProviders" {
+        it "TestGetAllDelegatedProviders" -Skip:$('TestGetAllDelegatedProviders' -in $global:SkippedTests) {
             $global:TestName = 'TestGetAllDelegatedProviders'
 
             $providers = Get-AzsDelegatedProvider
 
-            foreach($provider in $providers) {
-				$provider2 = Get-AzsDelegatedProvider -DelegatedProviderId $provider.SubscriptionId
+            foreach ($provider in $providers) {
+                $provider2 = Get-AzsDelegatedProvider -DelegatedProviderId $provider.SubscriptionId
                 AssertDelegatedProvidersSame $provider $provider2
-	        }
-		}
+            }
+        }
 
     }
 }

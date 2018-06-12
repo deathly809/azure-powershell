@@ -39,13 +39,16 @@ param(
     [bool]$RunRaw = $false,
     [bool]$UseInstalled = $false
 )
+
 $Global:UseInstalled = $UseInstalled
 $global:RunRaw = $RunRaw
+$global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-$global:VHDUri = "https://test.blob.local.azurestack.external/test/xenial-server-cloudimg-amd64-disk1.vhd"
-$global:TestName = ""
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
+}
 
 InModuleScope Azs.Compute.Admin {
 
@@ -84,7 +87,7 @@ InModuleScope Azs.Compute.Admin {
             }
         }
 
-        It "TestListPlatformImages" {
+        It "TestListPlatformImages" -Skip:$('TestListPlatformImages' -in $global:SkippedTests) {
             $global:TestName = 'TestListPlatformImages'
 
             $platformImages = Get-AzsPlatformImage -Location "local"
@@ -95,7 +98,7 @@ InModuleScope Azs.Compute.Admin {
             }
         }
 
-        It "TestGetPlatformImage" {
+        It "TestGetPlatformImage" -Skip:$('TestGetPlatformImage' -in $global:SkippedTests) {
             $global:TestName = 'TestGetPlatformImage'
 
             $platformImages = Get-AzsPlatformImage -Location "local"
@@ -116,7 +119,7 @@ InModuleScope Azs.Compute.Admin {
             }
         }
 
-        It "TestGetAllPlatformImages" {
+        It "TestGetAllPlatformImages" -Skip:$('TestGetAllPlatformImages' -in $global:SkippedTests) {
             $global:TestName = 'TestGetAllPlatformImages'
 
             $platformImages = Get-AzsPlatformImage -Location "local"
@@ -127,7 +130,7 @@ InModuleScope Azs.Compute.Admin {
             }
         }
 
-        It "TestCreatePlatformImage" {
+        It "TestCreatePlatformImage" -Skip:$('TestCreatePlatformImage' -in $global:SkippedTests) {
             $global:TestName = 'TestCreatePlatformImage'
 
             $Location = "Canonical";
@@ -151,7 +154,7 @@ InModuleScope Azs.Compute.Admin {
 
         }
 
-        It "TestCreateAndDeletePlatformImage" {
+        It "TestCreateAndDeletePlatformImage" -Skip:$('TestCreateAndDeletePlatformImage' -in $global:SkippedTests) {
             $global:TestName = 'TestCreateAndDeletePlatformImage'
 
             $Publisher = "Microsoft";

@@ -39,12 +39,16 @@ param(
     [bool]$RunRaw = $false,
     [bool]$UseInstalled = $false
 )
+
 $Global:UseInstalled = $UseInstalled
-$Global:RunRaw = $RunRaw
+$global:RunRaw = $RunRaw
+$global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
 
-$global:TestName = ""
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
+}
 
 InModuleScope Azs.Fabric.Admin {
 
@@ -82,7 +86,8 @@ InModuleScope Azs.Fabric.Admin {
                 )
                 if ($Expected -eq $null) {
                     $Found | Should Be $null
-                } else {
+                }
+                else {
                     $Found                  | Should Not Be $null
 
                     # Resource
@@ -99,13 +104,13 @@ InModuleScope Azs.Fabric.Admin {
         }
 
 
-        It "TestListStoragePools" {
+        it "TestListStoragePools" -Skip:$('TestListStoragePools' -in $global:SkippedTests) {
             $global:TestName = 'TestListStoragePools'
 
-            $storageSystems = Get-AzsStorageSystem -ResourceGroupName $ResourceGroup -Location $Location
+            $storageSystems = Get-AzsStorageSystem -ResourceGroupName $global:ResourceGroupName -Location $Location
             $storageSystems | Should not be $null
             foreach ($storageSystem in $storageSystems) {
-                $StoragePools = Get-AzsStoragePool -ResourceGroupName $ResourceGroup -Location $Location -StorageSystem $storageSystem.Name
+                $StoragePools = Get-AzsStoragePool -ResourceGroupName $global:ResourceGroupName -Location $Location -StorageSystem $storageSystem.Name
                 $StoragePools | Should Not Be $null
                 foreach ($StoragePool in $StoragePools) {
                     ValidateStoragePool -StoragePool $StoragePool
@@ -114,14 +119,14 @@ InModuleScope Azs.Fabric.Admin {
         }
 
 
-        It "TestGetStoragePool" {
+        it "TestGetStoragePool" -Skip:$('TestGetStoragePool' -in $global:SkippedTests) {
             $global:TestName = 'TestGetStoragePool'
 
-            $storageSystems = Get-AzsStorageSystem -ResourceGroupName $ResourceGroup -Location $Location
+            $storageSystems = Get-AzsStorageSystem -ResourceGroupName $global:ResourceGroupName -Location $Location
             foreach ($storageSystem in $storageSystems) {
-                $StoragePools = Get-AzsStoragePool -ResourceGroupName $ResourceGroup -Location $Location -StorageSystem $storageSystem.Name
+                $StoragePools = Get-AzsStoragePool -ResourceGroupName $global:ResourceGroupName -Location $Location -StorageSystem $storageSystem.Name
                 foreach ($StoragePool in $StoragePools) {
-                    $retrieved = Get-AzsStoragePool -ResourceGroupName $ResourceGroup -Location $Location -StorageSystem $storageSystem.Name -Name $StoragePool.Name
+                    $retrieved = Get-AzsStoragePool -ResourceGroupName $global:ResourceGroupName -Location $Location -StorageSystem $storageSystem.Name -Name $StoragePool.Name
                     AssertStoragePoolsAreSame -Expected $StoragePool -Found $retrieved
                     break
                 }
@@ -129,14 +134,14 @@ InModuleScope Azs.Fabric.Admin {
             }
         }
 
-        It "TestGetAllStoragePools" {
+        it "TestGetAllStoragePools" -Skip:$('TestGetAllStoragePools' -in $global:SkippedTests) {
             $global:TestName = 'TestGetAllStoragePools'
 
-            $storageSystems = Get-AzsStorageSystem -ResourceGroupName $ResourceGroup -Location $Location
+            $storageSystems = Get-AzsStorageSystem -ResourceGroupName $global:ResourceGroupName -Location $Location
             foreach ($storageSystem in $storageSystems) {
-                $StoragePools = Get-AzsStoragePool -ResourceGroupName $ResourceGroup -Location $Location -StorageSystem $storageSystem.Name
+                $StoragePools = Get-AzsStoragePool -ResourceGroupName $global:ResourceGroupName -Location $Location -StorageSystem $storageSystem.Name
                 foreach ($StoragePool in $StoragePools) {
-                    $retrieved = Get-AzsStoragePool -ResourceGroupName $ResourceGroup -Location $Location -StorageSystem $storageSystem.Name -Name $StoragePool.Name
+                    $retrieved = Get-AzsStoragePool -ResourceGroupName $global:ResourceGroupName -Location $Location -StorageSystem $storageSystem.Name -Name $StoragePool.Name
                     AssertStoragePoolsAreSame -Expected $StoragePool -Found $retrieved
                 }
             }

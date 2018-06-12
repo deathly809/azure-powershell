@@ -14,7 +14,6 @@
 
 $global:ResourceGroupName = "System.local"
 $global:Location = "local"
-$global:TestName = ""
 
 function Extract-Name {
     param(
@@ -28,5 +27,5 @@ if (-not $RunRaw) {
     $scriptBlock = {
         Get-MockClient -ClassName 'InfrastructureInsightsAdminClient' -TestName $global:TestName
     }
-    Mock New-ServiceClient $scriptBlock -ModuleName "Azs.InfrastructureInsights.Admin"
+    Mock New-ServiceClient $scriptBlock -ModuleName $global:ModuleName
 }

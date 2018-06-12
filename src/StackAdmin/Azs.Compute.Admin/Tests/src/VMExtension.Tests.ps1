@@ -39,14 +39,16 @@ param(
     [bool]$RunRaw = $false,
     [bool]$UseInstalled = $false
 )
+
 $Global:UseInstalled = $UseInstalled
 $global:RunRaw = $RunRaw
+$global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
-. $PSScriptRoot\Common.ps1
 
-$global:TestName = ""
-$global:Location = "local"
+if (Test-Path "$PSScriptRoot\Override.ps1") {
+    . $PSScriptRoot\Override.ps1
+}
 
 InModuleScope Azs.Compute.Admin {
 
@@ -54,7 +56,7 @@ InModuleScope Azs.Compute.Admin {
 
         BeforeEach {
 
-
+            . $PSScriptRoot\Common.ps1
 
             function ValidateVMExtension {
                 param(
@@ -72,7 +74,7 @@ InModuleScope Azs.Compute.Admin {
         }
 
 
-        It "TestListVMExtensions" {
+        It "TestListVMExtensions" -Skip:$('TestListVMExtensions' -in $global:SkippedTests) {
             $global:TestName = 'TestListVMExtensions'
 
             $VMExtensions = Get-AzsVMExtension -Location "local"
@@ -83,7 +85,7 @@ InModuleScope Azs.Compute.Admin {
         }
 
 
-        It "TestGetVMExtension" {
+        It "TestGetVMExtension" -Skip:$('TestGetVMExtension' -in $global:SkippedTests) {
             $global:TestName = 'TestGetVMExtension'
 
             $VMExtensions = Get-AzsVMExtension -Location "local"
@@ -94,7 +96,7 @@ InModuleScope Azs.Compute.Admin {
         }
 
 
-        It "TestGetAllVMExtensions" {
+        It "TestGetAllVMExtensions" -Skip:$('TestGetAllVMExtensions' -in $global:SkippedTests) {
             $global:TestName = 'TestGetAllVMExtensions'
 
             $VMExtensions = Get-AzsVMExtension -Location "local"
@@ -105,14 +107,14 @@ InModuleScope Azs.Compute.Admin {
         }
 
 
-        It "TestCreateVMExtension" {
+        It "TestCreateVMExtension" -Skip:$('TestCreateVMExtension' -in $global:SkippedTests) {
             $global:TestName = 'TestCreateVMExtension'
             $result = Add-AzsVMExtension -Location $global:Location -Publisher "Microsoft" -Type "MicroExtension" -Version "0.1.0" -ComputeRole "IaaS" -SourceBlob "https://github.com/Microsoft/PowerShell-DSC-for-Linux/archive/v1.1.1-294.zip" -SupportMultipleExtensions -VmOsType "Linux" -Force
             $result | Should not be $null
         }
 
 
-        It "TestDeleteVMExtension" {
+        It "TestDeleteVMExtension" -Skip:$('TestDeleteVMExtension' -in $global:SkippedTests) {
             $global:TestName = 'TestDeleteVMExtension'
             Remove-AzsVMExtension -Location $global:Location -Publisher "Microsoft" -Type "MicroExtension" -Version "0.1.0" -Force
         }

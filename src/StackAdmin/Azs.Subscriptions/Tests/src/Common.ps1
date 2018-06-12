@@ -12,12 +12,11 @@
 # limitations under the License.
 # ----------------------------------------------------------------------------------
 
-$global:TestName = ""
 
 if(-not $RunRaw) {
 		# Load the script block
 		$scriptBlock = { 
 			Get-MockClient -ClassName 'SubscriptionsClient' -TestName $global:TestName
 		}
-		Mock New-ServiceClient $scriptBlock -ModuleName "Azs.Subscriptions"
+		Mock New-ServiceClient $scriptBlock -ModuleName $global:ModuleName
 }

@@ -1,4 +1,4 @@
-﻿# ----------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------
 #
 # Copyright Microsoft Corporation
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,22 +40,12 @@ param(
     [bool]$UseInstalled = $false
 )
 
-$global:UseInstalled = $UseInstalled
+$Global:UseInstalled = $UseInstalled
 $global:RunRaw = $RunRaw
 $global:TestName = ""
 
 . $PSScriptRoot\CommonModules.ps1
-. $PSScriptRoot\Common.ps1
 
-$global:SkipList = @(
-    "TestDownloadAzsAzureBridgeProductPipeline",
-    "TestRemoveAzsAzureBridgeDownloadedProduct",
-    "TestRemoveAzsAzureBridgeDownloadedProductPipeline"
-)
-$global:ActivationName = "default"
-$global:ResourceGroupName = "azurestack-activation"
-$global:ProductName1 = "Canonical.UbuntuServer1710-ARM.1.0.6"
-$global:ProductName2 = "microsoft.docker-arm.1.1.0"
 
 if (Test-Path "$PSScriptRoot\Override.ps1") {
     . $PSScriptRoot\Override.ps1
@@ -63,51 +53,11 @@ if (Test-Path "$PSScriptRoot\Override.ps1") {
 
 InModuleScope Azs.AzureBridge.Admin {
 
-    Describe "AzsAzureBridgeActivation" -Tags @('AzureBridgeActivation', 'Azs.AzureBridge.Admin') {
-
-        BeforeEach {
-            function ValidateActivationInfo {
-                param(
-                    [Parameter(Mandatory = $true)]
-                    $Activation
-                )
-
-                $Activation          | Should Not Be $null
-
-                # Resource
-                $Activation.Id       | Should Not Be $null
-                $Activation.Name     | Should Not Be $null
-                $Activation.Type     | Should Not Be $null
-
-                $Activation.ProvisioningState    | Should Not Be $null
-                $Activation.Expiration         | Should Not Be $null
-                $Activation.MarketplaceSyndicationEnabled        | Should Not Be $null
-                $Activation.AzureRegistrationResourceIdentifier  | Should Not Be $null
-                $Activation.Location    | Should Not Be $null
-                $Activation.DisplayName  | Should Not Be $null
-
-            }
-        }
-
-        It "TestListAzsAzureBridgeActivation" {
-            $global:TestName = "TestListAzsAzureBridgeActivation"
-            $Activations = Get-AzsAzureBridgeActivation -ResourceGroupName $global:ResourceGroupName
-
-            Foreach ($Activation in $Activations) {
-                ValidateActivationInfo -Activation $Activation
-            }
-        }
-
-        It "TestGetAzsAzureBridgeActivationByName" {
-            $global:TestName = "TestGetAzsAzureBridgeActivationByName"
-            $Activation = Get-AzsAzureBridgeActivation -Name $global:ActivationName -ResourceGroupName $global:ResourceGroupName
-            ValidateActivationInfo -Activation $Activation
-        }
-    }
 
     Describe "AzsAzureBridgeProduct" {
         BeforeEach {
 
+            . $PSScriptRoot\Common.ps1
             function ValidateProductInfo {
                 param(
                     [Parameter(Mandatory = $true)]
@@ -132,7 +82,7 @@ InModuleScope Azs.AzureBridge.Admin {
 
         Context "Get-AzsAzureBridgeProduct" {
 
-            It "TestListAzsAzureBridgeProduct" -Skip:$("TestListAzsAzureBridgeProduct" -in $global:SkipList) {
+            It "TestListAzsAzureBridgeProduct" -Skip:$("TestListAzsAzureBridgeProduct" -in $global:SkippedTests) {
                 $global:TestName = "TestListAzsAzureBridgeProduct"
                 $Products = Get-AzsAzureBridgeProduct -ActivationName $global:ActivationName -ResourceGroupName $global:ResourceGroupName
                 foreach ($Product in $Products) {
@@ -140,7 +90,7 @@ InModuleScope Azs.AzureBridge.Admin {
                 }
             }
 
-            It "TestGetAzsAzureBridgeProductByName" -Skip:$("TestGetAzsAzureBridgeProductByName" -in $global:SkipList) {
+            It "TestGetAzsAzureBridgeProductByName" -Skip:$("TestGetAzsAzureBridgeProductByName" -in $global:SkippedTests) {
                 $global:TestName = "TestGetAzsAzureBridgeProductByName"
                 $Product = Get-AzsAzureBridgeProduct -ActivationName $global:ActivationName -ResourceGroupName $global:ResourceGroupName -Name $global:ProductName1
                 ValidateProductInfo $Product
@@ -151,12 +101,12 @@ InModuleScope Azs.AzureBridge.Admin {
         # Re-record
         Context "Invoke-AzsAzureBridgeProductDownload" {
 
-            It "TestDownloadAzsAzureBridgeProduct" -Skip:$("TestDownloadAzsAzureBridgeProduct" -in $global:SkipList) {
+            It "TestDownloadAzsAzureBridgeProduct" -Skip:$("TestDownloadAzsAzureBridgeProduct" -in $global:SkippedTests) {
                 $global:TestName = "TestDownloadAzsAzureBridgeProduct"
                 Invoke-AzsAzureBridgeProductDownload -ActivationName $global:ActivationName -Name $global:ProductName1 -ResourceGroupName $global:ResourceGroupName -Force -ErrorAction Stop
             }
 
-            It "TestDownloadAzsAzureBridgeProductPipeline" -Skip:$("TestDownloadAzsAzureBridgeProductPipeline" -in $global:SkipList) {
+            It "TestDownloadAzsAzureBridgeProductPipeline" -Skip:$("TestDownloadAzsAzureBridgeProductPipeline" -in $global:SkippedTests) {
                 $global:TestName = "TestDownloadAzsAzureBridgeProductPipeline"
                 $DownloadedProduct = (Get-AzsAzureBridgeProduct -ActivationName $global:ActivationName -Name $global:ProductName2 -ResourceGroupName $global:ResourceGroupName)  | Invoke-AzsAzureBridgeProductDownload -Force
                 ValidateProductInfo $DownloadedProduct
@@ -165,7 +115,7 @@ InModuleScope Azs.AzureBridge.Admin {
 
         Context "Get-AzsAzureBridgeDownloadedProduct" {
 
-            It "TestGetAzsAzureBridgeDownloadedProduct" -Skip:$("TestGetAzsAzureBridgeDownloadedProduct" -in $global:SkipList) {
+            It "TestGetAzsAzureBridgeDownloadedProduct" -Skip:$("TestGetAzsAzureBridgeDownloadedProduct" -in $global:SkippedTests) {
                 $global:TestName = "TestGetAzsAzureBridgeDownloadedProduct"
                 $DownloadedProducts = (Get-AzsAzureBridgeDownloadedProduct -ActivationName $global:ActivationName -ResourceGroupName $global:ResourceGroupName  )
                 foreach ($DownloadedProduct in $DownloadedProducts) {
@@ -173,7 +123,7 @@ InModuleScope Azs.AzureBridge.Admin {
                 }
             }
 
-            It "TestGetAzsAzureBridgeDownloadedProductByProductName" -Skip:$("TestGetAzsAzureBridgeDownloadedProductByProductName" -in $global:SkipList) {
+            It "TestGetAzsAzureBridgeDownloadedProductByProductName" -Skip:$("TestGetAzsAzureBridgeDownloadedProductByProductName" -in $global:SkippedTests) {
                 $global:TestName = "TestGetAzsAzureBridgeDownloadedProductByProductName"
                 $DownloadedProduct = (Get-AzsAzureBridgeDownloadedProduct -ActivationName $global:ActivationName -Name $global:ProductName1 -ResourceGroupName $global:ResourceGroupName  )
                 ValidateProductInfo $DownloadedProduct
@@ -183,13 +133,13 @@ InModuleScope Azs.AzureBridge.Admin {
         # Not able to remove because of the error: {"code":"RequestConflict","message":"Cannot modify resource with id '/subscriptions/b6a34e73-810f-4564-881a-8434c6c2e5c8/resourceGroups/azurestack-activation/providers/Microsoft.AzureBridge.Admin/activations/default/downloadedProducts/Canonical.UbuntuServer1710-ARM.1.0.6' because the resource entity provisioning state is not terminal. Please wait for the provisioning state to become terminal and then retry the request."}}
         Context "Remove-AzsAzureBridgeDownloadedProduct" {
 
-            It "TestRemoveAzsAzureBridgeDownloadedProduct" -Skip:$("TestRemoveAzsAzureBridgeDownloadedProduct" -in $global:SkipList) {
+            It "TestRemoveAzsAzureBridgeDownloadedProduct" -Skip:$("TestRemoveAzsAzureBridgeDownloadedProduct" -in $global:SkippedTests) {
                 $global:TestName = "TestRemoveAzsAzureBridgeDownloadedProduct"
                 Remove-AzsAzureBridgeDownloadedProduct -ActivationName $global:ActivationName -ResourceGroupName $global:ResourceGroupName -Name $global:ProductName1 -Force
                 Get-AzsAzureBridgeDownloadedProduct -ActivationName $global:ActivationName -ResourceGroupName $global:ResourceGroupName -Name $global:ProductName1 | Should Be $null
             }
 
-            It "TestRemoveAzsAzureBridgeDownloadedProductPipeline" -Skip:$("TestRemoveAzsAzureBridgeDownloadedProductPipeline" -in $global:SkipList) {
+            It "TestRemoveAzsAzureBridgeDownloadedProductPipeline" -Skip:$("TestRemoveAzsAzureBridgeDownloadedProductPipeline" -in $global:SkippedTests) {
                 $global:TestName = "TestRemoveAzsAzureBridgeDownloadedProductPipeline"
                 (Get-AzsAzureBridgeDownloadedProduct -ActivationName $global:ActivationName -Name $global:ProductName2 -ResourceGroupName $global:ResourceGroupName ) | Remove-AzsAzureBridgeDownloadedProduct  -Force
                 Get-AzsAzureBridgeDownloadedProduct -ActivationName $global:ActivationName -ResourceGroupName $global:ResourceGroupName -Name $global:ProductName2 | Should Be $null

@@ -24,14 +24,16 @@
     Run using our client creation path.
 
 .EXAMPLE
-    PS C:\> .\src\Quota.Tests.ps1
-	Describing Quota
-	  [+] TestListQuotas 2.03s
+    PS C:\> .\src\Network.Tests.ps1
+	Describing SubscriptionTests
+	[+] TestListRegionHealths 182ms
+	[+] TestGetRegionHealth 112ms
+	[+] TestGetAllRegionHealths 113ms
 
 .NOTES
-    Author: Mike Giesler
+    Author: Bala Ganapathy
 	Copyright: Microsoft
-    Date:   March 16, 2018
+    Date:   February 21, 2018
 #>
 param(
     [bool]$RunRaw = $false,
@@ -48,38 +50,30 @@ if (Test-Path "$PSScriptRoot\Override.ps1") {
     . $PSScriptRoot\Override.ps1
 }
 
-InModuleScope Azs.Subscriptions.Admin {
-
-    Describe "Quota" -Tags @('Quotas', 'SubscriptionsAdmin') {
+InModuleScope Azs.Network.Admin {
+    
+    Describe "LoadBalancerTests" {
+        
+        . $PSScriptRoot\Common.ps1
 
         BeforeEach {
-            
-            . $PSScriptRoot\Common.ps1
 
-            function ValidateQuota {
-                param(
-                    [Parameter(Mandatory = $true)]
-                    $Quota
-                )
-                # Overall
-                $Quota               | Should Not Be $null
-
-                # Resource
-                $Quota.Id            | Should Not Be $null
-                $Quota.Name          | Should Not Be $null
-                $Quota.Type          | Should Not Be $null
-                $Quota.Location      | Should Not Be $null
-            }
         }
 
-        it "TestListQuotas" -Skip:$('TestListQuotas' -in $global:SkippedTests) {
-            $global:TestName = 'TestListQuotas'
+        It "TestGetAllLoadBalancers" -Skip:$('TestGetAllLoadBalancers' -in $global:SkippedTests) {
+            $global:TestName = 'TestGetAllLoadBalancers'
 
-            $allQuotas = Get-AzsSubscriptionsQuota -Location $global:Location
-            $global:ResourceGroupNames = New-Object -TypeName System.Collections.Generic.HashSet[System.String]
-
-            foreach ($Quota in $allQuotas) {
-                ValidateQuota $Quota
+            $Balancers = Get-AzsLoadBalancer
+            # This test should be using the SessionRecord which has an existing LoadBalancer created
+            if ($null -ne $Balancers) {
+                foreach ($Balancer in $Balancers) {
+                    ValidateBaseResources($Balancer)
+                    ValidateBaseResourceTenant($Balancer)
+                    $Balancer.PublicIpAddresses | Should Not Be $null
+                    foreach ($IpAddress in $Balancer.PublicIpAddresses) {
+                        $IpAddress | Should Not Be $null
+                    }
+                }
             }
         }
     }
