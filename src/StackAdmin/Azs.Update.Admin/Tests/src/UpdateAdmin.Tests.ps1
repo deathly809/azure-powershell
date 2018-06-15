@@ -53,9 +53,9 @@ InModuleScope Azs.Update.Admin {
 
     Describe "UpdateAdminTests" -Tags @('UpdateAdminTests', 'Azs.Update.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateUpdateLocation {
                 param(

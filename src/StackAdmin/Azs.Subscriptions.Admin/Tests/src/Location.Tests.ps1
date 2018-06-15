@@ -50,8 +50,9 @@ InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Location" -Tags @('Locations', 'SubscriptionsAdmin') {
 
+        . $PSScriptRoot\Common.ps1
+
         BeforeEach {
-            . $PSScriptRoot\Common.ps1
 
             function ValidateLocation {
                 param(

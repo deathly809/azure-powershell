@@ -51,9 +51,9 @@ InModuleScope Azs.Subscriptions.Admin {
 
     Describe "AcquiredPlan" -Tags @('AcquiredPlan', 'SubscriptionsAdmin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidatePlanAcquisition {
                 param(

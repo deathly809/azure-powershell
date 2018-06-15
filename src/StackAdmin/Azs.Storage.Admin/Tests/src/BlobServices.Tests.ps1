@@ -50,9 +50,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "BlobServices" -Tags @('BlobService', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateBlobService {
                 param(

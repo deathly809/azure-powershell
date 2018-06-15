@@ -50,9 +50,9 @@ InModuleScope Azs.Subscriptions {
 
     Describe "Offers" -Tags @('Subscription', 'Offer') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateOffer {
                 param(

@@ -50,9 +50,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "TableServices" -Tags @('TableServices', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateTableService {
                 param(

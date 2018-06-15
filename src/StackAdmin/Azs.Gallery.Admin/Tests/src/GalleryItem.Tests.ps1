@@ -50,9 +50,9 @@ InModuleScope Azs.Gallery.Admin {
 
     Describe "GalleryItem" -Tags @('RegionHealth', 'GalleryAdmin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateGalleryItem {
                 param(

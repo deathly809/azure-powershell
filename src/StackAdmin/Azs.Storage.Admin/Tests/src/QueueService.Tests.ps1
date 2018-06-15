@@ -50,9 +50,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "QueueServices" -Tags @('QueueServices', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateQueueService {
                 param(

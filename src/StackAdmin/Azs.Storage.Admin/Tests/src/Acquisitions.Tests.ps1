@@ -48,9 +48,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "Acquisition" -Tags @('Acquisition', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateAcquisition {
                 param(

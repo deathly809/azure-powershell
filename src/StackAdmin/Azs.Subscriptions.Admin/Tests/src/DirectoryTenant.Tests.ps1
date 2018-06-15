@@ -50,8 +50,9 @@ InModuleScope Azs.Subscriptions.Admin {
 
     Describe "DirectoryTenant" -Tags @('DirectoryTenants', 'SubscriptionsAdmin') {
 
+        . $PSScriptRoot\Common.ps1
+
         BeforeEach {
-            . $PSScriptRoot\Common.ps1
 
             function ValidateDirectoryTenant {
                 param(

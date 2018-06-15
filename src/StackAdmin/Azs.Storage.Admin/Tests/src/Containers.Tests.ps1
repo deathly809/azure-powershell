@@ -49,9 +49,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "Containers" -Tags @('Containers', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateContainer {
                 param(

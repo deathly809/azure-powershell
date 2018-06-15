@@ -49,9 +49,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "StorageAccounts" -Tags @('StorageAccounts', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateStorageAccount {
                 param(

@@ -53,9 +53,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "StorageQuotas" -Tags @('StorageQuotas', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateStorageQuota {
                 param(

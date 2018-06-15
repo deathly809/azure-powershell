@@ -48,8 +48,9 @@ InModuleScope Azs.KeyVault.Admin {
 
     Describe "KeyVaultQuotas" -Tags @('KeyVaultQuotas', 'Azs.KeyVault.Admin') {
 
+        . $PSScriptRoot\Common.ps1
+
         BeforeEach {
-            . $PSScriptRoot\Common.ps1
         }
 
 

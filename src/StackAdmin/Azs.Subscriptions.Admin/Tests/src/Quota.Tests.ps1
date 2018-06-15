@@ -48,9 +48,9 @@ InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Quota" -Tags @('Quotas', 'SubscriptionsAdmin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateQuota {
                 param(

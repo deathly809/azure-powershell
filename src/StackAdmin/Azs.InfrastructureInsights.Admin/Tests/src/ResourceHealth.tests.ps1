@@ -50,9 +50,9 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 
     Describe "ResourceHealths" -Tags @('ResourceHealth', 'InfrastructureInsightsAdmin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateResourceHealth {
                 param(

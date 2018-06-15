@@ -48,9 +48,9 @@ InModuleScope Azs.Subscriptions.Admin {
 
     Describe "DelegatedProviderOffer" -Tags @('DelegatedProviderOffers', 'SubscriptionsAdmin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateDelegatedProviderOffer {
                 param(

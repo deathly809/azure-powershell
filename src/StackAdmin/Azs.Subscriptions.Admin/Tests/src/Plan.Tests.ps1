@@ -49,9 +49,9 @@ InModuleScope Azs.Subscriptions.Admin {
 
     Describe "Plan" -Tags @('Plans', 'SubscriptionsAdmin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidatePlan {
                 param(

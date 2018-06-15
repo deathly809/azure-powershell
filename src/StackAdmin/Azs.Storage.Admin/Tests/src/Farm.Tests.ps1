@@ -51,9 +51,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "Farm" -Tags @('Farm', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateFarm {
                 param(

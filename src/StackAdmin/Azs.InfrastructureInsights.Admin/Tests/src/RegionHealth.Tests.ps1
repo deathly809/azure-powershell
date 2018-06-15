@@ -50,9 +50,9 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 
 	Describe "RegionHealths" -Tags @('RegionHealth', 'InfrastructureInsightsAdmin') {
 
-		BeforeEach  {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+		BeforeEach  {
 
 			function ValidateMetrics{
 				param(

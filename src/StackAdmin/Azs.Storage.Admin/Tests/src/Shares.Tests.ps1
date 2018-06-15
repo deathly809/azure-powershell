@@ -52,9 +52,9 @@ InModuleScope Azs.Storage.Admin {
 
     Describe "Shares" -Tags @('Shares', 'Azs.Storage.Admin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function AssertAreEqual {
                 param(

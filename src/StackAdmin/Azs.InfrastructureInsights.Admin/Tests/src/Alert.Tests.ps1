@@ -51,9 +51,9 @@ InModuleScope Azs.InfrastructureInsights.Admin {
 
     Describe "Alerts" -Tags @('Alert', 'InfrastructureInsightsAdmin') {
 
-        BeforeEach {
+        . $PSScriptRoot\Common.ps1
 
-            . $PSScriptRoot\Common.ps1
+        BeforeEach {
 
             function ValidateAlert {
                 param(
