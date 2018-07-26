@@ -18,8 +18,6 @@ Test Virtual Machine Profile
 #>
 function Test-VirtualMachineProfile
 {
-	$storageEndpointSuffix = Get-DefaultStorageEndpointSuffix;
-
     # VM Profile & Hardware
     $vmsize = 'Standard_A2';
     $vmname = 'pstestvm' + ((Get-Random) % 10000);
@@ -52,21 +50,30 @@ function Test-VirtualMachineProfile
 
     # Storage
     $stoname = 'hpfteststo' + ((Get-Random) % 10000);
-    $stotype = 'Standard_LRS';
+    $stotype = 'Standard_GRS';
 
     $osDiskName = 'osDisk';
     $osDiskCaching = 'ReadWrite';
-    $osDiskVhdUri = "https://$stoname.blob.$storageEndpointSuffix/test/os.vhd";
-    $dataDiskVhdUri1 = "https://$stoname.blob.$storageEndpointSuffix/test/data1.vhd";
-    $dataDiskVhdUri2 = "https://$stoname.blob.$storageEndpointSuffix/test/data2.vhd";
-    $dataDiskVhdUri3 = "https://$stoname.blob.$storageEndpointSuffix/test/data3.vhd";
+    $osDiskVhdUri = "https://$stoname.blob.core.windows.net/test/os.vhd";
+    $dataDiskVhdUri1 = "https://$stoname.blob.core.windows.net/test/data1.vhd";
+    $dataDiskVhdUri2 = "https://$stoname.blob.core.windows.net/test/data2.vhd";
 
     $p = Set-AzureRmVMOSDisk -VM $p -Name $osDiskName -VhdUri $osDiskVhdUri -Caching $osDiskCaching -CreateOption Empty;
 
     $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk1' -Caching 'ReadOnly' -DiskSizeInGB 10 -Lun 0 -VhdUri $dataDiskVhdUri1 -CreateOption Empty;
     $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk2' -Caching 'ReadOnly' -DiskSizeInGB 11 -Lun 1 -VhdUri $dataDiskVhdUri2 -CreateOption Empty;
-    $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3' -Caching 'ReadOnly' -DiskSizeInGB $null -Lun 2 -VhdUri $dataDiskVhdUri3 -CreateOption Empty;
+
+    # Managed data disk setting
+    $managedDataDiskId = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rggroup/providers/Microsoft.Compute/disks/dataDisk";
+    $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3' -Caching 'ReadOnly' -DiskSizeInGB $null -Lun 2 -CreateOption Empty -ManagedDiskId $managedDataDiskId -StorageAccountType StandardLRS;
+    Assert-AreEqual $managedDataDiskId $p.StorageProfile.DataDisks[2].ManagedDisk.Id;
+    Assert-AreEqual "StandardLRS" $p.StorageProfile.DataDisks[2].ManagedDisk.StorageAccountType;
     Assert-Null $p.StorageProfile.DataDisks[2].DiskSizeGB;
+
+    $p = Set-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3' -StorageAccountType PremiumLRS;
+    Assert-AreEqual $managedDataDiskId $p.StorageProfile.DataDisks[2].ManagedDisk.Id;
+    Assert-AreEqual "PremiumLRS" $p.StorageProfile.DataDisks[2].ManagedDisk.StorageAccountType;
+
     $p = Remove-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3';
 
     Assert-AreEqual $p.StorageProfile.OSDisk.Caching $osDiskCaching;
@@ -105,7 +112,7 @@ function Test-VirtualMachineProfile
     $securePassword = ConvertTo-SecureString $password -AsPlainText -Force;
     $cred = New-Object System.Management.Automation.PSCredential ($user, $securePassword);
     $computerName = 'test';
-    $vhdContainer = "https://$stoname.blob.$storageEndpointSuffix/test";
+    $vhdContainer = "https://$stoname.blob.core.windows.net/test";
 
     $winRMCertUrl = "http://keyVaultName.vault.azure.net/secrets/secretName/secretVersion";
     $timeZone = "Pacific Standard Time";
@@ -242,9 +249,7 @@ Test Virtual Machine Profile without AdditionalUnattendContent
 #>
 function Test-VirtualMachineProfileWithoutAUC
 {
-    $storageEndpointSuffix = Get-DefaultStorageEndpointSuffix;
-	
-	# VM Profile & Hardware
+    # VM Profile & Hardware
     $vmsize = 'Standard_A2';
     $vmname = 'pstestvm' + ((Get-Random) % 10000);
     $p = New-AzureRmVMConfig -VMName $vmname -VMSize $vmsize;
@@ -263,14 +268,14 @@ function Test-VirtualMachineProfileWithoutAUC
 
     # Storage
     $stoname = 'hpfteststo' + ((Get-Random) % 10000);
-    $stotype = 'Standard_LRS';
+    $stotype = 'Standard_GRS';
 
     $osDiskName = 'osDisk';
     $osDiskCaching = 'ReadWrite';
-    $osDiskVhdUri = "https://$stoname.blob.$storageEndpointSuffix/test/os.vhd";
-    $dataDiskVhdUri1 = "https://$stoname.blob.$storageEndpointSuffix/test/data1.vhd";
-    $dataDiskVhdUri2 = "https://$stoname.blob.$storageEndpointSuffix/test/data2.vhd";
-    $dataDiskVhdUri3 = "https://$stoname.blob.$storageEndpointSuffix/test/data3.vhd";
+    $osDiskVhdUri = "https://$stoname.blob.core.windows.net/test/os.vhd";
+    $dataDiskVhdUri1 = "https://$stoname.blob.core.windows.net/test/data1.vhd";
+    $dataDiskVhdUri2 = "https://$stoname.blob.core.windows.net/test/data2.vhd";
+    $dataDiskVhdUri3 = "https://$stoname.blob.core.windows.net/test/data3.vhd";
 
     $dekUri = "https://testvault123.vault.azure.net/secrets/Test1/514ceb769c984379a7e0230bddaaaaaa";
     $dekId =  "/subscriptions/" + $subid + "/resourceGroups/RgTest1/providers/Microsoft.KeyVault/vaults/TestVault123";
@@ -307,7 +312,7 @@ function Test-VirtualMachineProfileWithoutAUC
     $securePassword = ConvertTo-SecureString $password -AsPlainText -Force;
     $cred = New-Object System.Management.Automation.PSCredential ($user, $securePassword);
     $computerName = 'test';
-    $vhdContainer = "https://$stoname.blob.$storageEndpointSuffix/test";
+    $vhdContainer = "https://$stoname.blob.core.windows.net/test";
     $img = 'a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-Datacenter-201503.01-en.us-127GB.vhd';
 
     $winRMCertUrl = "http://keyVaultName.vault.azure.net/secrets/secretName/secretVersion";
