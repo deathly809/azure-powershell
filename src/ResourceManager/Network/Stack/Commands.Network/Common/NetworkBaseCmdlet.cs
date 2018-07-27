@@ -43,7 +43,6 @@ namespace Microsoft.Azure.Commands.Network
         public override void ExecuteCmdlet()
         {
             base.ExecuteCmdlet();
-            NetworkResourceManagerProfile.Initialize();
         }
 
         public static string GetResourceGroup(string resourceId)
