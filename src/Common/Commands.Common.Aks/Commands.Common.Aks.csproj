@@ -83,7 +83,7 @@
     <Compile Include="Version2017_08_31\Models\OSType.cs" />
     <Compile Include="Version2017_08_31\Models\Page.cs" />
     <Compile Include="Version2017_08_31\Models\Resource.cs" />
-	<None Include="MSSharedLibKey.snk" />
+    <None Include="MSSharedLibKey.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
