@@ -108,7 +108,7 @@ namespace Microsoft.WindowsAzure.Commands.Sync.Upload
             var copyStatus = new ProgressStatus(0, source.Properties.Length);
             using (new ProgressTracker(copyStatus, Program.SyncOutput.ProgressCopyStatus, Program.SyncOutput.ProgressCopyComplete, TimeSpan.FromSeconds(1)))
             {
-                destinationBlob.StartCopyAsync(source).ConfigureAwait(false).GetAwaiter().GetResult();
+                destinationBlob.StartCopyFromBlobAsync(source).ConfigureAwait(false).GetAwaiter().GetResult();
                 destinationBlob.FetchAttributesAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
                 while (true)
