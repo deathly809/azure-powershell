@@ -333,11 +333,11 @@
       <Project>{3819d8a7-c62c-4c47-8ddd-0332d9ce1252}</Project>
       <Name>Commands.ResourceManager.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ServiceManagement\Compute\Sync\Sync.csproj">
+    <ProjectReference Include="..\Sync\Sync.csproj">
       <Project>{73820cbc-f4eb-4c5e-b4f0-cc4a93fbf157}</Project>
       <Name>Sync</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\ServiceManagement\Compute\VhdManagement\VhdManagement.csproj">
+    <ProjectReference Include="..\VhdManagement\VhdManagement.csproj">
       <Project>{80496b7b-068a-4a1e-b0bb-4b1fff3fa616}</Project>
       <Name>VhdManagement</Name>
     </ProjectReference>
