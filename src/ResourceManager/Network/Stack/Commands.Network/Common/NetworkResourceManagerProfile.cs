@@ -43,256 +43,264 @@ namespace Microsoft.Azure.Commands.Network
         }
     }
 
-    public class NetworkResourceManagerProfile : Profile
+    public class NetworkResourceManagerProfile : AutoMapper.Profile
     {
-        private static readonly Lazy<bool> initialize;
+        private static IMapper _mapper = null;
 
-        static NetworkResourceManagerProfile()
+        private static readonly object _lock = new object();
+        
+        public static IMapper Mapper
         {
-            initialize = new Lazy<bool>(() =>
-            {
-                Mapper.AddProfile<NetworkResourceManagerProfile>();
-                return true;
-            });
-        }
+            get {
+                lock (_lock)
+                {
+                    if (_mapper == null)
+                    {
+                        Initialize();
+                    }
 
+                    return _mapper;
+                }
+            }
+        }
         public override string ProfileName
         {
             get { return "NetworkResourceManagerProfile"; }
         }
 
-        public static bool Initialize()
-        {
-            return initialize.Value;
-        }
+        private static void Initialize() {
 
-        protected override void Configure()
-        {
-            Mapper.CreateMap<CNM.PSResourceId, MNM.SubResource>();
-            Mapper.CreateMap<MNM.SubResource, CNM.PSResourceId>();
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddProfile<NetworkResourceManagerProfile>();
 
-            // Subnet
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSDhcpOptions, MNM.DhcpOptions>();
-            Mapper.CreateMap<CNM.PSSubnet, MNM.Subnet>();
-            Mapper.CreateMap<CNM.PSIPConfiguration, MNM.IPConfiguration>();
+                cfg.CreateMap<CNM.PSResourceId, MNM.SubResource>();
+                cfg.CreateMap<MNM.SubResource, CNM.PSResourceId>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.DhcpOptions, CNM.PSDhcpOptions>();
-            Mapper.CreateMap<MNM.Subnet, CNM.PSSubnet>();
-            Mapper.CreateMap<MNM.IPConfiguration, CNM.PSIPConfiguration>();
+                // Subnet
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSDhcpOptions, MNM.DhcpOptions>();
+                cfg.CreateMap<CNM.PSSubnet, MNM.Subnet>();
+                cfg.CreateMap<CNM.PSIPConfiguration, MNM.IPConfiguration>();
 
-            // VirtualNetwork
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSAddressSpace, MNM.AddressSpace>();
-            Mapper.CreateMap<CNM.PSVirtualNetwork, MNM.VirtualNetwork>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.DhcpOptions, CNM.PSDhcpOptions>();
+                cfg.CreateMap<MNM.Subnet, CNM.PSSubnet>();
+                cfg.CreateMap<MNM.IPConfiguration, CNM.PSIPConfiguration>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.AddressSpace, CNM.PSAddressSpace>();
-            Mapper.CreateMap<MNM.VirtualNetwork, CNM.PSVirtualNetwork>();
+                // VirtualNetwork
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSAddressSpace, MNM.AddressSpace>();
+                cfg.CreateMap<CNM.PSVirtualNetwork, MNM.VirtualNetwork>();
 
-            // PublicIpAddress
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSPublicIpAddress, MNM.PublicIPAddress>();
-            Mapper.CreateMap<CNM.PSPublicIpAddressDnsSettings, MNM.PublicIPAddressDnsSettings>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.AddressSpace, CNM.PSAddressSpace>();
+                cfg.CreateMap<MNM.VirtualNetwork, CNM.PSVirtualNetwork>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.PublicIPAddress, CNM.PSPublicIpAddress>();
-            Mapper.CreateMap<MNM.PublicIPAddressDnsSettings, CNM.PSPublicIpAddressDnsSettings>();
+                // PublicIpAddress
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSPublicIpAddress, MNM.PublicIPAddress>();
+                cfg.CreateMap<CNM.PSPublicIpAddressDnsSettings, MNM.PublicIPAddressDnsSettings>();
 
-            // NetworkInterface
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSNetworkInterface, MNM.NetworkInterface>();
-            Mapper.CreateMap<CNM.PSNetworkInterfaceDnsSettings, MNM.NetworkInterfaceDnsSettings>();
-            Mapper.CreateMap<CNM.PSNetworkInterfaceIPConfiguration, MNM.NetworkInterfaceIPConfiguration>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.PublicIPAddress, CNM.PSPublicIpAddress>();
+                cfg.CreateMap<MNM.PublicIPAddressDnsSettings, CNM.PSPublicIpAddressDnsSettings>();
+
+                // NetworkInterface
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSNetworkInterface, MNM.NetworkInterface>();
+                cfg.CreateMap<CNM.PSNetworkInterfaceDnsSettings, MNM.NetworkInterfaceDnsSettings>();
+                cfg.CreateMap<CNM.PSNetworkInterfaceIPConfiguration, MNM.NetworkInterfaceIPConfiguration>();
 
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.NetworkInterface, CNM.PSNetworkInterface>();
-            Mapper.CreateMap<MNM.NetworkInterfaceDnsSettings, CNM.PSNetworkInterfaceDnsSettings>();
-            Mapper.CreateMap<MNM.NetworkInterfaceIPConfiguration, CNM.PSNetworkInterfaceIPConfiguration>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.NetworkInterface, CNM.PSNetworkInterface>();
+                cfg.CreateMap<MNM.NetworkInterfaceDnsSettings, CNM.PSNetworkInterfaceDnsSettings>();
+                cfg.CreateMap<MNM.NetworkInterfaceIPConfiguration, CNM.PSNetworkInterfaceIPConfiguration>();
 
-            // LoadBalancer
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSLoadBalancer, MNM.LoadBalancer>();
-            
-            // MNM to CNM
-            Mapper.CreateMap<MNM.LoadBalancer, CNM.PSLoadBalancer>();
-            
-            // FrontendIpConfiguration
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSFrontendIPConfiguration, MNM.FrontendIPConfiguration>();
+                // LoadBalancer
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSLoadBalancer, MNM.LoadBalancer>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.FrontendIPConfiguration, CNM.PSFrontendIPConfiguration>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.LoadBalancer, CNM.PSLoadBalancer>();
 
-            // BackendAddressPool
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSBackendAddressPool, MNM.BackendAddressPool>();
+                // FrontendIpConfiguration
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSFrontendIPConfiguration, MNM.FrontendIPConfiguration>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.BackendAddressPool, CNM.PSBackendAddressPool>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.FrontendIPConfiguration, CNM.PSFrontendIPConfiguration>();
 
-            // LoadBalancingRule
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSLoadBalancingRule, MNM.LoadBalancingRule>();
+                // BackendAddressPool
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSBackendAddressPool, MNM.BackendAddressPool>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.LoadBalancingRule, CNM.PSLoadBalancingRule>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.BackendAddressPool, CNM.PSBackendAddressPool>();
 
-            // Probes
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSProbe, MNM.Probe>();
+                // LoadBalancingRule
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSLoadBalancingRule, MNM.LoadBalancingRule>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.Probe, CNM.PSProbe>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.LoadBalancingRule, CNM.PSLoadBalancingRule>();
 
-            // InboundNatRules
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSInboundNatRule, MNM.InboundNatRule>();
+                // Probes
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSProbe, MNM.Probe>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.InboundNatRule, CNM.PSInboundNatRule>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.Probe, CNM.PSProbe>();
 
-            // InboundNatPools
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSInboundNatPool, MNM.InboundNatPool>();
+                // InboundNatRules
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSInboundNatRule, MNM.InboundNatRule>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.InboundNatPool, CNM.PSInboundNatPool>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.InboundNatRule, CNM.PSInboundNatRule>();
 
-            // NetworkSecurityGroups
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSNetworkSecurityGroup, MNM.NetworkSecurityGroup>();
+                // InboundNatPools
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSInboundNatPool, MNM.InboundNatPool>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.NetworkSecurityGroup, CNM.PSNetworkSecurityGroup>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.InboundNatPool, CNM.PSInboundNatPool>();
 
-            // NetworkSecrityRule
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSSecurityRule, MNM.SecurityRule>();
+                // NetworkSecurityGroups
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSNetworkSecurityGroup, MNM.NetworkSecurityGroup>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.SecurityRule, CNM.PSSecurityRule>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.NetworkSecurityGroup, CNM.PSNetworkSecurityGroup>();
 
-            // RouteTable
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSRouteTable, MNM.RouteTable>();
+                // NetworkSecrityRule
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSSecurityRule, MNM.SecurityRule>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.RouteTable, CNM.PSRouteTable>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.SecurityRule, CNM.PSSecurityRule>();
 
-            // Route
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSRoute, MNM.Route>();
+                // RouteTable
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSRouteTable, MNM.RouteTable>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.Route, CNM.PSRoute>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.RouteTable, CNM.PSRouteTable>();
 
-            // ExpressRouteCircuit
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSExpressRouteCircuit, MNM.ExpressRouteCircuit>();
-            Mapper.CreateMap<CNM.PSServiceProviderProperties, MNM.ExpressRouteCircuitServiceProviderProperties>();
-            Mapper.CreateMap<CNM.PSExpressRouteCircuitSku, MNM.ExpressRouteCircuitSku>();
-            Mapper.CreateMap<CNM.PSPeering, MNM.ExpressRouteCircuitPeering>();
-            Mapper.CreateMap<CNM.PSExpressRouteCircuitAuthorization, MNM.ExpressRouteCircuitAuthorization>();
+                // Route
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSRoute, MNM.Route>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.ExpressRouteCircuit, CNM.PSExpressRouteCircuit>();
-            Mapper.CreateMap<MNM.ExpressRouteCircuitServiceProviderProperties, CNM.PSServiceProviderProperties>();
-            Mapper.CreateMap<MNM.ExpressRouteCircuitSku, CNM.PSExpressRouteCircuitSku>();
-            Mapper.CreateMap<MNM.ExpressRouteCircuitPeering, CNM.PSPeering>();
-            Mapper.CreateMap<MNM.ExpressRouteCircuitAuthorization, CNM.PSExpressRouteCircuitAuthorization>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.Route, CNM.PSRoute>();
 
-            // ExpressRouteCircuitPeering
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSPeering, MNM.ExpressRouteCircuitPeering>();
-            Mapper.CreateMap<CNM.PSPeeringConfig, MNM.ExpressRouteCircuitPeeringConfig>();
-            
-            // MNM to CNM
-            Mapper.CreateMap<MNM.ExpressRouteCircuitPeering, CNM.PSPeering>();
-            Mapper.CreateMap<MNM.ExpressRouteCircuitPeeringConfig, CNM.PSPeeringConfig>();
+                // ExpressRouteCircuit
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSExpressRouteCircuit, MNM.ExpressRouteCircuit>();
+                cfg.CreateMap<CNM.PSServiceProviderProperties, MNM.ExpressRouteCircuitServiceProviderProperties>();
+                cfg.CreateMap<CNM.PSExpressRouteCircuitSku, MNM.ExpressRouteCircuitSku>();
+                cfg.CreateMap<CNM.PSPeering, MNM.ExpressRouteCircuitPeering>();
+                cfg.CreateMap<CNM.PSExpressRouteCircuitAuthorization, MNM.ExpressRouteCircuitAuthorization>();
 
-            // ExpressRouteServiceProvider
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSExpressRouteServiceProvider, MNM.ExpressRouteServiceProvider>();
-            Mapper.CreateMap<CNM.PSExpressRouteServiceProviderBandwidthsOffered, MNM.ExpressRouteServiceProviderBandwidthsOffered>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.ExpressRouteCircuit, CNM.PSExpressRouteCircuit>();
+                cfg.CreateMap<MNM.ExpressRouteCircuitServiceProviderProperties, CNM.PSServiceProviderProperties>();
+                cfg.CreateMap<MNM.ExpressRouteCircuitSku, CNM.PSExpressRouteCircuitSku>();
+                cfg.CreateMap<MNM.ExpressRouteCircuitPeering, CNM.PSPeering>();
+                cfg.CreateMap<MNM.ExpressRouteCircuitAuthorization, CNM.PSExpressRouteCircuitAuthorization>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.ExpressRouteServiceProvider, CNM.PSExpressRouteServiceProvider>();
-            Mapper.CreateMap<MNM.ExpressRouteServiceProviderBandwidthsOffered, CNM.PSExpressRouteServiceProviderBandwidthsOffered>();
+                // ExpressRouteCircuitPeering
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSPeering, MNM.ExpressRouteCircuitPeering>();
+                cfg.CreateMap<CNM.PSPeeringConfig, MNM.ExpressRouteCircuitPeeringConfig>();
 
-            // ExoressRouteCircuitAuthorization
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSExpressRouteCircuitAuthorization, MNM.ExpressRouteCircuitAuthorization>();
-         
-            // MNM to CNM
-            Mapper.CreateMap<MNM.ExpressRouteCircuitAuthorization, CNM.PSExpressRouteCircuitAuthorization>();
-   
+                // MNM to CNM
+                cfg.CreateMap<MNM.ExpressRouteCircuitPeering, CNM.PSPeering>();
+                cfg.CreateMap<MNM.ExpressRouteCircuitPeeringConfig, CNM.PSPeeringConfig>();
 
-            // Gateways
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSVirtualNetworkGateway, MNM.VirtualNetworkGateway>();
-            Mapper.CreateMap<CNM.PSConnectionResetSharedKey, MNM.ConnectionResetSharedKey>();
-            Mapper.CreateMap<CNM.PSConnectionSharedKey, MNM.ConnectionSharedKey>();
-            Mapper.CreateMap<CNM.PSLocalNetworkGateway, MNM.LocalNetworkGateway>();
-            Mapper.CreateMap<CNM.PSVirtualNetworkGatewayConnection, MNM.VirtualNetworkGatewayConnection>();
-            Mapper.CreateMap<CNM.PSVirtualNetworkGatewayIpConfiguration, MNM.VirtualNetworkGatewayIPConfiguration>();
-            Mapper.CreateMap<CNM.PSVirtualNetworkGatewaySku, MNM.VirtualNetworkGatewaySku>();
-            Mapper.CreateMap<CNM.PSVpnClientConfiguration, MNM.VpnClientConfiguration>();
-            Mapper.CreateMap<CNM.PSVpnClientParameters, MNM.VpnClientParameters>();
-            Mapper.CreateMap<CNM.PSVpnClientRevokedCertificate, MNM.VpnClientRevokedCertificate>();
-            Mapper.CreateMap<CNM.PSVpnClientRootCertificate, MNM.VpnClientRootCertificate>();
-            Mapper.CreateMap<CNM.PSBgpSettings, MNM.BgpSettings>();
+                // ExpressRouteServiceProvider
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSExpressRouteServiceProvider, MNM.ExpressRouteServiceProvider>();
+                cfg.CreateMap<CNM.PSExpressRouteServiceProviderBandwidthsOffered, MNM.ExpressRouteServiceProviderBandwidthsOffered>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.VirtualNetworkGateway, CNM.PSVirtualNetworkGateway>();
-            Mapper.CreateMap<MNM.ConnectionResetSharedKey, CNM.PSConnectionResetSharedKey>();
-            Mapper.CreateMap<MNM.ConnectionSharedKey, CNM.PSConnectionSharedKey>();
-            Mapper.CreateMap<MNM.LocalNetworkGateway, CNM.PSLocalNetworkGateway>();
-            Mapper.CreateMap<MNM.VirtualNetworkGatewayConnection, CNM.PSVirtualNetworkGatewayConnection>();
-            Mapper.CreateMap<MNM.VirtualNetworkGatewayIPConfiguration, CNM.PSVirtualNetworkGatewayIpConfiguration>();
-            Mapper.CreateMap<MNM.VirtualNetworkGatewaySku, CNM.PSVirtualNetworkGatewaySku>();
-            Mapper.CreateMap<MNM.VpnClientConfiguration, CNM.PSVpnClientConfiguration>();
-            Mapper.CreateMap<MNM.VpnClientParameters, CNM.PSVpnClientParameters>();
-            Mapper.CreateMap<MNM.VpnClientRevokedCertificate, CNM.PSVpnClientRevokedCertificate>();
-            Mapper.CreateMap<MNM.VpnClientRootCertificate, CNM.PSVpnClientRootCertificate>();
-            Mapper.CreateMap<MNM.BgpSettings, CNM.PSBgpSettings>();
+                // MNM to CNM
+                cfg.CreateMap<MNM.ExpressRouteServiceProvider, CNM.PSExpressRouteServiceProvider>();
+                cfg.CreateMap<MNM.ExpressRouteServiceProviderBandwidthsOffered, CNM.PSExpressRouteServiceProviderBandwidthsOffered>();
 
-            // Application Gateways
-            // CNM to MNM
-            Mapper.CreateMap<CNM.PSApplicationGateway, MNM.ApplicationGateway>();
-            Mapper.CreateMap<CNM.PSApplicationGatewaySku, MNM.ApplicationGatewaySku>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayPathRule, MNM.ApplicationGatewayPathRule>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayUrlPathMap, MNM.ApplicationGatewayUrlPathMap>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayProbe, MNM.ApplicationGatewayProbe>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayBackendAddress, MNM.ApplicationGatewayBackendAddress>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayBackendAddressPool, MNM.ApplicationGatewayBackendAddressPool>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayBackendHttpSettings, MNM.ApplicationGatewayBackendHttpSettings>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayFrontendIPConfiguration, MNM.ApplicationGatewayFrontendIPConfiguration>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayFrontendPort, MNM.ApplicationGatewayFrontendPort>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayHttpListener, MNM.ApplicationGatewayHttpListener>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayIPConfiguration, MNM.ApplicationGatewayIPConfiguration>();
-            Mapper.CreateMap<CNM.PSApplicationGatewayRequestRoutingRule, MNM.ApplicationGatewayRequestRoutingRule>();
-            Mapper.CreateMap<CNM.PSApplicationGatewaySslCertificate, MNM.ApplicationGatewaySslCertificate>();
-            Mapper.CreateMap<CNM.PSBackendAddressPool, MNM.BackendAddressPool>();
+                // ExoressRouteCircuitAuthorization
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSExpressRouteCircuitAuthorization, MNM.ExpressRouteCircuitAuthorization>();
 
-            // MNM to CNM
-            Mapper.CreateMap<MNM.ApplicationGateway, CNM.PSApplicationGateway>();
-            Mapper.CreateMap<MNM.ApplicationGatewaySku, CNM.PSApplicationGatewaySku>();
-            Mapper.CreateMap<MNM.ApplicationGatewayPathRule, CNM.PSApplicationGatewayPathRule>();
-            Mapper.CreateMap<MNM.ApplicationGatewayUrlPathMap, CNM.PSApplicationGatewayUrlPathMap>();
-            Mapper.CreateMap<MNM.ApplicationGatewayProbe, CNM.PSApplicationGatewayProbe>();
-            Mapper.CreateMap<MNM.ApplicationGatewayBackendAddress, CNM.PSApplicationGatewayBackendAddress>();
-            Mapper.CreateMap<MNM.ApplicationGatewayBackendAddressPool, CNM.PSApplicationGatewayBackendAddressPool>();
-            Mapper.CreateMap<MNM.ApplicationGatewayBackendHttpSettings, CNM.PSApplicationGatewayBackendHttpSettings>();
-            Mapper.CreateMap<MNM.ApplicationGatewayFrontendIPConfiguration, CNM.PSApplicationGatewayFrontendIPConfiguration>();
-            Mapper.CreateMap<MNM.ApplicationGatewayFrontendPort, CNM.PSApplicationGatewayFrontendPort>();
-            Mapper.CreateMap<MNM.ApplicationGatewayHttpListener, CNM.PSApplicationGatewayHttpListener>();
-            Mapper.CreateMap<MNM.ApplicationGatewayIPConfiguration, CNM.PSApplicationGatewayIPConfiguration>();
-            Mapper.CreateMap<MNM.ApplicationGatewayRequestRoutingRule, CNM.PSApplicationGatewayRequestRoutingRule>();
-            Mapper.CreateMap<MNM.ApplicationGatewaySslCertificate, CNM.PSApplicationGatewaySslCertificate>();
-            Mapper.CreateMap<MNM.BackendAddressPool, CNM.PSBackendAddressPool>();
-        }
+                // MNM to CNM
+                cfg.CreateMap<MNM.ExpressRouteCircuitAuthorization, CNM.PSExpressRouteCircuitAuthorization>();
+
+
+                // Gateways
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSVirtualNetworkGateway, MNM.VirtualNetworkGateway>();
+                cfg.CreateMap<CNM.PSConnectionResetSharedKey, MNM.ConnectionResetSharedKey>();
+                cfg.CreateMap<CNM.PSConnectionSharedKey, MNM.ConnectionSharedKey>();
+                cfg.CreateMap<CNM.PSLocalNetworkGateway, MNM.LocalNetworkGateway>();
+                cfg.CreateMap<CNM.PSVirtualNetworkGatewayConnection, MNM.VirtualNetworkGatewayConnection>();
+                cfg.CreateMap<CNM.PSVirtualNetworkGatewayIpConfiguration, MNM.VirtualNetworkGatewayIPConfiguration>();
+                cfg.CreateMap<CNM.PSVirtualNetworkGatewaySku, MNM.VirtualNetworkGatewaySku>();
+                cfg.CreateMap<CNM.PSVpnClientConfiguration, MNM.VpnClientConfiguration>();
+                cfg.CreateMap<CNM.PSVpnClientParameters, MNM.VpnClientParameters>();
+                cfg.CreateMap<CNM.PSVpnClientRevokedCertificate, MNM.VpnClientRevokedCertificate>();
+                cfg.CreateMap<CNM.PSVpnClientRootCertificate, MNM.VpnClientRootCertificate>();
+                cfg.CreateMap<CNM.PSBgpSettings, MNM.BgpSettings>();
+
+                // MNM to CNM
+                cfg.CreateMap<MNM.VirtualNetworkGateway, CNM.PSVirtualNetworkGateway>();
+                cfg.CreateMap<MNM.ConnectionResetSharedKey, CNM.PSConnectionResetSharedKey>();
+                cfg.CreateMap<MNM.ConnectionSharedKey, CNM.PSConnectionSharedKey>();
+                cfg.CreateMap<MNM.LocalNetworkGateway, CNM.PSLocalNetworkGateway>();
+                cfg.CreateMap<MNM.VirtualNetworkGatewayConnection, CNM.PSVirtualNetworkGatewayConnection>();
+                cfg.CreateMap<MNM.VirtualNetworkGatewayIPConfiguration, CNM.PSVirtualNetworkGatewayIpConfiguration>();
+                cfg.CreateMap<MNM.VirtualNetworkGatewaySku, CNM.PSVirtualNetworkGatewaySku>();
+                cfg.CreateMap<MNM.VpnClientConfiguration, CNM.PSVpnClientConfiguration>();
+                cfg.CreateMap<MNM.VpnClientParameters, CNM.PSVpnClientParameters>();
+                cfg.CreateMap<MNM.VpnClientRevokedCertificate, CNM.PSVpnClientRevokedCertificate>();
+                cfg.CreateMap<MNM.VpnClientRootCertificate, CNM.PSVpnClientRootCertificate>();
+                cfg.CreateMap<MNM.BgpSettings, CNM.PSBgpSettings>();
+
+                // Application Gateways
+                // CNM to MNM
+                cfg.CreateMap<CNM.PSApplicationGateway, MNM.ApplicationGateway>();
+                cfg.CreateMap<CNM.PSApplicationGatewaySku, MNM.ApplicationGatewaySku>();
+                cfg.CreateMap<CNM.PSApplicationGatewayPathRule, MNM.ApplicationGatewayPathRule>();
+                cfg.CreateMap<CNM.PSApplicationGatewayUrlPathMap, MNM.ApplicationGatewayUrlPathMap>();
+                cfg.CreateMap<CNM.PSApplicationGatewayProbe, MNM.ApplicationGatewayProbe>();
+                cfg.CreateMap<CNM.PSApplicationGatewayBackendAddress, MNM.ApplicationGatewayBackendAddress>();
+                cfg.CreateMap<CNM.PSApplicationGatewayBackendAddressPool, MNM.ApplicationGatewayBackendAddressPool>();
+                cfg.CreateMap<CNM.PSApplicationGatewayBackendHttpSettings, MNM.ApplicationGatewayBackendHttpSettings>();
+                cfg.CreateMap<CNM.PSApplicationGatewayFrontendIPConfiguration, MNM.ApplicationGatewayFrontendIPConfiguration>();
+                cfg.CreateMap<CNM.PSApplicationGatewayFrontendPort, MNM.ApplicationGatewayFrontendPort>();
+                cfg.CreateMap<CNM.PSApplicationGatewayHttpListener, MNM.ApplicationGatewayHttpListener>();
+                cfg.CreateMap<CNM.PSApplicationGatewayIPConfiguration, MNM.ApplicationGatewayIPConfiguration>();
+                cfg.CreateMap<CNM.PSApplicationGatewayRequestRoutingRule, MNM.ApplicationGatewayRequestRoutingRule>();
+                cfg.CreateMap<CNM.PSApplicationGatewaySslCertificate, MNM.ApplicationGatewaySslCertificate>();
+                cfg.CreateMap<CNM.PSBackendAddressPool, MNM.BackendAddressPool>();
+
+                // MNM to CNM
+                cfg.CreateMap<MNM.ApplicationGateway, CNM.PSApplicationGateway>();
+                cfg.CreateMap<MNM.ApplicationGatewaySku, CNM.PSApplicationGatewaySku>();
+                cfg.CreateMap<MNM.ApplicationGatewayPathRule, CNM.PSApplicationGatewayPathRule>();
+                cfg.CreateMap<MNM.ApplicationGatewayUrlPathMap, CNM.PSApplicationGatewayUrlPathMap>();
+                cfg.CreateMap<MNM.ApplicationGatewayProbe, CNM.PSApplicationGatewayProbe>();
+                cfg.CreateMap<MNM.ApplicationGatewayBackendAddress, CNM.PSApplicationGatewayBackendAddress>();
+                cfg.CreateMap<MNM.ApplicationGatewayBackendAddressPool, CNM.PSApplicationGatewayBackendAddressPool>();
+                cfg.CreateMap<MNM.ApplicationGatewayBackendHttpSettings, CNM.PSApplicationGatewayBackendHttpSettings>();
+                cfg.CreateMap<MNM.ApplicationGatewayFrontendIPConfiguration, CNM.PSApplicationGatewayFrontendIPConfiguration>();
+                cfg.CreateMap<MNM.ApplicationGatewayFrontendPort, CNM.PSApplicationGatewayFrontendPort>();
+                cfg.CreateMap<MNM.ApplicationGatewayHttpListener, CNM.PSApplicationGatewayHttpListener>();
+                cfg.CreateMap<MNM.ApplicationGatewayIPConfiguration, CNM.PSApplicationGatewayIPConfiguration>();
+                cfg.CreateMap<MNM.ApplicationGatewayRequestRoutingRule, CNM.PSApplicationGatewayRequestRoutingRule>();
+                cfg.CreateMap<MNM.ApplicationGatewaySslCertificate, CNM.PSApplicationGatewaySslCertificate>();
+                cfg.CreateMap<MNM.BackendAddressPool, CNM.PSBackendAddressPool>();
+            });
+            _mapper = config.CreateMapper();
+
+        }        
     }
 }
