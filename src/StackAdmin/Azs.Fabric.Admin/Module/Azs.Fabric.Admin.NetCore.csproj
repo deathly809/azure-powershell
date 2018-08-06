@@ -43,7 +43,7 @@
         <ItemGroup>
             <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\clr\$(RootNameSpace).*"/>
         </ItemGroup>
-        <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace).Netcore\%(RecursiveDir)%(Filename)%(Extension)')" />
+        <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Package\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace).Netcore\%(RecursiveDir)%(Filename)%(Extension)')" />
     </Target>
 
 </Project>
