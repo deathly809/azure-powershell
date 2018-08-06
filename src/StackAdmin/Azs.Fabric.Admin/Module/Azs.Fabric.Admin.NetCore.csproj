@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\..\..\..\tools\Common.Netcore.Dependencies.targets" />
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.0</TargetFramework>
+        <RootNamespace>Azs.Fabric.Admin</RootNamespace>
+        <AssemblyName>Azs.Fabric.Admin</AssemblyName>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <OutputPath>Azs.Fabric.Admin\ref\clr\</OutputPath>
+        <DelaySign>false</DelaySign>
+        <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>Azs.Fabric.Admin\ref\clr\</OutputPath>
+        <DocumentationFile></DocumentationFile>
+        <SignAssembly>true</SignAssembly>
+        <DelaySign>true</DelaySign>
+        <AssemblyOriginatorKeyFile>MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
+        <DefineConstants>TRACE;RELEASE;NETSTANDARD;SIGN</DefineConstants>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AzureStack.Management.Fabric.Admin" Version="0.2.0-preview" />
+        <PackageReference Include="System.ServiceModel.Primitives" Version="4.4.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(ProjectDir)$(RootNameSpace)\**\*.*" />
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="Build">
+        <ItemGroup>
+            <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\clr\$(RootNameSpace).*"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace).Netcore\%(RecursiveDir)%(Filename)%(Extension)')" />
+    </Target>
+
+</Project>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Authentication.Netcore", "src\Common\Commands.Common.Authentication\Common.Authentication.Netcore.csproj", "{D12674F6-CB92-438F-A68D-21CE12F8611B}"
 EndProject
@@ -148,6 +148,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commands.PolicyInsights.Netcore", "src\ResourceManager\PolicyInsights\Commands.PolicyInsights\Commands.PolicyInsights.Netcore.csproj", "{A0574194-976A-486A-B589-07B2E50CA6EF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commands.Common.Aks.Netcore", "src\Common\Commands.Common.Aks\Commands.Common.Aks.Netcore.csproj", "{B3A55509-A1D4-4884-B86F-179551C65C81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azs.Fabric.Admin.Netcore", "src\StackAdmin\Azs.Fabric.Admin\Module\Azs.Fabric.Admin.Netcore.csproj", "{E00C21A7-28A9-4108-9D09-F57A63B08A15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1035,6 +1037,18 @@ Global
 		{B3A55509-A1D4-4884-B86F-179551C65C81}.Release|x64.Build.0 = Release|Any CPU
 		{B3A55509-A1D4-4884-B86F-179551C65C81}.Release|x86.ActiveCfg = Release|Any CPU
 		{B3A55509-A1D4-4884-B86F-179551C65C81}.Release|x86.Build.0 = Release|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Debug|x64.Build.0 = Debug|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Debug|x86.Build.0 = Debug|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Release|x64.ActiveCfg = Release|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Release|x64.Build.0 = Release|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Release|x86.ActiveCfg = Release|Any CPU
+		{E00C21A7-28A9-4108-9D09-F57A63B08A15}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

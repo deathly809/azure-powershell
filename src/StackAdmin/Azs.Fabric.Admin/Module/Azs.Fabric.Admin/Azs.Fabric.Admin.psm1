@@ -10,7 +10,7 @@ Write-Warning "Preview version of the module Azs.Fabric.Admin loaded. Future rel
 # We always import embedded version.
 Import-Module (Join-Path -Path $PSScriptRoot -ChildPath PSSwaggerUtility) -Force
 
-if ((Get-OperatingSystemInfo).IsCore) {
+if ((Get-OperatingSystemInfo).IsCore -and -not (Test-Path .\ref\clr) ) {
     $clr = 'coreclr'
 }
 else {
