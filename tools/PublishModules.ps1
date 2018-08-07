@@ -266,7 +266,7 @@ function Get-ClientModules {
 
             # Get all module directories
             if ($IsNetCore) {
-                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.* | Where-Object {$_.FullName.EndsWith(".Netcore")}
+                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude | Where-Object {$_.FullName.EndsWith(".Netcore")}
             } else {
                 $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.*, *.Netcore
             }
