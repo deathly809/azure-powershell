@@ -60,7 +60,7 @@
       <MarkdownFiles Include="$(ProjectDir)..\Help\*.md" />
     </ItemGroup>
     <ItemGroup>
-      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\fullclr\$(RootNameSpace).*"/>
+      <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\fullclr\$(RootNameSpace).*;$(ProjectDir)$(RootNameSpace)\Azs.Fabric.Admin.Netcore.psm1"/>
     </ItemGroup>
     <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(MarkdownFiles)" DestinationFolder="..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace)\help\" ContinueOnError="false" />

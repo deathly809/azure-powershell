@@ -20,7 +20,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
     ModuleVersion     = '0.1.2'
 
     # Supported PSEditions
-    # CompatiblePSEditions = @()
+    CompatiblePSEditions = 'Core'
 
     # ID used to uniquely identify this module
     GUID              = '6ad9b0a0-a9c0-490c-83d3-02eeb307d1ad'
@@ -38,7 +38,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
     Description       = 'Fabric Admin Client'
 
     # Minimum version of the Windows PowerShell engine required by this module
-    # PowerShellVersion = ''
+    PowerShellVersion = '5.1'
 
     # Name of the Windows PowerShell host required by this module
     # PowerShellHostName = ''
@@ -56,8 +56,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    RequiredModules      = @(@{ModuleName = 'AzureRM.Profile'; RequiredVersion = '3.4.1'; },
-                             @{ModuleName = 'AzureRM.Resources'; RequiredVersion = '4.4.1'; })
+    RequiredModules      = @(
+        @{ModuleName = 'AzureRM.Profile.Netcore'; ModuleVersion = '0.13.1'; },
+        @{ModuleName = 'AzureRM.Resources.Netcore'; ModuleVersion = '0.13.1'; }
+    )
 
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()

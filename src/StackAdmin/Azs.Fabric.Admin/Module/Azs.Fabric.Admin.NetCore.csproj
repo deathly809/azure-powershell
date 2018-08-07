@@ -41,9 +41,9 @@
 
     <Target Name="PostBuild" AfterTargets="Build">
         <ItemGroup>
-            <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\clr\$(RootNameSpace).*"/>
+            <OutFiles Include="$(ProjectDir)$(RootNameSpace)\**\*.*" Exclude="$(ProjectDir)$(RootNameSpace)\ref\fullclr\$(RootNameSpace).*;$(ProjectDir)$(RootNameSpace)\Azs.Fabric.Admin.psm1"/>
         </ItemGroup>
-        <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Package\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace).Netcore\%(RecursiveDir)%(Filename)%(Extension)')" />
+        <Copy SourceFiles="@(OutFiles)" DestinationFiles="@(OutFiles->'..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\$(RootNameSpace).Netcore\%(RecursiveDir)%(Filename)%(Extension)')" />
     </Target>
 
 </Project>

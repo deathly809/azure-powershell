@@ -192,7 +192,12 @@ function Get-AdminModules {
         if ($Scope -eq "Stack") {
             $packageFolder, $resourceManagerRootFolder = Get-Directories -BuildConfig $BuildConfig -Scope $Scope
 
-            $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Filter Azs.*
+            if ($IsNetCore) {
+                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Filter Azs.*.Netcore
+            } else {
+                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Filter Azs.* -Exclude *.Netcore
+            }
+
             foreach ($module in $resourceManagerModules) {
                 $targets += $module.FullName
             }
@@ -266,7 +271,7 @@ function Get-ClientModules {
 
             # Get all module directories
             if ($IsNetCore) {
-                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude | Where-Object {$_.FullName.EndsWith(".Netcore")}
+                $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.* | Where-Object {$_.FullName.EndsWith(".Netcore")}
             } else {
                 $resourceManagerModules = Get-ChildItem -Path $resourceManagerRootFolder -Directory -Exclude Azs.*, *.Netcore
             }
