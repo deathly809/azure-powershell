@@ -89,6 +89,8 @@ function Restore-AzsBackup {
             $ResourceGroupName = $ArmResourceIdParameterValues['resourceGroup']
             $Location = $ArmResourceIdParameterValues['location']
             $Name = $ArmResourceIdParameterValues['backup']
+        } else {
+            $Name = Get-ResourceNameSuffix -ResourceName $Name
         }
 
         # Should process

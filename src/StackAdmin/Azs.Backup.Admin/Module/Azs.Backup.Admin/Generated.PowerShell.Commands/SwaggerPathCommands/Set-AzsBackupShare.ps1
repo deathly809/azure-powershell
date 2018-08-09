@@ -142,8 +142,6 @@ function Set-AzsBackupShare {
 
     Process {
 
-
-
         if ('InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
             $GetArmResourceIdParameterValue_params = @{
                 IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{location}'
@@ -185,7 +183,7 @@ function Set-AzsBackupShare {
 
             if ('InputObject' -eq $PsCmdlet.ParameterSetName -or 'Update' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
 
-                if ($InputObject -eq $null) {
+                if ($null -eq $InputObject) {
                     $InputObject = Get-AzsBackupLocation -ResourceGroupName $ResourceGroupName -Location $Location
                 }
 

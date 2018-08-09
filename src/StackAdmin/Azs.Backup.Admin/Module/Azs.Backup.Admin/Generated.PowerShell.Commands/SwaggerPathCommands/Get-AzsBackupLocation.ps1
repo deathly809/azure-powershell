@@ -75,8 +75,6 @@ function Get-AzsBackupLocation {
 
     Process {
 
-
-
         $NewServiceClient_params = @{
             FullClientTypeName = 'Microsoft.AzureStack.Management.Backup.Admin.BackupAdminClient'
         }
@@ -101,12 +99,13 @@ function Get-AzsBackupLocation {
             $ResourceGroupName = $ArmResourceIdParameterValues['resourceGroup']
             $Location = $ArmResourceIdParameterValues['location']
         } else {
-            if ([System.String]::IsNullOrEmpty($Location)) {
-                $Location = (Get-AzureRMLocation).Location
-            }
 
             if ([System.String]::IsNullOrEmpty($ResourceGroupName)) {
-                $ResourceGroupName = "System.$Location"
+                $tmpLocation = $Location
+                if ([System.String]::IsNullOrEmpty($tmpLocation)) {
+                    $tmpLocation = (Get-AzureRMLocation).Location
+                }
+                $ResourceGroupName = "System.$tmpLocation"
             }
         }
 

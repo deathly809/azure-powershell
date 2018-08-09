@@ -108,6 +108,10 @@ InModuleScope Azs.Backup.Admin {
             }
         }
 
+        AfterEach {
+            $global:Client = $null
+        }
+
         It "TestListBackupLocation" -Skip:$('TestListBackupLocation' -in $global:SkippedTests) {
             $global:TestName = 'TestListBackupLocations'
 
@@ -124,7 +128,7 @@ InModuleScope Azs.Backup.Admin {
             $backupLocations = Get-AzsBackupLocation -Location $global:Location
             $backupLocations  | Should Not Be $null
             foreach ($backupLocation in $backupLocations) {
-                $result = Get-AzsBackupLocation -Location (Select-Name $backupLocation.Name)
+                $result = Get-AzsBackupLocation -Location $backupLocation.Name
                 ValidateBackupLocation -BackupLocation $result
                 AssertAreEqual -expected $backupLocation -found $result
             }
@@ -133,10 +137,10 @@ InModuleScope Azs.Backup.Admin {
         It "TestGetAllBackupLocation" -Skip:$('TestGetAllBackupLocation' -in $global:SkippedTests) {
             $global:TestName = 'TestGetAllBackupLocation'
 
-            $backupLocations = Get-AzsBackupLocation -Location $global:Location
+            $backupLocations = Get-AzsBackupLocation -ResourceGroupName $global:ResourceGroupName
             $backupLocations  | Should Not Be $null
             foreach ($backupLocation in $backupLocations) {
-                $result = Get-AzsBackupLocation -Location (Select-Name $backupLocation.Name)
+                $result = Get-AzsBackupLocation -Location $backupLocation.Name
                 ValidateBackupLocation -BackupLocation $result
                 AssertAreEqual -expected $backupLocation -found $result
             }
@@ -177,7 +181,7 @@ InModuleScope Azs.Backup.Admin {
             $backup = Set-AzsBackupShare -ResourceGroupName $global:ResourceGroupName -Location $global:ResourceGroupName -Username $username -Password $password -BackupShare $path -EncryptionKey $encryptionKey
 
             $backup 					| Should Not Be $Null
-            Restore-AzsBackup -ResourceGroupName $global:ResourceGroupName -Location $global:ResourceGroupName -Backup (Select-Name $backup.Name)
+            Restore-AzsBackup -ResourceGroupName $global:ResourceGroupName -Location $global:ResourceGroupName -Backup $backup.Name
         }
     }
 }
