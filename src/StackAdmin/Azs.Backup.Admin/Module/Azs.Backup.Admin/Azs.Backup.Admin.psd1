@@ -89,8 +89,8 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     NestedModules        = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport    = 'Get-AzsBackupLocation', 'Get-AzsBackup', 'Restore-AzsBackup',
-    'Set-AzsBackupShare', 'Start-AzsBackup', "New-AzsEncryptionKeyBase64"
+    FunctionsToExport    = 'Get-AzsBackupConfiguration', 'Get-AzsBackup', 'Restore-AzsBackup',
+    'Set-AzsBackupConfiguration', 'Start-AzsBackup', "New-AzsEncryptionKeyBase64"
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport      = @()
@@ -99,7 +99,10 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     # VariablesToExport = @()
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport      = @()
+    AliasesToExport      = @(
+        'Set-AzsBackupShare',
+        'Get-AzsBackupLocation'
+    )
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
