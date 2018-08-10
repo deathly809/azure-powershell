@@ -23,7 +23,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
 .PARAMETER InputObject
     Backup location configuration returned by Get-AzsBackupLocation.
 
-.PARAMETER BackupShare
+.PARAMETER Path
     Location where backups will be stored.
 
 .PARAMETER Username
@@ -85,7 +85,7 @@ function Set-AzsBackupConfiguration {
         [ValidateNotNullOrEmpty()]
         [System.String]
         [Alias("Path")]
-        $BackupShare,
+        $Path,
 
         [Parameter(Mandatory = $false, ParameterSetName = 'ResourceId')]
         [Parameter(Mandatory = $false, ParameterSetName = 'InputObject')]
@@ -148,6 +148,12 @@ function Set-AzsBackupConfiguration {
             Write-Warning "Set-AzsBackupShare has been deprecated, please use Set-AzsBackupConfiguration"
         }
 
+        if ($PSBoundParameters.ContainsKey('Path')) {
+            if ( $MyInvocation.Line -match "\s-BackupShare\s") {
+                Write-Warning -Message "The parameter alias BackupShare will be deprecated in future release. Please use the parameter Path instead"
+            }
+        }
+
         if ('InputObject' -eq $PsCmdlet.ParameterSetName -or 'ResourceId' -eq $PsCmdlet.ParameterSetName) {
             $GetArmResourceIdParameterValue_params = @{
                 IdTemplate = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Backup.Admin/backupLocations/{location}'
@@ -194,7 +200,7 @@ function Set-AzsBackupConfiguration {
                 }
 
                 if ($PSBoundParameters.ContainsKey('BackupShare')) {
-                    $InputObject.Path = $BackupShare
+                    $InputObject.Path = $Path
                 }
 
                 if ($PSBoundParameters.ContainsKey('Username')) {
