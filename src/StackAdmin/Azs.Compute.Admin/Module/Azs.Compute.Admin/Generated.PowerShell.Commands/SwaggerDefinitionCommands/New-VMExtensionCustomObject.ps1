@@ -10,7 +10,7 @@ class VmExtensionCustomObject {
 
     # Extended Properties
     [string]$Publisher
-    [string]$ExtensionType;
+    [string]$TypeHandlerVersion;
     [string]$Version
 
     # VM Extension Properties
@@ -57,7 +57,7 @@ function New-VmExtensionCustomObject {
     # Add extra information
     $result."Publisher" = $publisherProperty
     $result."ExtensionType" = $typeProperty
-    $result."Version" = $versionProperty
+    $result."TypeHandlerVersion" = $versionProperty
 
     $result
 }

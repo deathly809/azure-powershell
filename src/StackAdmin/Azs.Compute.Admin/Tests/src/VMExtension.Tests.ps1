@@ -116,7 +116,7 @@ InModuleScope Azs.Compute.Admin {
                     -Location $vmextension.Location `
                     -Publisher $vmExtension.Publisher `
                     -Type $vmExtension.ExtensionType `
-                    -Version $vmExtension.Version `
+                    -Version $vmExtension.TypeHandlerVersion `
 
                 $vmExt | Should not be $null
                 ValidateSameVMExtension $VMExtension $vmExt
