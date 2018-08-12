@@ -78,6 +78,7 @@ function Get-AzsStorageShareMetricDefinition {
                 Write-Warning -Message "The parameter alias ShareName will be deprecated in future release. Please use the parameter Name instead"
             }
         }
+
         $Name = Get-ResourceNameSuffix -ResourceName $Name
 
         $NewServiceClient_params = @{

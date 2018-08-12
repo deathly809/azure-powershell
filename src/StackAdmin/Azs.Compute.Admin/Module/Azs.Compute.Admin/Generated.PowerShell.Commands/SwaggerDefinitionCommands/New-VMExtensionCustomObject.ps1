@@ -11,7 +11,7 @@ class VmExtensionCustomObject {
     # Extended Properties
     [string]$Publisher
     [string]$TypeHandlerVersion;
-    [string]$Version
+    [string]$ExtensionType
 
     # VM Extension Properties
     [string]$ComputeRole;
@@ -55,9 +55,9 @@ function New-VmExtensionCustomObject {
     $versionProperty = $ArmResourceIdParameterValues['version']
 
     # Add extra information
-    $result."Publisher" = $publisherProperty
-    $result."ExtensionType" = $typeProperty
-    $result."TypeHandlerVersion" = $versionProperty
+    $result.Publisher = $publisherProperty
+    $result.ExtensionType = $typeProperty
+    $result.TypeHandlerVersion = $versionProperty
 
     $result
 }

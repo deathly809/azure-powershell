@@ -31,7 +31,7 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     RootModule           = 'Azs.Backup.Admin.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.2.0'
+    ModuleVersion        = '0.2.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -70,8 +70,8 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    RequiredModules   = @(@{ModuleName = 'AzureRM.Profile'; ModuleVersion = '5.3.4'; },
-                          @{ModuleName = 'AzureRM.Resources'; ModuleVersion = '6.0.2'; })
+    RequiredModules      = @(@{ModuleName = 'AzureRM.Profile'; ModuleVersion = '5.3.4'; },
+        @{ModuleName = 'AzureRM.Resources'; ModuleVersion = '6.0.2'; })
 
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()
@@ -119,19 +119,33 @@ Changes may cause incorrect behavior and will be lost if the code is regenerated
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags         = @('AzureStack', 'Azure Stack', 'Admin', 'Backup', 'Azure Stack Backup and Restore', 'BRP')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri   = 'https://aka.ms/azps-license'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri   = 'https://github.com/Azure/azure-powershell'
 
             # A URL to an icon representing this module.
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = '## 2018.8.12 - Version 0.2.0
+            * Module dependencies updated
+                * AzureRM.Profile >= 5.3.4
+                * AzureRM.Resources >= 6.0.2
+            * Support handling names of nested resources
+                * Get-AzsBackup
+                * Restore-AzsBackup
+                * Start-AzsBackup
+            * Deprecations
+                * Set-AzsBackupShare is an alias now to the cmdlet Set-AzsBackupConfiguration
+                * Get-AzsBackupLocation is an alias now to the cmdlet Get-AzsBackupConfiguration
+                * Set-AzsBackupConfiguration, the parameter BackupShare is an alias now for the parameter path
+            * Bug fixes
+                * Handle ErrrorAction correctly now
+            '
 
         } # End of PSData hashtable
 
