@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: ED37B17D-C513-422A-89EA-A6AF1C9A5FEE
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/remove-azurermcontainerserviceagentpoolprofile
 schema: 2.0.0
@@ -31,6 +30,7 @@ PS C:\> Remove-AzureRmContainerServiceAgentPoolProfile -ContainerService $Contai
 
 The first command gets a container service named CSResourceGroup17 by using the Get-AzureRmContainerService cmdlet.
 The command stores the service in the $Container variable.
+
 The second command removes the profile named AgentPool01 from the container service in $Container.
 
 ## PARAMETERS
@@ -39,9 +39,9 @@ The second command removes the profile named AgentPool01 from the container serv
 Specifies the container service object from which this cmdlet removes an agent pool profile.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
+Type: PSContainerService
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -54,7 +54,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -69,9 +69,9 @@ Accept wildcard characters: False
 Specifies the name of the agent pool profile that this cmdlet removes.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -84,7 +84,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -99,7 +99,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -115,11 +115,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
-Parameters: ContainerService (ByPropertyName, ByValue)
-
-### System.String
-Parameters: Name (ByPropertyName)
+### ContainerService
+Parameter 'ContainerService' accepts value of type 'ContainerService' from the pipeline
 
 ## OUTPUTS
 

@@ -1,4 +1,4 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
 Module Name: AzureRM.Compute
 ms.assetid: 6BCB36BC-F5E6-4EDD-983C-8BDE7A9B004D
@@ -13,18 +13,7 @@ Enables encryption on a running IaaS virtual machine in Azure.
 
 ## SYNTAX
 
-### SinglePassParameterSet (Default)
-```
-Set-AzureRmVMDiskEncryptionExtension [-ResourceGroupName] <String> [-VMName] <String>
- [-DiskEncryptionKeyVaultUrl] <String> [-DiskEncryptionKeyVaultId] <String> [[-KeyEncryptionKeyUrl] <String>]
- [[-KeyEncryptionKeyVaultId] <String>] [[-KeyEncryptionAlgorithm] <String>] [[-VolumeType] <String>]
- [[-SequenceVersion] <String>] [[-TypeHandlerVersion] <String>] [[-Name] <String>] [[-Passphrase] <String>]
- [-Force] [-DisableAutoUpgradeMinorVersion] [-SkipVmBackup] [-ExtensionType <String>]
- [-ExtensionPublisherName <String>] [-EncryptFormatAll] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
-```
-
-### AADClientSecretParameterSet
+### AADClientSecretParameterSet (Default)
 ```
 Set-AzureRmVMDiskEncryptionExtension [-ResourceGroupName] <String> [-VMName] <String> [-AadClientID] <String>
  [-AadClientSecret] <String> [-DiskEncryptionKeyVaultUrl] <String> [-DiskEncryptionKeyVaultId] <String>
@@ -55,37 +44,7 @@ It is advised that you save your work on the virtual machine before you run this
 
 ## EXAMPLES
 
-### Example 1: Enable encryption
-```
-$RGName = "MyResourceGroup"
-$VMName = "MyTestVM"
-$VaultName= "MyKeyVault"
-$KeyVault = Get-AzureRmKeyVault -VaultName $VaultName -ResourceGroupName $RGName
-$DiskEncryptionKeyVaultUrl = $KeyVault.VaultUri
-$KeyVaultResourceId = $KeyVault.ResourceId
-Set-AzureRmVMDiskEncryptionExtension -ResourceGroupName $RGName -VMName $VMName -DiskEncryptionKeyVaultUrl $DiskEncryptionKeyVaultUrl -DiskEncryptionKeyVaultId $KeyVaultResourceId
-```
-
-This example demonstrates enabling encryption without specifying AD credentials.   
-
-### Example 2: Enable encryption with pipelined input
-```
-$params = New-Object PSObject -Property @{
-    ResourceGroupName = "[resource-group-name]"
-    VMName = "[vm-name]"
-    DiskEncryptionKeyVaultId = "/subscriptions/[subscription-id-guid]/resourceGroups/[resource-group-name]/providers/Microsoft.KeyVault/vaults/[keyvault-name]"
-    DiskEncryptionKeyVaultUrl = "https://[keyvault-name].vault.azure.net"
-    KeyEncryptionKeyVaultId = "/subscriptions/[subscription-id-guid]/resourceGroups/[resource-group-name]/providers/Microsoft.KeyVault/vaults/[keyvault-name]"
-    KeyEncryptionKeyUrl = "https://[keyvault-name].vault.azure.net/keys/[kekname]/[kek-unique-id]"
-    VolumeType = "All"
-}
-
-$params | Set-AzureRmVmDiskEncryptionExtension
-```
-
-This example demonstrates sending parameters using pipelined input to enable encryption without specifying AD credentials.  
-
-### Example 3: Enable encryption using Azure AD Client ID and Client Secret
+### Example 1: Enable encryption using Azure AD Client ID and Client Secret
 ```
 $RGName = "MyResourceGroup"
 $VMName = "MyTestVM"
@@ -100,7 +59,7 @@ Set-AzureRmVMDiskEncryptionExtension -ResourceGroupName $RGName -VMName $VMName 
 
 This example enables encryption using Azure AD client ID, and client secret.
 
-### Example 4: Enable encryption using Azure AD client ID and client certification thumbprint
+### Example 2: Enable encryption using Azure AD client ID and client certification thumbprint
 ```
 $RGName = "MyResourceGroup"
 $VMName = "MyTestVM"
@@ -114,8 +73,8 @@ $KeyVaultResourceId = $KeyVault.ResourceId
 $CertPath = "C:\certificates\examplecert.pfx"
 $CertPassword = "Password"
 $Cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($CertPath, $CertPassword)
-$CertValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
-$AzureAdApplication = New-AzureRmADApplication -DisplayName "<Your Application Display Name>" -HomePage "<https://YourApplicationHomePage>" -IdentifierUris "<https://YouApplicationUri>" -CertValue $CertValue 
+$KeyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
+$AzureAdApplication = New-AzureRmADApplication -DisplayName "<Your Application Display Name>" -HomePage "<https://YourApplicationHomePage>" -IdentifierUris "<https://YouApplicationUri>" -KeyValue $KeyValue -KeyType AsymmetricX509Cert 
 $ServicePrincipal = New-AzureRmADServicePrincipal -ApplicationId $AzureAdApplication.ApplicationId
 
 $AADClientID = $AzureAdApplication.ApplicationId
@@ -152,7 +111,7 @@ Set-AzureRmVMDiskEncryptionExtension -ResourceGroupName $RGName -VMName $VMName 
 
 This example enables encryption using Azure AD client ID and client certification thumbprints.
 
-### Example 5: Enable encryption using Azure AD client ID, client secret, and wrap disk encryption key by using key encryption key
+### Example 3: Enable encryption using Azure AD client ID, client secret, and wrap disk encryption key by using key encryption key
 ```
 $RGName = "MyResourceGroup"
 $VMName = "MyTestVM"
@@ -165,7 +124,6 @@ $KeyVault = Get-AzureRmKeyVault -VaultName $VaultName -ResourceGroupName $RGName
 $DiskEncryptionKeyVaultUrl = $KeyVault.VaultUri
 $KeyVaultResourceId = $KeyVault.ResourceId
 
-$KEKName = "MyKeyEncryptionKey"
 $KEK = Add-AzureKeyVaultKey -VaultName $VaultName -Name $KEKName -Destination "Software"
 $KeyEncryptionKeyUrl = $KEK.Key.kid
 
@@ -174,7 +132,7 @@ Set-AzureRmVMDiskEncryptionExtension -ResourceGroupName $RGName -VMName $VMName 
 
 This example enables encryption using Azure AD client ID, client secret, and wrap disk encryption key by using the key encryption key.
 
-### Example 6: Enable encryption using Azure AD client ID, client cert thumbprint, and wrap disk encryptionkey by using key encryption key
+### Example 4: Enable encryption using Azure AD client ID, client cert thumbprint, and wrap disk encryptionkey by using key encryption key
 ```
 $RGName = "MyResourceGroup"
 $VMName = "MyTestVM"
@@ -183,7 +141,6 @@ $VaultName= "MyKeyVault"
 $KeyVault = Get-AzureRmKeyVault -VaultName $VaultName -ResourceGroupName $RGName
 $DiskEncryptionKeyVaultUrl = $KeyVault.VaultUri
 $KeyVaultResourceId = $KeyVault.ResourceId
-$KEKName = "MyKeyEncryptionKey"
 $KEK = Add-AzureKeyVaultKey -VaultName $VaultName -Name $KEKName -Destination "Software"
 $KeyEncryptionKeyUrl = $KEK.Key.kid
 
@@ -191,8 +148,8 @@ $KeyEncryptionKeyUrl = $KEK.Key.kid
 $CertPath = "C:\certificates\examplecert.pfx"
 $CertPassword = "Password"
 $Cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($CertPath, $CertPassword)
-$CertValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
-$AzureAdApplication = New-AzureRmADApplication -DisplayName "<Your Application Display Name>" -HomePage "<https://YourApplicationHomePage>" -IdentifierUris "<https://YouApplicationUri>" -CertValue $CertValue
+$KeyValue = [System.Convert]::ToBase64String($cert.GetRawCertData())
+$AzureAdApplication = New-AzureRmADApplication -DisplayName "<Your Application Display Name>" -HomePage "<https://YourApplicationHomePage>" -IdentifierUris "<https://YouApplicationUri>" -KeyValue $KeyValue -KeyType AsymmetricX509Cert 
 $ServicePrincipal = New-AzureRmADServicePrincipal -ApplicationId $AzureAdApplication.ApplicationId
 
 $AADClientID = $AzureAdApplication.ApplicationId
@@ -223,7 +180,7 @@ $VM = Add-AzureRmVMSecret -VM $VM -SourceVaultId $SourceVaultId -CertificateStor
 Update-AzureRmVM -VM $VM -ResourceGroupName $RGName 
 
 #Enable encryption on the virtual machine using Azure AD client ID and client cert thumbprint
-Set-AzureRmVMDiskEncryptionExtension -ResourceGroupName $RGname -VMName $VMName -AadClientID $AADClientID -AadClientCertThumbprint $AADClientCertThumbprint -DiskEncryptionKeyVaultUrl $DiskEncryptionKeyVaultUrl -DiskEncryptionKeyVaultId $KeyVaultResourceId -KeyEncryptionKeyUrl $KeyEncryptionKeyUrl -KeyEncryptionKeyVaultId $KeyVaultResourceId
+Set-AzureRmVMDiskEncryptionExtension -ResourceGroupName $RGname -VMName $VMName -AadClientID $AADClientID -AadClientCertThumbprint $AADClientCertThumbprint -DiskEncryptionKeyVaultUrl $DiskEncryptionKeyVaultUrl -DiskEncryptionKeyVaultId $KeyVaultResourceId
 ```
 
 This example enables encryption using Azure AD client ID, client cert thumbprint, and wrap disk encryption key by using key encryption key.
@@ -238,9 +195,9 @@ For more details, see the **Add-AzureRmVMSecret** cmdlet help.
 The certificate must be previously deployed to the virtual machine local computer my certificate store.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: AADClientCertParameterSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -253,9 +210,9 @@ Accept wildcard characters: False
 Specifies the client ID of the Azure AD application that has permissions to write secrets to **KeyVault**.
 
 ```yaml
-Type: System.String
-Parameter Sets: AADClientSecretParameterSet, AADClientCertParameterSet
-Aliases:
+Type: String
+Parameter Sets: (All)
+Aliases: 
 
 Required: True
 Position: 2
@@ -268,9 +225,9 @@ Accept wildcard characters: False
 Specifies the client secret of the Azure AD application that has permissions to write secrets to **KeyVault**.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: AADClientSecretParameterSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -280,10 +237,10 @@ Accept wildcard characters: False
 ```
 
 ### -DefaultProfile
-The credentials, account, tenant, and subscription used for communication with Azure.
+The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -298,9 +255,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet disables auto-upgrade of the minor version of the extension.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 14
@@ -313,9 +270,9 @@ Accept wildcard characters: False
 Specifies the resource ID of the **KeyVault** to which the virtual machine encryption keys should be uploaded.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 5
@@ -328,9 +285,9 @@ Accept wildcard characters: False
 Specifies the **KeyVault** URL to which the virtual machine encryption keys should be uploaded.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 4
@@ -343,9 +300,9 @@ Accept wildcard characters: False
 Encrypt-Format all data drives that are not already encrypted
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -358,9 +315,9 @@ Accept wildcard characters: False
 The extension publisher name. Specify this parameter only to override the default value of "Microsoft.Azure.Security".
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -373,9 +330,9 @@ Accept wildcard characters: False
 The extension type. Specify this parameter to override its default value of "AzureDiskEncryption" for Windows VMs and "AzureDiskEncryptionForLinux" for Linux VMs.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -388,9 +345,9 @@ Accept wildcard characters: False
 Forces the command to run without asking for user confirmation.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -404,9 +361,9 @@ Specifies the algorithm that is used to wrap and unwrap the key encryption key o
 The default value is RSA-OAEP.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: RSA-OAEP, RSA1_5
 
 Required: False
@@ -421,9 +378,9 @@ Specifies the URL of the key encryption key that is used to wrap and unwrap the 
 This must be the full versioned URL.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 6
@@ -437,9 +394,9 @@ Specifies the resource ID of the **KeyVault** that contains key encryption key t
 This must be a full versioned URL.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 7
@@ -453,7 +410,7 @@ Specifies the name of the Azure Resource Manager resource that represents the ex
 The default value is AzureDiskEncryption for virtual machines that run the Windows operating system or AzureDiskEncryptionForLinux for Linux virtual machines.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ExtensionName
 
@@ -469,9 +426,9 @@ Specifies the passphrase used for encrypting Linux virtual machines only.
 This parameter is not used for virtual machines that run the Windows operating system.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 13
@@ -484,9 +441,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -501,9 +458,9 @@ This is unique per each encryption operation performed on the same virtual machi
 The Get-AzureRmVMExtension cmdlet can be used to retrieve the previous sequence number that was used.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 10
@@ -516,9 +473,9 @@ Accept wildcard characters: False
 Skip backup creation for Linux VMs
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 15
@@ -531,7 +488,7 @@ Accept wildcard characters: False
 Specifies the version of the encryption extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: HandlerVersion, Version
 
@@ -546,7 +503,7 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -563,9 +520,9 @@ Allowed values for virtual machines that run the Windows operating system are as
 The allowed values for Linux virtual machines are as follows: Data only.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: OS, Data, All
 
 Required: False
@@ -579,7 +536,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -592,10 +549,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -610,12 +568,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: AadClientCertThumbprint (ByPropertyName), AadClientID (ByPropertyName), AadClientSecret (ByPropertyName), DiskEncryptionKeyVaultId (ByPropertyName), DiskEncryptionKeyVaultUrl (ByPropertyName), ExtensionPublisherName (ByPropertyName), ExtensionType (ByPropertyName), KeyEncryptionAlgorithm (ByPropertyName), KeyEncryptionKeyUrl (ByPropertyName), KeyEncryptionKeyVaultId (ByPropertyName), Name (ByPropertyName), Passphrase (ByPropertyName), ResourceGroupName (ByPropertyName), SequenceVersion (ByPropertyName), TypeHandlerVersion (ByPropertyName), VMName (ByPropertyName), VolumeType (ByPropertyName)
-
-### System.Management.Automation.SwitchParameter
-Parameters: DisableAutoUpgradeMinorVersion (ByPropertyName), SkipVmBackup (ByPropertyName)
 
 ## OUTPUTS
 

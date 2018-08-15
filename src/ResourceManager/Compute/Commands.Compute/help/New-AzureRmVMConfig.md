@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 1BECAC91-BB43-46EB-B2C9-C965C6FBC831
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/new-azurermvmconfig
 schema: 2.0.0
@@ -13,25 +12,10 @@ Creates a configurable virtual machine object.
 
 ## SYNTAX
 
-### DefaultParameterSet (Default)
 ```
 New-AzureRmVMConfig [-VMName] <String> [-VMSize] <String> [[-AvailabilitySetId] <String>]
- [[-LicenseType] <String>] [-Zone <String[]>] [-Tags <Hashtable>] [-DefaultProfile <IAzureContextContainer>]
- [<CommonParameters>]
-```
-
-### ExplicitIdentityParameterSet
-```
-New-AzureRmVMConfig [-VMName] <String> [-VMSize] <String> [[-AvailabilitySetId] <String>]
- [[-LicenseType] <String>] [-IdentityType] <ResourceIdentityType> [-IdentityId <String[]>] [-Zone <String[]>]
+ [[-LicenseType] <String>] [[-IdentityType] <ResourceIdentityType>] [-AssignIdentity] [-Zone <String[]>]
  [-Tags <Hashtable>] [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
-```
-
-### AssignIdentityParameterSet
-```
-New-AzureRmVMConfig [-VMName] <String> [-VMSize] <String> [[-AvailabilitySetId] <String>]
- [[-LicenseType] <String>] [-AssignIdentity] [-Zone <String[]>] [-Tags <Hashtable>]
- [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -47,6 +31,7 @@ PS C:\> $VirtualMachine = New-AzureRmVMConfig -VMName "VirtualMachine07" -VMSize
 ```
 
 The first command gets the availability set named AvailablitySet03 in the resource group named ResourceGroup11, and then stores that object in the $AvailabilitySet variable.
+
 The second command creates a virtual machine object, and then stores it in the $VirtualMachine variable.
 The command assigns a name and size to the virtual machine.
 The virtual machine belongs to the availability set stored in $AvailabilitySet.
@@ -57,11 +42,11 @@ The virtual machine belongs to the availability set stored in $AvailabilitySet.
 Specify the system assigned identity for the virtual machine.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: AssignIdentityParameterSet
-Aliases:
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -74,9 +59,9 @@ To obtain an availability set object, use the Get-AzureRmAvailabilitySet cmdlet.
 The availability set object contains an ID property.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -89,7 +74,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -100,32 +85,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -IdentityId
-Specifies the list of user identities associated with the virtual machine scale set.
-The user identity references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'
-
-```yaml
-Type: System.String[]
-Parameter Sets: ExplicitIdentityParameterSet
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
 ### -IdentityType
 The identity of the virtual machine, if configured.
 
 ```yaml
-Type: System.Nullable`1[Microsoft.Azure.Management.Compute.Models.ResourceIdentityType]
-Parameter Sets: ExplicitIdentityParameterSet
-Aliases:
-Accepted values: SystemAssigned, UserAssigned, SystemAssignedUserAssigned, None
+Type: ResourceIdentityType
+Parameter Sets: (All)
+Aliases: 
+Accepted values: SystemAssigned
 
-Required: True
+Required: False
 Position: 4
 Default value: None
 Accept pipeline input: False
@@ -136,9 +105,9 @@ Accept wildcard characters: False
 The license type, which is for bringing your own license scenario.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -151,7 +120,7 @@ Accept wildcard characters: False
 The tags attached to the resource.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: Hashtable
 Parameter Sets: (All)
 Aliases: Tag
 
@@ -166,7 +135,7 @@ Accept wildcard characters: False
 Specifies a name for the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName, Name
 
@@ -181,9 +150,9 @@ Accept wildcard characters: False
 Specifies the size for the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -196,9 +165,9 @@ Accept wildcard characters: False
 Specifies the zone list for the virtual machine.
 
 ```yaml
-Type: System.String[]
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -211,15 +180,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: AvailabilitySetId (ByPropertyName), VMName (ByPropertyName), VMSize (ByPropertyName)
-
-### System.String[]
-Parameters: IdentityId (ByPropertyName), Zone (ByPropertyName)
-
-### System.Collections.Hashtable
-Parameters: Tags (ByPropertyName)
 
 ## OUTPUTS
 

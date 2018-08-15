@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermsnapshot
 schema: 2.0.0
 ---
@@ -49,7 +48,7 @@ This command gets the properties of the snapshot named "SnapshotName1" in the re
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -64,9 +63,9 @@ Accept wildcard characters: False
 Specifies the name of a resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
@@ -79,7 +78,7 @@ Accept wildcard characters: False
 Specifies the name of a snapshot.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -96,7 +95,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: ResourceGroupName (ByPropertyName), SnapshotName (ByPropertyName)
 
 ## OUTPUTS
 
@@ -105,3 +103,4 @@ Parameters: ResourceGroupName (ByPropertyName), SnapshotName (ByPropertyName)
 ## NOTES
 
 ## RELATED LINKS
+

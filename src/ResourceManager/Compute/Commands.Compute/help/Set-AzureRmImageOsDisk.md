@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermimageosdisk
 schema: 2.0.0
 ---
@@ -15,7 +14,7 @@ Sets the operating system disk properties on an image object.
 ```
 Set-AzureRmImageOsDisk [-Image] <PSImage> [[-OsType] <OperatingSystemTypes>]
  [[-OsState] <OperatingSystemStateTypes>] [[-BlobUri] <String>] [-Caching <CachingTypes>] [-DiskSizeGB <Int32>]
- [-StorageAccountType <String>] [-SnapshotId <String>] [-ManagedDiskId <String>]
+ [-StorageAccountType <StorageAccountTypes>] [-SnapshotId <String>] [-ManagedDiskId <String>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -37,10 +36,13 @@ PS C:\> New-AzureRmImage -Image $imageConfig -ImageName 'ImageName01' -ResourceG
 ```
 
 The first command creates an image object, and then stores it in the $imageConfig variable.
+
 The next three commands assign paths of os disk and two data disks to the $osDiskVhdUri, $dataDiskVhdUri1, and $dataDiskVhdUri2 variables.
 This approach is only for readability of the following commands.
+
 The next three commands each adds an os disk and two data disks to the image stored in $imageConfig.
 The URI of each disk is stored in $osDiskVhdUri, $dataDiskVhdUri1, and $dataDiskVhdUri2.
+
 The final command creates an image named 'ImageName01' in resource group 'ResourceGroup01'.
 
 ## PARAMETERS
@@ -49,9 +51,9 @@ The final command creates an image named 'ImageName01' in resource group 'Resour
 Specifies the Uri of the blob.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -64,9 +66,9 @@ Accept wildcard characters: False
 Specifies the caching mode of the disk.
 
 ```yaml
-Type: System.Nullable`1[Microsoft.Azure.Management.Compute.Models.CachingTypes]
+Type: CachingTypes
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: None, ReadOnly, ReadWrite
 
 Required: False
@@ -80,7 +82,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -95,9 +97,9 @@ Accept wildcard characters: False
 Specifies the size of the disk in GB.
 
 ```yaml
-Type: System.Int32
+Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -110,9 +112,9 @@ Accept wildcard characters: False
 Specifies a local image object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSImage
+Type: PSImage
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -125,9 +127,9 @@ Accept wildcard characters: False
 Specifies the ID of a managed disk.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -140,9 +142,9 @@ Accept wildcard characters: False
 Specifies the OS state.
 
 ```yaml
-Type: System.Nullable`1[Microsoft.Azure.Management.Compute.Models.OperatingSystemStateTypes]
+Type: OperatingSystemStateTypes
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: Generalized, Specialized
 
 Required: False
@@ -156,9 +158,9 @@ Accept wildcard characters: False
 Specifies the OS type.
 
 ```yaml
-Type: System.Nullable`1[Microsoft.Azure.Management.Compute.Models.OperatingSystemTypes]
+Type: OperatingSystemTypes
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: Windows, Linux
 
 Required: False
@@ -172,9 +174,9 @@ Accept wildcard characters: False
 Specifies the ID of a snapshot.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -187,9 +189,10 @@ Accept wildcard characters: False
 The Storage Account type of Os Image Disk
 
 ```yaml
-Type: System.String
+Type: StorageAccountTypes
 Parameter Sets: (All)
-Aliases:
+Aliases: 
+Accepted values: StandardLRS, PremiumLRS
 
 Required: False
 Position: Named
@@ -202,7 +205,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -217,7 +220,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -233,25 +236,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSImage
-Parameters: Image (ByPropertyName, ByValue)
-
-### System.Nullable`1[[Microsoft.Azure.Management.Compute.Models.OperatingSystemTypes, Microsoft.Azure.Management.Compute, Version=20.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
-
-### System.Nullable`1[[Microsoft.Azure.Management.Compute.Models.OperatingSystemStateTypes, Microsoft.Azure.Management.Compute, Version=20.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
-
-### System.String
-Parameters: BlobUri (ByPropertyName), ManagedDiskId (ByPropertyName), SnapshotId (ByPropertyName), StorageAccountType (ByPropertyName)
-
-### System.Nullable`1[[Microsoft.Azure.Management.Compute.Models.CachingTypes, Microsoft.Azure.Management.Compute, Version=20.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
-
-### System.Int32
-Parameters: DiskSizeGB (ByPropertyName)
+### Microsoft.Azure.Management.Compute.Models.Image
+System.Nullable`1[[Microsoft.Azure.Management.Compute.Models.OperatingSystemTypes, Microsoft.Azure.Management.Compute, Version=14.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
+System.Nullable`1[[Microsoft.Azure.Management.Compute.Models.OperatingSystemStateTypes, Microsoft.Azure.Management.Compute, Version=14.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
+System.String
+System.Nullable`1[[Microsoft.Azure.Management.Compute.Models.CachingTypes, Microsoft.Azure.Management.Compute, Version=14.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
+System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSImage
+### Microsoft.Azure.Management.Compute.Models.Image
 
 ## NOTES
 
 ## RELATED LINKS
+

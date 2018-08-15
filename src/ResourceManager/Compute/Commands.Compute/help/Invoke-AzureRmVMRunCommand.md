@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/invoke-azurermvmruncommand
 schema: 2.0.0
 ---
@@ -15,15 +14,14 @@ Run command on the VM.
 ### DefaultParameter (Default)
 ```
 Invoke-AzureRmVMRunCommand [-ResourceGroupName] <String> [-VMName] <String> -CommandId <String>
- [-ScriptPath <String>] [-Parameter <Hashtable>] [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
+ [-ScriptPath <String>] [-Parameter <Hashtable>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
  [-Confirm] [<CommonParameters>]
 ```
 
 ### VMParameter
 ```
 Invoke-AzureRmVMRunCommand -CommandId <String> [-ScriptPath <String>] [-Parameter <Hashtable>]
- [-VM] <PSVirtualMachine> [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+ [-VM] <PSVirtualMachine> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,28 +38,13 @@ Invoke a run command of RunPowerShellScript with overriding the script 'sample.p
 
 ## PARAMETERS
 
-### -AsJob
-Run cmdlet in the background and return a Job to track progress.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -CommandId
 The run command id.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: Named
@@ -74,7 +57,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -89,9 +72,9 @@ Accept wildcard characters: False
 The run command parameters.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: Hashtable
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -104,9 +87,9 @@ Accept wildcard characters: False
 The name of the resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: DefaultParameter
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -119,9 +102,9 @@ Accept wildcard characters: False
 Path of the script to be executed.  When this value is given, the given script will override the default script of the command.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -134,7 +117,7 @@ Accept wildcard characters: False
 The PS virtual Machine Object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
+Type: PSVirtualMachine
 Parameter Sets: VMParameter
 Aliases: VMProfile
 
@@ -149,7 +132,7 @@ Accept wildcard characters: False
 The name of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: DefaultParameter
 Aliases: Name
 
@@ -164,7 +147,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -180,7 +163,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -197,10 +180,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: ResourceGroupName (ByPropertyName), VMName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
-Parameters: VM (ByPropertyName, ByValue)
+Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
 
 ## OUTPUTS
 
@@ -209,3 +189,4 @@ Parameters: VM (ByPropertyName, ByValue)
 ## NOTES
 
 ## RELATED LINKS
+

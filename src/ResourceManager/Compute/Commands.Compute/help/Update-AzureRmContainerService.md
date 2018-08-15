@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 43D01A97-75B9-46CE-B007-26FE6A97C31C
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/update-azurermcontainerservice
 schema: 2.0.0
@@ -15,8 +14,8 @@ Updates the state of a container service.
 
 ```
 Update-AzureRmContainerService [-ResourceGroupName] <String> [-Name] <String>
- [-ContainerService] <PSContainerService> [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-ContainerService] <PSContainerService> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,36 +30,24 @@ PS C:\> Get-AzureRmContainerService -ResourceGroupName "ResourceGroup17" -Name "
 
 This command gets the container service named CSResourceGroup17 by using the Get-AzureRmContainerService cmdlet.
 The command passes that object to the Remove-AzureRmContainerServiceAgentPoolProfile cmdlet by using the pipeline operator.
+
 **Remove-AzureRmContainerServiceAgentPoolProfile** removes the profile named AgentPool01.
 The command passes the result to the Add-AzureRmContainerServiceAgentPoolProfile cmdlet.
+
 **Add-AzureRmContainerServiceAgentPoolProfile** adds a profile that has the name AgentPool01, and has the specified properties.
 The command passes the result to the current cmdlet.
+
 The current cmdlet updates the container service to reflect the changes that were made in this command.
 
 ## PARAMETERS
-
-### -AsJob
-Run cmdlet in the background
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -ContainerService
 Specifies a local **ContainerService** object that contains changes.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
+Type: PSContainerService
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -73,7 +60,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -88,9 +75,9 @@ Accept wildcard characters: False
 Specifies the name of the container service that this cmdlet updates.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -103,9 +90,9 @@ Accept wildcard characters: False
 Specifies the resource group of the container service that this cmdlet updates.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -118,7 +105,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -131,10 +118,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -150,11 +138,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: Name (ByPropertyName), ResourceGroupName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
-Parameters: ContainerService (ByValue)
+### ContainerService
+Parameter 'ContainerService' accepts value of type 'ContainerService' from the pipeline
 
 ## OUTPUTS
 

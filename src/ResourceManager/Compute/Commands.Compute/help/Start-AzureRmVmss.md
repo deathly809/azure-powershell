@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 7F7D1F05-617C-4EC5-8FF5-D816E9148841
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/start-azurermvmss
 schema: 2.0.0
@@ -14,7 +13,7 @@ Starts the VMSS or a set of virtual machines within the VMSS.
 ## SYNTAX
 
 ```
-Start-AzureRmVmss [-ResourceGroupName] <String> [-VMScaleSetName] <String> [[-InstanceId] <String[]>] [-AsJob]
+Start-AzureRmVmss [-ResourceGroupName] <String> [-VMScaleSetName] <String> [[-InstanceId] <String[]>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -40,26 +39,11 @@ This command starts all virtual machines that belong to the VMSS named ContosoVM
 
 ## PARAMETERS
 
-### -AsJob
-Run cmdlet in the background and return a Job to track progress.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DefaultProfile
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -75,9 +59,9 @@ Specifies, as a string array, the ID or IDs of the instances that cmdlet starts.
 For instance: `-InstanceId "0", "3"`
 
 ```yaml
-Type: System.String[]
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -90,9 +74,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the VMSS.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -105,7 +89,7 @@ Accept wildcard characters: False
 Specifies the name of the VMSS that this cmdlet starts the virtual machines.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -120,7 +104,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -135,7 +119,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -151,15 +135,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: ResourceGroupName (ByPropertyName), VMScaleSetName (ByPropertyName)
-
-### System.String[]
-Parameters: InstanceId (ByPropertyName)
-
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSOperationStatusResponse
+###  
+This cmdlet does not generate any output.
 
 ## NOTES
 

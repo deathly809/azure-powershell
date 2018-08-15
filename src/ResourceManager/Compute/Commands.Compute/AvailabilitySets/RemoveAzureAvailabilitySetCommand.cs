@@ -15,7 +15,6 @@
 using AutoMapper;
 using Microsoft.Azure.Commands.Compute.Common;
 using Microsoft.Azure.Commands.Compute.Models;
-using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using System.Management.Automation;
 
 
@@ -30,7 +29,6 @@ namespace Microsoft.Azure.Commands.Compute
            Position = 0,
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "The resource group name.")]
-        [ResourceGroupCompleter()]
         [ValidateNotNullOrEmpty]
         public string ResourceGroupName { get; set; }
 
@@ -47,9 +45,6 @@ namespace Microsoft.Azure.Commands.Compute
            HelpMessage = "To force the removal.")]
         [ValidateNotNullOrEmpty]
         public SwitchParameter Force { get; set; }
-
-        [Parameter(Mandatory = false, HelpMessage = "Run cmdlet in the background")]
-        public SwitchParameter AsJob { get; set; }
 
         public override void ExecuteCmdlet()
         {

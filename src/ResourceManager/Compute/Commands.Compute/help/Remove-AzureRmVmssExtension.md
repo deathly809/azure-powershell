@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 8C1C12AD-5130-42E7-99BB-B13900D7A712
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/remove-azurermvmssextension
 schema: 2.0.0
@@ -30,30 +29,13 @@ The **Remove-AzureRmVmssExtension** cmdlet removes an extension from the Virtual
 
 ## EXAMPLES
 
-### Example 1: Remove a VMSS extension
-```
-PS C:\> $vmss = Get-AzureRmVmss -ResourceGroupName $RGName -VMScaleSetName $vmssName 
-PS C:\> Remove-AzureRmVmssExtension -VirtualMachineScaleSet $vmss -Name $vmssExtensionName
-PS C:\> Update-AzureRmVmss -ResourceGroupName $RGName -Name $vmssName -VirtualMachineScaleSet $vmss
-```
-
-This command removes the extension of a VMSS and update the VMSS after the modification.
-
-### Example 2: Remove an instance from within a VMSS
-```
-PS C:\> $vmss = Get-AzureRmVmss -ResourceGroupName $RGName -VMScaleSetName $vmssName 
-PS C:\> Remove-AzureRmVmssExtension -ResourceGroupName "Group002" -VirtualMachineScaleSet $vmss -Id $extensionId
-```
-
-This command removes specify extension id from the VMSS that belongs to the resource group named Group002.
-
 ## PARAMETERS
 
 ### -DefaultProfile
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -68,9 +50,9 @@ Accept wildcard characters: False
 Specifies the ID of the extension that this cmdlet removes from the VMSS.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: IdParameterSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -83,9 +65,9 @@ Accept wildcard characters: False
 Specifies the name of the extension that this cmdlet removes from the VMSS.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: NameParameterSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -98,9 +80,9 @@ Accept wildcard characters: False
 Specifies the VMSS from which to remove the extension from.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSVirtualMachineScaleSet
+Type: PSVirtualMachineScaleSet
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -113,7 +95,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -128,7 +110,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -144,15 +126,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSVirtualMachineScaleSet
-Parameters: VirtualMachineScaleSet (ByPropertyName, ByValue)
-
-### System.String
-Parameters: Id (ByPropertyName), Name (ByPropertyName)
+### VirtualMachineScaleSet
+Parameter 'VirtualMachineScaleSet' accepts value of type 'VirtualMachineScaleSet' from the pipeline
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSVirtualMachineScaleSet
+### This cmdlet does not generate any output.
 
 ## NOTES
 

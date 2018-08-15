@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: C3C65F3E-1192-4B57-87DB-5D371C8FF68E
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/add-azurermcontainerserviceagentpoolprofile
 schema: 2.0.0
@@ -38,9 +37,9 @@ Specifies the container service object to which this cmdlet adds an agent pool p
 To obtain a **ContainerService** object, use the [New-AzureRmContainerServiceConfig](./New-AzureRmContainerServiceConfig.md) cmdlet.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
+Type: PSContainerService
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -55,9 +54,9 @@ The acceptable values for this parameter are: integers from 1 to 100.
 The default value is 1.
 
 ```yaml
-Type: System.Int32
+Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -70,7 +69,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -85,9 +84,9 @@ Accept wildcard characters: False
 Specifies the DNS prefix that this cmdlet uses to create the fully qualified domain name for this agent pool.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 4
@@ -101,9 +100,9 @@ Specifies the name of the agent pool profile.
 This value must be unique in the context of the subscription and resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
@@ -116,9 +115,9 @@ Accept wildcard characters: False
 Specifies the size of the virtual machines for the agents.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -131,7 +130,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -146,7 +145,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -162,14 +161,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
-Parameters: ContainerService (ByPropertyName, ByValue)
-
-### System.String
-Parameters: DnsPrefix (ByPropertyName), Name (ByPropertyName), VmSize (ByPropertyName)
-
-### System.Int32
-Parameters: Count (ByPropertyName)
+### ContainerService
+Parameter 'ContainerService' accepts value of type 'ContainerService' from the pipeline
 
 ## OUTPUTS
 

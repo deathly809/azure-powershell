@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: D08DAA8B-B7BF-4167-AB16-F2723985A0B7
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/add-azurermvhd
 schema: 2.0.0
@@ -15,7 +14,7 @@ Uploads a virtual hard disk from an on-premises virtual machine to a blob in a c
 
 ```
 Add-AzureRmVhd [[-ResourceGroupName] <String>] [-Destination] <Uri> [-LocalFilePath] <FileInfo>
- [[-NumberOfUploaderThreads] <Int32>] [[-BaseImageUriToPatch] <Uri>] [-OverWrite] [-AsJob]
+ [[-NumberOfUploaderThreads] <Int32>] [[-BaseImageUriToPatch] <Uri>] [-OverWrite]
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
 
@@ -60,27 +59,12 @@ This command adds a .vhd file to a storage account and specifies the SAS URI.
 
 ## PARAMETERS
 
-### -AsJob
-Run cmdlet in the background and return a Job to track progress.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -BaseImageUriToPatch
 Specifies the URI to a base image blob in Azure Blob Storage.
 An SAS can be specified as the value for this parameter.
 
 ```yaml
-Type: System.Uri
+Type: Uri
 Parameter Sets: (All)
 Aliases: bs
 
@@ -95,7 +79,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -111,7 +95,7 @@ Specifies the URI of a blob in Blob Storage.
 The parameter supports SAS URI, although patching scenarios destination cannot be an SAS URI.
 
 ```yaml
-Type: System.Uri
+Type: Uri
 Parameter Sets: (All)
 Aliases: dst
 
@@ -126,7 +110,7 @@ Accept wildcard characters: False
 Specifies the path of the local .vhd file.
 
 ```yaml
-Type: System.IO.FileInfo
+Type: FileInfo
 Parameter Sets: (All)
 Aliases: lf
 
@@ -141,7 +125,7 @@ Accept wildcard characters: False
 Specifies the number of uploader threads to be used when uploading the .vhd file.
 
 ```yaml
-Type: System.Nullable`1[System.Int32]
+Type: Int32
 Parameter Sets: (All)
 Aliases: th
 
@@ -156,7 +140,7 @@ Accept wildcard characters: False
 Indicates that this cmdlet overwrites an existing blob in the specified destination URI, if one exists.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: o
 
@@ -171,9 +155,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 0
@@ -186,20 +170,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: ResourceGroupName (ByPropertyName)
-
-### System.Uri
-Parameters: BaseImageUriToPatch (ByPropertyName), Destination (ByPropertyName)
-
-### System.IO.FileInfo
-Parameters: LocalFilePath (ByPropertyName)
-
-### System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
-
-### System.Management.Automation.SwitchParameter
-Parameters: OverWrite (ByPropertyName)
 
 ## OUTPUTS
 

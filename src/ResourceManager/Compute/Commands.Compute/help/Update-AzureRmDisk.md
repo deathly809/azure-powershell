@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/update-azurermdisk
 schema: 2.0.0
 ---
@@ -14,13 +13,13 @@ Updates a disk.
 
 ### DefaultParameter (Default)
 ```
-Update-AzureRmDisk [-ResourceGroupName] <String> [-DiskName] <String> [-DiskUpdate] <PSDiskUpdate> [-AsJob]
+Update-AzureRmDisk [-ResourceGroupName] <String> [-DiskName] <String> [-DiskUpdate] <PSDiskUpdate>
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### FriendMethod
 ```
-Update-AzureRmDisk [-ResourceGroupName] <String> [-DiskName] <String> [-Disk] <PSDisk> [-AsJob]
+Update-AzureRmDisk [-ResourceGroupName] <String> [-DiskName] <String> [-Disk] <PSDisk>
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -63,26 +62,11 @@ These commands also update an existing disk with name 'Disk01' in resource group
 
 ## PARAMETERS
 
-### -AsJob
-Run cmdlet in the background and return a Job to track progress.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DefaultProfile
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -97,9 +81,9 @@ Accept wildcard characters: False
 Specifies a local disk object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSDisk
+Type: PSDisk
 Parameter Sets: FriendMethod
-Aliases:
+Aliases: 
 
 Required: True
 Position: 4
@@ -112,7 +96,7 @@ Accept wildcard characters: False
 Specifies the name of a disk.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -127,9 +111,9 @@ Accept wildcard characters: False
 Specifies a local disk update object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSDiskUpdate
+Type: PSDiskUpdate
 Parameter Sets: DefaultParameter
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -142,9 +126,9 @@ Accept wildcard characters: False
 Specifies the name of a resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -157,7 +141,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -173,7 +157,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -190,13 +174,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: DiskName (ByPropertyName), ResourceGroupName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSDiskUpdate
-Parameters: DiskUpdate (ByValue)
-
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSDisk
-Parameters: Disk (ByValue)
+Microsoft.Azure.Commands.Compute.Automation.Models.PSDiskUpdate
+Microsoft.Azure.Commands.Compute.Automation.Models.PSDisk
 
 ## OUTPUTS
 
@@ -205,3 +184,4 @@ Parameters: Disk (ByValue)
 ## NOTES
 
 ## RELATED LINKS
+

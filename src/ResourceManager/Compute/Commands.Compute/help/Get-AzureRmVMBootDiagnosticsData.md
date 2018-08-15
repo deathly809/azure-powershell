@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 15CAC050-F2E9-4872-88E7-516A6D194FAB
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvmbootdiagnosticsdata
 schema: 2.0.0
@@ -45,7 +44,7 @@ The command stores the data in specified local path.
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -60,9 +59,9 @@ Accept wildcard characters: False
 Indicates that the virtual machine runs the Linux operating system.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: LinuxParamSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -75,9 +74,9 @@ Accept wildcard characters: False
 Specifies the local path for the boot diagnostics data.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: WindowsParamSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -87,9 +86,9 @@ Accept wildcard characters: False
 ```
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: LinuxParamSet
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -102,7 +101,7 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine for which this cmdlet gets diagnostics data.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName, VMName
 
@@ -117,9 +116,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -132,9 +131,9 @@ Accept wildcard characters: False
 Indicates that the virtual machine runs the Windows operating system.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: WindowsParamSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -147,9 +146,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: LocalPath (ByPropertyName), Name (ByPropertyName), ResourceGroupName (ByPropertyName)
 
 ## OUTPUTS
 

@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/update-azurermsnapshot
 schema: 2.0.0
 ---
@@ -15,13 +14,13 @@ Updates a snapshot.
 ### DefaultParameter (Default)
 ```
 Update-AzureRmSnapshot [-ResourceGroupName] <String> [-SnapshotName] <String>
- [-SnapshotUpdate] <PSSnapshotUpdate> [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
+ [-SnapshotUpdate] <PSSnapshotUpdate> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
 
 ### FriendMethod
 ```
-Update-AzureRmSnapshot [-ResourceGroupName] <String> [-SnapshotName] <String> [-Snapshot] <PSSnapshot> [-AsJob]
+Update-AzureRmSnapshot [-ResourceGroupName] <String> [-SnapshotName] <String> [-Snapshot] <PSSnapshot>
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -64,26 +63,11 @@ These commands also update an existing snapshot with name 'Snapshot01' in resour
 
 ## PARAMETERS
 
-### -AsJob
-Run cmdlet in the background and return a Job to track progress.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DefaultProfile
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -98,9 +82,9 @@ Accept wildcard characters: False
 Specifies the name of a resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -113,9 +97,9 @@ Accept wildcard characters: False
 Specifies a local snapshot object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSSnapshot
+Type: PSSnapshot
 Parameter Sets: FriendMethod
-Aliases:
+Aliases: 
 
 Required: True
 Position: 4
@@ -128,7 +112,7 @@ Accept wildcard characters: False
 Specifies the name of a snapshot.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -143,9 +127,9 @@ Accept wildcard characters: False
 Specifies a local snapshot update object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSSnapshotUpdate
+Type: PSSnapshotUpdate
 Parameter Sets: DefaultParameter
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -158,7 +142,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -174,7 +158,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -191,13 +175,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: ResourceGroupName (ByPropertyName), SnapshotName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSSnapshotUpdate
-Parameters: SnapshotUpdate (ByValue)
-
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSSnapshot
-Parameters: Snapshot (ByValue)
+Microsoft.Azure.Commands.Compute.Automation.Models.PSSnapshotUpdate
+Microsoft.Azure.Commands.Compute.Automation.Models.PSSnapshot
 
 ## OUTPUTS
 
@@ -206,3 +185,4 @@ Parameters: Snapshot (ByValue)
 ## NOTES
 
 ## RELATED LINKS
+

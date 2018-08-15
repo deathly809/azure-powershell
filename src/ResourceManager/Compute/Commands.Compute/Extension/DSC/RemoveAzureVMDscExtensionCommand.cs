@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using System;
 using System.Globalization;
 using System.Management.Automation;
-using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 
 namespace Microsoft.Azure.Commands.Compute.Extension.DSC
 {
@@ -27,7 +26,6 @@ namespace Microsoft.Azure.Commands.Compute.Extension.DSC
            Position = 0,
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "The name of the resource group.")]
-        [ResourceGroupCompleter()]
         [ValidateNotNullOrEmpty]
         public string ResourceGroupName { get; set; }
 
@@ -61,7 +59,7 @@ namespace Microsoft.Azure.Commands.Compute.Extension.DSC
             {
                 //Add retry logic due to CRP service restart known issue CRP bug: 3564713
                 var count = 1;
-                Rest.Azure.AzureOperationResponse op = null;
+                AzureOperationResponse<MC.OperationStatusResponse> op = null;
 
                 while (true)
                 {

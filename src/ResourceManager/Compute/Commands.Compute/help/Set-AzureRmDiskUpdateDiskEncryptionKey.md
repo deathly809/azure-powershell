@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermdiskupdatediskencryptionkey
 schema: 2.0.0
 ---
@@ -45,7 +44,7 @@ The last command takes the disk update object and updates an existing disk with 
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -60,9 +59,9 @@ Accept wildcard characters: False
 Specifies a local disk update object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSDiskUpdate
+Type: PSDiskUpdate
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -75,9 +74,9 @@ Accept wildcard characters: False
 Specifies the secret Url.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
@@ -90,9 +89,9 @@ Accept wildcard characters: False
 Specifies the source vault ID.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -105,7 +104,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -120,7 +119,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -136,16 +135,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSDiskUpdate
-Parameters: DiskUpdate (ByPropertyName, ByValue)
-
-### System.String
-Parameters: SecretUrl (ByPropertyName), SourceVaultId (ByPropertyName)
+### Microsoft.Azure.Management.Compute.Models.DiskUpdate
+System.String
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSDiskUpdate
+### Microsoft.Azure.Management.Compute.Models.DiskUpdate
 
 ## NOTES
 
 ## RELATED LINKS
+

@@ -16,7 +16,6 @@ using AutoMapper;
 using Microsoft.Azure.Commands.Compute.Common;
 using Microsoft.Azure.Commands.Compute.Extension.AzureVMBackup;
 using Microsoft.Azure.Commands.Compute.Models;
-using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using Microsoft.Azure.Management.Compute;
 using Microsoft.Azure.Management.Compute.Models;
 using Microsoft.Rest.Azure;
@@ -31,7 +30,7 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
         VerbsCommon.Set,
         ProfileNouns.AzureDiskEncryptionExtension,
         SupportsShouldProcess = true,
-        DefaultParameterSetName = AzureDiskEncryptionExtensionConstants.singlePassParameterSet)]
+        DefaultParameterSetName = AzureDiskEncryptionExtensionConstants.aadClientSecretParameterSet)]
     [OutputType(typeof(PSAzureOperationResponse))]
     public class SetAzureDiskEncryptionExtensionCommand : VirtualMachineExtensionBaseCmdlet
     {
@@ -40,7 +39,6 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
            Position = 0,
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "The resource group name to which the VM belongs to")]
-        [ResourceGroupCompleter()]
         [ValidateNotNullOrEmpty]
         public string ResourceGroupName { get; set; }
 
@@ -57,13 +55,6 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
            Mandatory = true,
            Position = 2,
            ValueFromPipelineByPropertyName = true,
-           ParameterSetName = AzureDiskEncryptionExtensionConstants.aadClientSecretParameterSet,
-           HelpMessage = "Client ID of AAD app with permissions to write secrets to KeyVault")]
-        [Parameter(
-           Mandatory = true,
-           Position = 2,
-           ValueFromPipelineByPropertyName = true,
-           ParameterSetName = AzureDiskEncryptionExtensionConstants.aadClientCertParameterSet,
            HelpMessage = "Client ID of AAD app with permissions to write secrets to KeyVault")]
         public string AadClientID { get; set; }
 
@@ -127,7 +118,7 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
             Mandatory = false,
             Position = 9,
             ValueFromPipelineByPropertyName = true,
-            HelpMessage = "Type of the volume (OS, Data, or All) to encrypt")]
+            HelpMessage = "Type of the volume (OS or Data) to perform encryption operation")]
         [ValidateSet(
             AzureDiskEncryptionExtensionContext.VolumeTypeOS,
             AzureDiskEncryptionExtensionContext.VolumeTypeData,
@@ -396,9 +387,7 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
             Hashtable publicSettings = new Hashtable();
             publicSettings.Add(AzureDiskEncryptionExtensionConstants.aadClientIDKey, AadClientID ?? String.Empty);
             publicSettings.Add(AzureDiskEncryptionExtensionConstants.aadClientCertThumbprintKey, AadClientCertThumbprint ?? String.Empty);
-            publicSettings.Add(AzureDiskEncryptionExtensionConstants.keyVaultResourceIdKey, DiskEncryptionKeyVaultId ?? string.Empty);
             publicSettings.Add(AzureDiskEncryptionExtensionConstants.keyVaultUrlKey, DiskEncryptionKeyVaultUrl ?? String.Empty);
-            publicSettings.Add(AzureDiskEncryptionExtensionConstants.kekVaultResourceIdKey, KeyEncryptionKeyVaultId ?? string.Empty);
             publicSettings.Add(AzureDiskEncryptionExtensionConstants.keyEncryptionKeyUrlKey, KeyEncryptionKeyUrl ?? String.Empty);
             publicSettings.Add(AzureDiskEncryptionExtensionConstants.volumeTypeKey, VolumeType ?? String.Empty);
             publicSettings.Add(AzureDiskEncryptionExtensionConstants.sequenceVersionKey, SequenceVersion ?? String.Empty);
@@ -444,7 +433,6 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
         {
             Hashtable SettingString = GetExtensionPublicSettings();
             Hashtable ProtectedSettingString = GetExtensionProtectedSettings();
-            string typeHandlerDefaultVersion;  // determined by parameter set and VM operating system type
 
             if (vmParameters == null)
             {
@@ -459,21 +447,12 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
             if (OperatingSystemTypes.Windows.Equals(currentOSType))
             {
                 this.Name = this.Name ?? AzureDiskEncryptionExtensionContext.ExtensionDefaultName;
-
-                if (this.ParameterSetName.Equals(AzureDiskEncryptionExtensionConstants.singlePassParameterSet))
-                {
-                    typeHandlerDefaultVersion = AzureDiskEncryptionExtensionContext.ExtensionSinglePassVersion;
-                }
-                else
-                {
-                    typeHandlerDefaultVersion = AzureDiskEncryptionExtensionContext.ExtensionDefaultVersion;
-                }
                 vmExtensionParameters = new VirtualMachineExtension
                 {
                     Location = vmParameters.Location,
                     Publisher = this.ExtensionPublisherName ?? AzureDiskEncryptionExtensionContext.ExtensionDefaultPublisher,
                     VirtualMachineExtensionType = this.ExtensionType ?? AzureDiskEncryptionExtensionContext.ExtensionDefaultType,
-                    TypeHandlerVersion = this.TypeHandlerVersion ?? typeHandlerDefaultVersion,
+                    TypeHandlerVersion = this.TypeHandlerVersion ?? AzureDiskEncryptionExtensionContext.ExtensionDefaultVersion,
                     Settings = SettingString,
                     ProtectedSettings = ProtectedSettingString,
                     AutoUpgradeMinorVersion = !DisableAutoUpgradeMinorVersion.IsPresent
@@ -482,20 +461,12 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
             else if (OperatingSystemTypes.Linux.Equals(currentOSType))
             {
                 this.Name = this.Name ?? AzureDiskEncryptionExtensionContext.LinuxExtensionDefaultName;
-                if (this.ParameterSetName.Equals(AzureDiskEncryptionExtensionConstants.singlePassParameterSet))
-                {
-                    typeHandlerDefaultVersion = AzureDiskEncryptionExtensionContext.LinuxExtensionSinglePassVersion;
-                }
-                else
-                {
-                    typeHandlerDefaultVersion = AzureDiskEncryptionExtensionContext.LinuxExtensionDefaultVersion;
-                }
                 vmExtensionParameters = new VirtualMachineExtension
                 {
                     Location = vmParameters.Location,
                     Publisher = this.ExtensionPublisherName ?? AzureDiskEncryptionExtensionContext.LinuxExtensionDefaultPublisher,
                     VirtualMachineExtensionType = this.ExtensionType ?? AzureDiskEncryptionExtensionContext.LinuxExtensionDefaultType,
-                    TypeHandlerVersion = this.TypeHandlerVersion ?? typeHandlerDefaultVersion,
+                    TypeHandlerVersion = this.TypeHandlerVersion ?? AzureDiskEncryptionExtensionContext.LinuxExtensionDefaultVersion,
                     Settings = SettingString,
                     ProtectedSettings = ProtectedSettingString,
                     AutoUpgradeMinorVersion = !DisableAutoUpgradeMinorVersion.IsPresent
@@ -554,53 +525,28 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
                     DiskEncryptionSettings encryptionSettingsBackup = virtualMachineResponse.StorageProfile.OsDisk.EncryptionSettings ??
                                                                       new DiskEncryptionSettings { Enabled = false };
 
-                    // Single Pass
-                    //      newer model, supported by newer extension versions and host functionality 
-                    //      if SinglePassParameterSet is used, cmdlet will default to newer extension version
-                    //      [first and only pass]
-                    //          only one enable extension call will be issued from the cmdlet n
-                    //          No AD identity information or protected settings will be passed to the extension 
-                    //          Host performs the necessary key vault operations and vm model updates 
-                    // Dual Pass
-                    //      older model, supported by older extension versions  
-                    //      if an AD ParameterSet is used, cmdlet will default to older extension version
-                    //      [first pass] 
-                    //          AD identity information is passed into the VM via protected settings of the extension
-                    //          VM uses the AD identity to authenticate and perform key vault operations  
-                    //          VM returns result of key vault operation to caller via the extension status message
-                    //      [second pass]
-                    //          powershell reads extension status message returned from first pass
-                    //          updates VM model with encryption settings
-                    //          updates VM 
-
-                    // First Pass
-                    AzureOperationResponse<VirtualMachineExtension> firstPass = this.VirtualMachineExtensionClient.CreateOrUpdateWithHttpMessagesAsync(
+                     // The "1st pass". If this goes wrong, just bubble up the error and abort.
+                    AzureOperationResponse<VirtualMachineExtension> extensionPushResult = this.VirtualMachineExtensionClient.CreateOrUpdateWithHttpMessagesAsync(
                         this.ResourceGroupName,
                         this.VMName,
                         this.Name,
                         parameters).GetAwaiter().GetResult();
 
-                    if (!firstPass.Response.IsSuccessStatusCode)
+                    if (!extensionPushResult.Response.IsSuccessStatusCode)
                     {
                         ThrowTerminatingError(new ErrorRecord(new ApplicationException(string.Format(CultureInfo.CurrentUICulture,
-                                                                                        "Installation failed for extension {0} with error {1}",
-                                                                                        parameters.VirtualMachineExtensionType,
-                                                                                        firstPass.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult())),
-                                                                "InvalidResult",
-                                                                ErrorCategory.InvalidResult,
-                                                                null));
+                                                                                       "Installation failed for extension {0} with error {1}",
+                                                                                       parameters.VirtualMachineExtensionType,
+                                                                                       extensionPushResult.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult())),
+                                                              "InvalidResult",
+                                                              ErrorCategory.InvalidResult,
+                                                              null));
                     }
 
-                    if (this.ParameterSetName.Equals(AzureDiskEncryptionExtensionConstants.singlePassParameterSet))
-                    {
-                        WriteObject(ComputeAutoMapperProfile.Mapper.Map<PSAzureOperationResponse>(firstPass));
-                    }
-                    else
-                    {
-                        // Second pass 
-                        var secondPass = UpdateVmEncryptionSettings(encryptionSettingsBackup);
-                        WriteObject(ComputeAutoMapperProfile.Mapper.Map<PSAzureOperationResponse>(secondPass));
-                    }
+                    var op = UpdateVmEncryptionSettings(encryptionSettingsBackup);
+
+                    var result = ComputeAutoMapperProfile.Mapper.Map<PSAzureOperationResponse>(op);
+                    WriteObject(result);
                 }
             });
         }

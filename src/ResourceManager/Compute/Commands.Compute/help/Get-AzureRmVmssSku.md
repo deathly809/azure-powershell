@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: BB6AFC7D-7E74-4D39-B336-A011B98D0682
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvmsssku
 schema: 2.0.0
@@ -36,7 +35,7 @@ This command gets all the available SKUs from the VMSS named ContosoVMSS that be
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -51,9 +50,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the VMSS.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -66,7 +65,7 @@ Accept wildcard characters: False
 Species the name of the VMSS.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -82,12 +81,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: ResourceGroupName (ByPropertyName), VMScaleSetName (ByPropertyName)
-
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSVirtualMachineScaleSetSku
+### This cmdlet does not produce any output.
 
 ## NOTES
 

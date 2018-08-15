@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/new-azurermimage
 schema: 2.0.0
 ---
@@ -13,7 +12,7 @@ Creats an image.
 ## SYNTAX
 
 ```
-New-AzureRmImage [-ResourceGroupName] <String> [-ImageName] <String> [-Image] <PSImage> [-AsJob]
+New-AzureRmImage [-ResourceGroupName] <String> [-ImageName] <String> [-Image] <PSImage>
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -35,34 +34,22 @@ PS C:\> New-AzureRmImage -Image $imageConfig -ImageName 'ImageName01' -ResourceG
 ```
 
 The first command creates an image object, and then stores it in the $imageConfig variable.
+
 The next three commands assign paths of os disk and two data disks to the $osDiskVhdUri, $dataDiskVhdUri1, and $dataDiskVhdUri2 variables.
 This approach is only for readability of the following commands.
+
 The next three commands each adds an os disk and two data disks to the image stored in $imageConfig.
 The URI of each disk is stored in $osDiskVhdUri, $dataDiskVhdUri1, and $dataDiskVhdUri2.
+
 The final command creates an image named 'ImageName01' in resource group 'ResourceGroup01'.
 
 ## PARAMETERS
-
-### -AsJob
-Run cmdlet in the background
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -DefaultProfile
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -77,9 +64,9 @@ Accept wildcard characters: False
 Specifies a local image object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSImage
+Type: PSImage
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -92,7 +79,7 @@ Accept wildcard characters: False
 Specifies the name of an image.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -107,9 +94,9 @@ Accept wildcard characters: False
 Specifies the name of a resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -122,7 +109,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -138,7 +125,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -155,15 +142,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: ImageName (ByPropertyName), ResourceGroupName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSImage
-Parameters: Image (ByValue)
+Microsoft.Azure.Commands.Compute.Automation.Models.PSImage
 
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.Compute.Automation.Models.PSImage
 
+### System.Object
+
 ## NOTES
 
 ## RELATED LINKS
+

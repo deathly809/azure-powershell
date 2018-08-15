@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 6250EC11-79CF-428B-A72F-9BD72C1751F0
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvm
 schema: 2.0.0
@@ -79,7 +78,7 @@ This command gets all the virtual machines in your subscription.
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -92,14 +91,16 @@ Accept wildcard characters: False
 
 ### -DisplayHint
 Determines how the virtual machine object is displayed.
-Valid values are:
--- Compact: displays only top level properties
--- Expand: displays all properties in all levels
 
+Valid values are:
+
+-- Compact: displays only top level properties
+
+-- Expand: displays all properties in all levels
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Models.DisplayHintType
+Type: DisplayHintType
 Parameter Sets: GetVirtualMachineInResourceGroupParamSet
-Aliases:
+Aliases: 
 Accepted values: Compact, Expand
 
 Required: False
@@ -113,7 +114,7 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine to get.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: GetVirtualMachineInResourceGroupParamSet
 Aliases: ResourceName, VMName
 
@@ -128,9 +129,9 @@ Accept wildcard characters: False
 Specifies the next link.
 
 ```yaml
-Type: System.Uri
+Type: Uri
 Parameter Sets: ListNextLinkVirtualMachinesParamSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -143,9 +144,9 @@ Accept wildcard characters: False
 Specifies the name of a resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: ListVirtualMachineInResourceGroupParamSet, GetVirtualMachineInResourceGroupParamSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -158,9 +159,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet gets only the instance view of the virtual machine.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -173,15 +174,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: Name (ByPropertyName), ResourceGroupName (ByPropertyName)
-
-### System.Uri
-Parameters: NextLink (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Models.DisplayHintType
-Parameters: DisplayHint (ByPropertyName)
 
 ## OUTPUTS
 

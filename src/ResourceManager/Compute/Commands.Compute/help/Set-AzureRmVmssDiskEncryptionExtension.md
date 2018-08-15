@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmssdiskencryptionextension
 schema: 2.0.0
 ---
@@ -47,7 +46,7 @@ This command enables encryption on all disks of all VMs in the VM scale set.
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -62,9 +61,9 @@ Accept wildcard characters: False
 Disable auto-upgrade of minor version
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -77,9 +76,9 @@ Accept wildcard characters: False
 ResourceID of the KeyVault where generated encryption key will be placed to
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -92,9 +91,9 @@ Accept wildcard characters: False
 URL of the KeyVault where generated encryption key will be placed to
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -108,9 +107,9 @@ The extension name.
 If this parameter is not specified, default values used are AzureDiskEncryption for windows VMs and AzureDiskEncryptionForLinux for Linux VMs
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -123,9 +122,9 @@ Accept wildcard characters: False
 To force enabling encryption on the virtual machine scale set.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -135,12 +134,10 @@ Accept wildcard characters: False
 ```
 
 ### -ForceUpdate
-Generate a tag for force update.  This should be given to perform repeated encryption operations on the same VM.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
+Generate a tag for force update.  This should be given to perform repeated encryption operations on the same VM.```yaml
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -153,9 +150,9 @@ Accept wildcard characters: False
 KeyEncryption Algorithm used to encrypt the volume encryption key
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: RSA-OAEP, RSA1_5
 
 Required: False
@@ -169,9 +166,9 @@ Accept wildcard characters: False
 Versioned KeyVault URL of the KeyEncryptionKey used to encrypt the disk encryption key
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -184,9 +181,9 @@ Accept wildcard characters: False
 ResourceID of the KeyVault containing the KeyEncryptionKey used to encrypt the disk encryption key
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -200,9 +197,9 @@ The passphrase specified in parameters.
 This parameter only works for Linux VM.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -215,9 +212,9 @@ Accept wildcard characters: False
 The resource group name to which the VM Scale Set belongs to
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -230,7 +227,7 @@ Accept wildcard characters: False
 The type handler version.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: HandlerVersion, Version
 
@@ -245,7 +242,7 @@ Accept wildcard characters: False
 Name of the virtual machine scale set
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -260,9 +257,9 @@ Accept wildcard characters: False
 Type of the volume (OS or Data) to perform encryption operation
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: OS, Data, All
 
 Required: False
@@ -276,7 +273,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -292,7 +289,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -309,10 +306,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: DiskEncryptionKeyVaultId (ByPropertyName), DiskEncryptionKeyVaultUrl (ByPropertyName), ExtensionName (ByPropertyName), KeyEncryptionAlgorithm (ByPropertyName), KeyEncryptionKeyUrl (ByPropertyName), KeyEncryptionKeyVaultId (ByPropertyName), Passphrase (ByPropertyName), ResourceGroupName (ByPropertyName), TypeHandlerVersion (ByPropertyName), VMScaleSetName (ByPropertyName), VolumeType (ByPropertyName)
-
-### System.Management.Automation.SwitchParameter
-Parameters: DisableAutoUpgradeMinorVersion (ByPropertyName), ForceUpdate (ByPropertyName)
+System.Management.Automation.SwitchParameter
 
 ## OUTPUTS
 
@@ -321,3 +315,4 @@ Parameters: DisableAutoUpgradeMinorVersion (ByPropertyName), ForceUpdate (ByProp
 ## NOTES
 
 ## RELATED LINKS
+

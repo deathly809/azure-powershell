@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: B7A675D3-EF79-4EE2-9330-D4C690739006
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvmsize
 schema: 2.0.0
@@ -63,9 +62,9 @@ You can resize this virtual machine to the sizes that this command gets.
 Specifies the name of the Availability Set for which this cmdlet gets the available virtual machine sizes.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: ListAvailableSizesForAvailabilitySet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -78,7 +77,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -93,9 +92,9 @@ Accept wildcard characters: False
 Specifies the location for which this cmdlet gets the available virtual machine sizes.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: ListVirtualMachineSizeParamSet
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -108,9 +107,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: ListAvailableSizesForAvailabilitySet, ListAvailableSizesForVirtualMachine
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -123,9 +122,9 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine that this cmdlet gets the available virtual machine sizes for resizing.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: ListAvailableSizesForVirtualMachine
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -138,9 +137,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: AvailabilitySetName (ByPropertyName), Location (ByPropertyName), ResourceGroupName (ByPropertyName), VMName (ByPropertyName)
 
 ## OUTPUTS
 

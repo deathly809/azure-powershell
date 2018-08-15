@@ -12,7 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
 
@@ -20,183 +19,79 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
     public partial class VirtualMachineScaleSetTests
     {
-        XunitTracingInterceptor _logger;
-
         public VirtualMachineScaleSetTests(Xunit.Abstractions.ITestOutputHelper output)
         {
-            _logger = new XunitTracingInterceptor(output);
-            XunitTracingInterceptor.AddToContext(_logger);
+            ServiceManagemenet.Common.Models.XunitTracingInterceptor.AddToContext(new ServiceManagemenet.Common.Models.XunitTracingInterceptor(output));
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSet()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSet");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSet");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSet_ManagedDisks()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSet-ManagedDisks");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSet-ManagedDisks");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetUpdate()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetUpdate");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetUpdate");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetReimageUpdate()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetReimageUpdate");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetReimageUpdate");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetLB()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetLB");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetLB");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetNextLink()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetNextLink");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetNextLink");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetBootDiagnostics()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetBootDiagnostics");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetBootDiagnostics");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetIdentity()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetIdentity");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetIdentity");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetUserIdentity()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetUserIdentity");
-        }
-
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
-        [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetNetworking()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetNetworking");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetNetworking");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetRollingUpgrade()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetRollingUpgrade");
-        }
-
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
-        [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetPriority()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetPriority");
-        }
-
-        [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetWriteAcceleratorUpdate()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetWriteAcceleratorUpdate");
-        }
-
-        [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetForceUDWalk()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetForceUDWalk");
-        }
-
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
-        [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetRedeploy()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetRedeploy");
-        }
-
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
-        [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetVMUpdate()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetVMUpdate");
-        }
-
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
-        [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetAutoRollback()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetAutoRollback");
-        }
-
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
-        [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestVirtualMachineScaleSetProfile()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetProfile");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetRollingUpgrade");
         }
     }
 }

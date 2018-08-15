@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 13ED884A-6224-4BD4-9F12-F896932F7842
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmdiagnosticsextension
 schema: 2.0.0
@@ -58,9 +57,9 @@ If the diagnostics storage account is in a different subscription than the virtu
 Indicates whether this cmdlet allows the Azure guest agent to automatically update the extension to a newer minor version.
 
 ```yaml
-Type: System.Boolean
+Type: Boolean
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 10
@@ -73,7 +72,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -88,9 +87,9 @@ Accept wildcard characters: False
 Specifies the path of the configuration file.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -103,9 +102,9 @@ Accept wildcard characters: False
 Specifies the location of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 7
@@ -118,7 +117,7 @@ Accept wildcard characters: False
 Specifies the name of an extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ExtensionName
 
@@ -133,9 +132,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -148,9 +147,9 @@ Accept wildcard characters: False
 Specifies the storage account endpoint.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 5
@@ -163,9 +162,9 @@ Accept wildcard characters: False
 Specifies the storage account key.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 4
@@ -178,9 +177,9 @@ Accept wildcard characters: False
 Specifies the storage account name.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -193,9 +192,9 @@ Accept wildcard characters: False
 Specifies the Azure storage context.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IStorageContext
+Type: IStorageContext
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 6
@@ -209,7 +208,7 @@ Specifies the version of the extension to use for this virtual machine.
 To obtain the version, run the Get-AzureRmVMExtensionImage cmdlet with a value of Microsoft.Compute for the *PublisherName* parameter and VMAccessAgent for the *Type* parameter.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: HandlerVersion, Version
 
@@ -224,7 +223,7 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine on which this cmdlet operates.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -239,15 +238,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: Location (ByPropertyName), Name (ByPropertyName), ResourceGroupName (ByPropertyName), StorageAccountEndpoint (ByPropertyName), StorageAccountKey (ByPropertyName), StorageAccountName (ByPropertyName), TypeHandlerVersion (ByPropertyName), VMName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Common.Authentication.Abstractions.IStorageContext
-Parameters: StorageContext (ByPropertyName)
-
-### System.Boolean
-Parameters: AutoUpgradeMinorVersion (ByPropertyName)
 
 ## OUTPUTS
 

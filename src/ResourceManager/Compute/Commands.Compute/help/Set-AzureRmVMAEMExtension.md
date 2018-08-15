@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 3B15C734-DF57-433A-8854-ACE2B35FF6CB
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmaemextension
 schema: 2.0.0
@@ -14,7 +13,7 @@ Enables support for monitoring for SAP systems.
 ## SYNTAX
 
 ```
-Set-AzureRmVMAEMExtension [-ResourceGroupName] <String> [-VMName] <String> [-EnableWAD]
+Set-AzureRmVMAEMExtension [-ResourceGroupName] <String> [-VMName] <String> [-DisableWAD] [-EnableWAD]
  [[-WADStorageAccountName] <String>] [[-OSType] <String>] [-SkipStorage]
  [-DefaultProfile <IAzureContextContainer>] [<CommonParameters>]
 ```
@@ -39,9 +38,24 @@ The command specifies the storage account named stdstorage.
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisableWAD
+Indicates that this cmdlet does not enable Azure Diagnostics for the virtual machine.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
 
 Required: False
 Position: Named
@@ -54,9 +68,9 @@ Accept wildcard characters: False
 If this parameter is provided, the commandlet will enable Windows Azure Diagnostics for this virtual machine.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -71,9 +85,9 @@ If the operating system disk does not have a type, you must specify this paramet
 The acceptable values for this parameter are: Windows and Linux.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -86,9 +100,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine that this cmdlet modifies.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -101,9 +115,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet skips configuration of storage.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 4
@@ -117,7 +131,7 @@ Specifies the name of a virtual machine.
 This cmdlet adds the AEM extension for the virtual machine that this parameter specifies.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -133,9 +147,9 @@ Specifies the name of the storage account that this cmdlet uses to configure the
 If the virtual machine does not use a standard storage account, you must specify a value for this parameter.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -148,9 +162,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: ResourceGroupName (ByPropertyName), VMName (ByPropertyName)
 
 ## OUTPUTS
 

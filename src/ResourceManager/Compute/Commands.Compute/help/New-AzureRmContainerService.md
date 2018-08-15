@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 522F5305-CDF6-41F2-803B-9EEA9E927668
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/new-azurermcontainerservice
 schema: 2.0.0
@@ -15,8 +14,8 @@ Creates a container service.
 
 ```
 New-AzureRmContainerService [-ResourceGroupName] <String> [-Name] <String>
- [-ContainerService] <PSContainerService> [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-ContainerService] <PSContainerService> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,36 +33,23 @@ PS C:\> New-AzureRmContainerService -ResourceGroupName "ResourceGroup17" -Name "
 
 The first command creates a resource group named ResourceGroup17 at the specified location.
 For more information, see the New-AzureRmResourceGroup cmdlet.
+
 The second command creates a container, and then stores it in the $Container variable.
 For more information, see the New-AzureRmContainerServiceConfig cmdlet.
+
 The final command creates a container service for the container stored in $Container.
 The service is named csResourceGroup17.
 
 ## PARAMETERS
-
-### -AsJob
-RRun cmdlet in the background and return a Job to track progress.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -ContainerService
 Specifies a container service object that contains the properties for the new service.
 To obtain a **ContainerService** object, use the New-AzureRmContainerServiceConfig cmdlet.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
+Type: PSContainerService
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -76,7 +62,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -91,9 +77,9 @@ Accept wildcard characters: False
 Specifies the name of the container service that this cmdlet creates.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -106,9 +92,9 @@ Accept wildcard characters: False
 Specifies the resource group in which this cmdlet deploys the container service.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -121,7 +107,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -134,10 +120,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -153,11 +140,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: Name (ByPropertyName), ResourceGroupName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSContainerService
-Parameters: ContainerService (ByValue)
+### ContainerService
+Parameter 'ContainerService' accepts value of type 'ContainerService' from the pipeline
 
 ## OUTPUTS
 

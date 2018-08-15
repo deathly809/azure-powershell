@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/remove-azurermvmsecret
 schema: 2.0.0
 ---
@@ -35,7 +34,7 @@ Removes all secrets from a virtual machine "vm1" in resource group "rg1" and upd
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -50,7 +49,7 @@ Accept wildcard characters: False
 Specifies an array of source vault IDs that this cmdlet removes.
 
 ```yaml
-Type: System.String[]
+Type: String[]
 Parameter Sets: (All)
 Aliases: Id
 
@@ -66,7 +65,7 @@ Specifies the virtual machine from which this cmdlet removes (a) secret(s).
 To obtain a virtual machine object, use the Get-AzureRmVM cmdlet.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
+Type: PSVirtualMachine
 Parameter Sets: (All)
 Aliases: VMProfile
 
@@ -81,7 +80,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -97,7 +96,7 @@ Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -114,7 +113,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
-Parameters: VM (ByPropertyName, ByValue)
 
 ## OUTPUTS
 
@@ -123,3 +121,4 @@ Parameters: VM (ByPropertyName, ByValue)
 ## NOTES
 
 ## RELATED LINKS
+

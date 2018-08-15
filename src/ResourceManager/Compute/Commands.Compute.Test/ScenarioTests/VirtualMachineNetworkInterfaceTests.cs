@@ -12,7 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
 
@@ -20,97 +19,59 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
     public class VirtualMachineNetworkInterfaceTests
     {
-        XunitTracingInterceptor _logger;
-
         public VirtualMachineNetworkInterfaceTests(Xunit.Abstractions.ITestOutputHelper output)
         {
-            _logger = new XunitTracingInterceptor(output);
-            XunitTracingInterceptor.AddToContext(_logger);
+            ServiceManagemenet.Common.Models.XunitTracingInterceptor.AddToContext(new ServiceManagemenet.Common.Models.XunitTracingInterceptor(output));
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Updated Storage, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineSingleNetworkInterface()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterface");
+            ComputeTestController.NewInstance.RunPsTest("Test-SingleNetworkInterface");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Updated Storage, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineMultipleNetworkInterface()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-MultipleNetworkInterface");
+            ComputeTestController.NewInstance.RunPsTest("Test-MultipleNetworkInterface");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Updated Storage, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSingleNetworkInterfaceDnsSettings()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterfaceDnsSettings");
+            ComputeTestController.NewInstance.RunPsTest("Test-SingleNetworkInterfaceDnsSettings");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Unknown issue/update, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAddNetworkInterface()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AddNetworkInterface");
+            ComputeTestController.NewInstance.RunPsTest("Test-AddNetworkInterface");
         }
 
 
-#if NETSTANDARD
-        [Fact(Skip = "Updated Storage, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestEffectiveRoutesAndNsg()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-EffectiveRoutesAndNsg");
+            ComputeTestController.NewInstance.RunPsTest("Test-EffectiveRoutesAndNsg");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Updated Storage, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestSingleNetworkInterfaceWithAcceleratedNetworking()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-SingleNetworkInterfaceWithAcceleratedNetworking");
+            ComputeTestController.NewInstance.RunPsTest("Test-SingleNetworkInterfaceWithAcceleratedNetworking");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Updated Storage, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVMNicWithAcceleratedNetworkingValidations()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VMNicWithAcceleratedNetworkingValidations");
+            ComputeTestController.NewInstance.RunPsTest("Test-VMNicWithAcceleratedNetworkingValidations");
         }
     }
 }

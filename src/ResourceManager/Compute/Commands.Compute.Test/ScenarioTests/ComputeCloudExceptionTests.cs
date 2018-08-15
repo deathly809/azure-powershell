@@ -13,7 +13,6 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
 
@@ -21,12 +20,9 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
     public class ComputeCloudExceptionTests
     {
-        XunitTracingInterceptor _logger;
-
         public ComputeCloudExceptionTests(Xunit.Abstractions.ITestOutputHelper output)
         {
-            _logger = new XunitTracingInterceptor(output);
-            XunitTracingInterceptor.AddToContext(_logger);
+            ServiceManagemenet.Common.Models.XunitTracingInterceptor.AddToContext(new ServiceManagemenet.Common.Models.XunitTracingInterceptor(output));
         }
 
         [Fact]
@@ -36,16 +32,16 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             // Message Only
             var ex1 = new Rest.Azure.CloudException("Test1");
             var cx1 = new ComputeCloudException(ex1);
-            Assert.Equal(cx1.Message, ex1.Message);
+            Assert.True(string.Equals(cx1.Message, ex1.Message));
             Assert.True(cx1.InnerException is Rest.Azure.CloudException);
-            Assert.Equal(cx1.InnerException.Message, ex1.Message);
+            Assert.True(string.Equals(cx1.InnerException.Message, ex1.Message));
 
             // Message + Inner Exception
             var ex2 = new Rest.Azure.CloudException("Test2", ex1);
             var cx2 = new ComputeCloudException(ex2);
-            Assert.Equal(cx2.Message, ex2.Message);
+            Assert.True(string.Equals(cx2.Message, ex2.Message));
             Assert.True(cx2.InnerException is Rest.Azure.CloudException);
-            Assert.Equal(cx2.InnerException.Message, ex2.Message);
+            Assert.True(string.Equals(cx2.InnerException.Message, ex2.Message));
 
             // Empty Message
             var ex3 = new Rest.Azure.CloudException(string.Empty);
@@ -61,7 +57,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             Assert.True(cx4.InnerException is Rest.Azure.CloudException);
             Assert.True(!string.IsNullOrEmpty(cx4.InnerException.Message));
 
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Run-ComputeCloudExceptionTests");
+            ComputeTestController.NewInstance.RunPsTest("Run-ComputeCloudExceptionTests");
         }
     }
 }

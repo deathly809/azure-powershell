@@ -12,8 +12,8 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 using System.Management.Automation;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Azure.Commands.Compute
 {
@@ -28,7 +28,6 @@ namespace Microsoft.Azure.Commands.Compute
            ParameterSetName = ResourceGroupNameParameterSet,
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "The resource group name.")]
-        [ResourceGroupCompleter()]
         [ValidateNotNullOrEmpty]
         public string ResourceGroupName { get; set; }
 
@@ -39,11 +38,7 @@ namespace Microsoft.Azure.Commands.Compute
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "The resource group name.")]
         [ValidateNotNullOrEmpty]
-        [ResourceIdCompleter("Microsoft.Compute/virtualMachines")]
         public string Id { get; set; }
-
-        [Parameter(Mandatory = false, HelpMessage = "Run cmdlet in the background")]
-        public SwitchParameter AsJob { get; set; }
 
         public override void ExecuteCmdlet()
         {
@@ -53,6 +48,14 @@ namespace Microsoft.Azure.Commands.Compute
             {
                 this.ResourceGroupName = GetResourceGroupNameFromId(this.Id);
             }
+        }
+
+        protected string GetResourceGroupNameFromId(string idString)
+        {
+            var match = Regex.Match(idString, @"resourceGroups/([A-Za-z0-9\-]+)/");
+            return (match.Success)
+                ? match.Groups[1].Value
+                : null;
         }
     }
 }

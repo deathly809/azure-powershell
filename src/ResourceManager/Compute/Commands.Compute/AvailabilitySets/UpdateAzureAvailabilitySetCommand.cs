@@ -16,8 +16,6 @@ using AutoMapper;
 using Microsoft.Azure.Commands.Compute.Common;
 using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Management.Compute.Models;
-using System.Collections;
-using System.Linq;
 using System.Management.Automation;
 
 namespace Microsoft.Azure.Commands.Compute
@@ -53,15 +51,6 @@ namespace Microsoft.Azure.Commands.Compute
             HelpMessage = "Managed Availability Set")]
         public SwitchParameter Managed { get; set; }
 
-        [Parameter(
-            Mandatory = false,
-            HelpMessage = "Key-value pairs in the form of a hash table."
-            )]
-        public Hashtable Tag { get; set; }
-
-        [Parameter(Mandatory = false, HelpMessage = "Run cmdlet in the background")]
-        public SwitchParameter AsJob { get; set; }
-
         public override void ExecuteCmdlet()
         {
             if (this.ShouldProcess(AvailabilitySet.Name, VerbsData.Update))
@@ -74,8 +63,7 @@ namespace Microsoft.Azure.Commands.Compute
                     {
                         Location = this.AvailabilitySet.Location,
                         PlatformUpdateDomainCount = this.AvailabilitySet.PlatformUpdateDomainCount,
-                        PlatformFaultDomainCount = this.AvailabilitySet.PlatformFaultDomainCount,
-                        Tags = Tag == null ? null : Tag.Cast<DictionaryEntry>().ToDictionary(d => (string)d.Key, d => (string)d.Value)
+                        PlatformFaultDomainCount = this.AvailabilitySet.PlatformFaultDomainCount
                     };
 
                     if (this.ParameterSetName.Equals(ManagedParamterSetName))

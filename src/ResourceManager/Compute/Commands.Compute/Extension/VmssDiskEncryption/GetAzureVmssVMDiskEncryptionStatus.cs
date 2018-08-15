@@ -22,7 +22,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 using System;
-using Microsoft.Azure.Commands.ResourceManager.Common.ArgumentCompleters;
 
 namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
 {
@@ -38,7 +37,6 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
            Position = 0,
            ValueFromPipelineByPropertyName = true,
            HelpMessage = "Resource group name of the virtual machine scale set.")]
-        [ResourceGroupCompleter()]
         [ValidateNotNullOrEmpty]
         public string ResourceGroupName { get; set; }
 
@@ -128,23 +126,24 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
                 psResult.Disks.Add(disk);
             }
 
-            psResult.Extension = null;
-            psResult.DiskEncryptionStatus = string.Format("The Extension, {0}, is not installed.", this.ExtensionName);
-
-            // replace defaults with extension and status data for the instance if found 
-            if (vmssVMInstanceView != null && vmssVMInstanceView.Extensions != null)
+            try
             {
-                psResult.Extension = vmssVMInstanceView.Extensions.DefaultIfEmpty(null).FirstOrDefault(e => e.Name.Equals(this.ExtensionName));
-                if (psResult.Extension != null
-                    && psResult.Extension.Statuses != null
-                    && psResult.Extension.Statuses.Count > 0)
-                {
-                    psResult.DiskEncryptionStatus = psResult.Extension.Statuses[0].DisplayStatus;
-                }
+                psResult.Extension = vmssVMInstanceView.Extensions.First(e => e.Name.Equals(this.ExtensionName));
+            }
+            catch (InvalidOperationException)
+            {
+                psResult.DiskEncryptionStatus = string.Format("The Extension, {0}, is not installed.", this.ExtensionName);
+            }
+
+            if (psResult.Extension != null
+            && psResult.Extension.Statuses != null
+            && psResult.Extension.Statuses.Count > 0)
+            {
+                psResult.DiskEncryptionStatus = psResult.Extension.Statuses[0].DisplayStatus;
             }
 
             psResult.OsVolumeEncrypted = GetOsDiskEncryptionStatus(psResult.Disks, vmssVM.StorageProfile);
-            psResult.DataVolumesEncrypted = GetDataDiskEncryptionStatus(psResult.Disks, vmssVM.StorageProfile);
+            psResult.DataVolumesEncrypted = GetDataDiskEncryptionStatus(rgName, vmssName, psResult.DiskEncryptionStatus, vmssVM.StorageProfile);
 
             return psResult;
         }
@@ -177,34 +176,44 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
                 : ConvertToEncryptionStatus(status.Code.Replace(AzureVmssDiskEncryptionExtensionContext.EncryptionStateString, ""));
         }
 
-        private EncryptionStatus GetDataDiskEncryptionStatus(List<DiskInstanceView> disks, StorageProfile storage)
+        private EncryptionStatus GetDataDiskEncryptionStatus(string rgName, string vmssName, string encryptionStatus, StorageProfile storage)
         {
             if (storage == null || storage.DataDisks == null || storage.DataDisks.Count == 0)
             {
                 return EncryptionStatus.NotMounted;
             }
 
+            // Data disk does not have disk encryption extension setting.
+
+            var vmssResult = this.VirtualMachineScaleSetClient.Get(rgName, vmssName);
+            if (vmssResult.VirtualMachineProfile == null
+                || vmssResult.VirtualMachineProfile.ExtensionProfile == null
+                || vmssResult.VirtualMachineProfile.ExtensionProfile.Extensions == null
+                || vmssResult.VirtualMachineProfile.ExtensionProfile.Extensions.Count == 0)
+            {
+                return EncryptionStatus.NotEncrypted;
+            }
+
             try
             {
-                InstanceViewStatus status = null;
-                try
-                {
-                    var disk = disks.First(e => e.Name.Equals(storage.DataDisks[0].Name));
+                VirtualMachineScaleSetExtension ext = vmssResult.VirtualMachineProfile.ExtensionProfile.Extensions.First(
+                         e => e.Type.Equals(this.ExtensionName));
 
-                    if (disk == null)
+                AzureVmssDiskEncryptionExtensionPublicSettings encryptionSettings = JsonConvert.DeserializeObject<AzureVmssDiskEncryptionExtensionPublicSettings>(
+                ext.Settings.ToString());
+                if (encryptionSettings.VolumeType.Equals(AzureVmssDiskEncryptionExtensionContext.VolumeTypeAll, StringComparison.OrdinalIgnoreCase)
+                    || encryptionSettings.VolumeType.Equals(AzureVmssDiskEncryptionExtensionContext.VolumeTypeData, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (encryptionSettings.EncryptionOperation.Equals(AzureDiskEncryptionExtensionConstants.enableEncryptionOperation, StringComparison.OrdinalIgnoreCase))
                     {
-                        return EncryptionStatus.Unknown;
+                        return !string.IsNullOrEmpty(encryptionStatus) &&
+                            encryptionStatus.EndsWith(AzureVmssDiskEncryptionExtensionContext.StatusSucceeded, StringComparison.OrdinalIgnoreCase)
+                            ? EncryptionStatus.Encrypted
+                            : EncryptionStatus.Unknown;
                     }
-                    status = disk.Statuses.First(s => s.Code.Contains(AzureVmssDiskEncryptionExtensionContext.EncryptionStateString));
-                }
-                catch (InvalidOperationException)
-                {
-                    return EncryptionStatus.NotEncrypted;
                 }
 
-                return (status == null)
-                    ? EncryptionStatus.NotEncrypted
-                    : ConvertToEncryptionStatus(status.Code.Replace(AzureVmssDiskEncryptionExtensionContext.EncryptionStateString, ""));
+                return EncryptionStatus.NotEncrypted;
             }
             catch (InvalidOperationException)
             {

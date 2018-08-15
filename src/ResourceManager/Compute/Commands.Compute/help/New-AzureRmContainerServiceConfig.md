@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: EC8C915A-A0BC-41DE-9DBF-3617536E3D1A
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/new-azurermcontainerserviceconfig
 schema: 2.0.0
@@ -37,9 +36,11 @@ PS C:\> $Container | Add-AzureRmContainerServiceAgentPoolProfile -Name "AgentPoo
 ```
 
 This command creates a container, and then stores it in the $Container variable.
+
 The command specifies various settings for the container service configuration. The command passes
 the configuration object to the Add-AzureRmContainerServiceAgentPoolProfile cmdlet by using the
 pipeline operator. That cmdlet adds an agent pool profile.
+
 Specify the object in $Container for the *ContainerService* parameter of **New-AzureRmContainerService**.
 
 ## PARAMETERS
@@ -48,9 +49,9 @@ Specify the object in $Container for the *ContainerService* parameter of **New-A
 Specifies the administrator account name to use for a Linux-based container service.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 8
@@ -64,9 +65,9 @@ Specifies an array of agent pool profile objects for the container service.
 Add a profile by using the Add-AzureRmContainerServiceAgentPoolProfile cmdlet.
 
 ```yaml
-Type: Microsoft.Azure.Management.Compute.Models.ContainerServiceAgentPoolProfile[]
+Type: ContainerServiceAgentPoolProfile[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 5
@@ -79,9 +80,9 @@ Accept wildcard characters: False
 Specifies the custom profile orchestrator.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -94,7 +95,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -109,9 +110,9 @@ Accept wildcard characters: False
 Specifies the location in which to create the container service.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 0
@@ -124,9 +125,9 @@ Accept wildcard characters: False
 Specifies the number of master virtual machines to create.
 
 ```yaml
-Type: System.Int32
+Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -139,9 +140,9 @@ Accept wildcard characters: False
 Specifies the DNS prefix for the master virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 4
@@ -155,9 +156,9 @@ Specifies the type of orchestrator for the container service.
 The acceptable values for this parameter are: DCOS and Swarm.
 
 ```yaml
-Type: System.Nullable`1[Microsoft.Azure.Management.Compute.Models.ContainerServiceOrchestratorTypes]
+Type: ContainerServiceOrchestratorTypes
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 Accepted values: Swarm, DCOS, Custom, Kubernetes
 
 Required: False
@@ -171,9 +172,9 @@ Accept wildcard characters: False
 Specifies the principal profile client ID.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -186,9 +187,9 @@ Accept wildcard characters: False
 Specifies the principal profile secret.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -201,9 +202,9 @@ Accept wildcard characters: False
 Specifies the SSH public key for a Linux-based container service.
 
 ```yaml
-Type: System.String[]
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 9
@@ -214,12 +215,13 @@ Accept wildcard characters: False
 
 ### -Tag
 Key-value pairs in the form of a hash table. For example:
+
 @{key0="value0";key1=$null;key2="value2"}
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: Hashtable
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
@@ -232,9 +234,9 @@ Accept wildcard characters: False
 Indicates whether this configuration enables diagnostics for the container service virtual machine.
 
 ```yaml
-Type: System.Boolean
+Type: Boolean
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 10
@@ -247,9 +249,9 @@ Accept wildcard characters: False
 Specifies the administrator password for a container service that uses the Windows operating system.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 7
@@ -262,9 +264,9 @@ Accept wildcard characters: False
 Specifies the administrator username for a container service that uses the Windows operating system.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 6
@@ -277,7 +279,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -292,7 +294,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -307,26 +309,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: AdminUsername (ByPropertyName), CustomProfileOrchestrator (ByPropertyName), Location (ByPropertyName), MasterDnsPrefix (ByPropertyName), ServicePrincipalProfileClientId (ByPropertyName), ServicePrincipalProfileSecret (ByPropertyName), WindowsProfileAdminPassword (ByPropertyName), WindowsProfileAdminUsername (ByPropertyName)
-
-### System.Collections.Hashtable
-Parameters: Tag (ByPropertyName)
-
-### System.Nullable`1[[Microsoft.Azure.Management.Compute.Models.ContainerServiceOrchestratorTypes, Microsoft.Azure.Management.Compute, Version=20.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35]]
-
-### System.Int32
-Parameters: MasterCount (ByPropertyName)
-
-### Microsoft.Azure.Management.Compute.Models.ContainerServiceAgentPoolProfile[]
-Parameters: AgentPoolProfile (ByPropertyName)
-
-### System.String[]
-Parameters: SshPublicKey (ByPropertyName)
-
-### System.Boolean
-Parameters: VmDiagnosticsEnabled (ByPropertyName)
 
 ## OUTPUTS
 

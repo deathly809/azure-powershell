@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: F46041A3-355F-4449-B582-4D2F7314CA05
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvmextensionimage
 schema: 2.0.0
@@ -37,7 +36,7 @@ This command gets all the versions of the extension image for the specified loca
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -52,9 +51,9 @@ Accept wildcard characters: False
 Specifies a filter expression.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -67,9 +66,9 @@ Accept wildcard characters: False
 Specifies the location of an extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: Named
@@ -83,9 +82,9 @@ Specifies the name of an extension publisher.
 To obtain an extension publisher, use the Get-AzureRmVMImagePublisher cmdlet.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: Named
@@ -99,9 +98,9 @@ Specifies the type of the extension.
 To obtain an extension type, use the Get-AzureRmVMExtensionImageType cmdlet.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: Named
@@ -114,9 +113,9 @@ Accept wildcard characters: False
 Specifies the version of the extension that this cmdlet gets.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -129,9 +128,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: Location (ByPropertyName), PublisherName (ByPropertyName), Type (ByPropertyName), Version (ByPropertyName)
 
 ## OUTPUTS
 

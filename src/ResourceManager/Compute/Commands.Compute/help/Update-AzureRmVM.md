@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 38917534-49C6-47EA-B815-240F794EE655
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/update-azurermvm
 schema: 2.0.0
@@ -15,29 +14,16 @@ Updates the state of an Azure virtual machine.
 
 ### ResourceGroupNameParameterSetName (Default)
 ```
-Update-AzureRmVM [-ResourceGroupName] <String> -VM <PSVirtualMachine> [-Tag <Hashtable>]
- [-OsDiskWriteAccelerator <Boolean>] [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
-```
-
-### AssignIdentityParameterSet
-```
-Update-AzureRmVM [-ResourceGroupName] <String> -VM <PSVirtualMachine> [-Tag <Hashtable>] [-AssignIdentity]
- [-OsDiskWriteAccelerator <Boolean>] [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
-```
-
-### ExplicitIdentityParameterSet
-```
-Update-AzureRmVM [-ResourceGroupName] <String> -VM <PSVirtualMachine> [-Tag <Hashtable>]
- -IdentityType <ResourceIdentityType> [-IdentityId <String[]>] [-OsDiskWriteAccelerator <Boolean>] [-AsJob]
- [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-AzureRmVM -VM <PSVirtualMachine> [-Tags <Hashtable>] [-IdentityType <ResourceIdentityType>]
+ [-AssignIdentity] [-ResourceGroupName] <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ### IdParameterSetName
 ```
-Update-AzureRmVM [-Id] <String> -VM <PSVirtualMachine> [-Tag <Hashtable>] [-OsDiskWriteAccelerator <Boolean>]
- [-AsJob] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-AzureRmVM -VM <PSVirtualMachine> [-Tags <Hashtable>] [-IdentityType <ResourceIdentityType>]
+ [-AssignIdentity] [-Id] <String> [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,30 +42,15 @@ To obtain a virtual machine object, use the **Get-AzureRmVM** cmdlet.
 
 ## PARAMETERS
 
-### -AsJob
-Run cmdlet in the background and return a Job to track progress.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -AssignIdentity
 Specify the system assigned identity for the virtual machine.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: AssignIdentityParameterSet
-Aliases:
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: 
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -90,7 +61,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -105,9 +76,9 @@ Accept wildcard characters: False
 Specifies the Resource ID of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: IdParameterSetName
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -116,45 +87,14 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -IdentityId
-Specifies the list of user identities associated with the virtual machine scale set.
-The user identity references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'
-
-```yaml
-Type: System.String[]
-Parameter Sets: ExplicitIdentityParameterSet
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -IdentityType
 The type of identity used for the virtual machine. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.
 
 ```yaml
-Type: System.Nullable`1[Microsoft.Azure.Management.Compute.Models.ResourceIdentityType]
-Parameter Sets: ExplicitIdentityParameterSet
-Aliases:
-Accepted values: SystemAssigned, UserAssigned, SystemAssignedUserAssigned, None
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OsDiskWriteAccelerator
-Specifies whether WriteAccelerator should be enabled or disabled on the OS disk.
-
-```yaml
-Type: System.Boolean
+Type: ResourceIdentityType
 Parameter Sets: (All)
-Aliases:
+Aliases: 
+Accepted values: SystemAssigned
 
 Required: False
 Position: Named
@@ -167,9 +107,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
-Parameter Sets: ResourceGroupNameParameterSetName, AssignIdentityParameterSet, ExplicitIdentityParameterSet
-Aliases:
+Type: String
+Parameter Sets: ResourceGroupNameParameterSetName
+Aliases: 
 
 Required: True
 Position: 0
@@ -178,15 +118,15 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Tag
+### -Tags
 Specifies the resources and resource groups can be tagged with a set of name-value pairs.
 Adding tags to resources enables you to group resources together across resource groups and to create your own views.
 Each resource or resource group can have a maximum of 15 tags.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: Hashtable
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -201,7 +141,7 @@ To obtain a virtual machine object, use the Get-AzureRmVM cmdlet.
 This virtual machine object contains the updated state for the virtual machine.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
+Type: PSVirtualMachine
 Parameter Sets: (All)
 Aliases: VMProfile
 
@@ -216,7 +156,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -229,10 +169,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -248,11 +189,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: Id (ByPropertyName), ResourceGroupName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
-Parameters: VM (ByPropertyName, ByValue)
+### PSVirtualMachine
+Parameter 'VM' accepts value of type 'PSVirtualMachine' from the pipeline
 
 ## OUTPUTS
 

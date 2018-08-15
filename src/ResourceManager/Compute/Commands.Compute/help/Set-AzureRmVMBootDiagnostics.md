@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 9A6F140C-9F1C-4701-9603-FC6107FCAF92
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmbootdiagnostics
 schema: 2.0.0
@@ -38,6 +37,7 @@ PS C:\> Set-AzureRmVMBootDiagnostics -VM $VM -Enable -ResourceGroupName "Resourc
 
 The first command gets the virtual machine named ContosoVM07 by using **Get-AzureRmVM**.
 The command stores it in the $VM variable.
+
 The second command enables boot diagnostics for the virtual machine in $VM.
 Diagnostics data is stored in the specified account.
 
@@ -47,7 +47,7 @@ Diagnostics data is stored in the specified account.
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -62,9 +62,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet disables the boot diagnostics for the virtual machine.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: DisableBootDiagnostics
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -77,9 +77,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet enables the boot diagnostics for the virtual machine.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: EnableBootDiagnostics
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -92,9 +92,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: EnableBootDiagnostics
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -107,9 +107,9 @@ Accept wildcard characters: False
 Specifies the name of the storage account in which to save boot diagnostics data.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: EnableBootDiagnostics
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -123,7 +123,7 @@ Specifies the virtual machine for which this cmdlet changes boot diagnostics.
 To obtain a virtual machine object, use the Get-AzureRmVM cmdlet.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
+Type: PSVirtualMachine
 Parameter Sets: (All)
 Aliases: VMProfile
 
@@ -139,11 +139,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
-Parameters: VM (ByPropertyName, ByValue)
-
-### System.String
-Parameters: ResourceGroupName (ByPropertyName), StorageAccountName (ByPropertyName)
+### PSVirtualMachine
+Parameter 'VM' accepts value of type 'PSVirtualMachine' from the pipeline
 
 ## OUTPUTS
 

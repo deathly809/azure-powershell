@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: B2B4E132-4A71-4DB8-A7B9-9ED3FE7EB292
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmbginfoextension
 schema: 2.0.0
@@ -26,7 +25,7 @@ The **Set-AzureRmVMBGInfoExtension** cmdlet adds the BGInfo extension to a virtu
 
 ### Example 1: Add the BGInfo extension for a virtual machine
 ```
-PS C:\> Set-AzureRmVMBgInfoExtension -ResourceGroupName "ContosoRG" -VMName "ContosoVM" -Name "ExtensionName" -TypeHandlerVersion "2.1" -Location "West Europe"
+PS C:\> Set-AzureVMBGInfoExtension -ResrouceGroupName "ContosoRG" -VMName "ContosoVM" -Name "ExtensionName" -TypeHandlerVersion "2.1" -Location "West Europe"
 ```
 
 This command adds the BGInfo extension to virtual machine named ContosoVM.
@@ -39,7 +38,7 @@ The command specifies the name and version of the extension.
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -55,9 +54,9 @@ Indicates that this cmdlet prevents the Azure guest agent from automatically upd
 By default, this cmdlet enables the guest agent to update the extension.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -69,12 +68,13 @@ Accept wildcard characters: False
 ### -ForceRerun
 Specifies that the extension should be run again with the same public or protected settings.
 The value can be any string different from the current value.
+
 If forceUpdateTag is not changed, updates to public or protected settings are still applied by the handler.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -87,9 +87,9 @@ Accept wildcard characters: False
 Specifies the location of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -102,7 +102,7 @@ Accept wildcard characters: False
 Specifies the name of the BGInfo extension that this cmdlet adds to a virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ExtensionName
 
@@ -117,9 +117,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine to which this cmdlet adds an extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -132,7 +132,7 @@ Accept wildcard characters: False
 Specifies the version of the extension that this cmdlet adds to the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: HandlerVersion, Version
 
@@ -147,7 +147,7 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine to which this cmdlet adds the BGInfo extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -162,7 +162,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -175,10 +175,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -194,12 +195,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: ForceRerun (ByPropertyName), Location (ByPropertyName), Name (ByPropertyName), ResourceGroupName (ByPropertyName), TypeHandlerVersion (ByPropertyName), VMName (ByPropertyName)
-
-### System.Management.Automation.SwitchParameter
-Parameters: DisableAutoUpgradeMinorVersion (ByPropertyName)
-
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.Compute.Models.PSAzureOperationResponse
@@ -207,3 +202,4 @@ Parameters: DisableAutoUpgradeMinorVersion (ByPropertyName)
 ## NOTES
 
 ## RELATED LINKS
+

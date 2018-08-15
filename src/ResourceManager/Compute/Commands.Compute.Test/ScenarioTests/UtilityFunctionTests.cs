@@ -13,7 +13,6 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using System;
 using Xunit;
@@ -22,19 +21,17 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
     public class UtilityFunctionTests
     {
-        XunitTracingInterceptor _logger;
-
         public UtilityFunctionTests(Xunit.Abstractions.ITestOutputHelper output)
         {
-            _logger = new XunitTracingInterceptor(output);
-            XunitTracingInterceptor.AddToContext(_logger);
+            ServiceManagemenet.Common.Models.XunitTracingInterceptor.AddToContext(new ServiceManagemenet.Common.Models.XunitTracingInterceptor(output));
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestLocationStringExtension()
         {
-            string[] locations = {
+            string[] locations = new string[]
+            {
                 "West US",
                 "eastus",
                 "East Asia 2"
@@ -49,7 +46,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             {
                 var s1 = loc.Canonicalize();
                 var s2 = normalize(loc);
-                Assert.Equal(s1, s2);
+                Assert.True(string.Equals(s1, s2));
             }
         }
     }

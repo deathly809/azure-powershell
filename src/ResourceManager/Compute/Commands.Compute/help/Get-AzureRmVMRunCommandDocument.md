@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvmruncommanddocument
 schema: 2.0.0
 ---
@@ -28,6 +27,8 @@ PS C:\> Get-AzureRmVMRunCommandDocument -Location 'westus' -CommandId 'RunPowerS
 ```
 
 Gets a specific run command document for 'RunPowerShellScript' in 'westus'.
+
+
 Get-AzureRmVMRunCommandDocument -Location $loc
 
 ### Example 2
@@ -43,9 +44,9 @@ Lists all available run commands in 'westus'.
 The command id.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -58,7 +59,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -73,9 +74,9 @@ Accept wildcard characters: False
 The location upon which run commands is queried.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 1
@@ -90,7 +91,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: CommandId (ByPropertyName), Location (ByPropertyName)
 
 ## OUTPUTS
 
@@ -99,3 +99,4 @@ Parameters: CommandId (ByPropertyName), Location (ByPropertyName)
 ## NOTES
 
 ## RELATED LINKS
+

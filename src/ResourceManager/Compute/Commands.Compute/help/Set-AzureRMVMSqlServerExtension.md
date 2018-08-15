@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: C650E465-7CDE-47F8-B85A-8FA3E1756FAF
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmsqlserverextension
 schema: 2.0.0
@@ -33,8 +32,10 @@ PS C:\> Get-AzureRmVM -ServiceName "Service02" -Name "VirtualMachine11" | Set-Az
 
 The first command creates a configuration object by using the **New-AzureVMSqlServerAutoPatchingConfig** cmdlet.
 The command stores the configuration in the $AutoPatchingConfig variable.
+
 The second command gets the virtual machine named VirtualMachine11 on the service named Service02 by using the Get-AzureRmVM cmdlet.
 The command passes that object to the current cmdlet by using the pipeline operator.
+
 The current cmdlet sets the automatic patching settings in $AutoPatchingConfig for the virtual machine.
 The command passes the virtual machine to the Update-AzureRmVM cmdlet.
 
@@ -46,7 +47,9 @@ PS C:\> Get-AzureRmVM -ServiceName "Service02" -Name "VirtualMachine11" | Set-Az
 
 The first command creates a configuration object by using the **New-AzureVMSqlServerAutoBackupConfig** cmdlet.
 The command stores the configuration in the $AutoBackupConfig variable.
+
 The second command gets the virtual machine named VirtualMachine11 on the service named Service02, and then passes it to the current cmdlet.
+
 The current cmdlet sets the automatic backup settings in $AutoBackupConfig for the virtual machine.
 The command passes the virtual machine to the Update-AzureRmVM cmdlet.
 
@@ -73,9 +76,9 @@ Specifies the automatic SQL Server backup settings.
 To create an **AutoBackupSettings** object , use the New-AzureVMSqlServerAutoBackupConfig cmdlet.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.AutoBackupSettings
+Type: AutoBackupSettings
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 6
@@ -89,9 +92,9 @@ Specifies the automatic SQL Server patching settings.
 To create an **AutoPatchingSettings** object , use the New-AzureVMSqlServerAutoPatchingConfig cmdlet.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.AutoPatchingSettings
+Type: AutoPatchingSettings
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 5
@@ -104,7 +107,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -117,9 +120,9 @@ Accept wildcard characters: False
 
 ### -KeyVaultCredentialSettings
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.KeyVaultCredentialSettings
+Type: KeyVaultCredentialSettings
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 7
@@ -132,9 +135,9 @@ Accept wildcard characters: False
 Specifies the location of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 8
@@ -147,9 +150,9 @@ Accept wildcard characters: False
 Specifies the name of the SQL Server the extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 4
@@ -162,9 +165,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -177,7 +180,7 @@ Accept wildcard characters: False
 Specifies the version of the SQL Server extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: HandlerVersion
 
@@ -192,9 +195,9 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine on which this cmdlet sets the SQL Server extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 3
@@ -207,18 +210,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: Location (ByPropertyName), Name (ByPropertyName), ResourceGroupName (ByPropertyName), Version (ByPropertyName), VMName (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.AutoPatchingSettings
-Parameters: AutoPatchingSettings (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.AutoBackupSettings
-Parameters: AutoBackupSettings (ByPropertyName)
-
-### Microsoft.Azure.Commands.Compute.KeyVaultCredentialSettings
-Parameters: KeyVaultCredentialSettings (ByPropertyName)
 
 ## OUTPUTS
 

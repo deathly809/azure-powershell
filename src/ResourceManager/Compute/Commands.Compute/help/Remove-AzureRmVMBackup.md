@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 2AB1B227-68C4-49AE-84C0-E1421E609DE7
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/remove-azurermvmbackup
 schema: 2.0.0
@@ -33,7 +32,7 @@ PS C:\>
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -46,9 +45,9 @@ Accept wildcard characters: False
 
 ### -ResourceGroupName
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -59,9 +58,9 @@ Accept wildcard characters: False
 
 ### -Tag
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -72,7 +71,7 @@ Accept wildcard characters: False
 
 ### -VMName
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -88,9 +87,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: ResourceGroupName (ByPropertyName), Tag (ByPropertyName), VMName (ByPropertyName)
-
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.Compute.Models.PSAzureOperationResponse
@@ -98,3 +94,4 @@ Parameters: ResourceGroupName (ByPropertyName), Tag (ByPropertyName), VMName (By
 ## NOTES
 
 ## RELATED LINKS
+

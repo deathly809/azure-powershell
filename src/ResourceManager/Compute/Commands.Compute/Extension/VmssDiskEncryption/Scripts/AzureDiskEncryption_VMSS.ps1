@@ -38,7 +38,7 @@ $ErrorActionPreference = “Stop”;
 ########################################################################################################################
 
     #Write-Host 'Please log into Azure now' -foregroundcolor Green;
-    #Connect-AzureRmAccount -ErrorAction "Stop" 1> $null;
+    #Login-AzureRmAccount -ErrorAction "Stop" 1> $null;
 
     if($subscriptionId)
     {

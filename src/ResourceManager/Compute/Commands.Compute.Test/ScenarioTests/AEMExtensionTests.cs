@@ -12,7 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
 
@@ -20,136 +19,83 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
     public class AEMExtensionTests
     {
-        XunitTracingInterceptor _logger;
-
         public AEMExtensionTests(Xunit.Abstractions.ITestOutputHelper output)
         {
-            _logger = new XunitTracingInterceptor(output);
-            XunitTracingInterceptor.AddToContext(_logger);
+            ServiceManagemenet.Common.Models.XunitTracingInterceptor.AddToContext(new ServiceManagemenet.Common.Models.XunitTracingInterceptor(output));
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Get-Location in Common.ps1 is not working correctly for NETSTANDARD")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionBasicWindowsWAD()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionBasicWindowsWAD");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionBasicWindowsWAD");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionBasicWindows()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionBasicWindows");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionBasicWindows");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Unknown issue/update, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionBasicLinuxWAD()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionBasicLinuxWAD");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionBasicLinuxWAD");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Unknown issue/update, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionBasicLinux()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionBasicLinux");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionBasicLinux");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Resources -> ResourceManager, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionAdvancedWindowsWAD()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedWindowsWAD");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedWindowsWAD");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Get-Location in Common.ps1 is not working correctly for NETSTANDARD")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionAdvancedWindows()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedWindows");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedWindows");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Unknown issue/update, needs re-recorded")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionAdvancedLinuxWAD()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedLinuxWAD");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedLinuxWAD");
         }
 
         [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionAdvancedLinux()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedLinux");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedLinux");
         }
 
-#if NETSTANDARD
-        [Fact(Skip = "Get-Location in Common.ps1 is not working correctly for NETSTANDARD")]
-        [Trait(Category.RunType, Category.DesktopOnly)]
-#else
         [Fact]
-#endif
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionAdvancedWindowsMD()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedWindowsMD");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedWindowsMD");
         }
 
         [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestAEMExtensionAdvancedLinuxMD()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedLinuxMD");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedLinuxMD");
         }
 
-        [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
+        [Fact]
         public void TestAEMExtensionAdvancedLinuxMD_ESeries()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedLinuxMD_E");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedLinuxMD_E");
         }
 
-        [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
+        [Fact]
         public void TestAEMExtensionAdvancedLinuxMD_DSeries()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-AEMExtensionAdvancedLinuxMD_D");
+            ComputeTestController.NewInstance.RunPsTest("Test-AEMExtensionAdvancedLinuxMD_D");
         }
     }
 }

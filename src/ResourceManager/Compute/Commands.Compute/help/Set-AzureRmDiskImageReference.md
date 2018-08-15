@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermdiskimagereference
 schema: 2.0.0
 ---
@@ -40,7 +39,7 @@ The last command takes the disk object and creates a disk with name 'Disk01' in 
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -55,9 +54,9 @@ Accept wildcard characters: False
 Specifies a local disk object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSDisk
+Type: PSDisk
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -70,9 +69,9 @@ Accept wildcard characters: False
 Specifies the ID.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
@@ -85,9 +84,9 @@ Accept wildcard characters: False
 Specifies the logical unit number (LUN).
 
 ```yaml
-Type: System.Int32
+Type: Int32
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -100,7 +99,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -115,7 +114,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -131,19 +130,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSDisk
-Parameters: Disk (ByPropertyName, ByValue)
-
-### System.String
-Parameters: Id (ByPropertyName)
-
-### System.Int32
-Parameters: Lun (ByPropertyName)
+### Microsoft.Azure.Management.Compute.Models.Disk
+System.String
+System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSDisk
+### Microsoft.Azure.Management.Compute.Models.Disk
 
 ## NOTES
 
 ## RELATED LINKS
+

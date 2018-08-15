@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: CBFFBF1B-1AF0-4D2F-9315-C3790A4E9346
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmbackupextension
 schema: 2.0.0
@@ -33,7 +32,7 @@ PS C:\>
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -46,7 +45,7 @@ Accept wildcard characters: False
 
 ### -Name
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ExtensionName
 
@@ -59,9 +58,9 @@ Accept wildcard characters: False
 
 ### -ResourceGroupName
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -72,9 +71,9 @@ Accept wildcard characters: False
 
 ### -Tag
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 2
@@ -85,7 +84,7 @@ Accept wildcard characters: False
 
 ### -VMName
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -101,9 +100,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: Name (ByPropertyName), ResourceGroupName (ByPropertyName), Tag (ByPropertyName), VMName (ByPropertyName)
-
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.Compute.Models.PSAzureOperationResponse
@@ -111,3 +107,4 @@ Parameters: Name (ByPropertyName), ResourceGroupName (ByPropertyName), Tag (ByPr
 ## NOTES
 
 ## RELATED LINKS
+

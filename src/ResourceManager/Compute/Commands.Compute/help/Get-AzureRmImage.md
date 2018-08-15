@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermimage
 schema: 2.0.0
 ---
@@ -49,7 +48,7 @@ This command gets the properties of all images under the subscription.
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -64,9 +63,9 @@ Accept wildcard characters: False
 Specifies the expand expression query.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -79,7 +78,7 @@ Accept wildcard characters: False
 Specifies the name of an image.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Name
 
@@ -94,9 +93,9 @@ Accept wildcard characters: False
 Specifies the name of a resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
@@ -111,7 +110,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
-Parameters: Expand (ByPropertyName), ImageName (ByPropertyName), ResourceGroupName (ByPropertyName)
 
 ## OUTPUTS
 
@@ -120,3 +118,4 @@ Parameters: Expand (ByPropertyName), ImageName (ByPropertyName), ResourceGroupNa
 ## NOTES
 
 ## RELATED LINKS
+

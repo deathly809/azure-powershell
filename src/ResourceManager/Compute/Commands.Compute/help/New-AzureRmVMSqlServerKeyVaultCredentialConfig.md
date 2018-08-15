@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: B30C2BDD-6DA9-47B5-88FE-3AD43E15A072
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/new-azurermvmsqlserverkeyvaultcredentialconfig
 schema: 2.0.0
@@ -27,9 +26,9 @@ New-AzureRmVMSqlServerKeyVaultCredentialConfig [-ResourceGroupName] <String> [-E
 
 ### -AzureKeyVaultUrl
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -40,9 +39,9 @@ Accept wildcard characters: False
 
 ### -CredentialName
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -53,9 +52,9 @@ Accept wildcard characters: False
 
 ### -Enable
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -66,9 +65,9 @@ Accept wildcard characters: False
 
 ### -ResourceGroupName
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -79,9 +78,9 @@ Accept wildcard characters: False
 
 ### -ServicePrincipalName
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -92,9 +91,9 @@ Accept wildcard characters: False
 
 ### -ServicePrincipalSecret
 ```yaml
-Type: System.Security.SecureString
+Type: SecureString
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -107,7 +106,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -120,10 +119,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -139,15 +139,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-Parameters: AzureKeyVaultUrl (ByPropertyName), CredentialName (ByPropertyName), ResourceGroupName (ByPropertyName), ServicePrincipalName (ByPropertyName)
-
-### System.Management.Automation.SwitchParameter
-Parameters: Enable (ByPropertyName)
-
-### System.Security.SecureString
-Parameters: ServicePrincipalSecret (ByPropertyName)
-
 ## OUTPUTS
 
 ### Microsoft.Azure.Commands.Compute.KeyVaultCredentialSettings
@@ -155,3 +146,4 @@ Parameters: ServicePrincipalSecret (ByPropertyName)
 ## NOTES
 
 ## RELATED LINKS
+

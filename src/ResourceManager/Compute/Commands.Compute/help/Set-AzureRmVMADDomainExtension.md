@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 65BF37D3-4FCE-48A3-BC5D-01AA20FEB6CA
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmaddomainextension
 schema: 2.0.0
@@ -34,9 +33,9 @@ To obtain a credential, use the Get-Credential cmdlet.
 For more information, type `Get-Help Get-Credential`.
 
 ```yaml
-Type: System.Management.Automation.PSCredential
+Type: PSCredential
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -49,7 +48,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -64,9 +63,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet disables auto-upgrade of the minor version of the extension.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -79,9 +78,9 @@ Accept wildcard characters: False
 Specifies the name of the domain.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: Named
@@ -93,12 +92,13 @@ Accept wildcard characters: False
 ### -ForceRerun
 Indicates that this cmdlet forces a rerun of the same extension configuration on the virtual machine without uninstalling and reinstalling the extension.
 The value can be any string different from the current value.
+
 If forceUpdateTag is not changed, updates to public or protected settings are still applied by the handler.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -111,9 +111,9 @@ Accept wildcard characters: False
 Specifies the join option.
 
 ```yaml
-Type: System.Nullable`1[System.UInt32]
+Type: UInt32
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -126,9 +126,9 @@ Accept wildcard characters: False
 Specifies the location of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -141,7 +141,7 @@ Accept wildcard characters: False
 Specifies the name of the domain extension to add.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ExtensionName
 
@@ -158,9 +158,9 @@ Enter the full distinguished name of the OU in quotation marks.
 The default value is the default OU for machine objects in the domain.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -173,9 +173,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -189,9 +189,9 @@ Indicates that this cmdlet restarts the virtual machine.
 A restart is often required to make the change effective.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -204,7 +204,7 @@ Accept wildcard characters: False
 Specifies the version of the domain extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: HandlerVersion, Version
 
@@ -219,7 +219,7 @@ Accept wildcard characters: False
 Specifies the name of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -234,7 +234,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -247,10 +247,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -265,17 +266,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: DomainName (ByPropertyName), ForceRerun (ByPropertyName), Location (ByPropertyName), Name (ByPropertyName), OUPath (ByPropertyName), ResourceGroupName (ByPropertyName), TypeHandlerVersion (ByPropertyName), VMName (ByPropertyName)
-
-### System.Nullable`1[[System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
-
-### System.Management.Automation.PSCredential
-Parameters: Credential (ByPropertyName)
-
-### System.Management.Automation.SwitchParameter
-Parameters: DisableAutoUpgradeMinorVersion (ByPropertyName), Restart (ByPropertyName)
 
 ## OUTPUTS
 

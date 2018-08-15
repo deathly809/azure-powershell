@@ -12,7 +12,6 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.WindowsAzure.Commands.ScenarioTest;
 using Xunit;
 
@@ -20,47 +19,32 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
     public partial class VirtualMachineScaleSetExtensionTests
     {
-        XunitTracingInterceptor _logger;
-
-        public VirtualMachineScaleSetExtensionTests(Xunit.Abstractions.ITestOutputHelper output)
-        {
-            _logger = new XunitTracingInterceptor(output);
-            XunitTracingInterceptor.AddToContext(_logger);
-        }
-
         [Fact(Skip = "TODO: only works for live mode")]
         [Trait(Category.RunType, Category.LiveOnly)]
         public void TestVirtualMachineScaleSetDiskEncryptionExtension()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-VirtualMachineScaleSetDiskEncryptionExtension");
+            ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetDiskEncryptionExtension");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestDisableVirtualMachineScaleSetDiskEncryption()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DisableVirtualMachineScaleSetDiskEncryption");
-        }
-
-        [Fact]
-        [Trait(Category.AcceptanceType, Category.CheckIn)]
-        public void TestDisableVirtualMachineScaleSetDiskEncryption2()
-        {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-DisableVirtualMachineScaleSetDiskEncryption2");
+            ComputeTestController.NewInstance.RunPsTest("Test-DisableVirtualMachineScaleSetDiskEncryption");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestGetVirtualMachineScaleSetDiskEncryptionStatus()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-GetVirtualMachineScaleSetDiskEncryptionStatus");
+            ComputeTestController.NewInstance.RunPsTest("Test-GetVirtualMachineScaleSetDiskEncryptionStatus");
         }
 
         [Fact]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestGetVirtualMachineScaleSetDiskEncryptionDataDisk()
         {
-            ComputeTestController.NewInstance.RunPsTest(_logger, "Test-GetVirtualMachineScaleSetDiskEncryptionDataDisk");
+            ComputeTestController.NewInstance.RunPsTest("Test-GetVirtualMachineScaleSetDiskEncryptionDataDisk");
         }
     }
 }

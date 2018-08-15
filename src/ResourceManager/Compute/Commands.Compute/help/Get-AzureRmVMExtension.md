@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 842652D4-0F1C-4D0D-AB55-0D43D3C5D82A
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvmextension
 schema: 2.0.0
@@ -45,7 +44,7 @@ This command gets the instance view for the extension named CustomScriptExtensio
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -61,7 +60,7 @@ Specifies the name of an extension.
 This cmdlet gets properties for the extension that this parameter specifies.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ExtensionName
 
@@ -76,9 +75,9 @@ Accept wildcard characters: False
 Specifies the name of a resource group.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -91,9 +90,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet gets only the instance view of an extension.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -107,7 +106,7 @@ Specifies the name of a virtual machine.
 This cmdlet gets properties of an extension from the virtual machine that this parameter specifies.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -122,12 +121,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: Name (ByPropertyName), ResourceGroupName (ByPropertyName), VMName (ByPropertyName)
-
-### System.Management.Automation.SwitchParameter
-Parameters: Status (ByPropertyName)
 
 ## OUTPUTS
 

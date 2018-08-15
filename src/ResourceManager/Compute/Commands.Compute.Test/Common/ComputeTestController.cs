@@ -33,31 +33,37 @@ using TestBase = Microsoft.Azure.Test.TestBase;
 #endif
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.Rest.ClientRuntime.Azure.TestFramework;
-using NetworkManagementClientInternal = Microsoft.Azure.Management.Internal.Network.Version2017_10_01.NetworkManagementClient;
-using ResourceManagementClientInternal = Microsoft.Azure.Management.Internal.Resources.ResourceManagementClient;
 using TestEnvironmentFactory = Microsoft.Rest.ClientRuntime.Azure.TestFramework.TestEnvironmentFactory;
+using ResourceManagementClientInternal = Microsoft.Azure.Management.Internal.Resources.ResourceManagementClient;
 
 namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 {
     public sealed class ComputeTestController : RMTestBase
     {
+
         private readonly EnvironmentSetupHelper _helper;
-
-        public StorageManagementClient StorageClient { get; private set; }
-
-        public ComputeManagementClient ComputeManagementClient { get; private set; }
-
-        public NetworkManagementClient NetworkManagementClient { get; private set; }
-
-        public NetworkManagementClientInternal NetworkManagementClientInternal { get; private set; }
+        private const string TenantIdKey = "TenantId";
+        private const string DomainKey = "Domain";
 
         public ResourceManagementClient ResourceManagementClient { get; private set; }
 
         public ResourceManagementClientInternal InternalResourceManagementClient { get; private set; }
 
+        public StorageManagementClient StorageClient { get; private set; }
+
+        public NetworkManagementClient NetworkManagementClient { get; private set; }
+
+        public ComputeManagementClient ComputeManagementClient { get; private set; }
+
         public string UserDomain { get; private set; }
 
-        public static ComputeTestController NewInstance => new ComputeTestController();
+        public static ComputeTestController NewInstance
+        {
+            get
+            {
+                return new ComputeTestController();
+            }
+        }
 
         public ComputeTestController()
         {
@@ -75,7 +81,24 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             var callingClassType = sf.GetMethod().ReflectedType?.ToString();
             var mockName = sf.GetMethod().Name;
 
-            _helper.TracingInterceptor = logger;
+            SetLogger(logger);
+
+            RunPsTestWorkflow(
+                () => scripts,
+                // no custom initializer
+                null,
+                // no custom cleanup
+                null,
+                callingClassType,
+                mockName);
+        }
+
+        public void RunPsTest(params string[] scripts)
+        {
+            var sf = new StackTrace().GetFrame(1);
+            var callingClassType = sf.GetMethod().ReflectedType?.ToString();
+            var mockName = sf.GetMethod().Name;
+
             RunPsTestWorkflow(
                 () => scripts,
                 // no custom initializer
@@ -98,13 +121,12 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             d.Add("Microsoft.Features", null);
             d.Add("Microsoft.Authorization", null);
             d.Add("Microsoft.Compute", null);
-            d.Add("Microsoft.Network", null);
-            d.Add("Microsoft.Storage", null);
 
             var providersToIgnore = new Dictionary<string, string>();
-            providersToIgnore.Add("Microsoft.Azure.Management.Resources.ResourceManagementClient", "2016-02-01");
+            //providersToIgnore.Add("Microsoft.Azure.Management.Resources.ResourceManagementClient", "2016-02-01");
             providersToIgnore.Add("Microsoft.Azure.Management.ResourceManager.ResourceManagementClient", "2017-05-10");
             providersToIgnore.Add("Microsoft.Azure.Management.Internal.Resources.ResourceManagementClient", "2016-09-01");
+
             HttpMockServer.Matcher = new PermissiveRecordMatcherWithApiExclusion(true, d, providersToIgnore);
 
             HttpMockServer.RecordsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SessionRecords");
@@ -116,26 +138,39 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 
                 _helper.SetupEnvironment(AzureModule.AzureResourceManager);
 
-                var callingClassName = callingClassType.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries).Last();
+                var baseDir = EnvironmentSetupHelper.StackDirectory;
+                var formatStr = @"ResourceManager\AzureResourceManager\AzureRM.{0}\AzureRM.{0}.psd1";
+
+                var computeLocation = Path.Combine(baseDir, String.Format(formatStr, "Compute"));
+                var networkLocation = Path.Combine(baseDir, String.Format(formatStr, "Network"));
+                var storageLocation = Path.Combine(baseDir, String.Format(formatStr, "Storage"));
+                var resourceLocation = Path.Combine(baseDir, String.Format(formatStr, "Resource"));
+
+                var callingClassName = callingClassType
+                                        .Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)
+                                        .Last();
                 _helper.SetupModules(AzureModule.AzureResourceManager,
                     "ScenarioTests\\Common.ps1",
                     "ScenarioTests\\ComputeTestCommon.ps1",
                     "ScenarioTests\\" + callingClassName + ".ps1",
                     _helper.RMProfileModule,
+                    computeLocation,
+                    networkLocation,
+                    storageLocation,
+                    resourceLocation,
                     _helper.RMStorageDataPlaneModule,
-                    _helper.RMStorageModule,
-                    _helper.GetRMModulePath("AzureRM.Compute.psd1"),
-                    _helper.GetRMModulePath("AzureRM.Network.psd1"),
-                    "AzureRM.Storage.ps1",
-                    "AzureRM.Resources.ps1");
+                    _helper.RMStorageModule);
 
                 try
                 {
-                    var psScripts = scriptBuilder?.Invoke();
-
-                    if (psScripts != null)
+                    if (scriptBuilder != null)
                     {
-                        _helper.RunPowerShellTest(psScripts);
+                        var psScripts = scriptBuilder();
+
+                        if (psScripts != null)
+                        {
+                            _helper.RunPowerShellTest(psScripts);
+                        }
                     }
                 }
                 finally
@@ -147,23 +182,22 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 
         private void SetupManagementClients(MockContext context)
         {
-            StorageClient = GetStorageManagementClient(context);
-            ComputeManagementClient = GetComputeManagementClient(context);
-            NetworkManagementClient = GetNetworkManagementClient(context);
-            NetworkManagementClientInternal = GetNetworkManagementClientInternal(context);
+
             ResourceManagementClient = GetResourceManagementClient(context);
+            StorageClient = GetStorageManagementClient(context);
+            NetworkManagementClient = this.GetNetworkManagementClientClient(context);
+            ComputeManagementClient = GetComputeManagementClient(context);
             InternalResourceManagementClient = GetResourceManagementClientInternal(context);
 
-            _helper.SetupSomeOfManagementClients(
-                StorageClient,
-                ComputeManagementClient,
-                NetworkManagementClient,
-                NetworkManagementClientInternal,
+            _helper.SetupManagementClients(
                 ResourceManagementClient,
+                StorageClient,
+                NetworkManagementClient,
+                ComputeManagementClient,
                 InternalResourceManagementClient);
         }
 
-        private static ResourceManagementClient GetResourceManagementClient(MockContext context)
+        private ResourceManagementClient GetResourceManagementClient(MockContext context)
         {
 #if NETSTANDARD
             return context.GetServiceClient<ResourceManagementClient>(TestEnvironmentFactory.GetTestEnvironment());
@@ -177,22 +211,17 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             return context.GetServiceClient<ResourceManagementClientInternal>(TestEnvironmentFactory.GetTestEnvironment());
         }
 
-        private static StorageManagementClient GetStorageManagementClient(MockContext context)
+        private StorageManagementClient GetStorageManagementClient(MockContext context)
         {
             return context.GetServiceClient<StorageManagementClient>(TestEnvironmentFactory.GetTestEnvironment());
         }
 
-        private static NetworkManagementClient GetNetworkManagementClient(MockContext context)
+        private NetworkManagementClient GetNetworkManagementClientClient(MockContext context)
         {
             return context.GetServiceClient<NetworkManagementClient>(TestEnvironmentFactory.GetTestEnvironment());
         }
 
-        private static NetworkManagementClientInternal GetNetworkManagementClientInternal(MockContext context)
-        {
-            return context.GetServiceClient<NetworkManagementClientInternal>(TestEnvironmentFactory.GetTestEnvironment());
-        }
-
-        private static ComputeManagementClient GetComputeManagementClient(MockContext context)
+        private ComputeManagementClient GetComputeManagementClient(MockContext context)
         {
             return context.GetServiceClient<ComputeManagementClient>(TestEnvironmentFactory.GetTestEnvironment());
         }

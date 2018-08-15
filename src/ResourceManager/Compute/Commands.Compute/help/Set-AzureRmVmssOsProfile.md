@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 3E7B9EFA-8BC2-46EB-9AD7-43EAB7FF3891
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmssosprofile
 schema: 2.0.0
@@ -43,9 +42,9 @@ Specifies an unattended content object.
 You can use the Add-AzureRmVMAdditionalUnattendContent to create the object.
 
 ```yaml
-Type: Microsoft.Azure.Management.Compute.Models.AdditionalUnattendContent[]
+Type: AdditionalUnattendContent[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 8
@@ -58,9 +57,9 @@ Accept wildcard characters: False
 Specifies the administrator password to use for all the virtual machine instances in the VMSS.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -73,9 +72,9 @@ Accept wildcard characters: False
 Specifies the administrator account name to use for all the virtual machine instances in the VMSS.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -89,9 +88,9 @@ Specifies the computer name prefix for all the virtual machine instances in the 
 Computer names must be 1 to 15 characters long.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
@@ -106,9 +105,9 @@ This is decoded to a binary array that is saved as a file on the virtual machine
 The maximum length of the binary array is 65535 bytes.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 4
@@ -121,7 +120,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -136,9 +135,9 @@ Accept wildcard characters: False
 Indicates that this cmdlet disables password authentication.
 
 ```yaml
-Type: System.Nullable`1[System.Boolean]
+Type: Boolean
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 10
@@ -153,9 +152,9 @@ This enables remote Windows PowerShell.
 You can use the Add-AzureRmVmssWinRMListener cmdlet to create the listener.
 
 ```yaml
-Type: Microsoft.Azure.Management.Compute.Models.WinRMListener[]
+Type: WinRMListener[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 9
@@ -169,9 +168,9 @@ Specifies the Secure Shell (SSH) public key object.
 You can use the Add-AzureRmVMSshPublicKey cmdlet to create the object.
 
 ```yaml
-Type: Microsoft.Azure.Management.Compute.Models.SshPublicKey[]
+Type: SshPublicKey[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 11
@@ -185,9 +184,9 @@ Specifies the secrets object which contains the certificate references to place 
 You can use the Add-AzureRmVmssSecret cmdlet to create the secrets object.
 
 ```yaml
-Type: Microsoft.Azure.Management.Compute.Models.VaultSecretGroup[]
+Type: VaultSecretGroup[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 12
@@ -200,9 +199,9 @@ Accept wildcard characters: False
 Specifies the time zone for the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 7
@@ -216,9 +215,9 @@ Specifies the VMSS object.
 You can use the New-AzureRmVmssConfig cmdlet to create the object.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Compute.Automation.Models.PSVirtualMachineScaleSet
+Type: PSVirtualMachineScaleSet
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -231,9 +230,9 @@ Accept wildcard characters: False
 Indicates whether the virtual machines in the VMSS are enabled for automatic updates.
 
 ```yaml
-Type: System.Nullable`1[System.Boolean]
+Type: Boolean
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 6
@@ -246,9 +245,9 @@ Accept wildcard characters: False
 Indicates whether virtual machine agent should be provisioned on the virtual machines in the VMSS.
 
 ```yaml
-Type: System.Nullable`1[System.Boolean]
+Type: Boolean
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 5
@@ -261,7 +260,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -276,7 +275,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -292,29 +291,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSVirtualMachineScaleSet
-Parameters: VirtualMachineScaleSet (ByPropertyName, ByValue)
-
-### System.String
-Parameters: AdminPassword (ByPropertyName), AdminUsername (ByPropertyName), ComputerNamePrefix (ByPropertyName), CustomData (ByPropertyName), TimeZone (ByPropertyName)
-
-### System.Nullable`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
-
-### Microsoft.Azure.Management.Compute.Models.AdditionalUnattendContent[]
-Parameters: AdditionalUnattendContent (ByPropertyName)
-
-### Microsoft.Azure.Management.Compute.Models.WinRMListener[]
-Parameters: Listener (ByPropertyName)
-
-### Microsoft.Azure.Management.Compute.Models.SshPublicKey[]
-Parameters: PublicKey (ByPropertyName)
-
-### Microsoft.Azure.Management.Compute.Models.VaultSecretGroup[]
-Parameters: Secret (ByPropertyName)
+### VirtualMachineScaleSet
+Parameter 'VirtualMachineScaleSet' accepts value of type 'VirtualMachineScaleSet' from the pipeline
 
 ## OUTPUTS
 
-### Microsoft.Azure.Commands.Compute.Automation.Models.PSVirtualMachineScaleSet
+### This cmdlet does not generate any output.
 
 ## NOTES
 

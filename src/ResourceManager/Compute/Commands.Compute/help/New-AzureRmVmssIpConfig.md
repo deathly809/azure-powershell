@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 92F192A5-F75E-4EFE-B2D2-B0DF0B78D3B5
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/new-azurermvmssipconfig
 schema: 2.0.0
@@ -18,8 +17,7 @@ New-AzureRmVmssIpConfig [[-Name] <String>] [[-Id] <String>] [[-SubnetId] <String
  [[-ApplicationGatewayBackendAddressPoolsId] <String[]>] [[-LoadBalancerBackendAddressPoolsId] <String[]>]
  [[-LoadBalancerInboundNatPoolsId] <String[]>] [-Primary] [-PrivateIPAddressVersion <String>]
  [-PublicIPAddressConfigurationName <String>] [-PublicIPAddressConfigurationIdleTimeoutInMinutes <Int32>]
- [-DnsSetting <String>] [-IpTag <VirtualMachineScaleSetIpTag[]>] [-DefaultProfile <IAzureContextContainer>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-DnsSetting <String>] [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,9 +53,9 @@ A scale set can reference backend address pools of one public and one internal l
 Multiple scale sets cannot use the same load balancer.
 
 ```yaml
-Type: System.String[]
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 3
@@ -70,7 +68,7 @@ Accept wildcard characters: False
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -87,7 +85,7 @@ The domain name label of the Dns settings to be applied on the publicIP addresse
 The concatenation of the domain name label and vm index will be the domain name labels of the Public IP Address resources that will be created.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: PublicIPAddressDomainNameLabel
 
@@ -102,27 +100,12 @@ Accept wildcard characters: False
 Specifies an ID.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
-### -IpTag
-Specifies an array of Ip Tag objects.
-
-```yaml
-Type: Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetIpTag[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -134,9 +117,9 @@ A scale set can reference incoming NAT pools of one public and one internal load
 Multiple scale sets cannot use the same load balancer.
 
 ```yaml
-Type: System.String[]
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 4
@@ -151,9 +134,9 @@ A scale set can reference incoming NAT pools of one public and one internal load
 Multiple scale sets cannot use the same load balancer.
 
 ```yaml
-Type: System.String[]
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 5
@@ -166,9 +149,9 @@ Accept wildcard characters: False
 Specifies the name of the IP configuration.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 0
@@ -181,14 +164,14 @@ Accept wildcard characters: False
 Specifies the primary IP Configuration in case the network interface has more than one IP Configuration.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -196,9 +179,9 @@ Accept wildcard characters: False
 Specify the ip configuration is either IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -211,7 +194,7 @@ Accept wildcard characters: False
 The idle timeout of the public IP address.
 
 ```yaml
-Type: System.Int32
+Type: Int32
 Parameter Sets: (All)
 Aliases: PublicIPAddressIdleTimeoutInMinutes
 
@@ -226,7 +209,7 @@ Accept wildcard characters: False
 The publicIP address configuration name.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: PublicIPAddressName
 
@@ -241,9 +224,9 @@ Accept wildcard characters: False
 Specifies the subnet ID in which the configuration creates  the VMSS network interface.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: 2
@@ -256,7 +239,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -271,7 +254,7 @@ Accept wildcard characters: False
 Shows what would happen if the cmdlet runs. The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -286,18 +269,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: DnsSetting (ByPropertyName), Id (ByPropertyName), Name (ByPropertyName), PrivateIPAddressVersion (ByPropertyName), PublicIPAddressConfigurationName (ByPropertyName), SubnetId (ByPropertyName)
-
-### System.String[]
-Parameters: ApplicationGatewayBackendAddressPoolsId (ByPropertyName), LoadBalancerBackendAddressPoolsId (ByPropertyName), LoadBalancerInboundNatPoolsId (ByPropertyName)
-
-### System.Int32
-Parameters: PublicIPAddressConfigurationIdleTimeoutInMinutes (ByPropertyName)
-
-### Microsoft.Azure.Management.Compute.Models.VirtualMachineScaleSetIpTag[]
-Parameters: IpTag (ByPropertyName)
 
 ## OUTPUTS
 

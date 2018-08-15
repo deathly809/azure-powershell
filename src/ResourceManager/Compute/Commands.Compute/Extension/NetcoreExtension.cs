@@ -58,6 +58,7 @@ namespace Microsoft.Azure.Commands.Compute
 #else
 using Microsoft.Azure.Commands.Common.Authentication;
 using Microsoft.Azure.Commands.Common.Authentication.Abstractions;
+using Microsoft.Azure.Management.Network;
 using Microsoft.Azure.Management.Storage.Models;
 using Newtonsoft.Json;
 using System;
@@ -67,7 +68,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Azure.Management.Internal.Network.Version2017_10_01;
 
 namespace Microsoft.Azure.Commands.Compute
 {
@@ -136,6 +136,21 @@ namespace Microsoft.Azure.Commands.Network
         public NetworkClient()
         {
         }
+    }
+}
+
+namespace Microsoft.Azure.Management.Internal.Network.Common
+{
+    public interface IResourceReference
+    {
+        string Id { get; set; }
+    }
+}
+namespace Microsoft.Azure.Management.Internal.Network.Common
+{
+    public interface INetworkInterfaceReference : IResourceReference
+    {
+        bool? Primary { get; set; }
     }
 }
 

@@ -12,21 +12,19 @@
 // limitations under the License.
 // ----------------------------------------------------------------------------------
 
-using System;
-using System.Globalization;
-using System.Management.Automation;
-using System.Text.RegularExpressions;
 using Microsoft.Azure.Commands.Compute.Common;
-using Microsoft.Azure.Commands.ResourceManager.Common;
+using System;
 
 namespace Microsoft.Azure.Commands.Compute
 {
-    public abstract class ComputeClientBaseCmdlet : AzureRMCmdlet
+    public abstract class ComputeClientBaseCmdlet : Microsoft.Azure.Commands.ResourceManager.Common.AzureRMCmdlet
     {
         protected const string VirtualMachineExtensionType = "Microsoft.Compute/virtualMachines/extensions";
 
-        protected override bool IsUsageMetricEnabled => true;
-        protected DateTime StartTime;
+        protected override bool IsUsageMetricEnabled
+        {
+            get { return true; }
+        }
 
         private ComputeClient computeClient;
 
@@ -36,11 +34,13 @@ namespace Microsoft.Azure.Commands.Compute
             {
                 if (computeClient == null)
                 {
-                    computeClient = new ComputeClient(DefaultProfile.DefaultContext);
+                    computeClient = new ComputeClient(DefaultProfile.DefaultContext)
+                    {
+                        VerboseLogger = WriteVerboseWithTimestamp,
+                        ErrorLogger = WriteErrorWithTimestamp
+                    };
                 }
 
-                this.computeClient.VerboseLogger = WriteVerboseWithTimestamp;
-                this.computeClient.ErrorLogger = WriteErrorWithTimestamp;
                 return computeClient;
             }
 
@@ -49,7 +49,6 @@ namespace Microsoft.Azure.Commands.Compute
 
         public override void ExecuteCmdlet()
         {
-            StartTime = DateTime.Now;
             base.ExecuteCmdlet();
         }
 
@@ -72,29 +71,6 @@ namespace Microsoft.Azure.Commands.Compute
 
                 throw new ComputeCloudException(ex);
             }
-        }
-
-        protected void ThrowInvalidArgumentError(string errorMessage, string arg)
-        {
-            ThrowTerminatingError
-                (new ErrorRecord(
-                    new ArgumentException(string.Format(CultureInfo.InvariantCulture,
-                        errorMessage, arg)),
-                    "InvalidArgument",
-                    ErrorCategory.InvalidArgument,
-                    null));
-        }
-
-        protected string GetDiskNameFromId(string Id)
-        {
-            return Id.Substring(Id.LastIndexOf('/') + 1);
-        }
-
-        public static string GetOperationIdFromUrlString(string Url)
-        {
-            Regex r = new Regex(@"(.*?)operations/(?<id>[a-f0-9]{8}[-]([a-f0-9]{4}[-]){3}[a-f0-9]{12})", RegexOptions.IgnoreCase);
-            Match m = r.Match(Url);
-            return m.Success ? m.Groups["id"].Value : null;
         }
     }
 }

@@ -1,6 +1,5 @@
----
+﻿---
 external help file: Microsoft.Azure.Commands.Compute.dll-Help.xml
-Module Name: AzureRM.Compute
 ms.assetid: 064196C3-ABF3-4F3A-A4AB-EB0D27098C70
 online version: https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/set-azurermvmextension
 schema: 2.0.0
@@ -16,7 +15,7 @@ Updates extension properties or adds an extension to a virtual machine.
 ### Settings (Default)
 ```
 Set-AzureRmVMExtension -Publisher <String> -ExtensionType <String> [-Settings <Hashtable>]
- [-ProtectedSettings <Hashtable>] [-AsJob] [-ResourceGroupName] <String> [-VMName] <String> [-Name <String>]
+ [-ProtectedSettings <Hashtable>] [-ResourceGroupName] <String> [-VMName] <String> [-Name <String>]
  [-TypeHandlerVersion <String>] [-Location <String>] [-DisableAutoUpgradeMinorVersion] [-ForceRerun <String>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -24,7 +23,7 @@ Set-AzureRmVMExtension -Publisher <String> -ExtensionType <String> [-Settings <H
 ### SettingString
 ```
 Set-AzureRmVMExtension -Publisher <String> -ExtensionType <String> [-SettingString <String>]
- [-ProtectedSettingString <String>] [-AsJob] [-ResourceGroupName] <String> [-VMName] <String> [-Name <String>]
+ [-ProtectedSettingString <String>] [-ResourceGroupName] <String> [-VMName] <String> [-Name <String>]
  [-TypeHandlerVersion <String>] [-Location <String>] [-DisableAutoUpgradeMinorVersion] [-ForceRerun <String>]
  [-DefaultProfile <IAzureContextContainer>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
@@ -44,6 +43,7 @@ PS C:\> Set-AzureRmVMExtension -ResourceGroupName "ResourceGroup11" -Location "W
 The first two commands use standard Windows PowerShell syntax to create hash tables, and then stores those hash tables in the $Settings and $ProtectedSettings variables.
 For more information, type `Get-Help about_Hash_Tables`.
 The second command includes two values previously created and stored in variables.
+
 The final command modifies an extension of the virtual machine named VirtualMachine22 in ResourceGroup11 according to the contents of $Settings and $ProtectedSettings.
 The command specifies other required information that includes the publisher and the extension type.
 
@@ -55,31 +55,17 @@ PS C:\> Set-AzureRmVMExtension -ResourceGroupName "ResourceGroup11" -Location "W
 ```
 
 The first two commands create strings that contain settings, and then stores them in the $SettingsString and $ProtectedSettingsString variables.
+
 The final command modifies an extension of the virtual machine named VirtualMachine22 in ResourceGroup11 according to the contents of $SettingsString and $ProtectedSettingsString.
 The command specifies other required information that includes the publisher and the extension type.
 
 ## PARAMETERS
 
-### -AsJob
-Run cmdlet in the background
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DefaultProfile
 The credentials, account, tenant, and subscription used for communication with azure.
 
 ```yaml
-Type: Microsoft.Azure.Commands.Common.Authentication.Abstractions.IAzureContextContainer
+Type: IAzureContextContainer
 Parameter Sets: (All)
 Aliases: AzureRmContext, AzureCredential
 
@@ -95,9 +81,9 @@ Indicates that this cmdlet prevents the Azure guest agent from automatically upd
 By default, this cmdlet enables the guest agent to update the extensions.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -110,7 +96,7 @@ Accept wildcard characters: False
 Specifies the extension type.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: Type
 
@@ -124,12 +110,13 @@ Accept wildcard characters: False
 ### -ForceRerun
 Indicates that this cmdlet forces a rerun of the same extension configuration on the virtual machine without uninstalling and reinstalling the extension.
 The value can be any string different from the current value.
+
 If forceUpdateTag is not changed, updates to public or protected settings are still applied by the handler.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -142,9 +129,9 @@ Accept wildcard characters: False
 Specifies the location of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -157,7 +144,7 @@ Accept wildcard characters: False
 Specifies the name of an extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ExtensionName
 
@@ -173,9 +160,9 @@ Specifies private configuration for the extension, as a hash table.
 This cmdlet encrypts the private configuration.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: Hashtable
 Parameter Sets: Settings
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -189,9 +176,9 @@ Specifies private configuration for the extension, as a string.
 This cmdlet encrypts the private configuration.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: SettingString
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -205,9 +192,9 @@ Specifies the name of the extension publisher.
 The publisher provides a name when the publisher registers an extension.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: Named
@@ -220,9 +207,9 @@ Accept wildcard characters: False
 Specifies the name of the resource group of the virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: 
 
 Required: True
 Position: 0
@@ -236,9 +223,9 @@ Specifies public configuration for the extension, as a hash table.
 This cmdlet does not encrypt public configuration.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: Hashtable
 Parameter Sets: Settings
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -252,9 +239,9 @@ Specifies public configuration for the extension, as a string.
 This cmdlet does not encrypt public configuration.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: SettingString
-Aliases:
+Aliases: 
 
 Required: False
 Position: Named
@@ -267,7 +254,7 @@ Accept wildcard characters: False
 Specifies the version of the extension to use for this virtual machine.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: HandlerVersion, Version
 
@@ -283,7 +270,7 @@ Specifies the name of a virtual machine.
 This cmdlet modifies extensions for the virtual machine that this parameter specifies.
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases: ResourceName
 
@@ -298,7 +285,7 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
 
@@ -311,10 +298,11 @@ Accept wildcard characters: False
 
 ### -WhatIf
 Shows what would happen if the cmdlet runs.
+
 The cmdlet is not run.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
 
@@ -329,15 +317,6 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-
-### System.String
-Parameters: ExtensionType (ByPropertyName), ForceRerun (ByPropertyName), Location (ByPropertyName), Name (ByPropertyName), ProtectedSettingString (ByPropertyName), Publisher (ByPropertyName), ResourceGroupName (ByPropertyName), SettingString (ByPropertyName), TypeHandlerVersion (ByPropertyName), VMName (ByPropertyName)
-
-### System.Collections.Hashtable
-Parameters: ProtectedSettings (ByPropertyName), Settings (ByPropertyName)
-
-### System.Management.Automation.SwitchParameter
-Parameters: DisableAutoUpgradeMinorVersion (ByPropertyName)
 
 ## OUTPUTS
 
