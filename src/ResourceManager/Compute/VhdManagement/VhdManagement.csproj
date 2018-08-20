@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1494D7FD-02CD-45AC-89E1-5AAB8368B00A}</ProjectGuid>
+    <ProjectGuid>{80496B7B-068A-4A1E-B0BB-4B1FFF3FA616}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.WindowsAzure.Commands.Tools.Vhd</RootNamespace>

@@ -27,7 +27,8 @@ using Microsoft.Azure.Management.Network;
 #if NETSTANDARD
 using Microsoft.Azure.Management.ResourceManager;
 #else
-using Microsoft.Azure.Management.Resources;
+//using Microsoft.Azure.Management.Resources;
+using Microsoft.Azure.Management.ResourceManager;
 using Microsoft.Azure.Test;
 using TestBase = Microsoft.Azure.Test.TestBase;
 #endif
@@ -124,8 +125,8 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 
             var providersToIgnore = new Dictionary<string, string>();
             //providersToIgnore.Add("Microsoft.Azure.Management.Resources.ResourceManagementClient", "2016-02-01");
-            providersToIgnore.Add("Microsoft.Azure.Management.ResourceManager.ResourceManagementClient", "2017-05-10");
-            providersToIgnore.Add("Microsoft.Azure.Management.Internal.Resources.ResourceManagementClient", "2016-09-01");
+            //providersToIgnore.Add("Microsoft.Azure.Management.ResourceManager.ResourceManagementClient", "2017-05-10");
+            //providersToIgnore.Add("Microsoft.Azure.Management.Internal.Resources.ResourceManagementClient", "2016-09-01");
 
             HttpMockServer.Matcher = new PermissiveRecordMatcherWithApiExclusion(true, d, providersToIgnore);
 
@@ -144,7 +145,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
                 var computeLocation = Path.Combine(baseDir, String.Format(formatStr, "Compute"));
                 var networkLocation = Path.Combine(baseDir, String.Format(formatStr, "Network"));
                 var storageLocation = Path.Combine(baseDir, String.Format(formatStr, "Storage"));
-                var resourceLocation = Path.Combine(baseDir, String.Format(formatStr, "Resource"));
+                var resourceLocation = Path.Combine(baseDir, String.Format(formatStr, "Resources"));
 
                 var callingClassName = callingClassType
                                         .Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)
@@ -199,11 +200,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 
         private ResourceManagementClient GetResourceManagementClient(MockContext context)
         {
-#if NETSTANDARD
             return context.GetServiceClient<ResourceManagementClient>(TestEnvironmentFactory.GetTestEnvironment());
-#else
-            return TestBase.GetServiceClient<ResourceManagementClient>(new CSMTestEnvironmentFactory());
-#endif
         }
 
         private static ResourceManagementClientInternal GetResourceManagementClientInternal(MockContext context)
