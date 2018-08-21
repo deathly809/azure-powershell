@@ -142,11 +142,13 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
 
                 var baseDir = EnvironmentSetupHelper.StackDirectory;
                 var formatStr = @"ResourceManager\AzureResourceManager\AzureRM.{0}\AzureRM.{0}.psd1";
+                var dataPlaneStr = @"Storage\Azure.Storage\Azure.Storage.psd1";
 
                 var computeLocation = Path.Combine(baseDir, String.Format(formatStr, "Compute"));
                 var networkLocation = Path.Combine(baseDir, String.Format(formatStr, "Network"));
                 var storageLocation = Path.Combine(baseDir, String.Format(formatStr, "Storage"));
                 var resourceLocation = Path.Combine(baseDir, String.Format(formatStr, "Resources"));
+                var dataPlaneLocation = Path.Combine(baseDir, dataPlaneStr);
 
                 var callingClassName = callingClassType
                                         .Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)
@@ -160,7 +162,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
                     networkLocation,
                     storageLocation,
                     resourceLocation,
-                    _helper.RMStorageDataPlaneModule);
+                    dataPlaneLocation);
 
                 try
                 {
