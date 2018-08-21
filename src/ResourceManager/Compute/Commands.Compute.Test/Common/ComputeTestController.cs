@@ -117,11 +117,12 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             string callingClassType,
             string mockName)
         {
-            Dictionary<string, string> d = new Dictionary<string, string>();
-            d.Add("Microsoft.Resources", null);
-            d.Add("Microsoft.Features", null);
-            d.Add("Microsoft.Authorization", null);
-            d.Add("Microsoft.Compute", null);
+            Dictionary<string, string> d = new Dictionary<string, string> {
+                { "Microsoft.Resources", null },
+                { "Microsoft.Features", null },
+                { "Microsoft.Authorization", null },
+                { "Microsoft.Compute", null }
+            };
 
             var providersToIgnore = new Dictionary<string, string>();
             //providersToIgnore.Add("Microsoft.Azure.Management.Resources.ResourceManagementClient", "2016-02-01");
@@ -159,8 +160,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
                     networkLocation,
                     storageLocation,
                     resourceLocation,
-                    _helper.RMStorageDataPlaneModule,
-                    _helper.RMStorageModule);
+                    _helper.RMStorageDataPlaneModule);
 
                 try
                 {

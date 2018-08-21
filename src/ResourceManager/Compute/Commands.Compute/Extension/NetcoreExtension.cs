@@ -19,39 +19,34 @@ namespace Microsoft.Azure.Commands.Compute
 {
     public static class StorageExtensions
     {
-        public static AccountType? Sku(this StorageAccount account)
+        public static SkuName? Sku(this StorageAccount account)
         {
-            return account.AccountType;
-        }
-
-        public static string SkuName(this StorageAccount account)
-        {
-            return account.AccountType.Value.ToString();
+            return account.Sku.Name;
         }
 
         public static bool IsPremiumLrs(this StorageAccount account)
         {
-            return account.AccountType.Value == AccountType.PremiumLRS;
+            return account.Sku.Name== SkuName.PremiumLRS;
         }
 
         public static void SetAsStandardGRS(this StorageAccountCreateParameters createParams)
         {
-            createParams.AccountType = AccountType.StandardGRS;
+            createParams.Sku.Name = SkuName.StandardGRS;
         }
 
-        public static string GetFirstAvailableKey(this StorageAccountKeys listKeyResult)
+        public static string GetFirstAvailableKey(this StorageAccountListKeysResult listKeyResult)
         {
-            return !string.IsNullOrEmpty(listKeyResult.Key1) ? listKeyResult.Key1 : listKeyResult.Key2;
+            return !string.IsNullOrEmpty(listKeyResult.Keys[0].Value) ? listKeyResult.Keys[0].Value : listKeyResult.Keys[1].Value;
         }
 
-        public static string GetKey1(this StorageAccountKeys listKeyResult)
+        public static string GetKey1(this StorageAccountListKeysResult listKeyResult)
         {
-            return listKeyResult.Key1;
+            return listKeyResult.Keys[0].Value;
         }
 
-        public static string GetKey2(this StorageAccountKeys listKeyResult)
+        public static string GetKey2(this StorageAccountListKeysResult listKeyResult)
         {
-            return listKeyResult.Key2;
+            return listKeyResult.Keys[1].Value;
         }
     }    
 }

@@ -247,7 +247,7 @@ namespace Microsoft.Azure.Commands.Compute
 
                         if (osDiskStorageAccount != null
                             && osDiskStorageAccount.Sku() != null
-                            && !osDiskStorageAccount.SkuName().ToLowerInvariant().Contains("premium"))
+                            && !osDiskStorageAccount.Sku.Name.ToString().ToLowerInvariant().Contains("premium"))
                         {
                             return osDiskStorageAccount.PrimaryEndpoints.Blob;
                         }
@@ -309,7 +309,7 @@ namespace Microsoft.Azure.Commands.Compute
             {
                 return storageAccountList.First(
                 e => e.Sku() != null
-                    && !e.SkuName().ToLowerInvariant().Contains("premium"));
+                    && !e.Sku.Name.ToString().ToLowerInvariant().Contains("premium"));
             }
             catch (InvalidOperationException e)
             {
