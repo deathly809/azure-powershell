@@ -29,8 +29,6 @@ using Microsoft.Azure.Management.ResourceManager;
 #else
 //using Microsoft.Azure.Management.Resources;
 using Microsoft.Azure.Management.ResourceManager;
-using Microsoft.Azure.Test;
-using TestBase = Microsoft.Azure.Test.TestBase;
 #endif
 using Microsoft.Azure.ServiceManagemenet.Common.Models;
 using Microsoft.Rest.ClientRuntime.Azure.TestFramework;
@@ -125,9 +123,6 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             };
 
             var providersToIgnore = new Dictionary<string, string>();
-            //providersToIgnore.Add("Microsoft.Azure.Management.Resources.ResourceManagementClient", "2016-02-01");
-            //providersToIgnore.Add("Microsoft.Azure.Management.ResourceManager.ResourceManagementClient", "2017-05-10");
-            //providersToIgnore.Add("Microsoft.Azure.Management.Internal.Resources.ResourceManagementClient", "2016-09-01");
 
             HttpMockServer.Matcher = new PermissiveRecordMatcherWithApiExclusion(true, d, providersToIgnore);
 
@@ -139,17 +134,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
                 SetupManagementClients(context);
 
                 _helper.SetupEnvironment(AzureModule.AzureResourceManager);
-
-                var baseDir = EnvironmentSetupHelper.StackDirectory;
-                var formatStr = @"ResourceManager\AzureResourceManager\AzureRM.{0}\AzureRM.{0}.psd1";
-                var dataPlaneStr = @"Storage\Azure.Storage\Azure.Storage.psd1";
-
-                var computeLocation = Path.Combine(baseDir, String.Format(formatStr, "Compute"));
-                var networkLocation = Path.Combine(baseDir, String.Format(formatStr, "Network"));
-                var storageLocation = Path.Combine(baseDir, String.Format(formatStr, "Storage"));
-                var resourceLocation = Path.Combine(baseDir, String.Format(formatStr, "Resources"));
-                var dataPlaneLocation = Path.Combine(baseDir, dataPlaneStr);
-
+                
                 var callingClassName = callingClassType
                                         .Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)
                                         .Last();
@@ -157,12 +142,12 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
                     "ScenarioTests\\Common.ps1",
                     "ScenarioTests\\ComputeTestCommon.ps1",
                     "ScenarioTests\\" + callingClassName + ".ps1",
-                    _helper.RMProfileModule,
-                    computeLocation,
-                    networkLocation,
-                    storageLocation,
-                    resourceLocation,
-                    dataPlaneLocation);
+                    _helper.StackRMProfileModule,
+                    _helper.StackRMResourceModule,
+                    _helper.StackRMStorageDataPlaneModule,
+                    _helper.StackRMStorageModule,
+                    _helper.GetStackRMModulePath("AzureRM.Compute"),
+                    _helper.GetStackRMModulePath("AzureRM.Network"));
 
                 try
                 {
