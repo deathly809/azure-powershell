@@ -8,12 +8,15 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
 {
     using System;
     using Microsoft.WindowsAzure.Commands.Utilities.Common;
-    using Microsoft.WindowsAzure.Management.Storage;
+    using Microsoft.Azure.Management.Storage;
+    using Microsoft.Azure.Management.Storage.Models;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
     using Microsoft.WindowsAzure.Storage.Table;
-    using  Arm = Microsoft.Azure.Management.Storage;
+    using Arm = Microsoft.Azure.Management.Storage;
+    using System.Linq;
+    using System.Text.RegularExpressions;
 
     public class StorageUtilities
     {
@@ -79,39 +82,17 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
         {
             if (!TestMockSupport.RunningMocked)
             {
-                var storageServiceResponse = storageClient.StorageAccounts.Get(accountName);
+                var response = storageClient.StorageAccounts.List()
+                    .Where<StorageAccount>(sa=> sa.Name.EndsWith("/" + accountName))
+                    .FirstOrDefault<StorageAccount>();
 
-                Uri fileEndpoint = null;
-                Uri blobEndpoint = null;
-                Uri queueEndpoint = null;
-                Uri tableEndpoint = null;
-
-                if (storageServiceResponse.StorageAccount.Properties.Endpoints.Count >= 4)
-                {
-                    fileEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[3].ToString());
-                }
-
-                if (storageServiceResponse.StorageAccount.Properties.Endpoints.Count >= 3)
-                {
-                    tableEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[2].ToString());
-                    queueEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[1].ToString());
-                }
-
-                if (storageServiceResponse.StorageAccount.Properties.Endpoints.Count >= 1)
-                {
-                    blobEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[0].ToString());
-                }
+                Uri fileEndpoint = new Uri(response.PrimaryEndpoints.File);
+                Uri blobEndpoint = new Uri(response.PrimaryEndpoints.Blob);
+                Uri queueEndpoint = new Uri(response.PrimaryEndpoints.Queue);
+                Uri tableEndpoint = new Uri(response.PrimaryEndpoints.Table);
 
                 return new CloudStorageAccount(
-                    GenerateStorageCredentials(storageClient, storageServiceResponse.StorageAccount.Name),
+                    GenerateStorageCredentials(storageClient, response.Name),
                     blobEndpoint,
                     queueEndpoint,
                     tableEndpoint,
@@ -163,9 +144,19 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
         {
             if (!TestMockSupport.RunningMocked)
             {
-                var storageKeysResponse = storageClient.StorageAccounts.GetKeys(accountName);
+                string regex = @"*/resourcegroups/([^/]+)/*";
+                var storageAccount = storageClient.StorageAccounts.List()
+                    .Where<StorageAccount>(sa => sa.Name.EndsWith("/" + accountName))
+                    .FirstOrDefault();
+                var match = Regex.Match(storageAccount.Id, regex, RegexOptions.IgnoreCase);
+                if(!match.Success)
+                {
+                    throw new ArgumentException(String.Format("Could not extract resource group from {0}",storageAccount.Id));
+                }
+                var resourceGroupName = match.Value;
+                var keys = storageClient.StorageAccounts.ListKeys(resourceGroupName,accountName);
                 return new StorageCredentials(accountName,
-                    storageKeysResponse.PrimaryKey);
+                    keys.Keys[0].Value);
             }
             else
             {

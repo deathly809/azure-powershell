@@ -23,7 +23,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>..\..\..\Stack\Debug\ResourceManager\AzureResourceManager\StorageSDK\</OutputPath>
+        <OutputPath>..\..\..\..\Stack\Debug\ResourceManager\AzureResourceManager\StorageSDK\</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -34,7 +34,7 @@
 
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-        <OutputPath>..\..\..\Stack\Release\ResourceManager\AzureResourceManager\StorageSDK</OutputPath>
+        <OutputPath>..\..\..\..\Stack\Release\ResourceManager\AzureResourceManager\StorageSDK</OutputPath>
         <DefineConstants>TRACE;SIGN</DefineConstants>
         <Optimize>true</Optimize>
         <DebugType>pdbonly</DebugType>
