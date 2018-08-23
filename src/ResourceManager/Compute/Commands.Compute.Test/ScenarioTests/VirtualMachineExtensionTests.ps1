@@ -26,7 +26,7 @@ function Test-VirtualMachineExtension
         # Common
         $loc = Get-ComputeVMLocation;
         New-AzureRmResourceGroup -Name $rgname -Location $loc -Force;
-        
+
         # VM Profile & Hardware
         $vmsize = 'Standard_A2';
         $vmname = 'vm' + $rgname;
@@ -54,7 +54,7 @@ function Test-VirtualMachineExtension
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -69,7 +69,7 @@ function Test-VirtualMachineExtension
         $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk2' -Caching 'ReadOnly' -DiskSizeInGB 11 -Lun 2 -VhdUri $dataDiskVhdUri2 -CreateOption Empty;
         $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3' -Caching 'ReadOnly' -DiskSizeInGB 12 -Lun 3 -VhdUri $dataDiskVhdUri3 -CreateOption Empty;
         $p = Remove-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3';
-        
+
         Assert-AreEqual $p.StorageProfile.OSDisk.Caching $osDiskCaching;
         Assert-AreEqual $p.StorageProfile.OSDisk.Name $osDiskName;
         Assert-AreEqual $p.StorageProfile.OSDisk.Vhd.Uri $osDiskVhdUri;
@@ -166,7 +166,7 @@ function Test-VirtualMachineExtensionUsingHashTable
         # Common
         $loc = Get-ComputeVMLocation;
         New-AzureRmResourceGroup -Name $rgname -Location $loc -Force;
-        
+
         # VM Profile & Hardware
         $vmsize = 'Standard_A2';
         $vmname = 'vm' + $rgname;
@@ -194,7 +194,7 @@ function Test-VirtualMachineExtensionUsingHashTable
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -209,7 +209,7 @@ function Test-VirtualMachineExtensionUsingHashTable
         $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk2' -Caching 'ReadOnly' -DiskSizeInGB 11 -Lun 2 -VhdUri $dataDiskVhdUri2 -CreateOption Empty;
         $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3' -Caching 'ReadOnly' -DiskSizeInGB 12 -Lun 3 -VhdUri $dataDiskVhdUri3 -CreateOption Empty;
         $p = Remove-AzureRmVMDataDisk -VM $p -Name 'testDataDisk3';
-        
+
         Assert-AreEqual $p.StorageProfile.OSDisk.Caching $osDiskCaching;
         Assert-AreEqual $p.StorageProfile.OSDisk.Name $osDiskName;
         Assert-AreEqual $p.StorageProfile.OSDisk.Vhd.Uri $osDiskVhdUri;
@@ -360,7 +360,7 @@ function Test-VirtualMachineCustomScriptExtension
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -517,7 +517,7 @@ function Test-VirtualMachineCustomScriptExtensionWrongStorage
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -628,7 +628,7 @@ function Test-VirtualMachineCustomScriptExtensionSecureExecution
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -754,7 +754,7 @@ function Test-VirtualMachineCustomScriptExtensionFileUri
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -915,7 +915,7 @@ function Test-VirtualMachineAccessExtension
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -1112,7 +1112,7 @@ function Test-AzureDiskEncryptionExtension
         #set enabledForDiskEncryption
         Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ResourceGroupName $rgname -EnabledForDiskEncryption;
         #set permissions to AAD app to write secrets and keys
-        Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ServicePrincipalName $aadClientID -PermissionsToKeys all -PermissionsToSecrets all 
+        Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ServicePrincipalName $aadClientID -PermissionsToKeys all -PermissionsToSecrets all
         #create a key in KeyVault to use as Kek
         $kek = Add-AzureKeyVaultKey -VaultName $vaultName -Name $kekName -Destination "Software"
 
@@ -1131,7 +1131,7 @@ function Test-AzureDiskEncryptionExtension
         $diskEncryptionKeyVaultUrl2 = $keyVault2.VaultUri;
         $keyVaultResourceId2 = $keyVault2.ResourceId;
 
-        # VM Profile & Hardware   
+        # VM Profile & Hardware
         $p = New-AzureRmVMConfig -VMName $vmname -VMSize $vmsize;
 
         # NRP
@@ -1150,7 +1150,7 @@ function Test-AzureDiskEncryptionExtension
 
         # Storage Account (SA)
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $storageAccountName -Location $loc -Type $stotype;
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $storageAccountName).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $storageAccountName)[0].Value;
 
         $osDiskVhdUri = "https://$storageAccountName.blob.core.windows.net/$vhdContainerName/$osDiskName.vhd";
         $dataDiskVhdUri = "https://$storageAccountName.blob.core.windows.net/$vhdContainerName/$dataDiskName.vhd";
@@ -1233,7 +1233,7 @@ function Test-AzureDiskEncryptionExtension
         Assert-NotNull $OsVolumeEncryptionSettings.DiskEncryptionKey.SecretUrl;
         Assert-NotNull $OsVolumeEncryptionSettings.DiskEncryptionKey.SourceVault;
 
-        #Remove the VM 
+        #Remove the VM
         Remove-AzureRmVm -ResourceGroupName $rgname -Name $vmName -Force;
 
         #Create a brand new VM using the same OS vhd encrypted above
@@ -1294,7 +1294,7 @@ function Test-VirtualMachineBginfoExtension
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -1419,7 +1419,7 @@ function Test-VirtualMachineExtensionWithSwitch
         # Common
         $loc = Get-ComputeVMLocation;
         New-AzureRmResourceGroup -Name $rgname -Location $loc -Force;
-        
+
         # VM Profile & Hardware
         $vmsize = 'Standard_A2';
         $vmname = 'vm' + $rgname;
@@ -1447,7 +1447,7 @@ function Test-VirtualMachineExtensionWithSwitch
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -1459,7 +1459,7 @@ function Test-VirtualMachineExtensionWithSwitch
 
         $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk1' -Caching 'ReadOnly' -DiskSizeInGB 10 -Lun 1 -VhdUri $dataDiskVhdUri1 -CreateOption Empty;
         $p = Add-AzureRmVMDataDisk -VM $p -Name 'testDataDisk2' -Caching 'ReadOnly' -DiskSizeInGB 11 -Lun 2 -VhdUri $dataDiskVhdUri2 -CreateOption Empty;
-        
+
         Assert-AreEqual $p.StorageProfile.OSDisk.Caching $osDiskCaching;
         Assert-AreEqual $p.StorageProfile.OSDisk.Name $osDiskName;
         Assert-AreEqual $p.StorageProfile.OSDisk.Vhd.Uri $osDiskVhdUri;
@@ -1588,7 +1588,7 @@ function Test-VirtualMachineADDomainExtension
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';
@@ -1747,7 +1747,7 @@ function Test-VirtualMachineADDomainExtensionDomainJoin
         $stotype = 'Standard_GRS';
         New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
         Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+        $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
         $osDiskName = 'osDisk';
         $osDiskCaching = 'ReadWrite';

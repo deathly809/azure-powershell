@@ -82,7 +82,7 @@ function Test-SetAzureRmVMSqlServerAKVExtension
 
         $securepfxpwd = ConvertTo-SecureString –String "Amu6y/RzJcc7JBzdAdRVv6mk=" –AsPlainText –Force;
         $aps_akv = New-AzureRmVMSqlServerKeyVaultCredentialConfig -ResourceGroupName $rgname -Enable -CredentialName "CredentialTesting" -AzureKeyVaultUrl "https://Testkeyvault.vault.azure.net/" -ServicePrincipalName "0326921f-bf005595337c" -ServicePrincipalSecret $securepfxpwd;
-        Set-AzureRmVMSqlServerExtension -KeyVaultCredentialSettings $aps_akv -ResourceGroupName $rgname -VMName $vmname -Version "1.2" -Verbose; 
+        Set-AzureRmVMSqlServerExtension -KeyVaultCredentialSettings $aps_akv -ResourceGroupName $rgname -VMName $vmname -Version "1.2" -Verbose;
 
         # 2) Calls Get-AzureRmVMSqlServerExtension cmdlet to check the status of the extension installation.
         $extension = Get-AzureRmVMSqlServerExtension -ResourceGroupName $rgname -VmName $vmName -Name $extensionName;
@@ -95,11 +95,11 @@ function Test-SetAzureRmVMSqlServerAKVExtension
         # 4) Update extension values
 
         $aps_akv = New-AzureRmVMSqlServerKeyVaultCredentialConfig -ResourceGroupName $rgname -Enable -CredentialName "CredentialTest" -AzureKeyVaultUrl "https://Testkeyvault.vault.azure.net/" -ServicePrincipalName "0326921f-82af-4ab3-9d46-bf005595337c" -ServicePrincipalSecret $securepfxpwd;
-        Set-AzureRmVMSqlServerExtension -KeyVaultCredentialSettings $aps_akv -ResourceGroupName $rgname -VMName $vmname -Version "1.2" -Verbose; 
+        Set-AzureRmVMSqlServerExtension -KeyVaultCredentialSettings $aps_akv -ResourceGroupName $rgname -VMName $vmname -Version "1.2" -Verbose;
 
         # 5) Verify changes
         $extension = Get-AzureRmVMSqlServerExtension -ResourceGroupName $rgname -VmName $vmName -Name $extensionName;
-		
+
         Assert-AreEqual $extension.KeyVaultCredentialSettings.Credentials.Count 2;
 		Assert-AreEqual $extension.KeyVaultCredentialSettings.Credentials[1].CredentialName "CredentialTest"
 
@@ -190,7 +190,7 @@ function Test-SetAzureRmVMSqlServerExtension
         # 1) Installs the SqlIaaS extension by calling Set-AzureRmVMSqlServerExtension cmdlet on a VM, with auto patching and auto backup settings.
         $aps = New-AzureRmVMSqlServerAutoPatchingConfig -Enable -DayOfWeek "Thursday" -MaintenanceWindowStartingHour 20 -MaintenanceWindowDuration 120 -PatchCategory "Important"
 		$storageBlobUrl = "https://$stoname.blob.core.windows.net";
-		$storageKey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+		$storageKey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 		$storageKeyAsSecureString = ConvertTo-SecureString -String $storageKey -AsPlainText -Force;
 		$abs = New-AzureRmVMSqlServerAutoBackupConfig -Enable -RetentionPeriodInDays 5 -ResourceGroupName $rgname -StorageUri $storageBlobUrl -StorageKey $storageKeyAsSecureString
         Set-AzureRmVMSqlServerExtension -AutoPatchingSettings $aps -AutoBackupSettings $abs -ResourceGroupName $rgname -VMName $vmname -Version "1.2" -Verbose -Name $extensionName;
@@ -234,7 +234,7 @@ function Test-SetAzureRmVMSqlServerExtension
     }
 }
 
-# Test setting up VM with Sql Server 2016 image. (Includes testing for AutoBackup V2) 
+# Test setting up VM with Sql Server 2016 image. (Includes testing for AutoBackup V2)
 function Test-SetAzureRmVMSqlServerExtensionWith2016Image
 {
     Set-StrictMode -Version latest; $ErrorActionPreference = 'Stop'
@@ -305,7 +305,7 @@ function Test-SetAzureRmVMSqlServerExtensionWith2016Image
         # 1) Installs the SqlIaaS extension by calling Set-AzureRmVMSqlServerExtension cmdlet on a VM, with auto patching and auto backup settings.
         $aps = New-AzureRmVMSqlServerAutoPatchingConfig -Enable -DayOfWeek "Thursday" -MaintenanceWindowStartingHour 20 -MaintenanceWindowDuration 120 -PatchCategory "Important"
 		$storageBlobUrl = "https://$stoname.blob.core.windows.net";
-		$storageKey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+		$storageKey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 		$storageKeyAsSecureString = ConvertTo-SecureString -String $storageKey -AsPlainText -Force;
 		$abs = New-AzureRmVMSqlServerAutoBackupConfig -Enable -RetentionPeriodInDays 5 -ResourceGroupName $rgname -StorageUri $storageBlobUrl -StorageKey $storageKeyAsSecureString `
 			-BackupScheduleType Manual -BackupSystemDbs -FullBackupStartHour 10 -FullBackupWindowInHours 5 -FullBackupFrequency Daily -LogBackupFrequencyInMinutes 30

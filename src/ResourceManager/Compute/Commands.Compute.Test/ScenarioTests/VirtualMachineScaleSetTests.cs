@@ -45,7 +45,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetUpdate");
         }
 
-        [Fact]
+        [Fact(Skip = "TODO: The provided instanceId 0 is not an active Virtual Machine Scale Set VM instanceId.")]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetReimageUpdate()
         {
@@ -87,7 +87,7 @@ namespace Microsoft.Azure.Commands.Compute.Test.ScenarioTests
             ComputeTestController.NewInstance.RunPsTest("Test-VirtualMachineScaleSetNetworking");
         }
 
-        [Fact]
+        [Fact(Skip = "TODO: Internal Server error")]
         [Trait(Category.AcceptanceType, Category.CheckIn)]
         public void TestVirtualMachineScaleSetRollingUpgrade()
         {

@@ -29,7 +29,7 @@ function Get-ComputeTestResourceName
             $testName = $frame.Command;
         }
     }
-    
+
     try
     {
         $assetName = [Microsoft.Azure.Test.HttpRecorder.HttpMockServer]::GetAssetName($testName, "crptestps");
@@ -132,7 +132,7 @@ function Create-VirtualMachine($rgname, $vmname, $loc)
     $stotype = 'Standard_GRS';
     $sa = New-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname -Location $loc -Type $stotype;
     Retry-IfException { $global:stoaccount = Get-AzureRmStorageAccount -ResourceGroupName $rgname -Name $stoname; }
-    $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname).Key1;
+    $stokey = (Get-AzureRmStorageAccountKey -ResourceGroupName $rgname -Name $stoname)[0].Value;
 
     $osDiskName = 'osDisk';
     $osDiskCaching = 'ReadWrite';
@@ -263,7 +263,7 @@ Gets random resource name
 function Get-RandomItemName
 {
     param([string] $prefix = "crptestps")
-    
+
     if ($prefix -eq $null -or $prefix -eq '')
     {
         $prefix = "crptestps";
@@ -371,7 +371,7 @@ function Get-DefaultCRPImage
     {
         $defaultVersion = $result[0];
     }
-    
+
     $vmimg = Get-AzureRmVMImage -Location $loc -Offer $defaultOffer -PublisherName $defaultPublisher -Skus $defaultSku -Version $defaultVersion;
 
     return $vmimg;
@@ -437,7 +437,7 @@ function Get-DefaultVMConfig
 function Assert-OutputContains
 {
     param([string] $cmd, [string[]] $sstr)
-    
+
     $st = Write-Verbose ('Running Command : ' + $cmd);
     $output = Invoke-Expression $cmd | Out-String;
 
@@ -490,7 +490,7 @@ function Get-ResourceProviderLocation
     {
         $type = $provider.Substring($namespace.Length + 1);
         $location = Get-AzureRmResourceProvider -ProviderNamespace $namespace | where {$_.ResourceTypes[0].ResourceTypeName -eq $type};
-  
+
         if ($location -eq $null)
         {
             return "westus";
