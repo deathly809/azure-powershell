@@ -60,7 +60,17 @@ Licensed under the MIT License. See License.txt in the project root for license 
         @{ModuleName = 'AzureRM.Resources'; ModuleVersion = '6.0.2'; })
 
     # Assemblies that must be loaded prior to importing this module
-    # RequiredAssemblies = @()
+    RequiredAssemblies = @(
+        '.\ref\fullclr\Microsoft.AzureStack.Management.Compute.Admin.dll',
+        '.\ref\fullclr\Microsoft.Rest.ClientRuntime.Azure.dll',
+        '.\ref\fullclr\Microsoft.Rest.ClientRuntime.dll',
+        '.\ref\fullclr\NewtonSoft.json',
+        '.\ref\fullclr\System.Net.Http.Extensions.dll',
+        '.\ref\fullclr\System.Net.Http.Primatives.dll',
+        '.\ref\fullclr\Microsoft.Threading.Tasks.dll',
+        '.\ref\fullclr\Microsoft.Threading.Extensions.dll',
+        '.\ref\fullclr\Microsoft.Threading.Extensions.Desktop.dll'
+    )
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
     ScriptsToProcess  = @(
