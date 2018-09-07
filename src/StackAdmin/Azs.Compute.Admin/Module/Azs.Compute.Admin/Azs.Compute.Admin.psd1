@@ -64,12 +64,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         '.\ref\fullclr\Microsoft.AzureStack.Management.Compute.Admin.dll',
         '.\ref\fullclr\Microsoft.Rest.ClientRuntime.Azure.dll',
         '.\ref\fullclr\Microsoft.Rest.ClientRuntime.dll',
-        '.\ref\fullclr\NewtonSoft.json',
+        '.\ref\fullclr\NewtonSoft.Json.dll',
         '.\ref\fullclr\System.Net.Http.Extensions.dll',
-        '.\ref\fullclr\System.Net.Http.Primatives.dll',
+        '.\ref\fullclr\System.Net.Http.Primitives.dll',
         '.\ref\fullclr\Microsoft.Threading.Tasks.dll',
-        '.\ref\fullclr\Microsoft.Threading.Extensions.dll',
-        '.\ref\fullclr\Microsoft.Threading.Extensions.Desktop.dll'
+        '.\ref\fullclr\Microsoft.Threading.Tasks.Extensions.dll',
+        '.\ref\fullclr\Microsoft.Threading.Tasks.Extensions.Desktop.dll'
     )
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
