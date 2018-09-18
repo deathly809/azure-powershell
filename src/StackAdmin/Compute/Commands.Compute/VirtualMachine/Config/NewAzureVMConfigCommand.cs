@@ -100,11 +100,7 @@ namespace Microsoft.Azure.Commands.Compute
                 Tags = this.Tags != null ? this.Tags.ToDictionary() : null,
                 Zones = this.Zone,
             };
-
-            if (this.IdentityType != null)
-            {
-                vm.Identity = new VirtualMachineIdentity(null, null, ResourceIdentityType.SystemAssigned);
-            }
+            
             if (!string.IsNullOrEmpty(this.VMSize))
             {
                 vm.HardwareProfile = new HardwareProfile();

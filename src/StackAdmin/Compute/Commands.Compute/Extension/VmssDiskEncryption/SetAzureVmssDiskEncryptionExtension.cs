@@ -19,7 +19,7 @@ using Microsoft.Azure.Commands.Compute.Models;
 using Microsoft.Azure.Management.Compute;
 using Microsoft.Azure.Management.Compute.Models;
 using Microsoft.Azure.Management.Internal.Resources;
-using Microsoft.Azure.Management.KeyVault;
+using Microsoft.Azure.Commands.Common.KeyVault.Version2016_10_1;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -303,7 +303,7 @@ namespace Microsoft.Azure.Commands.Compute.Extension.AzureDiskEncryption
 
                     var thisVmss = this.VirtualMachineScaleSetClient.Get(this.ResourceGroupName, this.VMScaleSetName);
 
-                    Azure.Management.KeyVault.Models.Vault returnedKeyVault = null;
+                    Microsoft.Azure.Commands.Common.KeyVault.Version2016_10_1.Models.Vault returnedKeyVault = null;
                     try
                     {
                         returnedKeyVault = keyVaultManagementFactory.Vaults.Get(rg, kv);

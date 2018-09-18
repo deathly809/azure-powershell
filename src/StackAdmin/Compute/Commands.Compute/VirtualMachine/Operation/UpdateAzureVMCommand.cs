@@ -73,9 +73,9 @@ namespace Microsoft.Azure.Commands.Compute
                         Zones = (this.VM.Zones != null && this.VM.Zones.Count > 0) ? this.VM.Zones : null
                     };
 
-                    if (this.IdentityType != null)
+                    if (this.AssignIdentity != null)
                     {
-                        parameters.Identity = new VirtualMachineIdentity(null, null, this.IdentityType);
+                        parameters.Identity = new VirtualMachineIdentity(null, null, ResourceIdentityType.SystemAssigned);
                     }
 
                     var op = this.VirtualMachineClient.CreateOrUpdateWithHttpMessagesAsync(

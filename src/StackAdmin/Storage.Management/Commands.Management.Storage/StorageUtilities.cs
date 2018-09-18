@@ -1,19 +1,22 @@
 ﻿
 using System.CodeDom;
-using System.Diagnostics.Eventing.Reader;
+//using System.Diagnostics.Eventing.Reader;
 using System.Text;
 using Microsoft.Azure.Management.Storage;
+using Microsoft.Azure.Management.Storage.Models;
+using System.Linq;
 
 namespace Microsoft.WindowsAzure.Commands.Common.Storage
 {
     using System;
     using Microsoft.WindowsAzure.Commands.Utilities.Common;
-    using Microsoft.WindowsAzure.Management.Storage;
+    using Microsoft.WindowsAzure.Commands.Common.Storage;
     using Microsoft.WindowsAzure.Storage;
     using Microsoft.WindowsAzure.Storage.Auth;
     using Microsoft.WindowsAzure.Storage.Blob;
     using Microsoft.WindowsAzure.Storage.Table;
     using  Arm = Microsoft.Azure.Management.Storage;
+    using System.Text.RegularExpressions;
 
     public class StorageUtilities
     {
@@ -54,7 +57,7 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
                     GenerateStorageCredentials(storageClient, resourceGroupName, accountName),
                     blobEndpoint,
                     queueEndpoint,
-                    tableEndpoint, 
+                    tableEndpoint,
                     fileEndpoint);
             }
             else
@@ -64,7 +67,7 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
                         Convert.ToBase64String(Encoding.UTF8.GetBytes(Guid.NewGuid().ToString()))),
                     new Uri(string.Format("https://{0}.blob.core.windows.net", accountName)),
                     new Uri(string.Format("https://{0}.queue.core.windows.net", accountName)),
-                    new Uri(string.Format("https://{0}.table.core.windows.net", accountName)),                    
+                    new Uri(string.Format("https://{0}.table.core.windows.net", accountName)),
                     new Uri(string.Format("https://{0}.file.core.windows.net", accountName)));
             }
         }
@@ -79,39 +82,36 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
         {
             if (!TestMockSupport.RunningMocked)
             {
-                var storageServiceResponse = storageClient.StorageAccounts.Get(accountName);
+                var storageAccounts= storageClient.StorageAccounts.List();
+                var storageServiceResponse = storageAccounts.Where((sa) => sa.Name.Equals(accountName)).First();
 
                 Uri fileEndpoint = null;
                 Uri blobEndpoint = null;
                 Uri queueEndpoint = null;
                 Uri tableEndpoint = null;
-
-                if (storageServiceResponse.StorageAccount.Properties.Endpoints.Count >= 4)
-                {
-                    fileEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[3].ToString());
+                
+                var file = storageServiceResponse.PrimaryEndpoints.File;
+                if (String.IsNullOrEmpty(file)) {
+                    fileEndpoint= StorageUtilities.CreateHttpsEndpoint(file);
                 }
 
-                if (storageServiceResponse.StorageAccount.Properties.Endpoints.Count >= 3)
-                {
-                    tableEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[2].ToString());
-                    queueEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[1].ToString());
+                var queue = storageServiceResponse.PrimaryEndpoints.Queue;
+                if (String.IsNullOrEmpty(queue)) {
+                    queueEndpoint = StorageUtilities.CreateHttpsEndpoint(queue);
                 }
 
-                if (storageServiceResponse.StorageAccount.Properties.Endpoints.Count >= 1)
-                {
-                    blobEndpoint =
-                        StorageUtilities.CreateHttpsEndpoint(
-                            storageServiceResponse.StorageAccount.Properties.Endpoints[0].ToString());
+                var table = storageServiceResponse.PrimaryEndpoints.Table;
+                if (String.IsNullOrEmpty(table)) {
+                    tableEndpoint= StorageUtilities.CreateHttpsEndpoint(table);
                 }
 
+                var blob = storageServiceResponse.PrimaryEndpoints.Blob;
+                if (String.IsNullOrEmpty(blob)) {
+                    blobEndpoint = StorageUtilities.CreateHttpsEndpoint(blob);
+                }
+                
                 return new CloudStorageAccount(
-                    GenerateStorageCredentials(storageClient, storageServiceResponse.StorageAccount.Name),
+                    GenerateStorageCredentials(storageClient, storageServiceResponse.Name),
                     blobEndpoint,
                     queueEndpoint,
                     tableEndpoint,
@@ -163,9 +163,13 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
         {
             if (!TestMockSupport.RunningMocked)
             {
-                var storageKeysResponse = storageClient.StorageAccounts.GetKeys(accountName);
+                var storageAccounts = storageClient.StorageAccounts.List();
+                var storageServiceResponse = storageAccounts.Where((sa) => sa.Name.Equals(accountName)).First();
+                var resourceGroupName = GetResourceGroupFromId(storageServiceResponse.Id);
+
+                var storageKeysResponse = storageClient.StorageAccounts.ListKeys(resourceGroupName, accountName);
                 return new StorageCredentials(accountName,
-                    storageKeysResponse.PrimaryKey);
+                    storageKeysResponse.Keys[0].Value);
             }
             else
             {
@@ -174,36 +178,13 @@ namespace Microsoft.WindowsAzure.Commands.Common.Storage
             }
         }
 
-        public static string GenerateTableStorageSasUrl(string connectionString, string tableName, DateTime expiryTime, SharedAccessTablePermissions permissions)
-        {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-            CloudTable tableReference = tableClient.GetTableReference(tableName);
-            tableReference.CreateIfNotExists();
-            var sasToken = tableReference.GetSharedAccessSignature(
-                new SharedAccessTablePolicy()
-                {
-                    SharedAccessExpiryTime = expiryTime,
-                    Permissions = permissions
-                });
-
-            return tableReference.Uri + sasToken;
-        }
-
-        public static string GenerateBlobStorageSasUrl(string connectionString, string blobContainerName, DateTime expiryTime, SharedAccessBlobPermissions permissions)
-        {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer blobContainer = blobClient.GetContainerReference(blobContainerName);
-            blobContainer.CreateIfNotExists();
-            var sasToken = blobContainer.GetSharedAccessSignature(
-                new SharedAccessBlobPolicy()
-                {
-                    SharedAccessExpiryTime = expiryTime,
-                    Permissions = permissions
-                });
-
-            return blobContainer.Uri + sasToken;
+        internal static string GetResourceGroupFromId(string id) {
+            var matcher = new Regex("/subscriptions/([^/]+)/resourceGroups/([^/]+)/providers/(\\w+)");
+            var result = matcher.Match(id);
+            if (!result.Success || result.Groups == null || result.Groups.Count < 3) {
+                throw new InvalidOperationException(string.Format("Cannot find resource group name and storage account name from resource identity {0}", id));
+            }
+            return result.Groups[2].Value;
         }
     }
 }

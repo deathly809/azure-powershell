@@ -1,0 +1,220 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="$(ProjectDir)..\..\..\..\tools\Common.Netcore.Dependencies.targets" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Microsoft.Azure.Commands.Compute</AssemblyName>
+    <RootNamespace>Microsoft.Azure.Commands.Compute</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>$(ProjectDir)..\..\..\Stack\$(Configuration)\ResourceManager\AzureResourceManager\Az.Compute\</OutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DelaySign>false</DelaySign>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>true</DelaySign>
+    <AssemblyOriginatorKeyFile>MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
+    <DefineConstants>TRACE;RELEASE;NETSTANDARD;SIGN</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.0.2.0" />
+    <PackageReference Include="Microsoft.Azure.Management.Compute" Version="16.3.0" />
+    <PackageReference Include="Microsoft.Azure.Management.KeyVault" Version="2.3.0-preview" />
+    <PackageReference Include="WindowsAzure.Storage" Version="8.6.0" />
+    <PackageReference Include="Microsoft.Data.Edm" Version="5.8.2" />
+    <PackageReference Include="Microsoft.Data.OData" Version="5.8.2" />
+    <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.2" />
+    <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.2" />
+    <PackageReference Include="System.Spatial" Version="5.8.2" />
+    <PackageReference Include="System.Security.Permissions" Version="4.5.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Az.Compute.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>true</DesignTime>
+      <AutoGen>true</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Generated\Microsoft.Azure.Commands.Compute.Automation.format.generated.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Microsoft.Azure.Commands.Compute.format.generated.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Microsoft.Azure.Commands.Compute.format.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Microsoft.Azure.Commands.Compute.Types.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="help\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Sync\Download\" />
+    <Folder Include="Sync\IO\" />
+    <Folder Include="Sync\Threading\" />
+    <Folder Include="Sync\Upload\" />
+    <Folder Include="VhdManagement\Async\" />
+    <Folder Include="VhdManagement\Model\Persistance\" />
+    <Folder Include="StorageSDK\" />
+    <Folder Include="StorageSDK\Models" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\..\packages\Microsoft.Azure.PowerShell.Storage.1.1.2-preview\tools\Adapters\ARM.Storage.6\ARMStorageService.cs" />
+    <Compile Include="..\..\..\packages\Microsoft.Azure.PowerShell.Storage.1.1.2-preview\tools\Adapters\ARM.Storage.6\ARMStorageProvider.cs" />
+    <Compile Include="..\..\..\packages\Microsoft.Azure.PowerShell.Storage.1.1.2-preview\tools\Adapters\WindowsAzure.Storage.6\AzureStorageContext.cs" />
+    <Compile Include="..\..\..\packages\Microsoft.Azure.PowerShell.Storage.1.1.2-preview\tools\Adapters\WindowsAzure.Storage.6\LazyAzureStorageContext.cs" />
+    <Compile Include="..\..\..\packages\Microsoft.Azure.PowerShell.Storage.1.1.2-preview\tools\Adapters\WindowsAzure.Storage.6\AzureContextAdapterExtensions.cs" />
+    <Compile Include="..\..\..\ServiceManagement\Compute\Commands.ServiceManagement\IaaS\Extensions\DSC\DscExtensionCmdletConstants.cs" Link="Extension\DSC\DscExtensionCmdletConstants.cs" />
+    <Compile Include="..\..\..\ServiceManagement\Compute\Commands.ServiceManagement\IaaS\Extensions\DSC\DscExtensionPrivateSettings.cs" Link="Extension\DSC\DscExtensionPrivateSettings.cs" />
+    <Compile Include="..\..\..\ServiceManagement\Compute\Commands.ServiceManagement\IaaS\Extensions\DSC\DscExtensionPublicSettings.cs" Link="Extension\DSC\DscExtensionPublicSettings.cs" />
+    <Compile Include="..\..\..\ServiceManagement\Compute\Commands.ServiceManagement\IaaS\Extensions\DSC\DscExtensionSettingsSerializer.cs" Link="Extension\DSC\DscExtensionSettingsSerializer.cs" />
+    <Compile Include="..\..\..\ServiceManagement\Compute\Commands.ServiceManagement\IaaS\Extensions\DSC\Publish\ConfigurationParseResult.cs" Link="Extension\DSC\ConfigurationParseResult.cs" />
+    <Compile Include="..\..\..\ServiceManagement\Compute\Commands.ServiceManagement\IaaS\Extensions\DSC\Publish\ConfigurationParsingHelper.cs" Link="Extension\DSC\ConfigurationParsingHelper.cs" />
+    <Compile Include="..\Sync\ComputeStats.cs" Link="Sync\ComputeStats.cs" />
+    <Compile Include="..\Sync\Download\BlobHandle.cs" Link="Sync\Download\BlobHandle.cs" />
+    <Compile Include="..\Sync\Download\BlobUri.cs" Link="Sync\Download\BlobUri.cs" />
+    <Compile Include="..\Sync\Download\Downloader.cs" Link="Sync\Download\Downloader.cs" />
+    <Compile Include="..\Sync\Download\DownloaderParameters.cs" Link="Sync\Download\DownloaderParameters.cs" />
+    <Compile Include="..\Sync\IO\StreamWithReadProgress.cs" Link="Sync\IO\StreamWithReadProgress.cs" />
+    <Compile Include="..\Sync\Program.cs" Link="Sync\Program.cs" />
+    <Compile Include="..\Sync\ProgressRecord.cs" Link="Sync\ProgressRecord.cs" />
+    <Compile Include="..\Sync\ProgressStatus.cs" Link="Sync\ProgressStatus.cs" />
+    <Compile Include="..\Sync\ProgressTracker.cs" Link="Sync\ProgressTracker.cs" />
+    <Compile Include="..\Sync\ServicePointHandler.cs" Link="Sync\ServicePointHandler.cs" />
+    <Compile Include="..\Sync\Threading\Parallel.cs" Link="Sync\Threading\Parallel.cs" />
+    <Compile Include="..\Sync\Upload\BlobCreator.cs" Link="Sync\Upload\BlobCreator.cs" />
+    <Compile Include="..\Sync\Upload\BlobCreatorBase.cs" Link="Sync\Upload\BlobCreatorBase.cs" />
+    <Compile Include="..\Sync\Upload\BlobSynchronizer.cs" Link="Sync\Upload\BlobSynchronizer.cs" />
+    <Compile Include="..\Sync\Upload\ComputeStats.cs" Link="Sync\Upload\ComputeStats.cs" />
+    <Compile Include="..\Sync\Upload\DataWithRange.cs" Link="Sync\Upload\DataWithRange.cs" />
+    <Compile Include="..\Sync\Upload\ExtensionMethods.cs" Link="Sync\Upload\ExtensionMethods.cs" />
+    <Compile Include="..\Sync\Upload\IndexRangeHelper.cs" Link="Sync\Upload\IndexRangeHelper.cs" />
+    <Compile Include="..\Sync\Upload\PatchingBlobCreator.cs" Link="Sync\Upload\PatchingBlobCreator.cs" />
+    <Compile Include="..\Sync\Upload\SerializationUtil.cs" Link="Sync\Upload\SerializationUtil.cs" />
+    <Compile Include="..\Sync\Upload\UploadContext.cs" Link="Sync\Upload\UploadContext.cs" />
+    <Compile Include="..\Sync\Upload\UploadOperationMetaData.cs" Link="Sync\Upload\UploadOperationMetaData.cs" />
+    <Compile Include="..\VhdManagement\Async\AsyncMachine.cs" Link="VhdManagement\Async\AsyncMachine.cs" />
+    <Compile Include="..\VhdManagement\Async\ExceptionExtension.cs" Link="VhdManagement\Async\ExceptionExtension.cs" />
+    <Compile Include="..\VhdManagement\Model\AttributeHelper.cs" Link="VhdManagement\Model\AttributeHelper.cs" />
+    <Compile Include="..\VhdManagement\Model\BitMap.cs" Link="VhdManagement\Model\BitMap.cs" />
+    <Compile Include="..\VhdManagement\Model\Block.cs" Link="VhdManagement\Model\Block.cs" />
+    <Compile Include="..\VhdManagement\Model\BlockAllocationTable.cs" Link="VhdManagement\Model\BlockAllocationTable.cs" />
+    <Compile Include="..\VhdManagement\Model\DiskGeometry.cs" Link="VhdManagement\Model\DiskGeometry.cs" />
+    <Compile Include="..\VhdManagement\Model\DiskType.cs" Link="VhdManagement\Model\DiskType.cs" />
+    <Compile Include="..\VhdManagement\Model\HostOsType.cs" Link="VhdManagement\Model\HostOsType.cs" />
+    <Compile Include="..\VhdManagement\Model\IndexRange.cs" Link="VhdManagement\Model\IndexRange.cs" />
+    <Compile Include="..\VhdManagement\Model\IndexRangeComparer.cs" Link="VhdManagement\Model\IndexRangeComparer.cs" />
+    <Compile Include="..\VhdManagement\Model\Model.cs" Link="VhdManagement\Model\Model.cs" />
+    <Compile Include="..\VhdManagement\Model\ParentLocator.cs" Link="VhdManagement\Model\ParentLocator.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\AbstractDiskBlockFactory.cs" Link="VhdManagement\Model\Persistance\AbstractDiskBlockFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\BitMapFactory.cs" Link="VhdManagement\Model\Persistance\BitMapFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\BlockAllocationTableFactory.cs" Link="VhdManagement\Model\Persistance\BlockAllocationTableFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\CloudVhdFileCreator.cs" Link="VhdManagement\Model\Persistance\CloudVhdFileCreator.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\DifferencingDiskBlockFactory.cs" Link="VhdManagement\Model\Persistance\DifferencingDiskBlockFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\DiskTypeFactory.cs" Link="VhdManagement\Model\Persistance\DiskTypeFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\DynamicDiskBlockFactory.cs" Link="VhdManagement\Model\Persistance\DynamicDiskBlockFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\FixedDiskBlockFactory.cs" Link="VhdManagement\Model\Persistance\FixedDiskBlockFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\IBlockFactory.cs" Link="VhdManagement\Model\Persistance\IBlockFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\SectorFactory.cs" Link="VhdManagement\Model\Persistance\SectorFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\StreamHelper.cs" Link="VhdManagement\Model\Persistance\StreamHelper.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdConstants.cs" Link="VhdManagement\Model\Persistance\VhdConstants.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdDataReader.cs" Link="VhdManagement\Model\Persistance\VhdDataReader.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdDataWriter.cs" Link="VhdManagement\Model\Persistance\VhdDataWriter.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdFileFactory.cs" Link="VhdManagement\Model\Persistance\VhdFileFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdFooterFactory.cs" Link="VhdManagement\Model\Persistance\VhdFooterFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdFooterSerializer.cs" Link="VhdManagement\Model\Persistance\VhdFooterSerializer.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdHeaderFactory.cs" Link="VhdManagement\Model\Persistance\VhdHeaderFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\Persistence\VhdParentLocatorFactory.cs" Link="VhdManagement\Model\Persistance\VhdParentLocatorFactory.cs" />
+    <Compile Include="..\VhdManagement\Model\PlatformCode.cs" Link="VhdManagement\Model\PlatformCode.cs" />
+    <Compile Include="..\VhdManagement\Model\Sector.cs" Link="VhdManagement\Model\Sector.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdCookie.cs" Link="VhdManagement\Model\VhdCookie.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdCookieType.cs" Link="VhdManagement\Model\VhdCookieType.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdCreatorVersion.cs" Link="VhdManagement\Model\VhdCreatorVersion.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdEntityAttribute.cs" Link="VhdManagement\Model\VhdEntityAttribute.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdEntityDescriptor.cs" Link="VhdManagement\Model\VhdEntityDescriptor.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdFeature.cs" Link="VhdManagement\Model\VhdFeature.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdFile.cs" Link="VhdManagement\Model\VhdFile.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdFileFormatVersion.cs" Link="VhdManagement\Model\VhdFileFormatVersion.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdFooter.cs" Link="VhdManagement\Model\VhdFooter.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdHeader.cs" Link="VhdManagement\Model\VhdHeader.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdHeaderVersion.cs" Link="VhdManagement\Model\VhdHeaderVersion.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdPropertyAttribute.cs" Link="VhdManagement\Model\VhdPropertyAttribute.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdPropertyDescriptor.cs" Link="VhdManagement\Model\VhdPropertyDescriptor.cs" />
+    <Compile Include="..\VhdManagement\Model\VhdTimeStamp.cs" Link="VhdManagement\Model\VhdTimeStamp.cs" />
+    <Compile Include="..\VhdManagement\SparseStream.cs" Link="VhdManagement\SparseStream.cs" />
+    <Compile Include="..\VhdManagement\VirtualDiskStream.cs" Link="VhdManagement\VirtualDiskStream.cs" />
+
+    <Compile Include="..\..\Storage.Management\SDK\Generated\IStorageAccountsOperations.cs" Link="StorageSDK\IStorageAccountsOperations.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\IStorageManagementClient.cs" Link="StorageSDK\IStorageManagementClient.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\IUsageOperations.cs" Link="StorageSDK\IUsageOperations.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\StorageAccountsOperations.cs" Link="StorageSDK\StorageAccountsOperations.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\StorageAccountsOperationsExtensions.cs" Link="StorageSDK\StorageAccountsOperationsExtensions.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\StorageManagementClient.cs" Link="StorageSDK\StorageManagementClient.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\UsageOperations.cs" Link="StorageSDK\UsageOperations.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\UsageOperationsExtensions.cs" Link="StorageSDK\UsageOperationsExtensions.cs"/>
+
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\AccessTier.cs" Link="StorageSDK\Models\AccessTier.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\AccountStatus.cs" Link="StorageSDK\Models\AccountStatus.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\CheckNameAvailabilityResult.cs" Link="StorageSDK\Models\CheckNameAvailabilityResult.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\CustomDomain.cs" Link="StorageSDK\Models\CustomDomain.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Encryption.cs" Link="StorageSDK\Models\Encryption.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\EncryptionService.cs" Link="StorageSDK\Models\EncryptionService.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\EncryptionServices.cs" Link="StorageSDK\Models\EncryptionServices.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Endpoints.cs" Link="StorageSDK\Models\Endpoints.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\KeyPermission.cs" Link="StorageSDK\Models\KeyPermission.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Kind.cs" Link="StorageSDK\Models\Kind.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Page.cs" Link="StorageSDK\Models\Page.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\ProvisioningState.cs" Link="StorageSDK\Models\ProvisioningState.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Reason.cs" Link="StorageSDK\Models\Reason.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Resource.cs" Link="StorageSDK\Models\Resource.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Sku.cs" Link="StorageSDK\Models\Sku.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\SkuName.cs" Link="StorageSDK\Models\SkuName.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\SkuTier.cs" Link="StorageSDK\Models\SkuTier.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\StorageAccount.cs" Link="StorageSDK\Models\StorageAccount.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\StorageAccountCheckNameAvailabilityParameters.cs" Link="StorageSDK\Models\StorageAccountCheckNameAvailabilityParameters.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\StorageAccountCreateParameters.cs" Link="StorageSDK\Models\StorageAccountCreateParameters.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\StorageAccountKey.cs" Link="StorageSDK\Models\StorageAccountKey.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\StorageAccountListKeysResult.cs" Link="StorageSDK\Models\StorageAccountListKeysResult.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\StorageAccountRegenerateKeyParameters.cs" Link="StorageSDK\Models\StorageAccountRegenerateKeyParameters.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\StorageAccountUpdateParameters.cs" Link="StorageSDK\Models\StorageAccountUpdateParameters.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\Usage.cs" Link="StorageSDK\Models\Usage.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\UsageListResult.cs" Link="StorageSDK\Models\UsageListResult.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\UsageName.cs" Link="StorageSDK\Models\UsageName.cs"/>
+    <Compile Include="..\..\Storage.Management\SDK\Generated\Models\UsageUnit.cs" Link="StorageSDK\Models\UsageUnit.cs"/>
+  </ItemGroup>
+
+</Project>

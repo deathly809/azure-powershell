@@ -14,6 +14,8 @@
 
 using Microsoft.WindowsAzure.Commands.Sync.Threading;
 using Microsoft.WindowsAzure.Commands.Tools.Vhd.Model;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Core;
 using System;
 using System.Diagnostics;
 using System.IO;

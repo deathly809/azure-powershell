@@ -15,6 +15,7 @@
 using Microsoft.WindowsAzure.Commands.Sync.Download;
 using Microsoft.WindowsAzure.Commands.Tools.Vhd;
 using Microsoft.WindowsAzure.Commands.Tools.Vhd.Model;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
@@ -24,9 +25,9 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Permissions;
-using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading;
+using System.ServiceModel.Channels;
 
 namespace Microsoft.WindowsAzure.Commands.Sync.Upload
 {

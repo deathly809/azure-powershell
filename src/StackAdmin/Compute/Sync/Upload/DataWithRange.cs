@@ -13,8 +13,8 @@
 // ----------------------------------------------------------------------------------
 
 using Microsoft.WindowsAzure.Commands.Tools.Vhd.Model;
-using System;
 using System.ServiceModel.Channels;
+using System;
 
 namespace Microsoft.WindowsAzure.Commands.Sync.Upload
 {

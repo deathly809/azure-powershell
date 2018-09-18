@@ -90,16 +90,12 @@ namespace Microsoft.Azure.Commands.Compute
                     PlatformFaultDomainCount = this.PlatformFaultDomainCount
                 };
 
-                if (this.Managed.IsPresent || !string.IsNullOrEmpty(this.Sku))
+                if (!string.IsNullOrEmpty(this.Sku))
                 {
                     avSetParams.Sku = new Sku();
                     if (!string.IsNullOrEmpty(this.Sku))
                     {
                         avSetParams.Sku.Name = this.Sku;
-                    }
-                    if (this.Managed.IsPresent)
-                    {
-                        avSetParams.Sku.Name = "Aligned";
                     }
                 }
 

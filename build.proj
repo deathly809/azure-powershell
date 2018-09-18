@@ -88,7 +88,8 @@
 
   <ItemGroup>
     <LocalBuildTasks  Include="$(LibraryToolsFolder)\RepoTasks\RepoTasks.sln" Condition="'$(NetCore)' == 'false'" />
-    <StackSolution    Include="$(LibrarySourceFolder)\StackAdmin\Stack.sln" Condition="'$(Scope)' == 'All' or '$(Scope)' == 'Stack'" />
+    <StackSolution    Include="$(LibrarySourceFolder)\StackAdmin\Stack.sln" Condition="('$(Scope)' == 'All' or '$(Scope)' == 'Stack') and '$(NetCore)' == 'false'" />
+    <StackSolution    Include="$(LibrarySourceFolder)\StackAdmin\Stack.Netcore.sln" Condition="('$(Scope)' == 'All' or '$(Scope)' == 'Stack') and '$(NetCore)' == 'true'" />
     <StaticAnalysis   Include=".\tools\StaticAnalysis\StaticAnalysis.sln" />
     <LocalBuildTasks  Include="$(LibraryToolsFolder)\BuildPackagesTask\Microsoft.Azure.Build.Tasks.sln" />
     <LocalBuildTasks  Include="$(LibraryToolsFolder)\RepoTasks\RepoTasks.sln" Condition="'$(NetCore)' == 'false'" />
